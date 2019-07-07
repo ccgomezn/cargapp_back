@@ -22,3 +22,11 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+### The code Verify (standardize)
+## Code style checker
+* run command for verify code
+`rubocop`
+
+* run command to correct code
+`rubocop -a`
