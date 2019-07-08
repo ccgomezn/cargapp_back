@@ -11,6 +11,12 @@ class Api::V1::RolesController < ApplicationController
     render json: @roles
   end
 
+  def active
+    @roles = Role.where(active: true)
+
+    render json: @roles
+  end
+
   # GET /roles/1
   def show
     render json: @role
