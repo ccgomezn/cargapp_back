@@ -30,3 +30,14 @@ Things you may want to cover:
 
 * run command to correct code
 `rubocop -a`
+
+
+# Data Base Models
+
+## Role
+* name
+* code
+* description
+* active
+
+```rails g scaffold Role name code:string:index description:text active:boolean```
