@@ -41,3 +41,6 @@ Things you may want to cover:
 * active
 
 ```rails g scaffold Role name code:string:index description:text active:boolean```
+
+##### Temporary in controller models api 
+```protect_from_forgery with: :null_session```
