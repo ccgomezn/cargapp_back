@@ -1,8 +1,17 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-#The code Verify (standardize)
+# START New GEM
+# The code Verify (standardize)
 gem 'rubocop', '~> 0.72.0', require: false
+
+# Environment Variables
+gem 'dotenv-rails', :require => 'dotenv/rails-now'
+
+# Gem for model of user
+gem 'devise'
+
+# END New GEM
 
 ruby '2.6.1'
 
