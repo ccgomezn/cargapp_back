@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'home/index'
+  get 'home/user_information'
+  
   devise_for :users
   resources :roles
 

@@ -24,7 +24,9 @@ Things you may want to cover:
 * ...
 
 ### The code Verify (standardize)
-## Code style checker
+
+Code style checker
+
 * run command for verify code
 `rubocop`
 
