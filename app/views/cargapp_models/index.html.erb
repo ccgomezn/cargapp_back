@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Cargapp Models</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Code</th>
+      <th>Value</th>
+      <th>Description</th>
+      <th>Active</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cargapp_models.each do |cargapp_model| %>
+      <tr>
+        <td><%= cargapp_model.name %></td>
+        <td><%= cargapp_model.code %></td>
+        <td><%= cargapp_model.value %></td>
+        <td><%= cargapp_model.description %></td>
+        <td><%= cargapp_model.active %></td>
+        <td><%= link_to 'Show', cargapp_model %></td>
+        <td><%= link_to 'Edit', edit_cargapp_model_path(cargapp_model) %></td>
+        <td><%= link_to 'Destroy', cargapp_model, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cargapp Model', new_cargapp_model_path %>

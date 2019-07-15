@@ -1,0 +1,2 @@
+class CargappModel < ApplicationRecord
+end

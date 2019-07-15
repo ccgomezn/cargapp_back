@@ -1,0 +1,42 @@
+<%= form_with(model: cargapp_model, local: true) do |form| %>
+  <% if cargapp_model.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cargapp_model.errors.count, "error") %> prohibited this cargapp_model from being saved:</h2>
+
+      <ul>
+        <% cargapp_model.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :code %>
+    <%= form.text_field :code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :value %>
+    <%= form.text_field :value %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :active %>
+    <%= form.check_box :active %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

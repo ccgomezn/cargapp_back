@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @cargapp_model.name %>
+</p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @cargapp_model.code %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @cargapp_model.value %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @cargapp_model.description %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @cargapp_model.active %>
+</p>
+
+<%= link_to 'Edit', edit_cargapp_model_path(@cargapp_model) %> |
+<%= link_to 'Back', cargapp_models_path %>

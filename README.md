@@ -34,6 +34,10 @@ Code style checker
 `rubocop -a`
 
 
+##### Temporary in controller models api 
+```protect_from_forgery with: :null_session```
+
+
 # Data Base Models
 
 ## Role
@@ -44,5 +48,42 @@ Code style checker
 
 ```rails g scaffold Role name code:string:index description:text active:boolean```
 
-##### Temporary in controller models api 
-```protect_from_forgery with: :null_session```
+## UserRole
+* role_id
+* user_id
+* admin_id
+* active:boolean
+
+```rails g scaffold UserRole role:references user:references admin:references active:boolean```
+
+## CargappModel
+* name
+* code
+* description
+* active
+
+```rails g scaffold CargappModel name code description:text active:boolean```
+
+
+## Parameter
+* name
+* code
+* description
+* user_id
+* value
+* model_id
+* active
+
+```rails g scaffold Parameter name code description:text user:references value model:references active:boolean```
+
+
+## Permission 
+* role_id
+* model
+* action
+* method
+* allow
+* user_id
+* active
+
+```rails g scaffold Permission role:references model action method allow:boolean user:references active:boolean```

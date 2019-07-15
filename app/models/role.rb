@@ -6,6 +6,6 @@ class Role < ApplicationRecord
 
   before_create :default_values
   def default_values
-    self.active = false
+    self.active ||= false
   end
 end

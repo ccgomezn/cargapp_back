@@ -1,0 +1,2 @@
+module CargappModelsHelper
+end
