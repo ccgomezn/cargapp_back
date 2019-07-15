@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Role:</strong>
+  <%= @permission.role_id %>
+</p>
+
+<p>
+  <strong>Cargapp model:</strong>
+  <%= @permission.cargapp_model_id %>
+</p>
+
+<p>
+  <strong>Action:</strong>
+  <%= @permission.action %>
+</p>
+
+<p>
+  <strong>Method:</strong>
+  <%= @permission.method %>
+</p>
+
+<p>
+  <strong>Allow:</strong>
+  <%= @permission.allow %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @permission.user_id %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @permission.active %>
+</p>
+
+<%= link_to 'Edit', edit_permission_path(@permission) %> |
+<%= link_to 'Back', permissions_path %>

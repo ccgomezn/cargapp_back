@@ -1,0 +1,59 @@
+<%= form_with(model: permission, local: true) do |form| %>
+  <% if permission.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(permission.errors.count, "error") %> prohibited this permission from being saved:</h2>
+
+      <ul>
+        <% permission.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :role_id %>
+    <% form.text_field :role_id %>
+    <%= form.collection_select(:role_id, @roles, :id, :name, {}, :class => "form-control") %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cargapp_model_id %>
+    <% form.text_field :cargapp_model_id %>
+    <%= form.collection_select(:cargapp_model_id, @cargapp_models, :id, :name, {}, :class => "form-control") %>
+  </div>
+
+  <div class="field">
+    <%= form.label :action %>
+    <% form.text_field :action %>
+    <% @cargapp_action %>
+    <%= form.select(:action, @cargapp_action) %>
+    <% # form.collection_select(:action, @cargapp_action, :name, :name, {}, :class => "form-control") %>
+  </div>
+
+  <div class="field">
+    <%= form.label :method %>
+    <% form.text_field :method %>
+    <%= form.select(:method, @cargapp_method) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :allow %>
+    <%= form.check_box :allow %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <% form.text_field :user_id %>
+    <%= form.collection_select(:user_id, @users, :id, :email, {}, :class => "form-control") %>
+  </div>
+
+  <div class="field">
+    <%= form.label :active %>
+    <%= form.check_box :active %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

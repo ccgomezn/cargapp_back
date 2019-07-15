@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  role: one
+  cargapp_model: one
+  action: MyString
+  method: MyString
+  allow: false
+  user: one
+  active: false
+
+two:
+  role: two
+  cargapp_model: two
+  action: MyString
+  method: MyString
+  allow: false
+  user: two
+  active: false

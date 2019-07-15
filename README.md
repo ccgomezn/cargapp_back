@@ -74,16 +74,16 @@ Code style checker
 * model_id
 * active
 
-```rails g scaffold Parameter name code description:text user:references value model:references active:boolean```
+```rails g scaffold Parameter name code description:text user:references value cargapp_model:references active:boolean```
 
 
 ## Permission 
 * role_id
-* model
+* model_id
 * action
 * method
-* allow
 * user_id
+* allow
 * active
 
-```rails g scaffold Permission role:references model action method allow:boolean user:references active:boolean```
+```rails g scaffold Permission role:references cargapp_model:references action method allow:boolean user:references active:boolean```

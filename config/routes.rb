@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :permissions
+  resources :parameters
   resources :cargapp_models
   resources :user_roles
   get 'home/index'

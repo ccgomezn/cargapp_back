@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_15_053443) do
+ActiveRecord::Schema.define(version: 2019_07_15_055834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,35 @@ ActiveRecord::Schema.define(version: 2019_07_15_053443) do
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "parameters", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.text "description"
+    t.bigint "user_id", null: false
+    t.string "value"
+    t.bigint "cargapp_model_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cargapp_model_id"], name: "index_parameters_on_cargapp_model_id"
+    t.index ["user_id"], name: "index_parameters_on_user_id"
+  end
+
+  create_table "permissions", force: :cascade do |t|
+    t.bigint "role_id", null: false
+    t.bigint "cargapp_model_id", null: false
+    t.string "action"
+    t.string "method"
+    t.boolean "allow"
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cargapp_model_id"], name: "index_permissions_on_cargapp_model_id"
+    t.index ["role_id"], name: "index_permissions_on_role_id"
+    t.index ["user_id"], name: "index_permissions_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -59,6 +88,11 @@ ActiveRecord::Schema.define(version: 2019_07_15_053443) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "parameters", "cargapp_models"
+  add_foreign_key "parameters", "users"
+  add_foreign_key "permissions", "cargapp_models"
+  add_foreign_key "permissions", "roles"
+  add_foreign_key "permissions", "users"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
 end
