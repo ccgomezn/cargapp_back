@@ -11,6 +11,9 @@ gem 'dotenv-rails', :require => 'dotenv/rails-now'
 # Gem for model of user
 gem 'devise'
 
+gem 'doorkeeper'
+gem 'oauth2'
+
 gem 'rails_admin', '~> 2.0.0.beta'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 

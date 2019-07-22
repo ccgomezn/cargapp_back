@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
-class Api::V1::UsersController < ActionController::API
-  protect_from_forgery with: :null_session
+class Api::V1::UsersController < ApplicationController
+  # protect_from_forgery with: :null_session
+  before_action :doorkeeper_authorize!, except: %i[create login show update email_verify phone_verify]
+
 
   def create
     @user = User.new(user_params)
