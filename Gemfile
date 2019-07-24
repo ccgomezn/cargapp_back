@@ -17,6 +17,11 @@ gem 'oauth2'
 gem 'rails_admin', '~> 2.0.0.beta'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 
+gem 'capistrano', '~> 3.11'
+gem 'capistrano-rails', '~> 1.4'
+gem 'capistrano-passenger', '~> 0.2.0'
+gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
+
 # END New GEM
 
 ruby '2.6.1'
