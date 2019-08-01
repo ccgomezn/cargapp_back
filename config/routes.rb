@@ -18,7 +18,9 @@ Rails.application.routes.draw do
       resources :roles
       get 'user_roles/active' => 'user_roles#active'
       resources :user_roles
+      get 'cargapp_models/active' => 'cargapp_models#active'
       resources :cargapp_models
+      get 'parameters/active' => 'parameters#active'
       resources :parameters
       resources :permissions
     end
