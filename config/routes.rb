@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'home/index'
   get 'home/user_information'
-  
+
+  use_doorkeeper
   devise_for :users
   resources :roles
   resources :user_roles
