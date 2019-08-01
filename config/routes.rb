@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'home/index'
   get 'home/user_information'
   
@@ -11,9 +12,11 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1, defaults: { format: :json } do
+      resources :users #, only: [:create, :update, :show]
+      # -------------------
       get 'roles/active' => 'roles#active'
       resources :roles
-      resources :users#, only: [:create, :update, :show]
+      get 'user_roles/active' => 'user_roles#active'
       resources :user_roles
       resources :cargapp_models
       resources :parameters
