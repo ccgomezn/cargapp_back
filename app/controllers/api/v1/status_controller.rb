@@ -49,7 +49,7 @@ class Api::V1::StatusController < ApplicationController
   # DELETE /status/1
   # DELETE /status/1.json
   def destroy
-    @status.destroy
+    @statu.destroy
   end
 
   private
