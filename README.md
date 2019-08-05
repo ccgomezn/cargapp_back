@@ -91,6 +91,7 @@ Code style checker
         "active": true
     }
 }
+```
 
 ## CargappModel
 * name
@@ -131,6 +132,27 @@ Code style checker
 
 ```rails g scaffold Parameter name code description:text user:references value cargapp_model:references active:boolean```
 
+1. GET http://api.cargapp.co/api/v1/parameters 'Listar'
+2. GET http://api.cargapp.co/api/v1/parameters/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/parameters/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/parameters 'Crear'
+5. PUT http://api.cargapp.co/api/v1/parameters/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/parameters/:id 'Elimina'
+
+```
+{
+    "parameter": {
+        "name": "role",
+        "code": "ROLES",
+        "description": "Role para todos los uaurios en general",
+        "value": "roles, user_roles",
+        "user_id": 1,
+        "cargapp_model_id": 1,
+        "active": true
+    }
+}
+```
+
 
 ## Permission 
 * role_id
@@ -142,3 +164,55 @@ Code style checker
 * active
 
 ```rails g scaffold Permission role:references cargapp_model:references action method allow:boolean user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/permissions 'Listar'
+2. GET http://api.cargapp.co/api/v1/permissions/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/permissions/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/permissions 'Crear'
+5. PUT http://api.cargapp.co/api/v1/permissions/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/permissions/:id 'Elimina'
+
+```
+{
+    "permission": {
+        "role_id": 1,
+        "user_id": 1,
+        "cargapp_model_id": 1,
+        "action": "index",
+        "method": "GET",
+        "allow": true,
+        "active": true
+    }
+}
+```
+
+
+## Statu 
+* name
+* code
+* description
+* user_id
+* cargapp_model_id
+* active
+
+```rails g scaffold Statu name code description:text user:references cargapp_model:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/status 'Listar'
+2. GET http://api.cargapp.co/api/v1/status/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/status/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/status 'Crear'
+5. PUT http://api.cargapp.co/api/v1/status/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/status/:id 'Elimina'
+
+```
+{
+    "statu": {
+        "name": "creado",
+        "code": "creted",
+        "description": "estado creado para el usro de los estados del modelo servicios o ofertas",
+        "user_id": 1,
+        "cargapp_model_id": 1,
+        "active": true
+    }
+}
+```

@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       resources :cargapp_models
       get 'parameters/active' => 'parameters#active'
       resources :parameters
+      get 'permissions/active' => 'permissions#active'
       resources :permissions
     end
   end
