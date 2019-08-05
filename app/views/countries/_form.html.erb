@@ -1,0 +1,82 @@
+<%= form_with(model: country, local: true) do |form| %>
+  <% if country.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(country.errors.count, "error") %> prohibited this country from being saved:</h2>
+
+      <ul>
+        <% country.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :code %>
+    <%= form.text_field :code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cioc %>
+    <%= form.text_field :cioc %>
+  </div>
+
+  <div class="field">
+    <%= form.label :currency_code %>
+    <%= form.text_field :currency_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :currency_name %>
+    <%= form.text_field :currency_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :currency_symbol %>
+    <%= form.text_field :currency_symbol %>
+  </div>
+
+  <div class="field">
+    <%= form.label :language_iso639 %>
+    <%= form.text_field :language_iso639 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :language_name %>
+    <%= form.text_field :language_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :language_native_name %>
+    <%= form.text_field :language_native_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :image %>
+    <%= form.text_field :image %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_utc %>
+    <%= form.text_field :date_utc %>
+  </div>
+
+  <div class="field">
+    <%= form.label :active %>
+    <%= form.check_box :active %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

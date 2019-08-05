@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  code: MyString
+  description: MyText
+  cioc: MyString
+  currency_code: MyString
+  currency_name: MyString
+  currency_symbol: MyString
+  language_iso639: MyString
+  language_name: MyString
+  language_native_name: MyString
+  image: MyString
+  date_utc: MyString
+  active: false
+
+two:
+  name: MyString
+  code: MyString
+  description: MyText
+  cioc: MyString
+  currency_code: MyString
+  currency_name: MyString
+  currency_symbol: MyString
+  language_iso639: MyString
+  language_name: MyString
+  language_native_name: MyString
+  image: MyString
+  date_utc: MyString
+  active: false

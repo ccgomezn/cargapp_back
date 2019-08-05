@@ -216,3 +216,42 @@ Code style checker
     }
 }
 ```
+
+
+## Country 
+* name
+* code
+* description
+* cioc
+* currency_code
+* currency_name
+* currency_symbol
+* language_iso639
+* language_name 
+* language_native_name
+* image
+* date_utc
+* active
+
+
+```rails g scaffold Country name code description:text cioc currency_code currency_name currency_symbol language_iso639 language_name language_native_name image date_utc active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/countries 'Listar'
+2. GET http://api.cargapp.co/api/v1/countries/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/countries/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/countries 'Crear'
+5. PUT http://api.cargapp.co/api/v1/countries/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/countries/:id 'Elimina'
+
+```
+{
+    "country": {
+        "name": "creado",
+        "code": "creted",
+        "cioc": "creee",
+        "description": "estado creado para el usro de los estados del modelo servicios o ofertas",
+        "active": true,
+        ..........
+    }
+}
+```

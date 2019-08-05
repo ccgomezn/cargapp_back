@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @country.name %>
+</p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @country.code %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @country.description %>
+</p>
+
+<p>
+  <strong>Cioc:</strong>
+  <%= @country.cioc %>
+</p>
+
+<p>
+  <strong>Currency code:</strong>
+  <%= @country.currency_code %>
+</p>
+
+<p>
+  <strong>Currency name:</strong>
+  <%= @country.currency_name %>
+</p>
+
+<p>
+  <strong>Currency symbol:</strong>
+  <%= @country.currency_symbol %>
+</p>
+
+<p>
+  <strong>Language iso639:</strong>
+  <%= @country.language_iso639 %>
+</p>
+
+<p>
+  <strong>Language name:</strong>
+  <%= @country.language_name %>
+</p>
+
+<p>
+  <strong>Language native name:</strong>
+  <%= @country.language_native_name %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @country.image %>
+</p>
+
+<p>
+  <strong>Date utc:</strong>
+  <%= @country.date_utc %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @country.active %>
+</p>
+
+<%= link_to 'Edit', edit_country_path(@country) %> |
+<%= link_to 'Back', countries_path %>
