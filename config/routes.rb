@@ -1,4 +1,4 @@
-Rails.application.routes.draw do  
+Rails.application.routes.draw do    
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   use_doorkeeper
 
@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :permissions
   resources :status
   resources :countries
+  resources :states
 
   namespace :api, defaults: { format: :json } do
     namespace :v1, defaults: { format: :json } do
@@ -33,6 +34,8 @@ Rails.application.routes.draw do
       get 'countries/active' => 'countries#active'
       get 'countries/migration' => 'countries#migration'
       resources :countries
+      get 'states/active' => 'states#active'
+      resources :states
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_05_145708) do
+ActiveRecord::Schema.define(version: 2019_08_05_160440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -164,6 +164,17 @@ ActiveRecord::Schema.define(version: 2019_08_05_145708) do
     t.index ["code"], name: "index_roles_on_code"
   end
 
+  create_table "states", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.text "description"
+    t.bigint "country_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["country_id"], name: "index_states_on_country_id"
+  end
+
   create_table "status", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -211,6 +222,7 @@ ActiveRecord::Schema.define(version: 2019_08_05_145708) do
   add_foreign_key "permissions", "cargapp_models"
   add_foreign_key "permissions", "roles"
   add_foreign_key "permissions", "users"
+  add_foreign_key "states", "countries"
   add_foreign_key "status", "cargapp_models"
   add_foreign_key "status", "users"
   add_foreign_key "user_roles", "roles"

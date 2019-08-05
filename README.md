@@ -255,3 +255,33 @@ Code style checker
     }
 }
 ```
+
+## State 
+* name
+* code
+* description
+* country_id
+* active
+
+
+```rails g scaffold State name code description:text country:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/states 'Listar'
+2. GET http://api.cargapp.co/api/v1/states/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/states/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/states 'Crear'
+5. PUT http://api.cargapp.co/api/v1/states/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/states/:id 'Elimina'
+
+```
+{
+    "state": {
+        "name": "creado",
+        "code": "creted",        
+        "description": "estado creado para el usro de los estados del modelo servicios o ofertas",
+        "country_id": 1,
+        "active": true
+    }
+}
+```
+

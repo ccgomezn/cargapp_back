@@ -29,6 +29,7 @@ class Api::V1::CountriesController < ApplicationController
                                              currency_code: country['currencies'][0]['code'],
                                              currency_name: country['currencies'][0]['name'],
                                              currency_symbol: country['currencies'][0]['symbol'],
+                                             active: false,
                                              # latitude: country['latlng'][0].to_s, longitude: country['latlng'][1].to_s,
                                              language_iso639: country['languages'][0]['iso639_1'], language_name: country['languages'][0]['name'],
                                              language_native_name: country['languages'][0]['nativeName'])

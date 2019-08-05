@@ -26,10 +26,10 @@ class Api::V1::StatusController < ApplicationController
   # POST /status.json
   def create
     @statu = Statu.new(status_params)
-    
+
     if @statu.save
       render json: @statu, status: :created, location: @statu
-      # 'Status was successfully created.'
+      # 'statu was successfully created.'
     else
       render json: @statu.errors, status: :unprocessable_entity
     end
