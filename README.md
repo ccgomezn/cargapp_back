@@ -285,3 +285,32 @@ Code style checker
 }
 ```
 
+
+## City 
+* name
+* code
+* description
+* state_id
+* active
+
+
+```rails g scaffold City name code description:text state:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/cities 'Listar'
+2. GET http://api.cargapp.co/api/v1/cities/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/cities/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/cities 'Crear'
+5. PUT http://api.cargapp.co/api/v1/cities/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/cities/:id 'Elimina'
+
+```
+{
+    "city": {
+        "name": "creado",
+        "code": "creted",        
+        "description": "estado creado para el usro de los estados del modelo servicios o ofertas",
+        "state_id": 1,
+        "active": true
+    }
+}
+```

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :status
   resources :countries
   resources :states
+  resources :cities
 
   namespace :api, defaults: { format: :json } do
     namespace :v1, defaults: { format: :json } do
@@ -36,6 +37,8 @@ Rails.application.routes.draw do
       resources :countries
       get 'states/active' => 'states#active'
       resources :states
+      get 'cities/active' => 'cities#active'
+      resources :cities
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
