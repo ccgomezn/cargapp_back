@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_01_055857) do
+ActiveRecord::Schema.define(version: 2019_08_05_002913) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -146,6 +146,19 @@ ActiveRecord::Schema.define(version: 2019_08_01_055857) do
     t.index ["code"], name: "index_roles_on_code"
   end
 
+  create_table "status", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.text "description"
+    t.bigint "user_id", null: false
+    t.bigint "cargapp_model_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cargapp_model_id"], name: "index_status_on_cargapp_model_id"
+    t.index ["user_id"], name: "index_status_on_user_id"
+  end
+
   create_table "user_roles", force: :cascade do |t|
     t.bigint "role_id", null: false
     t.bigint "user_id", null: false
@@ -180,6 +193,8 @@ ActiveRecord::Schema.define(version: 2019_08_01_055857) do
   add_foreign_key "permissions", "cargapp_models"
   add_foreign_key "permissions", "roles"
   add_foreign_key "permissions", "users"
+  add_foreign_key "status", "cargapp_models"
+  add_foreign_key "status", "users"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
 end
