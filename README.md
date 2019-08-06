@@ -431,6 +431,7 @@ Code style checker
 4. POST http://api.cargapp.co/api/v1/cargapp_integrations 'Crear'
 5. PUT http://api.cargapp.co/api/v1/cargapp_integrations/:id 'Actualiza'
 6. DELETE http://api.cargapp.co/api/v1/cargapp_integrations/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/cargapp_integrations/me 'Ver los del usuario'
 
 ```
 {
@@ -453,6 +454,43 @@ Code style checker
         "client_id": null,
         "api_key": null,
         "user_id": 1,
+        "active": true
+    }
+}
+```
+
+
+## Company 
+* name
+* description
+* company_type
+* load_type_id
+* sector
+* legal_representative
+* address
+* phone
+* user_id
+* constitution_date
+* active
+
+
+```rails g scaffold Company name description:text company_type load_type:references sector legal_representative address phone user:references constitution_date:date active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/companies 'Listar'
+2. GET http://api.cargapp.co/api/v1/companies/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/companies/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/companies 'Crear'
+5. PUT http://api.cargapp.co/api/v1/companies/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/companies/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/companies/me 'Ver los del usuario'
+
+```
+{
+    "load_type": {
+        "name": "creado",
+        "code": "creted",        
+        "description": "estado creado para el usro de los estados del modelo servicios o ofertas",
+        "icon": "image.png",
         "active": true
     }
 }

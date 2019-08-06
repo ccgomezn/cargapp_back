@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  company_type: MyString
+  load_type: one
+  sector: MyString
+  legal_representative: MyString
+  address: MyString
+  phone: MyString
+  user: one
+  constitution_date: 2019-08-06
+  active: false
+
+two:
+  name: MyString
+  description: MyText
+  company_type: MyString
+  load_type: two
+  sector: MyString
+  legal_representative: MyString
+  address: MyString
+  phone: MyString
+  user: two
+  constitution_date: 2019-08-06
+  active: false
