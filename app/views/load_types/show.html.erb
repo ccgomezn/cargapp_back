@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @load_type.name %>
+</p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @load_type.code %>
+</p>
+
+<p>
+  <strong>Icon:</strong>
+  <%= @load_type.icon %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @load_type.description %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @load_type.active %>
+</p>
+
+<%= link_to 'Edit', edit_load_type_path(@load_type) %> |
+<%= link_to 'Back', load_types_path %>

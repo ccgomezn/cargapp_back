@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Load Types</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Code</th>
+      <th>Icon</th>
+      <th>Description</th>
+      <th>Active</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @load_types.each do |load_type| %>
+      <tr>
+        <td><%= load_type.name %></td>
+        <td><%= load_type.code %></td>
+        <td><%= load_type.icon %></td>
+        <td><%= load_type.description %></td>
+        <td><%= load_type.active %></td>
+        <td><%= link_to 'Show', load_type %></td>
+        <td><%= link_to 'Edit', edit_load_type_path(load_type) %></td>
+        <td><%= link_to 'Destroy', load_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Load Type', new_load_type_path %>

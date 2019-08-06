@@ -1,4 +1,4 @@
-Rails.application.routes.draw do    
+Rails.application.routes.draw do      
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   use_doorkeeper
 
@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :cities
   resources :document_types
   resources :vehicle_types
+  resources :load_types
 
   namespace :api, defaults: { format: :json } do
     namespace :v1, defaults: { format: :json } do
@@ -45,6 +46,8 @@ Rails.application.routes.draw do
       resources :document_types
       get 'vehicle_types/active' => 'vehicle_types#active'
       resources :vehicle_types
+      get 'load_types/active' => 'load_types#active'
+      resources :load_types
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

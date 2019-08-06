@@ -351,7 +351,7 @@ Code style checker
 * active
 
 
-```rails g scaffold VehicleType name code description:text active:boolean```
+```rails g scaffold VehicleType name code icon description:text active:boolean```
 
 1. GET http://api.cargapp.co/api/v1/vehicle_types 'Listar'
 2. GET http://api.cargapp.co/api/v1/vehicle_types/active 'Ver activos'
@@ -366,7 +366,36 @@ Code style checker
         "name": "creado",
         "code": "creted",        
         "description": "estado creado para el usro de los estados del modelo servicios o ofertas",
-        "ico": 'image.png',
+        "icon": "image.png",
+        "active": true
+    }
+}
+```
+
+## LoadType 
+* name
+* code
+* icon
+* description
+* active
+
+
+```rails g scaffold LoadType name code icon description:text active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/load_types 'Listar'
+2. GET http://api.cargapp.co/api/v1/load_types/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/load_types/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/load_types 'Crear'
+5. PUT http://api.cargapp.co/api/v1/load_types/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/load_types/:id 'Elimina'
+
+```
+{
+    "load_type": {
+        "name": "creado",
+        "code": "creted",        
+        "description": "estado creado para el usro de los estados del modelo servicios o ofertas",
+        "icon": "image.png",
         "active": true
     }
 }
