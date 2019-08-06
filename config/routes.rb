@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :states
   resources :cities
   resources :document_types
+  resources :vehicle_types
 
   namespace :api, defaults: { format: :json } do
     namespace :v1, defaults: { format: :json } do
@@ -42,6 +43,8 @@ Rails.application.routes.draw do
       resources :cities
       get 'document_types/active' => 'document_types#active'
       resources :document_types
+      get 'vehicle_types/active' => 'vehicle_types#active'
+      resources :vehicle_types
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

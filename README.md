@@ -353,20 +353,20 @@ Code style checker
 
 ```rails g scaffold VehicleType name code description:text active:boolean```
 
-1. GET http://api.cargapp.co/api/v1/cities 'Listar'
-2. GET http://api.cargapp.co/api/v1/cities/active 'Ver activos'
-3. GET http://api.cargapp.co/api/v1/cities/:id 'Ver detalle'
-4. POST http://api.cargapp.co/api/v1/cities 'Crear'
-5. PUT http://api.cargapp.co/api/v1/cities/:id 'Actualiza'
-6. DELETE http://api.cargapp.co/api/v1/cities/:id 'Elimina'
+1. GET http://api.cargapp.co/api/v1/vehicle_types 'Listar'
+2. GET http://api.cargapp.co/api/v1/vehicle_types/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/vehicle_types/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/vehicle_types 'Crear'
+5. PUT http://api.cargapp.co/api/v1/vehicle_types/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/vehicle_types/:id 'Elimina'
 
 ```
 {
-    "city": {
+    "vehicle_type": {
         "name": "creado",
         "code": "creted",        
         "description": "estado creado para el usro de los estados del modelo servicios o ofertas",
-        "state_id": 1,
+        "ico": 'image.png',
         "active": true
     }
 }
