@@ -242,6 +242,7 @@ Code style checker
 4. POST http://api.cargapp.co/api/v1/countries 'Crear'
 5. PUT http://api.cargapp.co/api/v1/countries/:id 'Actualiza'
 6. DELETE http://api.cargapp.co/api/v1/countries/:id 'Elimina'
+7. PUT http://api.cargapp.co/api/v1/countries/migration 'Actualiza'
 
 ```
 {
@@ -295,6 +296,62 @@ Code style checker
 
 
 ```rails g scaffold City name code description:text state:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/cities 'Listar'
+2. GET http://api.cargapp.co/api/v1/cities/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/cities/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/cities 'Crear'
+5. PUT http://api.cargapp.co/api/v1/cities/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/cities/:id 'Elimina'
+
+```
+{
+    "city": {
+        "name": "creado",
+        "code": "creted",        
+        "description": "estado creado para el usro de los estados del modelo servicios o ofertas",
+        "state_id": 1,
+        "active": true
+    }
+}
+```
+
+## DocumentType 
+* name
+* code
+* description
+* active
+
+
+```rails g scaffold DocumentType name code description:text active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/document_types 'Listar'
+2. GET http://api.cargapp.co/api/v1/document_types/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/document_types/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/document_types 'Crear'
+5. PUT http://api.cargapp.co/api/v1/document_types/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/document_types/:id 'Elimina'
+
+```
+{
+    "document_type": {
+        "name": "creado",
+        "code": "creted",        
+        "description": "estado creado para el usro de los estados del modelo servicios o ofertas",
+        "active": true
+    }
+}
+```
+
+## VehicleType 
+* name
+* code
+* icon
+* description
+* active
+
+
+```rails g scaffold VehicleType name code description:text active:boolean```
 
 1. GET http://api.cargapp.co/api/v1/cities 'Listar'
 2. GET http://api.cargapp.co/api/v1/cities/active 'Ver activos'
