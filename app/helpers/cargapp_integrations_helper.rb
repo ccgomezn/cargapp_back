@@ -1,0 +1,2 @@
+module CargappIntegrationsHelper
+end

@@ -400,3 +400,60 @@ Code style checker
     }
 }
 ```
+
+##Integration
+* name
+* description
+* provider
+* code
+* url
+* url_provider
+* url_production
+* url_develop
+* email
+* username
+* password
+* phone
+* pin
+* token
+* app_id
+* client_id
+* api_key
+* user:references
+* active 
+
+
+```rails g scaffold CargappIntegration name description:text provider code url url_provider url_production url_develop email username password phone pin token app_id client_id api_key user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/cargapp_integrations 'Listar'
+2. GET http://api.cargapp.co/api/v1/cargapp_integrations/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/cargapp_integrations/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/cargapp_integrations 'Crear'
+5. PUT http://api.cargapp.co/api/v1/cargapp_integrations/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/cargapp_integrations/:id 'Elimina'
+
+```
+{
+    "cargapp_integration": {
+        "name": "creado",
+        "description": "estado creado para el usro de los estados del modelo servicios o ofertas",
+        "provider": null,
+        "code": "creted",
+        "url": null,
+        "url_provider": null,
+        "url_production": null,
+        "url_develop": null,
+        "email": null,
+        "username": null,
+        "password": null,
+        "phone": null,
+        "pin": null,
+        "token": null,
+        "app_id": null,
+        "client_id": null,
+        "api_key": null,
+        "user_id": 1,
+        "active": true
+    }
+}
+```

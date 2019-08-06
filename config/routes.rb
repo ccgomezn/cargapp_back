@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :document_types
   resources :vehicle_types
   resources :load_types
+  resources :cargapp_integrations
 
   namespace :api, defaults: { format: :json } do
     namespace :v1, defaults: { format: :json } do
@@ -48,6 +49,9 @@ Rails.application.routes.draw do
       resources :vehicle_types
       get 'load_types/active' => 'load_types#active'
       resources :load_types
+      get 'cargapp_integrations/me' => 'cargapp_integrations#me'
+      get 'cargapp_integrations/active' => 'cargapp_integrations#active'
+      resources :cargapp_integrations
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

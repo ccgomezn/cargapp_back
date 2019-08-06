@@ -1,0 +1,112 @@
+<%= form_with(model: cargapp_integration, local: true) do |form| %>
+  <% if cargapp_integration.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cargapp_integration.errors.count, "error") %> prohibited this cargapp_integration from being saved:</h2>
+
+      <ul>
+        <% cargapp_integration.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :provider %>
+    <%= form.text_field :provider %>
+  </div>
+
+  <div class="field">
+    <%= form.label :code %>
+    <%= form.text_field :code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :url %>
+    <%= form.text_field :url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :url_provider %>
+    <%= form.text_field :url_provider %>
+  </div>
+
+  <div class="field">
+    <%= form.label :url_production %>
+    <%= form.text_field :url_production %>
+  </div>
+
+  <div class="field">
+    <%= form.label :url_develop %>
+    <%= form.text_field :url_develop %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :username %>
+    <%= form.text_field :username %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password %>
+    <%= form.text_field :password %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone %>
+    <%= form.text_field :phone %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pin %>
+    <%= form.text_field :pin %>
+  </div>
+
+  <div class="field">
+    <%= form.label :token %>
+    <%= form.text_field :token %>
+  </div>
+
+  <div class="field">
+    <%= form.label :app_id %>
+    <%= form.text_field :app_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :client_id %>
+    <%= form.text_field :client_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :api_key %>
+    <%= form.text_field :api_key %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :active %>
+    <%= form.check_box :active %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

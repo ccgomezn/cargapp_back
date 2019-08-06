@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_06_143159) do
+ActiveRecord::Schema.define(version: 2019_08_06_144311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,31 @@ ActiveRecord::Schema.define(version: 2019_08_06_143159) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "cargapp_integrations", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "provider"
+    t.string "code"
+    t.string "url"
+    t.string "url_provider"
+    t.string "url_production"
+    t.string "url_develop"
+    t.string "email"
+    t.string "username"
+    t.string "password"
+    t.string "phone"
+    t.string "pin"
+    t.string "token"
+    t.string "app_id"
+    t.string "client_id"
+    t.string "api_key"
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_cargapp_integrations_on_user_id"
   end
 
   create_table "cargapp_models", force: :cascade do |t|
@@ -98,6 +123,27 @@ ActiveRecord::Schema.define(version: 2019_08_06_143159) do
     t.string "name"
     t.string "code"
     t.text "description"
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "integrations", force: :cascade do |t|
+    t.string "name"
+    t.string "provider"
+    t.string "code"
+    t.string "url"
+    t.string "url_pro"
+    t.string "url_dev"
+    t.string "email"
+    t.string "username"
+    t.string "password"
+    t.string "phone"
+    t.string "pin"
+    t.string "token"
+    t.string "app_id"
+    t.string "client_id"
+    t.string "api_key"
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -253,6 +299,7 @@ ActiveRecord::Schema.define(version: 2019_08_06_143159) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cargapp_integrations", "users"
   add_foreign_key "cities", "states"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_grants", "users", column: "resource_owner_id"

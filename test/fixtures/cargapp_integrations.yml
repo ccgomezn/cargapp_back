@@ -1,0 +1,43 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  provider: MyString
+  code: MyString
+  url: MyString
+  url_provider: MyString
+  url_production: MyString
+  url_develop: MyString
+  email: MyString
+  username: MyString
+  password: MyString
+  phone: MyString
+  pin: MyString
+  token: MyString
+  app_id: MyString
+  client_id: MyString
+  api_key: MyString
+  user: one
+  active: false
+
+two:
+  name: MyString
+  description: MyText
+  provider: MyString
+  code: MyString
+  url: MyString
+  url_provider: MyString
+  url_production: MyString
+  url_develop: MyString
+  email: MyString
+  username: MyString
+  password: MyString
+  phone: MyString
+  pin: MyString
+  token: MyString
+  app_id: MyString
+  client_id: MyString
+  api_key: MyString
+  user: two
+  active: false
