@@ -495,3 +495,37 @@ Code style checker
     }
 }
 ```
+
+## Ticket 
+* title
+* body
+* image
+* media
+* status_id
+* user_id
+* active
+
+
+```rails g scaffold Ticket title body:text image media statu:references user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/tickets 'Listar'
+2. GET http://api.cargapp.co/api/v1/tickets/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/tickets/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/tickets 'Crear'
+5. PUT http://api.cargapp.co/api/v1/tickets/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/tickets/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/tickets/me 'Ver los del usuario'
+
+```
+{
+    "ticket": {
+        "title": "creado",
+        "body": "estado creado para el usro de los estados del modelo servicios o ofertas",
+        "image": "image.png",
+        "media": "archivo.pdf",
+        "statu_id": 1,
+        "user_id": 1,
+        "active": true
+    }
+}
+```
