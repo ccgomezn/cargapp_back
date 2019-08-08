@@ -1,6 +1,48 @@
 class Api::V1::CitiesController < ApplicationController
   before_action :set_city, only: [:show, :edit, :update, :destroy]
   protect_from_forgery with: :null_session # Temporary
+  swagger_controller :cities, 'Cities Management'
+
+  swagger_api :index do
+    summary 'Fetches all City items'
+    notes 'This lists all the cities'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active City items'
+    notes 'This lists all the active cities'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new City'
+    param :form, :name, :string, :required, 'Name'
+    param :form, :code, :string, :required, 'Code'
+    param :form, :description, :string, :required, 'Description'
+    param :form, :state_id, :integer, :required, 'State Id related to City'
+    param :form, :active, :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing City'
+    param :path, :id, :integer, :required, "City Id"
+    param :form, :name, :string, :optional, 'Name'
+    param :form, :code, :string, :optional, 'Code'
+    param :form, :description, :string, :optional, 'Description'
+    param :form, :state_id, :integer, :optional, 'State Id related to City'
+    param :form, :active, :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing City"
+    param :path, :id, :integer, :optional, "City Id"
+    response :unauthorized
+    response :not_found
+  end
 
   # GET /cities
   # GET /cities.json

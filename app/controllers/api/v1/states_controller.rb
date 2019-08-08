@@ -2,6 +2,49 @@ class Api::V1::StatesController < ApplicationController
   before_action :set_state, only: [:show, :edit, :update, :destroy]
   protect_from_forgery with: :null_session # Temporary
 
+  swagger_controller :states, 'States Location Management'
+
+  swagger_api :index do
+    summary 'Fetches all States items'
+    notes 'This lists all the states'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active States items'
+    notes 'This lists all the active states'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new States'
+    param :form, :name, :string, :required, 'Name'
+    param :form, :code, :string, :required, 'Code'
+    param :form, :description, :string, :required, 'Description'
+    param :form, :country_id, :integer, :required, 'Country id related to status'
+    param :form, :active, :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing State'
+    param :path, :id, :integer, :required, "State Id"
+    param :form, :name, :string, :optional, 'Name'
+    param :form, :code, :string, :optional, 'Code'
+    param :form, :description, :string, :optional, 'Description'
+    param :form, :country_id, :integer, :optional, 'Country id related to status'
+    param :form, :active, :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing State"
+    param :path, :id, :integer, :optional, "State Id"
+    response :unauthorized
+    response :not_found
+  end
+
   # GET /states
   # GET /states.json
   def index

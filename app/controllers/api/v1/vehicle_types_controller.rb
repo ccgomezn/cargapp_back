@@ -1,6 +1,49 @@
 class Api::V1::VehicleTypesController < ApplicationController
-  before_action :set_vehicle_type, only: [:show, :edit, :update, :destroy]
+  before_action :set_vehicle_type, only: %i[show edit update destroy]
   protect_from_forgery with: :null_session # Temporary
+
+  swagger_controller :vehicleTypes, 'Vehicle Types Management'
+
+  swagger_api :index do
+    summary 'Fetches all Vehicle Types items'
+    notes 'This lists all the vehicle types'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Vehicle Types items'
+    notes 'This lists all the active vehicle types'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Vehicle Type'
+    param :form, :name, :string, :required, 'Name'
+    param :form, :code, :string, :required, 'Code'
+    param :form, :description, :string, :required, 'Description'
+    param :form, :icon, :string, :required, 'Icon'
+    param :form, :active, :boolean, :required, 'Activation State'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Vehicle Type'
+    param :path, :id, :integer, :required, "Vehicle Type Id"
+    param :form, :name, :string, :optional, 'Name'
+    param :form, :code, :string, :optional, 'Code'
+    param :form, :description, :string, :optional, 'Description'
+    param :form, :icon, :string, :optional, 'Icon'
+    param :form, :active, :boolean, :optional, 'Activation State'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Vehicle Type"
+    param :path, :id, :integer, :optional, "Vehicle Type Id"
+    response :unauthorized
+    response :not_found
+  end
 
   # GET /vehicle_types
   # GET /vehicle_types.json
@@ -53,13 +96,14 @@ class Api::V1::VehicleTypesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_vehicle_type
-      @vehicle_type = VehicleType.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def vehicle_type_params
-      params.require(:vehicle_type).permit(:name, :code, :icon, :description, :active)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_vehicle_type
+    @vehicle_type = VehicleType.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def vehicle_type_params
+    params.require(:vehicle_type).permit(:name, :code, :icon, :description, :active)
+  end
 end

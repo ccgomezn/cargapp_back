@@ -2,6 +2,53 @@ class Api::V1::ParametersController < ApplicationController
   before_action :set_parameter, only: [:show, :edit, :update, :destroy]
   protect_from_forgery with: :null_session # Temporary
 
+  swagger_controller :parameters, 'Parameters Management'
+
+  swagger_api :index do
+    summary 'Fetches all Parameters items'
+    notes 'This lists all the parameters'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Parameters items'
+    notes 'This lists all the active parameters'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Parameter'
+    param :form, :name, :string, :required, 'Name'
+    param :form, :code, :string, :required, 'Code'
+    param :form, :description, :string, :required, 'Description'
+    param :form, :user_id, :integer, :required, 'Id of user related to parameter'
+    param :form, :value, :string, :required, 'Value'
+    param :form, :model_id, :integer, :required, 'Id of model related to parameter'
+    param :form, :active, :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Parameter'
+    param :path, :id, :integer, :required, "Parameter Id"
+    param :form, :name, :string, :optional, 'Name'
+    param :form, :code, :string, :optional, 'Code'
+    param :form, :description, :string, :optional, 'Description'
+    param :form, :user_id, :integer, :optional, 'Id of user related to parameter'
+    param :form, :value, :string, :optional, 'Value'
+    param :form, :model_id, :integer, :optional, 'Id of model related to parameter'
+    param :form, :active, :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Parameter"
+    param :path, :id, :integer, :optional, "Parameter Id"
+    response :unauthorized
+    response :not_found
+  end
+
   # GET /parameters
   # GET /parameters.json
   def index

@@ -2,6 +2,51 @@ class Api::V1::StatusController < ApplicationController
   before_action :set_status, only: [:show, :edit, :update, :destroy]
   protect_from_forgery with: :null_session # Temporary
 
+  swagger_controller :status, 'Status Management'
+
+  swagger_api :index do
+    summary 'Fetches all Status items'
+    notes 'This lists all the status'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Status items'
+    notes 'This lists all the active status'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Status'
+    param :form, :name, :string, :required, 'Name'
+    param :form, :code, :string, :required, 'Code'
+    param :form, :description, :string, :required, 'Description'
+    param :form, :user_id, :integer, :required, 'User id related to status'
+    param :form, :cargapp_model_id, :integer, :required, 'Model id related to status'
+    param :form, :active, :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Status'
+    param :path, :id, :integer, :required, "Status Id"
+    param :form, :name, :string, :optional, 'Name'
+    param :form, :code, :string, :optional, 'Code'
+    param :form, :description, :string, :optional, 'Description'
+    param :form, :user_id, :integer, :optional, 'User id related to status'
+    param :form, :cargapp_model_id, :integer, :optional, 'Model id related to status'
+    param :form, :active, :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Status"
+    param :path, :id, :integer, :optional, "Status Id"
+    response :unauthorized
+    response :not_found
+  end
+
   # GET /status
   # GET /status.json
   def index

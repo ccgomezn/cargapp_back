@@ -2,6 +2,53 @@ class Api::V1::PermissionsController < ApplicationController
   before_action :set_permission, only: [:show, :edit, :update, :destroy]
   protect_from_forgery with: :null_session # Temporary
 
+  swagger_controller :permissions, 'Permissions Management'
+
+  swagger_api :index do
+    summary 'Fetches all Permission items'
+    notes 'This lists all the permissions'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Permission items'
+    notes 'This lists all the active permissions'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Permission'
+    param :form, :role_id, :integer, :required, 'Id of role related to permission'
+    param :form, :model_id, :integer, :required, 'Id of model related to permission'
+    param :form, :action, :string, :required, 'Action'
+    param :form, :method, :string, :required, 'Method'
+    param :form, :user_id, :integer, :required, 'Id of user related to permission'
+    param :form, :allow, :boolean, :required, 'Allow all actions'
+    param :form, :active, :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Permission'
+    param :path, :id, :integer, :required, "Permission Id"
+    param :form, :role_id, :integer, :optional, 'Id of role related to permission'
+    param :form, :model_id, :integer, :optional, 'Id of model related to permission'
+    param :form, :action, :string, :optional, 'Action'
+    param :form, :method, :string, :optional, 'Method'
+    param :form, :user_id, :integer, :optional, 'Id of user related to permission'
+    param :form, :allow, :boolean, :optional, 'Allow all actions'
+    param :form, :active, :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Permission"
+    param :path, :id, :integer, :optional, "Permission Id"
+    response :unauthorized
+    response :not_found
+  end
+
   # GET /permissions
   # GET /permissions.json
   def index
