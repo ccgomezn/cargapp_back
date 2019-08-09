@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_06_202327) do
+ActiveRecord::Schema.define(version: 2019_08_09_143541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -146,6 +146,27 @@ ActiveRecord::Schema.define(version: 2019_08_06_202327) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "integrations", force: :cascade do |t|
+    t.string "name"
+    t.string "provider"
+    t.string "code"
+    t.string "url"
+    t.string "url_pro"
+    t.string "url_dev"
+    t.string "email"
+    t.string "username"
+    t.string "password"
+    t.string "phone"
+    t.string "pin"
+    t.string "token"
+    t.string "app_id"
+    t.string "client_id"
+    t.string "api_key"
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "load_types", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -261,6 +282,20 @@ ActiveRecord::Schema.define(version: 2019_08_06_202327) do
     t.index ["user_id"], name: "index_status_on_user_id"
   end
 
+  create_table "tickets", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.string "image"
+    t.string "media"
+    t.bigint "statu_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["statu_id"], name: "index_tickets_on_statu_id"
+    t.index ["user_id"], name: "index_tickets_on_user_id"
+  end
+
   create_table "user_roles", force: :cascade do |t|
     t.bigint "role_id", null: false
     t.bigint "user_id", null: false
@@ -312,6 +347,8 @@ ActiveRecord::Schema.define(version: 2019_08_06_202327) do
   add_foreign_key "states", "countries"
   add_foreign_key "status", "cargapp_models"
   add_foreign_key "status", "users"
+  add_foreign_key "tickets", "status", column: "statu_id"
+  add_foreign_key "tickets", "users"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
 end

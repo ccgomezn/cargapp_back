@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @ticket.title %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @ticket.body %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @ticket.image %>
+</p>
+
+<p>
+  <strong>Media:</strong>
+  <%= @ticket.media %>
+</p>
+
+<p>
+  <strong>Statu:</strong>
+  <%= @ticket.statu_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @ticket.user_id %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @ticket.active %>
+</p>
+
+<%= link_to 'Edit', edit_ticket_path(@ticket) %> |
+<%= link_to 'Back', tickets_path %>

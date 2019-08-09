@@ -1,6 +1,7 @@
 class Api::V1::CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
   protect_from_forgery with: :null_session # Temporary
+  before_action :set_user
 
   # GET /companies
   # GET /companies.json
@@ -59,6 +60,10 @@ class Api::V1::CompaniesController < ApplicationController
   end
 
   private
+
+    def set_user
+      @user = User.all.first #User.find(doorkeeper_token.resource_owner_id) if doorkeeper_token
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_company
       @company = Company.find(params[:id])
