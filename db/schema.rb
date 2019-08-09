@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_06_144311) do
+ActiveRecord::Schema.define(version: 2019_08_06_202327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,24 @@ ActiveRecord::Schema.define(version: 2019_08_06_144311) do
     t.index ["state_id"], name: "index_cities_on_state_id"
   end
 
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "company_type"
+    t.bigint "load_type_id", null: false
+    t.string "sector"
+    t.string "legal_representative"
+    t.string "address"
+    t.string "phone"
+    t.bigint "user_id", null: false
+    t.date "constitution_date"
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["load_type_id"], name: "index_companies_on_load_type_id"
+    t.index ["user_id"], name: "index_companies_on_user_id"
+  end
+
   create_table "countries", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -123,27 +141,6 @@ ActiveRecord::Schema.define(version: 2019_08_06_144311) do
     t.string "name"
     t.string "code"
     t.text "description"
-    t.boolean "active"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "integrations", force: :cascade do |t|
-    t.string "name"
-    t.string "provider"
-    t.string "code"
-    t.string "url"
-    t.string "url_pro"
-    t.string "url_dev"
-    t.string "email"
-    t.string "username"
-    t.string "password"
-    t.string "phone"
-    t.string "pin"
-    t.string "token"
-    t.string "app_id"
-    t.string "client_id"
-    t.string "api_key"
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -301,6 +298,8 @@ ActiveRecord::Schema.define(version: 2019_08_06_144311) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cargapp_integrations", "users"
   add_foreign_key "cities", "states"
+  add_foreign_key "companies", "load_types"
+  add_foreign_key "companies", "users"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_grants", "users", column: "resource_owner_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"

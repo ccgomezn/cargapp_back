@@ -495,3 +495,291 @@ Code style checker
     }
 }
 ```
+# AQUI
+
+## Ticket 
+* title
+* body
+* image
+* media
+* status_id
+* user_id
+* active
+
+
+```rails g scaffold Ticket title body:text image media statu:references user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/tickets 'Listar'
+2. GET http://api.cargapp.co/api/v1/tickets/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/tickets/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/tickets 'Crear'
+5. PUT http://api.cargapp.co/api/v1/tickets/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/tickets/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/tickets/me 'Ver los del usuario'
+
+```
+{
+    "ticket": {
+        "title": "creado",
+        "body": "estado creado para el usro de los estados del modelo servicios o ofertas",
+        "image": "image.png",
+        "media": "archivo.pdf",
+        "statu_id": 1,
+        "user_id": 1,
+        "active": true
+    }
+}
+```
+
+
+## Document 
+* document_id
+* document_type_id
+* file
+* status_id
+* user_id
+* expire_date
+* approved
+* active
+
+
+```rails g scaffold Document document_id document_type:references file statu:rferences user:references expire_date:date approved:boolean active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/documents 'Listar'
+2. GET http://api.cargapp.co/api/v1/documents/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/documents/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/documents 'Crear'
+5. PUT http://api.cargapp.co/api/v1/documents/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/documents/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/documents/me 'Ver los del usuario'
+
+```
+{
+    "document": {
+        "document_id": "1086726268",
+        "document": "1086726268",
+        "number": "1086726268",
+        "document_type_id": 1,
+        "file": "archivo.pdf",
+        "expire_date": "10-09-2019"
+        "statu_id": 1,
+        "user_id": 1,
+        "approved": true,
+        "active": true
+    }
+}
+```
+
+
+## Profile 
+* firt_name
+* last_name
+* avatar
+* phone
+* document_id
+* document_type_id
+* birth_date
+* user_id
+
+
+```rails g scaffold Profile firt_name last_name avatar phone:number document_id document_type:references user:references birth_date:date```
+
+1. GET http://api.cargapp.co/api/v1/profiles 'Listar'
+2. GET http://api.cargapp.co/api/v1/profiles/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/profiles/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/profiles 'Crear'
+5. PUT http://api.cargapp.co/api/v1/profiles/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/profiles/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/profiles/me 'Ver los del usuario'
+
+```
+{
+    "profile": {
+        "firt_name": "segundo",
+        "last_name": "espana",
+        "avatar": "foto.png",
+        "phone": "573156257773",
+        "document_id": "1086726268",
+        "document_type_id": 1,
+        "birth_date": "10-09-2019",
+        "user_id": 1
+    }
+}
+```
+
+
+## Vehicle 
+* brand
+* model
+* model_year
+* color
+* plate 
+* chassis
+* owner_vehicle
+* vehicle_type_id
+* user_id
+* active
+
+
+```rails g scaffold Vehicle brand model model_year:integer color plate chassis owner_vehicle vehicle_type:references owner_document_type:refrences user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/vehicles 'Listar'
+2. GET http://api.cargapp.co/api/v1/vehicles/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/vehicles/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/vehicles 'Crear'
+5. PUT http://api.cargapp.co/api/v1/vehicles/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/vehicles/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/vehicles/me 'Ver los del usuario'
+
+```
+{
+    "vehicle": {
+        "brand": "mazda",
+        "model": "2",
+        "model_year": 2019,
+        "color": "white",
+        "plate": "528-SRC"
+        "chassis": "segundo1w35djjd",
+        "owner_vehicle": "segundo españa bastidas",
+        "owner_document_id": "10922222",
+        "vehicle_type": 1,
+        "owner_document_type_id": 1, 
+        "user_id": 1,
+        "active": true
+    }
+}
+```
+
+
+## Challenge 
+* name
+* body
+* image
+* point 
+* user_id
+* active
+
+
+```rails g scaffold Challenge name body:text image point:number user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/challenges 'Listar'
+2. GET http://api.cargapp.co/api/v1/challenges/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/challenges/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/challenges 'Crear'
+5. PUT http://api.cargapp.co/api/v1/challenges/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/challenges/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/challenges/me 'Ver los del usuario'
+
+```
+{
+    "challenge": {
+        "name": "los 3 primeros viajes",
+        "body": "quien ejecte los primeros 3 viajes ganara 10 puntos",
+        "image": "image.png",
+        "point": 12,
+        "user_id": 1,
+        "active": true
+    }
+}
+```
+
+
+## UserChallenge
+* position
+* point 
+* challenge_id
+* user_id
+* active
+
+
+```rails g scaffold UserChallenge position:number point:number challenge:references user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/user_challenges 'Listar'
+2. GET http://api.cargapp.co/api/v1/user_challenges/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/user_challenges/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/user_challenges 'Crear'
+5. PUT http://api.cargapp.co/api/v1/user_challenges/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/user_challenges/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/user_challenges/me 'Ver los del usuario'
+
+```
+{
+    "user_challenge": {
+        "position": "los 3 primeros viajes",
+        "point": 12,
+        "user_id": 1,
+        "challenge_id": 1,
+        "active": true
+    }
+}
+```
+
+
+## Coupon
+* name
+* code
+* description
+* cargapp_model_id
+* is_porcentage
+* value
+* quantity
+* user_id
+* active
+
+
+```rails g scaffold Coupon name code description is_porcentage:boolean value:number quantity:number * cargapp_model:references user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/coupons 'Listar'
+2. GET http://api.cargapp.co/api/v1/coupons/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/coupons/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/coupons 'Crear'
+5. PUT http://api.cargapp.co/api/v1/coupons/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/coupons/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/coupons/me 'Ver los del usuario'
+
+```
+{
+    "coupon": {
+        "name": "Todos 10",
+        "code": "TODO10", 
+        "description": "10% de decuento para todos",
+        "is_porcentage": true,
+        "value": 10,
+        "quantity": 100,    
+        "user_id": 1,
+        "active": true
+    }
+}
+```
+
+## UserCoupon
+* user_id
+* coupon_id
+* cargapp_model_id
+* offert_id
+* discount
+* active
+
+
+```rails g scaffold UserCoupon discount offert:references cargarpp_model:references coupon:references user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/user_coupons 'Listar'
+2. GET http://api.cargapp.co/api/v1/user_coupons/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/user_coupons/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/user_coupons 'Crear'
+5. PUT http://api.cargapp.co/api/v1/user_coupons/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/user_coupons/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/user_coupons/me 'Ver los del usuario'
+
+```
+{
+    "user_coupon": {
+        "discount": 10,
+        "offert_id": 2,
+        "cargapp_model_id": 1,
+        "cupon_id": 1,
+        "user_id": 1,
+        "active": true
+    }
+}
+```
