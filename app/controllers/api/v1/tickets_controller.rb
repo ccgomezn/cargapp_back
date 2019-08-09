@@ -36,7 +36,16 @@ class Api::V1::TicketsController < ApplicationController
     @ticket = Ticket.new(ticket_params)
 
     if @ticket.save
-      render json: @ticket, status: :created, location: @ticket
+      @obj = {
+        title: @ticket.title,
+        body: @ticket.body,
+        statu_id: @ticket.statu_id,
+        user_id: @ticket.user_id,
+        active: @ticket.active,
+        image: @ticket.image.attached? ? url_for(@ticket.image) : nil,
+        media: @ticket.image.attached? ? url_for(@ticket.image) : nil
+      }
+      render json: @obj, status: :created, location: @obj
       # 'ticket was successfully created.'
     else
       render json: @ticket.errors, status: :unprocessable_entity
@@ -47,7 +56,18 @@ class Api::V1::TicketsController < ApplicationController
   # PATCH/PUT /tickets/1.json
   def update
     if @ticket.update(ticket_params)
-      render json: @ticket
+
+      @obj = {
+        title: @ticket.title,
+        body: @ticket.body,
+        statu_id: @ticket.statu_id,
+        user_id: @ticket.user_id,
+        active: @ticket.active,
+        image: @ticket.image.attached? ? url_for(@ticket.image) : nil,
+        media: @ticket.image.attached? ? url_for(@ticket.image) : nil
+      }
+
+      render json: @obj
       # 'ticket was successfully updated.'
     else
       render json: @ticket.errors, status: :unprocessable_entity
