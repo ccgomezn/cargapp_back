@@ -27,7 +27,16 @@ class Api::V1::TicketsController < ApplicationController
   # GET /tickets/1
   # GET /tickets/1.json
   def show
-    render json: @ticket
+    @obj = {
+      title: @ticket.title,
+      body: @ticket.body,
+      statu_id: @ticket.statu_id,
+      user_id: @ticket.user_id,
+      active: @ticket.active,
+      image: @ticket.image.attached? ? url_for(@ticket.image) : nil,
+      media: @ticket.image.attached? ? url_for(@ticket.image) : nil
+    }
+    render json: @obj
   end
 
   # POST /tickets
