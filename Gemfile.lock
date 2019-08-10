@@ -54,6 +54,7 @@ GEM
       activejob (= 6.0.0.rc2)
       activerecord (= 6.0.0.rc2)
       marcel (~> 0.3.1)
+    activestorage-digitalocean (0.0.0)
     activesupport (6.0.0.rc2)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
@@ -118,7 +119,11 @@ GEM
       dotenv (= 2.7.4)
       railties (>= 3.2, < 6.1)
     erubi (1.8.0)
+    ethon (0.12.0)
+      ffi (>= 1.3.0)
     execjs (2.7.0)
+    exponent-server-sdk (0.0.6)
+      typhoeus
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
     ffi (1.11.1)
@@ -293,6 +298,8 @@ GEM
     turbolinks (5.2.0)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
+    typhoeus (1.3.1)
+      ethon (>= 0.9.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     unicode-display_width (1.6.0)
@@ -322,6 +329,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activestorage-digitalocean
   bootsnap (>= 1.4.2)
   byebug
   capistrano (~> 3.11)
@@ -332,6 +340,7 @@ DEPENDENCIES
   devise
   doorkeeper
   dotenv-rails
+  exponent-server-sdk
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   oauth2

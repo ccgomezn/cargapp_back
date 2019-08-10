@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_09_143541) do
+ActiveRecord::Schema.define(version: 2019_08_10_175439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -144,6 +144,22 @@ ActiveRecord::Schema.define(version: 2019_08_09_143541) do
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.string "document_id"
+    t.bigint "document_type_id", null: false
+    t.string "file"
+    t.bigint "statu_id", null: false
+    t.bigint "user_id", null: false
+    t.date "expire_date"
+    t.boolean "approved"
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["document_type_id"], name: "index_documents_on_document_type_id"
+    t.index ["statu_id"], name: "index_documents_on_statu_id"
+    t.index ["user_id"], name: "index_documents_on_user_id"
   end
 
   create_table "integrations", force: :cascade do |t|
@@ -335,6 +351,9 @@ ActiveRecord::Schema.define(version: 2019_08_09_143541) do
   add_foreign_key "cities", "states"
   add_foreign_key "companies", "load_types"
   add_foreign_key "companies", "users"
+  add_foreign_key "documents", "document_types"
+  add_foreign_key "documents", "status", column: "statu_id"
+  add_foreign_key "documents", "users"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_grants", "users", column: "resource_owner_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"

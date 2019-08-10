@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :cargapp_integrations
   resources :companies
   resources :tickets
+  resources :documents
 
   namespace :api, defaults: { format: :json } do
     namespace :v1, defaults: { format: :json } do
@@ -60,6 +61,9 @@ Rails.application.routes.draw do
       get 'tickets/me' => 'tickets#me'
       get 'tickets/active' => 'tickets#active'
       resources :tickets
+      get 'documents/me' => 'documents#me'
+      get 'documents/active' => 'documents#active'
+      resources :documents
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

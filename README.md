@@ -530,7 +530,6 @@ Code style checker
 }
 ```
 
-# AQUI
 
 ## Document 
 * document_id
@@ -543,7 +542,7 @@ Code style checker
 * active
 
 
-```rails g scaffold Document document_id document_type:references file statu:rferences user:references expire_date:date approved:boolean active:boolean```
+```rails g scaffold Document document_id document_type:references file statu:references user:references expire_date:date approved:boolean active:boolean```
 
 1. GET http://api.cargapp.co/api/v1/documents 'Listar'
 2. GET http://api.cargapp.co/api/v1/documents/active 'Ver activos'
