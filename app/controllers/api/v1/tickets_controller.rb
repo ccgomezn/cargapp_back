@@ -7,21 +7,66 @@ class Api::V1::TicketsController < ApplicationController
   # GET /tickets.json
   def index
     @tickets = Ticket.all
-
-    render json: @tickets
+    @result = []
+    @tickets.each do |ticket|
+      @obj = {
+        id: ticket.id,
+        title: ticket.title,
+        body: ticket.body,
+        statu_id: ticket.statu_id,
+        user_id: ticket.user_id,
+        active: ticket.active,
+        image: ticket.image.attached? ? url_for(ticket.image) : nil,
+        media: ticket.image.attached? ? url_for(ticket.image) : nil,
+        created_at: ticket.created_at,
+        updated_at: ticket.updated_at
+      }
+      @result << @obj
+    end
+    render json: @result
   end
 
   def me
-    @tickets = @user.companies #CargappIntegration.where(active: true, user_id: @user)
-
-    render json: @tickets
+    @tickets = @user.tickets #CargappIntegration.where(active: true, user_id: @user)
+    @result = []
+    @tickets.each do |ticket|
+      @obj = {
+        id: ticket.id,
+        title: ticket.title,
+        body: ticket.body,
+        statu_id: ticket.statu_id,
+        user_id: ticket.user_id,
+        active: ticket.active,
+        image: ticket.image.attached? ? url_for(ticket.image) : nil,
+        media: ticket.image.attached? ? url_for(ticket.image) : nil,
+        created_at: ticket.created_at,
+        updated_at: ticket.updated_at
+      }
+      @result << @obj
+    end
+    render json: @result
   end
 
 
   def active
-    @tickets = Statu.where(active: true)
-
-    render json: @tickets
+    @tickets = Ticket.where(active: true)
+    @result = []
+    @tickets.each do |ticket|
+      @obj = {
+        id: ticket.id,
+        title: ticket.title,
+        body: ticket.body,
+        statu_id: ticket.statu_id,
+        user_id: ticket.user_id,
+        active: ticket.active,
+        image: ticket.image.attached? ? url_for(ticket.image) : nil,
+        media: ticket.image.attached? ? url_for(ticket.image) : nil,
+        created_at: ticket.created_at,
+        updated_at: ticket.updated_at
+      }
+      @result << @obj
+    end
+    render json: @result
   end
 
   # GET /tickets/1
