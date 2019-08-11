@@ -54,7 +54,6 @@ GEM
       activejob (= 6.0.0.rc2)
       activerecord (= 6.0.0.rc2)
       marcel (~> 0.3.1)
-    activestorage-digitalocean (0.0.0)
     activesupport (6.0.0.rc2)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
@@ -329,7 +328,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activestorage-digitalocean
   bootsnap (>= 1.4.2)
   byebug
   capistrano (~> 3.11)
