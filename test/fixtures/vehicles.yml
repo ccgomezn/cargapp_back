@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  brand: MyString
+  model: MyString
+  model_year: 1
+  color: MyString
+  plate: MyString
+  chassis: MyString
+  owner_vehicle: MyString
+  vehicle_type: one
+  owner_document_type: one
+  owner_document_id: MyString
+  user: one
+  active: false
+
+two:
+  brand: MyString
+  model: MyString
+  model_year: 1
+  color: MyString
+  plate: MyString
+  chassis: MyString
+  owner_vehicle: MyString
+  vehicle_type: two
+  owner_document_type: two
+  owner_document_id: MyString
+  user: two
+  active: false

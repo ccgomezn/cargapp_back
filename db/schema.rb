@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_10_175439) do
+ActiveRecord::Schema.define(version: 2019_08_11_031810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -160,27 +160,6 @@ ActiveRecord::Schema.define(version: 2019_08_10_175439) do
     t.index ["document_type_id"], name: "index_documents_on_document_type_id"
     t.index ["statu_id"], name: "index_documents_on_statu_id"
     t.index ["user_id"], name: "index_documents_on_user_id"
-  end
-
-  create_table "integrations", force: :cascade do |t|
-    t.string "name"
-    t.string "provider"
-    t.string "code"
-    t.string "url"
-    t.string "url_pro"
-    t.string "url_dev"
-    t.string "email"
-    t.string "username"
-    t.string "password"
-    t.string "phone"
-    t.string "pin"
-    t.string "token"
-    t.string "app_id"
-    t.string "client_id"
-    t.string "api_key"
-    t.boolean "active"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "load_types", force: :cascade do |t|
@@ -346,6 +325,26 @@ ActiveRecord::Schema.define(version: 2019_08_10_175439) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "vehicles", force: :cascade do |t|
+    t.string "brand"
+    t.string "model"
+    t.integer "model_year"
+    t.string "color"
+    t.string "plate"
+    t.string "chassis"
+    t.string "owner_vehicle"
+    t.bigint "vehicle_type_id", null: false
+    t.bigint "owner_document_type_id"
+    t.string "owner_document_id"
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["owner_document_type_id"], name: "index_vehicles_on_owner_document_type_id"
+    t.index ["user_id"], name: "index_vehicles_on_user_id"
+    t.index ["vehicle_type_id"], name: "index_vehicles_on_vehicle_type_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cargapp_integrations", "users"
   add_foreign_key "cities", "states"
@@ -370,4 +369,6 @@ ActiveRecord::Schema.define(version: 2019_08_10_175439) do
   add_foreign_key "tickets", "users"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
+  add_foreign_key "vehicles", "users"
+  add_foreign_key "vehicles", "vehicle_types"
 end

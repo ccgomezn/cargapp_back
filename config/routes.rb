@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :companies
   resources :tickets
   resources :documents
+  resources :vehicles
 
   namespace :api, defaults: { format: :json } do
     namespace :v1, defaults: { format: :json } do
@@ -64,6 +65,9 @@ Rails.application.routes.draw do
       get 'documents/me' => 'documents#me'
       get 'documents/active' => 'documents#active'
       resources :documents
+      get 'vehicles/me' => 'vehicles#me'
+      get 'vehicles/active' => 'vehicles#active'
+      resources :vehicles
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -1,0 +1,77 @@
+<%= form_with(model: vehicle, local: true) do |form| %>
+  <% if vehicle.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(vehicle.errors.count, "error") %> prohibited this vehicle from being saved:</h2>
+
+      <ul>
+        <% vehicle.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :brand %>
+    <%= form.text_field :brand %>
+  </div>
+
+  <div class="field">
+    <%= form.label :model %>
+    <%= form.text_field :model %>
+  </div>
+
+  <div class="field">
+    <%= form.label :model_year %>
+    <%= form.number_field :model_year %>
+  </div>
+
+  <div class="field">
+    <%= form.label :color %>
+    <%= form.text_field :color %>
+  </div>
+
+  <div class="field">
+    <%= form.label :plate %>
+    <%= form.text_field :plate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :chassis %>
+    <%= form.text_field :chassis %>
+  </div>
+
+  <div class="field">
+    <%= form.label :owner_vehicle %>
+    <%= form.text_field :owner_vehicle %>
+  </div>
+
+  <div class="field">
+    <%= form.label :vehicle_type_id %>
+    <%= form.text_field :vehicle_type_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :owner_document_type_id %>
+    <%= form.text_field :owner_document_type_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :owner_document_id %>
+    <%= form.text_field :owner_document_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :active %>
+    <%= form.check_box :active %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

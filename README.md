@@ -616,11 +616,13 @@ Code style checker
 * chassis
 * owner_vehicle
 * vehicle_type_id
+* owner_document_type_id
+* owner_document_id
 * user_id
 * active
 
 
-```rails g scaffold Vehicle brand model model_year:integer color plate chassis owner_vehicle vehicle_type:references owner_document_type:refrences user:references active:boolean```
+```rails g scaffold Vehicle brand model model_year:integer color plate chassis owner_vehicle vehicle_type:references owner_document_type:references owner_document_id user:references active:boolean```
 
 1. GET http://api.cargapp.co/api/v1/vehicles 'Listar'
 2. GET http://api.cargapp.co/api/v1/vehicles/active 'Ver activos'
