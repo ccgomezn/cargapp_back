@@ -756,12 +756,13 @@ Code style checker
 * user_id
 * coupon_id
 * cargapp_model_id
+* applied_item_id
 * offert_id
 * discount
 * active
 
 
-```rails g scaffold UserCoupon discount offert:references cargarpp_model:references coupon:references user:references active:boolean```
+```rails g scaffold UserCoupon discount cargapp_model:references applied_item_id:integer coupon:references user:references active:boolean```
 
 1. GET http://api.cargapp.co/api/v1/user_coupons 'Listar'
 2. GET http://api.cargapp.co/api/v1/user_coupons/active 'Ver activos'
@@ -775,9 +776,9 @@ Code style checker
 {
     "user_coupon": {
         "discount": 10,
-        "offert_id": 2,
+        "applied_item_id": 1,
         "cargapp_model_id": 1,
-        "cupon_id": 1,
+        "coupon_id": 1,
         "user_id": 1,
         "active": true
     }

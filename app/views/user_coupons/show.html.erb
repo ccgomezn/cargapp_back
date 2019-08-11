@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Discount:</strong>
+  <%= @user_coupon.discount %>
+</p>
+
+<p>
+  <strong>Cargapp model:</strong>
+  <%= @user_coupon.cargapp_model_id %>
+</p>
+
+<p>
+  <strong>Applied item:</strong>
+  <%= @user_coupon.applied_item_id %>
+</p>
+
+<p>
+  <strong>Coupon:</strong>
+  <%= @user_coupon.coupon_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @user_coupon.user_id %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @user_coupon.active %>
+</p>
+
+<%= link_to 'Edit', edit_user_coupon_path(@user_coupon) %> |
+<%= link_to 'Back', user_coupons_path %>

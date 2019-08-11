@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_11_184750) do
+ActiveRecord::Schema.define(version: 2019_08_11_192926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -367,6 +367,20 @@ ActiveRecord::Schema.define(version: 2019_08_11_184750) do
     t.index ["user_id"], name: "index_user_challenges_on_user_id"
   end
 
+  create_table "user_coupons", force: :cascade do |t|
+    t.string "discount"
+    t.bigint "cargapp_model_id", null: false
+    t.integer "applied_item_id"
+    t.bigint "coupon_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cargapp_model_id"], name: "index_user_coupons_on_cargapp_model_id"
+    t.index ["coupon_id"], name: "index_user_coupons_on_coupon_id"
+    t.index ["user_id"], name: "index_user_coupons_on_user_id"
+  end
+
   create_table "user_roles", force: :cascade do |t|
     t.bigint "role_id", null: false
     t.bigint "user_id", null: false
@@ -450,6 +464,9 @@ ActiveRecord::Schema.define(version: 2019_08_11_184750) do
   add_foreign_key "tickets", "users"
   add_foreign_key "user_challenges", "challenges"
   add_foreign_key "user_challenges", "users"
+  add_foreign_key "user_coupons", "cargapp_models"
+  add_foreign_key "user_coupons", "coupons"
+  add_foreign_key "user_coupons", "users"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
   add_foreign_key "vehicles", "users"
