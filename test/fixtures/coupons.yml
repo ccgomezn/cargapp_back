@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  code: MyString
+  description: MyString
+  is_porcentage: false
+  value: 1
+  quantity: 1
+  cargapp_model: one
+  user: one
+  active: false
+
+two:
+  name: MyString
+  code: MyString
+  description: MyString
+  is_porcentage: false
+  value: 1
+  quantity: 1
+  cargapp_model: two
+  user: two
+  active: false

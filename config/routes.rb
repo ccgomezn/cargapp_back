@@ -1,4 +1,4 @@
-Rails.application.routes.draw do    
+Rails.application.routes.draw do      
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   use_doorkeeper
 
@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :profiles
   resources :challenges
   resources :user_challenges
+  resources :coupons
 
   namespace :api, defaults: { format: :json } do
     namespace :v1, defaults: { format: :json } do
@@ -80,6 +81,9 @@ Rails.application.routes.draw do
       get 'user_challenges/me' => 'user_challenges#me'
       get 'user_challenges/active' => 'user_challenges#active'
       resources :user_challenges
+      get 'coupons/me' => 'coupons#me'
+      get 'coupons/active' => 'coupons#active'
+      resources :coupons
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

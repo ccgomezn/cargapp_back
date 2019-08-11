@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_11_171711) do
+ActiveRecord::Schema.define(version: 2019_08_11_184750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,6 +147,22 @@ ActiveRecord::Schema.define(version: 2019_08_11_171711) do
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "coupons", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.string "description"
+    t.boolean "is_porcentage"
+    t.integer "value"
+    t.integer "quantity"
+    t.bigint "cargapp_model_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cargapp_model_id"], name: "index_coupons_on_cargapp_model_id"
+    t.index ["user_id"], name: "index_coupons_on_user_id"
   end
 
   create_table "document_types", force: :cascade do |t|
@@ -411,6 +427,8 @@ ActiveRecord::Schema.define(version: 2019_08_11_171711) do
   add_foreign_key "cities", "states"
   add_foreign_key "companies", "load_types"
   add_foreign_key "companies", "users"
+  add_foreign_key "coupons", "cargapp_models"
+  add_foreign_key "coupons", "users"
   add_foreign_key "documents", "document_types"
   add_foreign_key "documents", "status", column: "statu_id"
   add_foreign_key "documents", "users"

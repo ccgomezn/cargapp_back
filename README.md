@@ -726,7 +726,7 @@ Code style checker
 * active
 
 
-```rails g scaffold Coupon name code description is_porcentage:boolean value:number quantity:number * cargapp_model:references user:references active:boolean```
+```rails g scaffold Coupon name code description is_porcentage:boolean value:integer quantity:integer cargapp_model:references user:references active:boolean```
 
 1. GET http://api.cargapp.co/api/v1/coupons 'Listar'
 2. GET http://api.cargapp.co/api/v1/coupons/active 'Ver activos'
@@ -746,6 +746,7 @@ Code style checker
         "value": 10,
         "quantity": 100,    
         "user_id": 1,
+        "cargapp_model_id": 1,
         "active": true
     }
 }
