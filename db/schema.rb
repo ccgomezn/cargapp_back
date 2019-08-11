@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_11_031810) do
+ActiveRecord::Schema.define(version: 2019_08_11_171711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,18 @@ ActiveRecord::Schema.define(version: 2019_08_11_031810) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "challenges", force: :cascade do |t|
+    t.string "name"
+    t.text "body"
+    t.string "image"
+    t.integer "point"
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_challenges_on_user_id"
+  end
+
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -160,6 +172,27 @@ ActiveRecord::Schema.define(version: 2019_08_11_031810) do
     t.index ["document_type_id"], name: "index_documents_on_document_type_id"
     t.index ["statu_id"], name: "index_documents_on_statu_id"
     t.index ["user_id"], name: "index_documents_on_user_id"
+  end
+
+  create_table "integrations", force: :cascade do |t|
+    t.string "name"
+    t.string "provider"
+    t.string "code"
+    t.string "url"
+    t.string "url_pro"
+    t.string "url_dev"
+    t.string "email"
+    t.string "username"
+    t.string "password"
+    t.string "phone"
+    t.string "pin"
+    t.string "token"
+    t.string "app_id"
+    t.string "client_id"
+    t.string "api_key"
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "load_types", force: :cascade do |t|
@@ -306,6 +339,18 @@ ActiveRecord::Schema.define(version: 2019_08_11_031810) do
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
+  create_table "user_challenges", force: :cascade do |t|
+    t.integer "position"
+    t.integer "point"
+    t.bigint "challenge_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["challenge_id"], name: "index_user_challenges_on_challenge_id"
+    t.index ["user_id"], name: "index_user_challenges_on_user_id"
+  end
+
   create_table "user_roles", force: :cascade do |t|
     t.bigint "role_id", null: false
     t.bigint "user_id", null: false
@@ -362,6 +407,7 @@ ActiveRecord::Schema.define(version: 2019_08_11_031810) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cargapp_integrations", "users"
+  add_foreign_key "challenges", "users"
   add_foreign_key "cities", "states"
   add_foreign_key "companies", "load_types"
   add_foreign_key "companies", "users"
@@ -384,6 +430,8 @@ ActiveRecord::Schema.define(version: 2019_08_11_031810) do
   add_foreign_key "status", "users"
   add_foreign_key "tickets", "status", column: "statu_id"
   add_foreign_key "tickets", "users"
+  add_foreign_key "user_challenges", "challenges"
+  add_foreign_key "user_challenges", "users"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
   add_foreign_key "vehicles", "users"

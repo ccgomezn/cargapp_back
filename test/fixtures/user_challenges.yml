@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  position: 1
+  point: 1
+  challenge: one
+  user: one
+  active: false
+
+two:
+  position: 1
+  point: 1
+  challenge: two
+  user: two
+  active: false

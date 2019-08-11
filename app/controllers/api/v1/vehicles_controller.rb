@@ -26,15 +26,7 @@ class Api::V1::VehiclesController < ApplicationController
   # GET /vehicles/1
   # GET /vehicles/1.json
   def show
-  end
-
-  # GET /vehicles/new
-  def new
-    @vehicle = Vehicle.new
-  end
-
-  # GET /vehicles/1/edit
-  def edit
+    render json: @vehicle
   end
 
   # POST /vehicles
@@ -42,28 +34,20 @@ class Api::V1::VehiclesController < ApplicationController
   def create
     @vehicle = Vehicle.new(vehicle_params)
 
-    respond_to do |format|
-      if @vehicle.save
-        format.html { redirect_to @vehicle, notice: 'Vehicle was successfully created.' }
-        format.json { render :show, status: :created, location: @vehicle }
-      else
-        format.html { render :new }
-        format.json { render json: @vehicle.errors, status: :unprocessable_entity }
-      end
+    if @vehicle.save
+      render json: @vehicle, status: :created, location: @vehicle
+    else
+      render json: @vehicle.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /vehicles/1
   # PATCH/PUT /vehicles/1.json
   def update
-    respond_to do |format|
-      if @vehicle.update(vehicle_params)
-        format.html { redirect_to @vehicle, notice: 'Vehicle was successfully updated.' }
-        format.json { render :show, status: :ok, location: @vehicle }
-      else
-        format.html { render :edit }
-        format.json { render json: @vehicle.errors, status: :unprocessable_entity }
-      end
+    if @vehicle.update(vehicle_params)
+      render json: @vehicle
+    else
+      render json: @vehicle.errors, status: :unprocessable_entity
     end
   end
 
@@ -71,10 +55,6 @@ class Api::V1::VehiclesController < ApplicationController
   # DELETE /vehicles/1.json
   def destroy
     @vehicle.destroy
-    respond_to do |format|
-      format.html { redirect_to vehicles_url, notice: 'Vehicle was successfully destroyed.' }
-      format.json { head :no_content }
-    end
   end
 
   private

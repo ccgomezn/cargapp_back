@@ -568,8 +568,6 @@ Code style checker
 ```
 
 
-# AQUI
-
 ## Profile 
 * firt_name
 * last_name
@@ -643,7 +641,7 @@ Code style checker
         "chassis": "segundo1w35djjd",
         "owner_vehicle": "segundo españa bastidas",
         "owner_document_id": "10922222",
-        "vehicle_type": 1,
+        "vehicle_type_id": 1,
         "owner_document_type_id": 1, 
         "user_id": 1,
         "active": true
@@ -661,7 +659,7 @@ Code style checker
 * active
 
 
-```rails g scaffold Challenge name body:text image point:number user:references active:boolean```
+```rails g scaffold Challenge name body:text image point:integer user:references active:boolean```
 
 1. GET http://api.cargapp.co/api/v1/challenges 'Listar'
 2. GET http://api.cargapp.co/api/v1/challenges/active 'Ver activos'
@@ -693,7 +691,7 @@ Code style checker
 * active
 
 
-```rails g scaffold UserChallenge position:number point:number challenge:references user:references active:boolean```
+```rails g scaffold UserChallenge position:integer point:integer challenge:references user:references active:boolean```
 
 1. GET http://api.cargapp.co/api/v1/user_challenges 'Listar'
 2. GET http://api.cargapp.co/api/v1/user_challenges/active 'Ver activos'
