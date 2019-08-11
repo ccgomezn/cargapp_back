@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_10_175439) do
+ActiveRecord::Schema.define(version: 2019_08_11_004041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -264,6 +264,21 @@ ActiveRecord::Schema.define(version: 2019_08_10_175439) do
     t.index ["user_id"], name: "index_permissions_on_user_id"
   end
 
+  create_table "profiles", force: :cascade do |t|
+    t.string "firt_name"
+    t.string "last_name"
+    t.string "avatar"
+    t.string "phone"
+    t.string "document_id"
+    t.bigint "document_type_id", null: false
+    t.bigint "user_id", null: false
+    t.date "birth_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["document_type_id"], name: "index_profiles_on_document_type_id"
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -363,6 +378,8 @@ ActiveRecord::Schema.define(version: 2019_08_10_175439) do
   add_foreign_key "permissions", "cargapp_models"
   add_foreign_key "permissions", "roles"
   add_foreign_key "permissions", "users"
+  add_foreign_key "profiles", "document_types"
+  add_foreign_key "profiles", "users"
   add_foreign_key "states", "countries"
   add_foreign_key "status", "cargapp_models"
   add_foreign_key "status", "users"

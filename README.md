@@ -556,8 +556,6 @@ Code style checker
 {
     "document": {
         "document_id": "1086726268",
-        "document": "1086726268",
-        "number": "1086726268",
         "document_type_id": 1,
         "file": "archivo.pdf",
         "expire_date": "10-09-2019"
@@ -570,6 +568,8 @@ Code style checker
 ```
 
 
+# AQUI
+
 ## Profile 
 * firt_name
 * last_name
@@ -581,7 +581,7 @@ Code style checker
 * user_id
 
 
-```rails g scaffold Profile firt_name last_name avatar phone:number document_id document_type:references user:references birth_date:date```
+```rails g scaffold Profile firt_name last_name avatar phone document_id document_type:references user:references birth_date:date```
 
 1. GET http://api.cargapp.co/api/v1/profiles 'Listar'
 2. GET http://api.cargapp.co/api/v1/profiles/active 'Ver activos'

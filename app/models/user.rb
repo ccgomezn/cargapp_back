@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :companies
   has_many :tickets
   has_many :documents
+  has_one :profile
 
   has_many :access_grants,
          class_name: 'Doorkeeper::AccessGrant',
