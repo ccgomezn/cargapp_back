@@ -1,25 +1,93 @@
 class Api::V1::DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
   protect_from_forgery with: :null_session # Temporary
+  before_action :set_user
 
   # GET /documents
   # GET /documents.json
   def index
     @documents = Document.all
+    @result = []
+    @documents.each do |document|
+      @obj = {
+        id: document.id,
+        document_id: document.document_id,
+        document_type_id: document.document_type_id,
+        expire_date: document.expire_date,
+        statu_id: document.statu_id,
+        user_id: document.user_id,
+        active: document.active,
+        approved: document.approved,
+        file: document.file.attached? ? url_for(document.file) : nil,
+        created_at: document.created_at,
+        updated_at: document.updated_at
+      }
+      @result << @obj
+    end
+    render json: @result
+  end
+
+  def active
+    @documents = Document.where(active: true)
+    @result = []
+    @documents.each do |document|
+      @obj = {
+        id: document.id,
+        document_id: document.document_id,
+        document_type_id: document.document_type_id,
+        expire_date: document.expire_date,
+        statu_id: document.statu_id,
+        user_id: document.user_id,
+        active: document.active,
+        approved: document.approved,
+        file: document.file.attached? ? url_for(document.file) : nil,
+        created_at: document.created_at,
+        updated_at: document.updated_at
+      }
+      @result << @obj
+    end
+    render json: @result
+  end
+
+  def me
+    @documents = @user.documents
+    @result = []
+    @documents.each do |document|
+      @obj = {
+        id: document.id,
+        document_id: document.document_id,
+        document_type_id: document.document_type_id,
+        expire_date: document.expire_date,
+        statu_id: document.statu_id,
+        user_id: document.user_id,
+        active: document.active,
+        approved: document.approved,
+        file: document.file.attached? ? url_for(document.file) : nil,
+        created_at: document.created_at,
+        updated_at: document.updated_at
+      }
+      @result << @obj
+    end
+    render json: @result
   end
 
   # GET /documents/1
   # GET /documents/1.json
   def show
-  end
-
-  # GET /documents/new
-  def new
-    @document = Document.new
-  end
-
-  # GET /documents/1/edit
-  def edit
+    @obj = {
+      id: @document.id,
+      document_id: @document.document_id,
+      document_type_id: @document.document_type_id,
+      expire_date: @document.expire_date,
+      statu_id: @document.statu_id,
+      user_id: @document.user_id,
+      active: @document.active,
+      approved: @document.approved,
+      file: @document.file.attached? ? url_for(@document.file) : nil,
+      created_at: @document.created_at,
+      updated_at: @document.updated_at
+    }
+    render json: @obj
   end
 
   # POST /documents
@@ -27,28 +95,50 @@ class Api::V1::DocumentsController < ApplicationController
   def create
     @document = Document.new(document_params)
 
-    respond_to do |format|
-      if @document.save
-        format.html { redirect_to @document, notice: 'Document was successfully created.' }
-        format.json { render :show, status: :created, location: @document }
-      else
-        format.html { render :new }
-        format.json { render json: @document.errors, status: :unprocessable_entity }
-      end
+    if @document.save
+      @obj = {
+        id: @document.id,
+        document_id: @document.document_id,
+        document_type_id: @document.document_type_id,
+        expire_date: @document.expire_date,
+        statu_id: @document.statu_id,
+        user_id: @document.user_id,
+        active: @document.active,
+        approved: @document.approved,
+        file: @document.file.attached? ? url_for(@document.file) : nil,
+        created_at: @document.created_at,
+        updated_at: @document.updated_at
+      }
+      render json: @obj, status: :created, location: @obj
+      # 'ticket was successfully created.'
+    else
+      render json: @document.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /documents/1
   # PATCH/PUT /documents/1.json
   def update
-    respond_to do |format|
-      if @document.update(document_params)
-        format.html { redirect_to @document, notice: 'Document was successfully updated.' }
-        format.json { render :show, status: :ok, location: @document }
-      else
-        format.html { render :edit }
-        format.json { render json: @document.errors, status: :unprocessable_entity }
-      end
+    if @document.update(document_params)
+
+      @obj = {
+        id: @document.id,
+        document_id: @document.document_id,
+        document_type_id: @document.document_type_id,
+        expire_date: @document.expire_date,
+        statu_id: @document.statu_id,
+        user_id: @document.user_id,
+        active: @document.active,
+        approved: @document.approved,
+        file: @document.file.attached? ? url_for(@document.file) : nil,
+        created_at: @document.created_at,
+        updated_at: @document.updated_at
+      }
+
+      render json: @obj
+      # 'ticket was successfully updated.'
+    else
+      render json: @document.errors, status: :unprocessable_entity
     end
   end
 
@@ -56,13 +146,13 @@ class Api::V1::DocumentsController < ApplicationController
   # DELETE /documents/1.json
   def destroy
     @document.destroy
-    respond_to do |format|
-      format.html { redirect_to documents_url, notice: 'Document was successfully destroyed.' }
-      format.json { head :no_content }
-    end
   end
 
   private
+
+    def set_user
+      @user = User.all.first #User.find(doorkeeper_token.resource_owner_id) if doorkeeper_token
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_document
       @document = Document.find(params[:id])

@@ -73,13 +73,16 @@ class Api::V1::TicketsController < ApplicationController
   # GET /tickets/1.json
   def show
     @obj = {
+      id: @ticket.id,
       title: @ticket.title,
       body: @ticket.body,
       statu_id: @ticket.statu_id,
       user_id: @ticket.user_id,
       active: @ticket.active,
       image: @ticket.image.attached? ? url_for(@ticket.image) : nil,
-      media: @ticket.image.attached? ? url_for(@ticket.image) : nil
+      media: @ticket.image.attached? ? url_for(@ticket.image) : nil,
+      created_at: @ticket.created_at,
+      updated_at: @ticket.updated_at
     }
     render json: @obj
   end
@@ -91,6 +94,7 @@ class Api::V1::TicketsController < ApplicationController
 
     if @ticket.save
       @obj = {
+        id: @ticket.id,
         title: @ticket.title,
         body: @ticket.body,
         statu_id: @ticket.statu_id,
@@ -112,6 +116,7 @@ class Api::V1::TicketsController < ApplicationController
     if @ticket.update(ticket_params)
 
       @obj = {
+        id: @ticket.id,
         title: @ticket.title,
         body: @ticket.body,
         statu_id: @ticket.statu_id,
@@ -125,7 +130,6 @@ class Api::V1::TicketsController < ApplicationController
       # 'ticket was successfully updated.'
     else
       render json: @ticket.errors, status: :unprocessable_entity
-    endd
     end
   end
 
