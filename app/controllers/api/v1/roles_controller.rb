@@ -5,6 +5,48 @@ class Api::V1::RolesController < ApplicationController
   protect_from_forgery with: :null_session # Temporary
   #before_action :doorkeeper_authorize!
 
+  swagger_controller :roles, 'Roles Management'
+
+  swagger_api :index do
+    summary 'Fetches all Roles items'
+    notes 'This lists all the roles'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Roles items'
+    notes 'This lists all the active roles'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Role'
+    param :form, :name, :string, :required, 'Name'
+    param :form, :code, :string, :required, 'Code'
+    param :form, :description, :string, :required, 'Description'
+    param :form, :active, :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Role'
+    param :path, :id, :integer, :required, "Role Id"
+    param :form, :name, :string, :optional, 'Name'
+    param :form, :code, :string, :optional, 'Code'
+    param :form, :description, :string, :optional, 'Description'
+    param :form, :active, :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Role"
+    param :path, :id, :integer, :optional, "Role Id"
+    response :unauthorized
+    response :not_found
+  end
+
+
   # GET /roles
   def index
     @roles = Role.all

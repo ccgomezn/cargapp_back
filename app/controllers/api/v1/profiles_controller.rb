@@ -3,6 +3,56 @@ class Api::V1::ProfilesController < ApplicationController
   protect_from_forgery with: :null_session # Temporary
   before_action :set_user
 
+
+  swagger_controller :profiles, 'Profiles Management'
+
+  swagger_api :index do
+    summary 'Fetches all Profile items'
+    notes 'This lists all the profiles'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Profile items'
+    notes 'This lists all the active profiles'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Profile'
+    param :form, :firt_name, :string, :required, 'First name'
+    param :form, :last_name, :integer, :required, 'Last name'
+    param :form, :avatar, :string, :required, 'Profiles avatar'
+    param :form, :phone, :string, :required, 'Users phone'
+    param :form, :document_id, :string, :required, 'Id of document on profile'
+    param :form, :document_type_id, :integer, :required, 'Document type'
+    param :form, :birth_date, :string, :required, 'Birthday'
+    param :form, :user_id, :integer, :required, 'User associated to profile'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Profile'
+    param :path, :id, :integer, :required, "Profile Id"
+    param :form, :firt_name, :string, :optional, 'First name'
+    param :form, :last_name, :integer, :optional, 'Last name'
+    param :form, :avatar, :string, :optional, 'Profiles avatar'
+    param :form, :phone, :string, :optional, 'Users phone'
+    param :form, :document_id, :string, :optional, 'Id of document on profile'
+    param :form, :document_type_id, :integer, :optional, 'Document type'
+    param :form, :birth_date, :string, :optional, 'Birthday'
+    param :form, :user_id, :integer, :optional, 'User associated to profile'
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Profile"
+    param :path, :id, :integer, :optional, "Profile Id"
+    response :unauthorized
+    response :not_found
+  end
+
+
   # GET /profiles
   # GET /profiles.json
   def index

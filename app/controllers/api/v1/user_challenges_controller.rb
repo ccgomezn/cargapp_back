@@ -3,6 +3,48 @@ class Api::V1::UserChallengesController < ApplicationController
   protect_from_forgery with: :null_session # Temporary
   before_action :set_user
 
+  swagger_controller :userChallenges, 'User - Challenges Relation Management'
+
+  swagger_api :index do
+    summary 'Fetches all User-Challenge items'
+    notes 'This lists all the User-Challenges'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active User-Challenge items'
+    notes 'This lists all the active User-Challenges'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new User-Challenge'
+    param :form, :position, :integer, :required, 'Position of user-challenge'
+    param :form, :point, :integer, :required, 'Points on challenge'
+    param :form, :challenge_id, :integer, :required, 'Id of challenge associated'
+    param :form, :user_id, :integer, :required, 'Id of user associated'
+    param :form, :active, :boolean, :required, 'Activation state'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing User-Challenge'
+    param :path, :id, :integer, :required, "User-Challenge Id"
+    param :form, :position, :integer, :optional, 'Position of user-challenge'
+    param :form, :point, :integer, :optional, 'Points on challenge'
+    param :form, :challenge_id, :integer, :optional, 'Id of challenge associated'
+    param :form, :user_id, :integer, :optional, 'Id of user associated'
+    param :form, :active, :boolean, :optional, 'Activation state'
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Ticket"
+    param :path, :id, :integer, :optional, "Ticket Id"
+    response :unauthorized
+    response :not_found
+  end
+
   # GET /user_challenges
   # GET /user_challenges.json
   def index

@@ -3,6 +3,61 @@ class Api::V1::CompaniesController < ApplicationController
   protect_from_forgery with: :null_session # Temporary
   before_action :set_user
 
+  swagger_controller :companies, 'Companies Management'
+
+  swagger_api :index do
+    summary 'Fetches all Company items'
+    notes 'This lists all the companies'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Company items'
+    notes 'This lists all the active companies'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Company'
+    param :form, :name, :string, :required, 'Name'
+    param :form, :code, :string, :required, 'Code'
+    param :form, :company_type, :string, :required, 'Company Type'
+    param :form, :load_type_id, :integer, :required, 'Load Type related to Id'
+    param :form, :sector, :string, :required, 'Sector'
+    param :form, :legal_representative, :string, :required, 'Legal representative of the Company'
+    param :form, :address, :string, :required, 'Address'
+    param :form, :phone, :string, :required, 'Phone'
+    param :form, :user_id, :integer, :required, 'Id of user related to Company'
+    param :form, :constitution_date, :string, :required, 'Date of constitution of the company'
+    param :form, :active, :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Company'
+    param :path, :id, :integer, :required, "Company Id"
+    param :form, :name, :string, :optional, 'Name'
+    param :form, :code, :string, :optional, 'Code'
+    param :form, :company_type, :string, :optional, 'Company Type'
+    param :form, :load_type_id, :integer, :optional, 'Load Type related to Id'
+    param :form, :sector, :string, :optional, 'Sector'
+    param :form, :legal_representative, :string, :optional, 'Legal representative of the Company'
+    param :form, :address, :string, :optional, 'Address'
+    param :form, :phone, :string, :optional, 'Phone'
+    param :form, :user_id, :integer, :optional, 'Id of user related to Company'
+    param :form, :constitution_date, :string, :optional, 'Date of constitution of the company'
+    param :form, :active, :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Company"
+    param :path, :id, :integer, :optional, "Company Id"
+    response :unauthorized
+    response :not_found
+  end
+
   # GET /companies
   # GET /companies.json
   def index

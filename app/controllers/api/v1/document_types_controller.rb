@@ -2,6 +2,46 @@ class Api::V1::DocumentTypesController < ApplicationController
   before_action :set_document_type, only: [:show, :edit, :update, :destroy]
   protect_from_forgery with: :null_session # Temporary
 
+  swagger_controller :loadTypes, 'Document Types Management'
+
+  swagger_api :index do
+    summary 'Fetches all Document Types items'
+    notes 'This lists all the document types'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Document Types items'
+    notes 'This lists all the active document types'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Document Type'
+    param :form, :name, :string, :required, 'Name'
+    param :form, :code, :string, :required, 'Code'
+    param :form, :description, :string, :required, 'Description'
+    param :form, :active, :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Document Type'
+    param :path, :id, :integer, :required, "Document Type Id"
+    param :form, :name, :string, :optional, 'Name'
+    param :form, :code, :string, :optional, 'Code'
+    param :form, :description, :string, :optional, 'Description'
+    param :form, :active, :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Document Type"
+    param :path, :id, :integer, :optional, "Document Type Id"
+    response :unauthorized
+    response :not_found
+  end
   # GET /document_types
   # GET /document_types.json
   def index

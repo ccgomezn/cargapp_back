@@ -4,6 +4,22 @@ class Api::V1::UsersController < ApplicationController
   protect_from_forgery with: :null_session
   # before_action :doorkeeper_authorize!, except: %i[create login show update email_verify phone_verify]
 
+  swagger_controller :users, 'User Management'
+
+  swagger_api :index do
+    summary 'Fetches all User items'
+    notes 'This lists all the users'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new User'
+    param :form, :email, :string, :required, 'Email'
+    param :form, :password, :string, :required, 'Password'
+    param :form, :password_confirmation, :string, :required, 'Password confirmation'
+    param :form, :phone_number, :string, :optional, 'Phone number'
+    response :unauthorized
+    response :not_acceptable
+  end
 
   def create
     @user = User.new(user_params)

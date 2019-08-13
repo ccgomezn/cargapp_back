@@ -3,6 +3,50 @@ class Api::V1::ChallengesController < ApplicationController
   protect_from_forgery with: :null_session # Temporary
   before_action :set_user
 
+  swagger_controller :challenges, 'Challenges Management'
+
+  swagger_api :index do
+    summary 'Fetches all Challenges items'
+    notes 'This lists all the challenges'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Challenges items'
+    notes 'This lists all the active challenges'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Challenge'
+    param :form, :name, :string, :required, 'Name'
+    param :form, :body, :string, :required, 'Body'
+    param :form, :image, :string, :required, 'Image'
+    param :form, :point, :string, :required, 'Points related to challenge'
+    param :form, :user_id, :integer, :required, 'Id of user associated to challenge'
+    param :form, :active, :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Challenge'
+    param :path, :id, :integer, :required, "Challenge Id"
+    param :form, :name, :string, :optional, 'Name'
+    param :form, :body, :string, :optional, 'Body'
+    param :form, :image, :string, :optional, 'Image'
+    param :form, :point, :string, :optional, 'Points related to challenge'
+    param :form, :user_id, :integer, :optional, 'Id of user associated to challenge'
+    param :form, :active, :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Challenge"
+    param :path, :id, :integer, :optional, "Challenge Id"
+    response :unauthorized
+    response :not_found
+  end
   # GET /challenges
   # GET /challenges.json
   def index

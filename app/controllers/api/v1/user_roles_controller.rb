@@ -4,6 +4,48 @@ class Api::V1::UserRolesController < ApplicationController
   before_action :set_user_role, only: %i[show update destroy]
   protect_from_forgery with: :null_session # Temporary
 
+  swagger_controller :userRoles, 'User and Roles relation Management'
+
+  swagger_api :index do
+    summary 'Fetches all User-Roles items'
+    notes 'This lists all the user-roles'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active User-Role items'
+    notes 'This lists all the active users-roles'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new User-Role'
+    param :form, :role_id, :integer, :required, 'Role Id'
+    param :form, :user_id, :integer, :required, 'User Id'
+    param :form, :admin_id, :integer, :required, 'Admin Id responsible of creation'
+    param :form, :active, :boolean, :required, 'Activation state'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing User-Role'
+    param :path, :id, :integer, :required, "User-Role Id"
+    param :form, :role_id, :integer, :optional, 'Role Id'
+    param :form, :user_id, :integer, :optional, 'User Id'
+    param :form, :admin_id, :integer, :optional, 'Admin Id responsible of creation'
+    param :form, :active, :boolean, :optional, 'Activation state'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing User-Role"
+    param :path, :id, :integer, :optional, "User-Role Id"
+    response :unauthorized
+    response :not_found
+  end
+
+
   # GET /user_roles
   # GET /user_roles.json
   def index
