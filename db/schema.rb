@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_11_192926) do
+ActiveRecord::Schema.define(version: 2019_08_13_154404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -292,6 +292,22 @@ ActiveRecord::Schema.define(version: 2019_08_11_192926) do
     t.index ["user_id"], name: "index_permissions_on_user_id"
   end
 
+  create_table "prizes", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.integer "point"
+    t.text "description"
+    t.text "body"
+    t.string "image"
+    t.string "media"
+    t.datetime "expire_date"
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_prizes_on_user_id"
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.string "firt_name"
     t.string "last_name"
@@ -381,6 +397,18 @@ ActiveRecord::Schema.define(version: 2019_08_11_192926) do
     t.index ["user_id"], name: "index_user_coupons_on_user_id"
   end
 
+  create_table "user_prizes", force: :cascade do |t|
+    t.string "point"
+    t.bigint "prize_id", null: false
+    t.datetime "expire_date"
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["prize_id"], name: "index_user_prizes_on_prize_id"
+    t.index ["user_id"], name: "index_user_prizes_on_user_id"
+  end
+
   create_table "user_roles", force: :cascade do |t|
     t.bigint "role_id", null: false
     t.bigint "user_id", null: false
@@ -455,6 +483,7 @@ ActiveRecord::Schema.define(version: 2019_08_11_192926) do
   add_foreign_key "permissions", "cargapp_models"
   add_foreign_key "permissions", "roles"
   add_foreign_key "permissions", "users"
+  add_foreign_key "prizes", "users"
   add_foreign_key "profiles", "document_types"
   add_foreign_key "profiles", "users"
   add_foreign_key "states", "countries"
@@ -467,6 +496,8 @@ ActiveRecord::Schema.define(version: 2019_08_11_192926) do
   add_foreign_key "user_coupons", "cargapp_models"
   add_foreign_key "user_coupons", "coupons"
   add_foreign_key "user_coupons", "users"
+  add_foreign_key "user_prizes", "prizes"
+  add_foreign_key "user_prizes", "users"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
   add_foreign_key "vehicles", "users"

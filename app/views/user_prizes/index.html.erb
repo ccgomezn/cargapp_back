@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>User Prizes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Point</th>
+      <th>Prize</th>
+      <th>Expire date</th>
+      <th>User</th>
+      <th>Active</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_prizes.each do |user_prize| %>
+      <tr>
+        <td><%= user_prize.point %></td>
+        <td><%= user_prize.prize_id %></td>
+        <td><%= user_prize.expire_date %></td>
+        <td><%= user_prize.user_id %></td>
+        <td><%= user_prize.active %></td>
+        <td><%= link_to 'Show', user_prize %></td>
+        <td><%= link_to 'Edit', edit_user_prize_path(user_prize) %></td>
+        <td><%= link_to 'Destroy', user_prize, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User Prize', new_user_prize_path %>

@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @prize.name %>
+</p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @prize.code %>
+</p>
+
+<p>
+  <strong>Point:</strong>
+  <%= @prize.point %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @prize.description %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @prize.body %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @prize.image %>
+</p>
+
+<p>
+  <strong>Media:</strong>
+  <%= @prize.media %>
+</p>
+
+<p>
+  <strong>Expire date:</strong>
+  <%= @prize.expire_date %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @prize.user_id %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @prize.active %>
+</p>
+
+<%= link_to 'Edit', edit_prize_path(@prize) %> |
+<%= link_to 'Back', prizes_path %>

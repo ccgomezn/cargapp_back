@@ -123,7 +123,7 @@ class Api::V1::TicketsController < ApplicationController
         user_id: @ticket.user_id,
         active: @ticket.active,
         image: @ticket.image.attached? ? url_for(@ticket.image) : nil,
-        media: @ticket.image.attached? ? url_for(@ticket.image) : nil
+        media: @ticket.media.attached? ? url_for(@ticket.media) : nil
       }
 
       render json: @obj
