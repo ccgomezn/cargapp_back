@@ -196,6 +196,7 @@ GEM
     public_suffix (3.1.1)
     puma (3.12.1)
     rack (2.0.7)
+    rack-cors (1.0.3)
     rack-pjax (1.1.0)
       nokogiri (~> 1.5)
       rack (>= 1.1)
@@ -287,7 +288,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.1)
     sshkit (1.19.1)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
@@ -348,6 +348,7 @@ DEPENDENCIES
   oauth2
   pg (>= 0.18, < 2.0)
   puma (~> 3.11)
+  rack-cors
   rails (~> 6.0.0.rc1)
   rails_admin (~> 2.0.0.beta)
   rubocop (~> 0.72.0)
@@ -355,7 +356,6 @@ DEPENDENCIES
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)
-  sqlite3
   swagger-docs
   turbolinks (~> 5)
   tzinfo-data

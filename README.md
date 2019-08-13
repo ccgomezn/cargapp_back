@@ -785,7 +785,142 @@ Code style checker
 }
 ```
 
-## Activity
+
+## Prize
+* name
+* code
+* point
+* description
+* body
+* image
+* media
+* expire_date
+* user_id
+* active
+
+
+```rails g scaffold Prize name code point:integer description:text body:text image media expire_date:datetime user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/prizes 'Listar'
+2. GET http://api.cargapp.co/api/v1/prizes/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/prizes/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/prizes 'Crear'
+5. PUT http://api.cargapp.co/api/v1/prizes/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/prizes/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/prizes/me 'Ver los del usuario'
+
+```
+{
+    "prize": {
+        "name": "la primera carrera",
+        "code": "CAA1",
+        "point": "CAA1",
+        "decription": "CAA1",
+        "body": "CAA1",
+        "image": "CAA1.png",
+        "media": "CAA1.png",
+        "expire_date": "18-08-2019 12:12",
+        "user_id": 1,
+        "active": true
+    }
+}
+```
+
+
+## UserPrize
+* point
+* expire_date
+* prize_id
+* user_id
+* active
+
+
+```rails g scaffold UserPrize point prize:references expire_date:datetime user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/user_prizes 'Listar'
+2. GET http://api.cargapp.co/api/v1/user_prizes/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/user_prizes/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/user_prizes 'Crear'
+5. PUT http://api.cargapp.co/api/v1/user_prizes/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/user_prizes/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/user_prizes/me 'Ver los del usuario'
+
+```
+{
+    "user_prize": {
+        "point": 1,
+        "prize_id": 1,
+        "expire_date": "18-12-2019 12:12",
+        "user_id": 1,
+        "active": true
+    }
+}
+```
+
+
+## ReasonType 
+* name
+* code
+* icon
+* description
+* active
+
+
+```rails g scaffold ReasonType name code icon description:text active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/reason_types 'Listar'
+2. GET http://api.cargapp.co/api/v1/reason_types/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/reason_types/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/reason_types 'Crear'
+5. PUT http://api.cargapp.co/api/v1/reason_types/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/reason_types/:id 'Elimina'
+
+```
+{
+    "reason_type": {
+        "name": "creado",
+        "code": "creted",        
+        "description": "estado creado para el usro de los estados del modelo servicios o ofertas",
+        "icon": "image.png",
+        "active": true
+    }
+}
+```
+
+
+## Blocking
+* description
+* reason_id
+* statu_id
+* user_id
+* driver_id
+* expire_date
+* active
+
+
+```rails g scaffold Blocking description:text reason:references statu:references expire_date:datetime user:references driver:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/user_coupons 'Listar'
+2. GET http://api.cargapp.co/api/v1/user_coupons/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/user_coupons/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/user_coupons 'Crear'
+5. PUT http://api.cargapp.co/api/v1/user_coupons/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/user_coupons/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/user_coupons/me 'Ver los del usuario'
+
+```
+{
+    "Prize": {
+        "point": 1,
+        "prize_id": 1,
+        "expire_date": "18-12-2019 12:12",
+        "user_id": 1,
+        "active": true
+    }
+}
+```
+
+## Activity (After)
 * model
 * action
 * item
@@ -854,3 +989,16 @@ Code style checker
     }
 }
 ```
+
+
+Report
+Service
+Offert
+FavoriteRoute
+OffertDocument
+Payment
+PaymentMethod
+UserPaymentMethod
+PaymentAcount
+UserLocation
+OffertLocation

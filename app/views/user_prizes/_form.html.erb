@@ -1,0 +1,42 @@
+<%= form_with(model: user_prize, local: true) do |form| %>
+  <% if user_prize.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user_prize.errors.count, "error") %> prohibited this user_prize from being saved:</h2>
+
+      <ul>
+        <% user_prize.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :point %>
+    <%= form.text_field :point %>
+  </div>
+
+  <div class="field">
+    <%= form.label :prize_id %>
+    <%= form.text_field :prize_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :expire_date %>
+    <%= form.datetime_select :expire_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :active %>
+    <%= form.check_box :active %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

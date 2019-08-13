@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Point:</strong>
+  <%= @user_prize.point %>
+</p>
+
+<p>
+  <strong>Prize:</strong>
+  <%= @user_prize.prize_id %>
+</p>
+
+<p>
+  <strong>Expire date:</strong>
+  <%= @user_prize.expire_date %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @user_prize.user_id %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @user_prize.active %>
+</p>
+
+<%= link_to 'Edit', edit_user_prize_path(@user_prize) %> |
+<%= link_to 'Back', user_prizes_path %>

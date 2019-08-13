@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  point: MyString
+  prize: one
+  expire_date: 2019-08-13 10:44:04
+  user: one
+  active: false
+
+two:
+  point: MyString
+  prize: two
+  expire_date: 2019-08-13 10:44:04
+  user: two
+  active: false

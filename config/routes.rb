@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   resources :user_challenges
   resources :coupons
   resources :user_coupons
+  resources :prizes
+  resources :user_prizes
 
   namespace :api, defaults: { format: :json } do
     namespace :v1, defaults: { format: :json } do
@@ -88,6 +90,11 @@ Rails.application.routes.draw do
       get 'user_coupons/me' => 'user_coupons#me'
       get 'user_coupons/active' => 'user_coupons#active'
       resources :user_coupons
+      get 'prizes/active' => 'prizes#active'
+      resources :prizes
+      get 'user_prizes/me' => 'user_prizes#me'
+      get 'user_prizes/active' => 'user_prizes#active'
+      resources :user_prizes
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

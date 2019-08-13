@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  code: MyString
+  point: 1
+  description: MyText
+  body: MyText
+  image: MyString
+  media: MyString
+  expire_date: 2019-08-13 10:42:36
+  user: one
+  active: false
+
+two:
+  name: MyString
+  code: MyString
+  point: 1
+  description: MyText
+  body: MyText
+  image: MyString
+  media: MyString
+  expire_date: 2019-08-13 10:42:36
+  user: two
+  active: false
