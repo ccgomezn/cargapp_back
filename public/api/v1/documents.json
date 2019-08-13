@@ -1,0 +1,229 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:3000",
+  "resourcePath": "documents",
+  "apis": [
+    {
+      "path": "/api/v1/documents/active",
+      "operations": [
+        {
+          "summary": "Fetches all active Documt items",
+          "notes": "This lists all the active documents",
+          "nickname": "Api::V1::Documents#active",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/documents",
+      "operations": [
+        {
+          "summary": "Fetches all Document items",
+          "notes": "This lists all the documents",
+          "nickname": "Api::V1::Documents#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/documents",
+      "operations": [
+        {
+          "summary": "Creates a new Document",
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "document[document_id]",
+              "type": "string",
+              "description": "Id of document",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "document[document_type_id]",
+              "type": "integer",
+              "description": "Id of type associated to document",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "document[file]",
+              "type": "string",
+              "description": "File",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "document[status_id]",
+              "type": "integer",
+              "description": "Id of status associated to document",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "document[user_id]",
+              "type": "integer",
+              "description": "Id user on coupon",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "document[expire_date]",
+              "type": "string",
+              "description": "Expiration date of document",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "document[approved]",
+              "type": "boolean",
+              "description": "Check if document is approved",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "document[active]",
+              "type": "boolean",
+              "description": "State of activation",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Api::V1::Documents#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/documents/{id}",
+      "operations": [
+        {
+          "summary": "Updates an existing Coupon",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Coupon Id",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "document[document_id]",
+              "type": "string",
+              "description": "Id of document",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "document[document_type_id]",
+              "type": "integer",
+              "description": "Id of type associated to document",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "document[file]",
+              "type": "string",
+              "description": "File",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "document[status_id]",
+              "type": "integer",
+              "description": "Id of status associated to document",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "document[user_id]",
+              "type": "integer",
+              "description": "Id user on coupon",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "document[expire_date]",
+              "type": "string",
+              "description": "Expiration date of document",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "document[approved]",
+              "type": "boolean",
+              "description": "Check if document is approved",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "document[active]",
+              "type": "boolean",
+              "description": "State of activation",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Api::V1::Documents#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/documents/{id}",
+      "operations": [
+        {
+          "summary": "Deletes an existing Document",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Document Id",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::Documents#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

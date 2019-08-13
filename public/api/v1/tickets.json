@@ -1,0 +1,201 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:3000",
+  "resourcePath": "tickets",
+  "apis": [
+    {
+      "path": "/api/v1/tickets/active",
+      "operations": [
+        {
+          "summary": "Fetches all active Ticket items",
+          "notes": "This lists all the active tickets",
+          "nickname": "Api::V1::Tickets#active",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/tickets",
+      "operations": [
+        {
+          "summary": "Fetches all Ticket items",
+          "notes": "This lists all the tickets",
+          "nickname": "Api::V1::Tickets#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/tickets",
+      "operations": [
+        {
+          "summary": "Creates a new Ticket",
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "ticket[body]",
+              "type": "integer",
+              "description": "Body of ticket",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "ticket[image]",
+              "type": "file",
+              "description": "Image associated to ticket",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "ticket[media]",
+              "type": "file",
+              "description": "Media associated to ticket",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "ticket[status_id]",
+              "type": "integer",
+              "description": "Id of status",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "ticket[user_id]",
+              "type": "integer",
+              "description": "Id of user associated to ticket",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "ticket[active]",
+              "type": "boolean",
+              "description": "Activation state",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Api::V1::Tickets#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/tickets/{id}",
+      "operations": [
+        {
+          "summary": "Updates an existing Ticket",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Ticket Id",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "ticket[body]",
+              "type": "integer",
+              "description": "Body of ticket",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "ticket[image]",
+              "type": "file",
+              "description": "Image associated to ticket",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "ticket[media]",
+              "type": "file",
+              "description": "Media associated to ticket",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "ticket[status_id]",
+              "type": "integer",
+              "description": "Id of status",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "ticket[user_id]",
+              "type": "integer",
+              "description": "Id of user associated to ticket",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "ticket[active]",
+              "type": "boolean",
+              "description": "Activation state",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Api::V1::Tickets#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/tickets/{id}",
+      "operations": [
+        {
+          "summary": "Deletes an existing Ticket",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Ticket Id",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::Tickets#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

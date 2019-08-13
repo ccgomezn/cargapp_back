@@ -17,13 +17,13 @@ class Api::V1::UserCouponsController < ApplicationController
 
   swagger_api :create do
     summary 'Creates a new User-Coupon'
-    param :form, :applied_item_id, :integer, :required, 'Id of item on offer'
-    param :form, :cargapp_model_id, :integer, :required, 'Id of model associated'
-    param :form, :coupon_id, :integer, :required, 'Id of coupon associated'
-    param :form, :user_id, :integer, :required, 'Id of user associated'
-    param :form, :offert_id, :integer, :required, 'Id of offer associated'
-    param :form, :discount, :integer, :required, 'Discount'
-    param :form, :active, :boolean, :required, 'Activation state'
+    param :form, 'user_coupon[applied_item_id]', :integer, :required, 'Id of item on offer'
+    param :form, 'user_coupon[cargapp_model_id]', :integer, :required, 'Id of model associated'
+    param :form, 'user_coupon[coupon_id]', :integer, :required, 'Id of coupon associated'
+    param :form, 'user_coupon[user_id]', :integer, :required, 'Id of user associated'
+    param :form, 'user_coupon[offer_id]', :integer, :required, 'Id of offer associated'
+    param :form, 'user_coupon[discount]', :integer, :required, 'Discount'
+    param :form, 'user_coupon[active]', :boolean, :required, 'Activation state'
     response :unauthorized
     response :not_acceptable
   end
@@ -31,13 +31,13 @@ class Api::V1::UserCouponsController < ApplicationController
   swagger_api :update do
     summary 'Updates an existing User-Coupon'
     param :path, :id, :integer, :required, "User-Coupon Id"
-     param :form, :applied_item_id, :integer, :optional, 'Id of item on offer'
-    param :form, :cargapp_model_id, :integer, :optional, 'Id of model associated'
-    param :form, :coupon_id, :integer, :optional, 'Id of coupon associated'
-    param :form, :user_id, :integer, :optional, 'Id of user associated'
-    param :form, :offert_id, :integer, :optional, 'Id of offer associated'
-    param :form, :discount, :integer, :optional, 'Discount'
-    param :form, :active, :boolean, :optional, 'Activation state'
+    param :form, 'user_coupon[applied_item_id]', :integer, :optional, 'Id of item on offer'
+    param :form, 'user_coupon[cargapp_model_id]', :integer, :optional, 'Id of model associated'
+    param :form, 'user_coupon[coupon_id]', :integer, :optional, 'Id of coupon associated'
+    param :form, 'user_coupon[user_id]', :integer, :optional, 'Id of user associated'
+    param :form, 'user_coupon[offer_id]', :integer, :optional, 'Id of offer associated'
+    param :form, 'user_coupon[discount]', :integer, :optional, 'Discount'
+    param :form, 'user_coupon[active]', :boolean, :optional, 'Activation state'
     response :not_found
     response :not_acceptable
   end

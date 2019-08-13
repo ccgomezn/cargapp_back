@@ -16,13 +16,13 @@ class Api::V1::ParametersController < ApplicationController
 
   swagger_api :create do
     summary 'Creates a new Parameter'
-    param :form, :name, :string, :required, 'Name'
-    param :form, :code, :string, :required, 'Code'
-    param :form, :description, :string, :required, 'Description'
-    param :form, :user_id, :integer, :required, 'Id of user related to parameter'
-    param :form, :value, :string, :required, 'Value'
-    param :form, :model_id, :integer, :required, 'Id of model related to parameter'
-    param :form, :active, :boolean, :required, 'State of activation'
+    param :form, 'parameter[name]', :string, :required, 'Name'
+    param :form, 'parameter[code]', :string, :required, 'Code'
+    param :form, 'parameter[description]', :string, :required, 'Description'
+    param :form, 'parameter[user_id]', :integer, :required, 'Id of user related to parameter'
+    param :form, 'parameter[value]', :string, :required, 'Value'
+    param :form, 'parameter[model_id]', :integer, :required, 'Id of model related to parameter'
+    param :form, 'parameter[active]', :boolean, :required, 'State of activation'
     response :unauthorized
     response :not_acceptable
   end
@@ -30,13 +30,13 @@ class Api::V1::ParametersController < ApplicationController
   swagger_api :update do
     summary 'Updates an existing Parameter'
     param :path, :id, :integer, :required, "Parameter Id"
-    param :form, :name, :string, :optional, 'Name'
-    param :form, :code, :string, :optional, 'Code'
-    param :form, :description, :string, :optional, 'Description'
-    param :form, :user_id, :integer, :optional, 'Id of user related to parameter'
-    param :form, :value, :string, :optional, 'Value'
-    param :form, :model_id, :integer, :optional, 'Id of model related to parameter'
-    param :form, :active, :boolean, :optional, 'State of activation'
+    param :form, 'parameter[name]', :string, :optional, 'Name'
+    param :form, 'parameter[code]', :string, :optional, 'Code'
+    param :form, 'parameter[description]', :string, :optional, 'Description'
+    param :form, 'parameter[user_id]', :integer, :optional, 'Id of user related to parameter'
+    param :form, 'parameter[value]', :string, :optional, 'Value'
+    param :form, 'parameter[model_id]', :integer, :optional, 'Id of model related to parameter'
+    param :form, 'parameter[active]', :boolean, :optional, 'State of activation'
     response :unauthorized
     response :not_found
     response :not_acceptable

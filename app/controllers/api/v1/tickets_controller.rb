@@ -19,13 +19,12 @@ class Api::V1::TicketsController < ApplicationController
 
   swagger_api :create do
     summary 'Creates a new Ticket'
-    param :form, :title, :string, :required, 'Title of ticket'
-    param :form, :body, :integer, :required, 'Body of ticket'
-    param :form, :image, :string, :required, 'Image associated to ticket'
-    param :form, :media, :string, :required, 'Media associated to ticket'
-    param :form, :status_id, :integer, :required, 'Id of status'
-    param :form, :user_id, :integer, :required, 'Id of user associated to ticket'
-    param :form, :active, :boolean, :required, 'Activation state'
+    param :form, 'ticket[body]', :integer, :required, 'Body of ticket'
+    param :form, 'ticket[image]', :file, :required, 'Image associated to ticket'
+    param :form, 'ticket[media]', :file, :required, 'Media associated to ticket'
+    param :form, 'ticket[status_id]', :integer, :required, 'Id of status'
+    param :form, 'ticket[user_id]', :integer, :required, 'Id of user associated to ticket'
+    param :form, 'ticket[active]', :boolean, :required, 'Activation state'
     response :unauthorized
     response :not_acceptable
   end
@@ -33,13 +32,12 @@ class Api::V1::TicketsController < ApplicationController
   swagger_api :update do
     summary 'Updates an existing Ticket'
     param :path, :id, :integer, :required, "Ticket Id"
-    param :form, :title, :string, :optional, 'Title of ticket'
-    param :form, :body, :integer, :optional, 'Body of ticket'
-    param :form, :image, :string, :optional, 'Image associated to ticket'
-    param :form, :media, :string, :optional, 'Media associated to ticket'
-    param :form, :status_id, :integer, :optional, 'Id of status'
-    param :form, :user_id, :integer, :optional, 'Id of user associated to ticket'
-    param :form, :active, :boolean, :optional, 'Activation state'
+    param :form, 'ticket[body]', :integer, :optional, 'Body of ticket'
+    param :form, 'ticket[image]', :file, :optional, 'Image associated to ticket'
+    param :form, 'ticket[media]', :file, :optional, 'Media associated to ticket'
+    param :form, 'ticket[status_id]', :integer, :optional, 'Id of status'
+    param :form, 'ticket[user_id]', :integer, :optional, 'Id of user associated to ticket'
+    param :form, 'ticket[active]', :boolean, :optional, 'Activation state'
     response :not_found
     response :not_acceptable
   end

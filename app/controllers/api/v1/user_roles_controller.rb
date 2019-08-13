@@ -18,10 +18,10 @@ class Api::V1::UserRolesController < ApplicationController
 
   swagger_api :create do
     summary 'Creates a new User-Role'
-    param :form, :role_id, :integer, :required, 'Role Id'
-    param :form, :user_id, :integer, :required, 'User Id'
-    param :form, :admin_id, :integer, :required, 'Admin Id responsible of creation'
-    param :form, :active, :boolean, :required, 'Activation state'
+    param :form, 'user_role[role_id]', :integer, :required, 'Role Id'
+    param :form, 'user_role[user_id]', :integer, :required, 'User Id'
+    param :form, 'user_role[admin_id]', :integer, :required, 'Admin Id responsible of creation'
+    param :form, 'user_role[active]', :boolean, :required, 'Activation state'
     response :unauthorized
     response :not_acceptable
   end
@@ -29,10 +29,10 @@ class Api::V1::UserRolesController < ApplicationController
   swagger_api :update do
     summary 'Updates an existing User-Role'
     param :path, :id, :integer, :required, "User-Role Id"
-    param :form, :role_id, :integer, :optional, 'Role Id'
-    param :form, :user_id, :integer, :optional, 'User Id'
-    param :form, :admin_id, :integer, :optional, 'Admin Id responsible of creation'
-    param :form, :active, :boolean, :optional, 'Activation state'
+    param :form, 'user_role[role_id]', :integer, :optional, 'Role Id'
+    param :form, 'user_role[user_id]', :integer, :optional, 'User Id'
+    param :form, 'user_role[admin_id]', :integer, :optional, 'Admin Id responsible of creation'
+    param :form, 'user_role[active]', :boolean, :optional, 'Activation state'
     response :unauthorized
     response :not_found
     response :not_acceptable

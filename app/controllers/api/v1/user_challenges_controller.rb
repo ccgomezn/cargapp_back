@@ -17,11 +17,11 @@ class Api::V1::UserChallengesController < ApplicationController
 
   swagger_api :create do
     summary 'Creates a new User-Challenge'
-    param :form, :position, :integer, :required, 'Position of user-challenge'
-    param :form, :point, :integer, :required, 'Points on challenge'
-    param :form, :challenge_id, :integer, :required, 'Id of challenge associated'
-    param :form, :user_id, :integer, :required, 'Id of user associated'
-    param :form, :active, :boolean, :required, 'Activation state'
+    param :form, 'user_challenge[position]', :integer, :required, 'Position of user-challenge'
+    param :form, 'user_challenge[point]', :integer, :required, 'Points on challenge'
+    param :form, 'user_challenge[challenge_id]', :integer, :required, 'Id of challenge associated'
+    param :form, 'user_challenge[user_id]', :integer, :required, 'Id of user associated'
+    param :form, 'user_challenge[active]', :boolean, :required, 'Activation state'
     response :unauthorized
     response :not_acceptable
   end
@@ -29,18 +29,18 @@ class Api::V1::UserChallengesController < ApplicationController
   swagger_api :update do
     summary 'Updates an existing User-Challenge'
     param :path, :id, :integer, :required, "User-Challenge Id"
-    param :form, :position, :integer, :optional, 'Position of user-challenge'
-    param :form, :point, :integer, :optional, 'Points on challenge'
-    param :form, :challenge_id, :integer, :optional, 'Id of challenge associated'
-    param :form, :user_id, :integer, :optional, 'Id of user associated'
-    param :form, :active, :boolean, :optional, 'Activation state'
+    param :form, 'user_challenge[position]', :integer, :optional, 'Position of user-challenge'
+    param :form, 'user_challenge[point]', :integer, :optional, 'Points on challenge'
+    param :form, 'user_challenge[challenge_id]', :integer, :optional, 'Id of challenge associated'
+    param :form, 'user_challenge[user_id]', :integer, :optional, 'Id of user associated'
+    param :form, 'user_challenge[active]', :boolean, :optional, 'Activation state'
     response :not_found
     response :not_acceptable
   end
 
   swagger_api :destroy do
-    summary "Deletes an existing Ticket"
-    param :path, :id, :integer, :optional, "Ticket Id"
+    summary "Deletes an existing User-Challenge"
+    param :path, :id, :integer, :optional, "User-Challenge Id"
     response :unauthorized
     response :not_found
   end

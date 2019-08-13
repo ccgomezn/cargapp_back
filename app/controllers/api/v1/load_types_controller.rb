@@ -16,11 +16,11 @@ class Api::V1::LoadTypesController < ApplicationController
 
   swagger_api :create do
     summary 'Creates a new Load Type'
-    param :form, :name, :string, :required, 'Name'
-    param :form, :code, :string, :required, 'Code'
-    param :form, :description, :string, :required, 'Description'
-    param :form, :icon, :string, :required, 'Icon'
-    param :form, :active, :boolean, :required, 'State of activation'
+    param :form, 'load_type[name]', :string, :required, 'Name'
+    param :form, 'load_type[code]', :string, :required, 'Code'
+    param :form, 'load_type[description]', :string, :required, 'Description'
+    param :form, 'load_type[icon]', :string, :required, 'Icon'
+    param :form, 'load_type[active]', :boolean, :required, 'State of activation'
     response :unauthorized
     response :not_acceptable
   end
@@ -28,11 +28,11 @@ class Api::V1::LoadTypesController < ApplicationController
   swagger_api :update do
     summary 'Updates an existing Load Type'
     param :path, :id, :integer, :required, "Load Type Id"
-    param :form, :name, :string, :optional, 'Name'
-    param :form, :code, :string, :optional, 'Code'
-    param :form, :description, :string, :optional, 'Description'
-    param :form, :icon, :string, :optional, 'Icon'
-    param :form, :active, :boolean, :optional, 'State of activation'
+    param :form, 'load_type[name]', :string, :optional, 'Name'
+    param :form, 'load_type[code]', :string, :optional, 'Code'
+    param :form, 'load_type[description]', :string, :optional, 'Description'
+    param :form, 'load_type[icon]', :string, :optional, 'Icon'
+    param :form, 'load_type[active]', :boolean, :optional, 'State of activation'
     response :unauthorized
     response :not_found
     response :not_acceptable

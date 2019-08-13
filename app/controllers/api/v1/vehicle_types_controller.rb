@@ -16,11 +16,11 @@ class Api::V1::VehicleTypesController < ApplicationController
 
   swagger_api :create do
     summary 'Creates a new Vehicle Type'
-    param :form, :name, :string, :required, 'Name'
-    param :form, :code, :string, :required, 'Code'
-    param :form, :description, :string, :required, 'Description'
-    param :form, :icon, :string, :required, 'Icon'
-    param :form, :active, :boolean, :required, 'Activation State'
+    param :form, 'vehicle_type[name]', :string, :required, 'Name'
+    param :form, 'vehicle_type[code]', :string, :required, 'Code'
+    param :form, 'vehicle_type[description]', :string, :required, 'Description'
+    param :form, 'vehicle_type[icon]', :string, :required, 'Icon'
+    param :form, 'vehicle_type[active]', :boolean, :required, 'Activation State'
     response :unauthorized
     response :not_acceptable
   end
@@ -28,11 +28,11 @@ class Api::V1::VehicleTypesController < ApplicationController
   swagger_api :update do
     summary 'Updates an existing Vehicle Type'
     param :path, :id, :integer, :required, "Vehicle Type Id"
-    param :form, :name, :string, :optional, 'Name'
-    param :form, :code, :string, :optional, 'Code'
-    param :form, :description, :string, :optional, 'Description'
-    param :form, :icon, :string, :optional, 'Icon'
-    param :form, :active, :boolean, :optional, 'Activation State'
+    param :form, 'vehicle_type[name]', :string, :optional, 'Name'
+    param :form, 'vehicle_type[code]', :string, :optional, 'Code'
+    param :form, 'vehicle_type[description]', :string, :optional, 'Description'
+    param :form, 'vehicle_type[icon]', :string, :optional, 'Icon'
+    param :form, 'vehicle_type[active]', :boolean, :optional, 'Activation State'
     response :unauthorized
     response :not_found
     response :not_acceptable

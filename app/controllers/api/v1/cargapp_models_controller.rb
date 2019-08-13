@@ -16,10 +16,10 @@ class Api::V1::CargappModelsController < ApplicationController
 
   swagger_api :create do
     summary 'Creates a new Cargapp Model'
-    param :form, :name, :string, :required, 'Name'
-    param :form, :code, :string, :required, 'Code'
-    param :form, :description, :string, :required, 'Description'
-    param :form, :active, :boolean, :required, 'State of activation'
+    param :form, 'cargapp_model[name]', :string, :required, 'Name'
+    param :form, 'cargapp_model[code]', :string, :required, 'Code'
+    param :form, 'cargapp_model[description]', :string, :required, 'Description'
+    param :form, 'cargapp_model[active]', :boolean, :required, 'State of activation'
     response :unauthorized
     response :not_acceptable
   end
@@ -27,10 +27,10 @@ class Api::V1::CargappModelsController < ApplicationController
   swagger_api :update do
     summary 'Updates an existing Cargapp Model'
     param :path, :id, :integer, :required, "Cargapp Model Id"
-    param :form, :name, :string, :optional, 'Name'
-    param :form, :code, :string, :optional, 'Code'
-    param :form, :description, :string, :optional, 'Description'
-    param :form, :active, :boolean, :optional, 'State of activation'
+    param :form, 'cargapp_model[name]', :string, :optional, 'Name'
+    param :form, 'cargapp_model[code]', :string, :optional, 'Code'
+    param :form, 'cargapp_model[description]', :string, :optional, 'Description'
+    param :form, 'cargapp_model[active]', :boolean, :optional, 'State of activation'
     response :unauthorized
     response :not_found
     response :not_acceptable
