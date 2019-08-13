@@ -16,6 +16,8 @@ gem 'oauth2'
 
 gem 'rails_admin', '~> 2.0.0.beta'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
+gem 'exponent-server-sdk'
+# gem 'activestorage-digitalocean'
 
 gem 'capistrano', '~> 3.11'
 gem 'capistrano-rails', '~> 1.4'

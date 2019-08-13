@@ -495,7 +495,6 @@ Code style checker
     }
 }
 ```
-# AQUI
 
 ## Ticket 
 * title
@@ -543,7 +542,7 @@ Code style checker
 * active
 
 
-```rails g scaffold Document document_id document_type:references file statu:rferences user:references expire_date:date approved:boolean active:boolean```
+```rails g scaffold Document document_id document_type:references file statu:references user:references expire_date:date approved:boolean active:boolean```
 
 1. GET http://api.cargapp.co/api/v1/documents 'Listar'
 2. GET http://api.cargapp.co/api/v1/documents/active 'Ver activos'
@@ -557,8 +556,6 @@ Code style checker
 {
     "document": {
         "document_id": "1086726268",
-        "document": "1086726268",
-        "number": "1086726268",
         "document_type_id": 1,
         "file": "archivo.pdf",
         "expire_date": "10-09-2019"
@@ -582,7 +579,7 @@ Code style checker
 * user_id
 
 
-```rails g scaffold Profile firt_name last_name avatar phone:number document_id document_type:references user:references birth_date:date```
+```rails g scaffold Profile firt_name last_name avatar phone document_id document_type:references user:references birth_date:date```
 
 1. GET http://api.cargapp.co/api/v1/profiles 'Listar'
 2. GET http://api.cargapp.co/api/v1/profiles/active 'Ver activos'
@@ -617,11 +614,13 @@ Code style checker
 * chassis
 * owner_vehicle
 * vehicle_type_id
+* owner_document_type_id
+* owner_document_id
 * user_id
 * active
 
 
-```rails g scaffold Vehicle brand model model_year:integer color plate chassis owner_vehicle vehicle_type:references owner_document_type:refrences user:references active:boolean```
+```rails g scaffold Vehicle brand model model_year:integer color plate chassis owner_vehicle vehicle_type:references owner_document_type:references owner_document_id user:references active:boolean```
 
 1. GET http://api.cargapp.co/api/v1/vehicles 'Listar'
 2. GET http://api.cargapp.co/api/v1/vehicles/active 'Ver activos'
@@ -642,7 +641,7 @@ Code style checker
         "chassis": "segundo1w35djjd",
         "owner_vehicle": "segundo españa bastidas",
         "owner_document_id": "10922222",
-        "vehicle_type": 1,
+        "vehicle_type_id": 1,
         "owner_document_type_id": 1, 
         "user_id": 1,
         "active": true
@@ -660,7 +659,7 @@ Code style checker
 * active
 
 
-```rails g scaffold Challenge name body:text image point:number user:references active:boolean```
+```rails g scaffold Challenge name body:text image point:integer user:references active:boolean```
 
 1. GET http://api.cargapp.co/api/v1/challenges 'Listar'
 2. GET http://api.cargapp.co/api/v1/challenges/active 'Ver activos'
@@ -692,7 +691,7 @@ Code style checker
 * active
 
 
-```rails g scaffold UserChallenge position:number point:number challenge:references user:references active:boolean```
+```rails g scaffold UserChallenge position:integer point:integer challenge:references user:references active:boolean```
 
 1. GET http://api.cargapp.co/api/v1/user_challenges 'Listar'
 2. GET http://api.cargapp.co/api/v1/user_challenges/active 'Ver activos'
@@ -727,7 +726,7 @@ Code style checker
 * active
 
 
-```rails g scaffold Coupon name code description is_porcentage:boolean value:number quantity:number * cargapp_model:references user:references active:boolean```
+```rails g scaffold Coupon name code description is_porcentage:boolean value:integer quantity:integer cargapp_model:references user:references active:boolean```
 
 1. GET http://api.cargapp.co/api/v1/coupons 'Listar'
 2. GET http://api.cargapp.co/api/v1/coupons/active 'Ver activos'
@@ -747,6 +746,7 @@ Code style checker
         "value": 10,
         "quantity": 100,    
         "user_id": 1,
+        "cargapp_model_id": 1,
         "active": true
     }
 }
@@ -756,12 +756,13 @@ Code style checker
 * user_id
 * coupon_id
 * cargapp_model_id
+* applied_item_id
 * offert_id
 * discount
 * active
 
 
-```rails g scaffold UserCoupon discount offert:references cargarpp_model:references coupon:references user:references active:boolean```
+```rails g scaffold UserCoupon discount cargapp_model:references applied_item_id:integer coupon:references user:references active:boolean```
 
 1. GET http://api.cargapp.co/api/v1/user_coupons 'Listar'
 2. GET http://api.cargapp.co/api/v1/user_coupons/active 'Ver activos'
@@ -775,9 +776,79 @@ Code style checker
 {
     "user_coupon": {
         "discount": 10,
-        "offert_id": 2,
+        "applied_item_id": 1,
         "cargapp_model_id": 1,
-        "cupon_id": 1,
+        "coupon_id": 1,
+        "user_id": 1,
+        "active": true
+    }
+}
+```
+
+## Activity
+* model
+* action
+* item
+* message
+* user_id
+
+
+```rails g scaffold Activity model action item message user:references ```
+
+1. GET http://api.cargapp.co/api/v1/activities 'Listar'
+2. GET http://api.cargapp.co/api/v1/activities/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/activities/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/activities 'Crear'
+5. PUT http://api.cargapp.co/api/v1/activities/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/activities/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/activities/me 'Ver los del usuario'
+
+```
+{
+    "activity": {
+        "model": "profiles",
+        "action": "me",
+        "item": "1"
+        "message": "ingreso al perfil"
+        "user_id": 1
+    }
+}
+```
+
+
+## PaymentMethod
+* name
+* uuid
+* description
+* email
+* app_id
+* secret_id
+* token
+* password
+* user_id
+* active
+
+```rails g scaffold PaymentMethod name uuid description:text email aap_id secret_id token password user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/payment_methods 'Listar'
+2. GET http://api.cargapp.co/api/v1/payment_methods/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/payment_methods/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/payment_methods 'Crear'
+5. PUT http://api.cargapp.co/api/v1/payment_methods/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/payment_methods/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/payment_methods/me 'Ver los del usuario'
+
+```
+{
+    "payment_method": {
+        "name": "efectivo",
+        "uuid": "cargapp2019",
+        "description": "metodo de pago en efectivo",
+        "email": "hello@cargapp.co",
+        "app_id": "cargapp2019",
+        "secret_id": "cargapp2019",
+        "token": "cargapp2019",
+        "password": "cargapp2019",
         "user_id": 1,
         "active": true
     }

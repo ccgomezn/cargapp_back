@@ -14,6 +14,14 @@ local:
 #   region: us-east-1
 #   bucket: your_own_bucket
 
+digital_ocean:
+   service: S3
+   access_key_id: <%= ENV['ACCESS_KEY'] %>
+   secret_access_key: <%= ENV['SECRET_ACCESS'] %>
+   region: nyc3
+   bucket: <%= ENV['BUCKET'] %>
+   endpoint: https://nyc3.digitaloceanspaces.com
+
 # Remember not to checkin your GCS keyfile to a repository
 # google:
 #   service: GCS

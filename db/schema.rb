@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_06_202327) do
+ActiveRecord::Schema.define(version: 2019_08_11_192926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,18 @@ ActiveRecord::Schema.define(version: 2019_08_06_202327) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "challenges", force: :cascade do |t|
+    t.string "name"
+    t.text "body"
+    t.string "image"
+    t.integer "point"
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_challenges_on_user_id"
+  end
+
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -137,10 +149,63 @@ ActiveRecord::Schema.define(version: 2019_08_06_202327) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "coupons", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.string "description"
+    t.boolean "is_porcentage"
+    t.integer "value"
+    t.integer "quantity"
+    t.bigint "cargapp_model_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cargapp_model_id"], name: "index_coupons_on_cargapp_model_id"
+    t.index ["user_id"], name: "index_coupons_on_user_id"
+  end
+
   create_table "document_types", force: :cascade do |t|
     t.string "name"
     t.string "code"
     t.text "description"
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.string "document_id"
+    t.bigint "document_type_id", null: false
+    t.string "file"
+    t.bigint "statu_id", null: false
+    t.bigint "user_id", null: false
+    t.date "expire_date"
+    t.boolean "approved"
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["document_type_id"], name: "index_documents_on_document_type_id"
+    t.index ["statu_id"], name: "index_documents_on_statu_id"
+    t.index ["user_id"], name: "index_documents_on_user_id"
+  end
+
+  create_table "integrations", force: :cascade do |t|
+    t.string "name"
+    t.string "provider"
+    t.string "code"
+    t.string "url"
+    t.string "url_pro"
+    t.string "url_dev"
+    t.string "email"
+    t.string "username"
+    t.string "password"
+    t.string "phone"
+    t.string "pin"
+    t.string "token"
+    t.string "app_id"
+    t.string "client_id"
+    t.string "api_key"
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -227,6 +292,21 @@ ActiveRecord::Schema.define(version: 2019_08_06_202327) do
     t.index ["user_id"], name: "index_permissions_on_user_id"
   end
 
+  create_table "profiles", force: :cascade do |t|
+    t.string "firt_name"
+    t.string "last_name"
+    t.string "avatar"
+    t.string "phone"
+    t.string "document_id"
+    t.bigint "document_type_id", null: false
+    t.bigint "user_id", null: false
+    t.date "birth_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["document_type_id"], name: "index_profiles_on_document_type_id"
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -259,6 +339,46 @@ ActiveRecord::Schema.define(version: 2019_08_06_202327) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cargapp_model_id"], name: "index_status_on_cargapp_model_id"
     t.index ["user_id"], name: "index_status_on_user_id"
+  end
+
+  create_table "tickets", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.string "image"
+    t.string "media"
+    t.bigint "statu_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["statu_id"], name: "index_tickets_on_statu_id"
+    t.index ["user_id"], name: "index_tickets_on_user_id"
+  end
+
+  create_table "user_challenges", force: :cascade do |t|
+    t.integer "position"
+    t.integer "point"
+    t.bigint "challenge_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["challenge_id"], name: "index_user_challenges_on_challenge_id"
+    t.index ["user_id"], name: "index_user_challenges_on_user_id"
+  end
+
+  create_table "user_coupons", force: :cascade do |t|
+    t.string "discount"
+    t.bigint "cargapp_model_id", null: false
+    t.integer "applied_item_id"
+    t.bigint "coupon_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cargapp_model_id"], name: "index_user_coupons_on_cargapp_model_id"
+    t.index ["coupon_id"], name: "index_user_coupons_on_coupon_id"
+    t.index ["user_id"], name: "index_user_coupons_on_user_id"
   end
 
   create_table "user_roles", force: :cascade do |t|
@@ -295,11 +415,37 @@ ActiveRecord::Schema.define(version: 2019_08_06_202327) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "vehicles", force: :cascade do |t|
+    t.string "brand"
+    t.string "model"
+    t.integer "model_year"
+    t.string "color"
+    t.string "plate"
+    t.string "chassis"
+    t.string "owner_vehicle"
+    t.bigint "vehicle_type_id", null: false
+    t.bigint "owner_document_type_id"
+    t.string "owner_document_id"
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["owner_document_type_id"], name: "index_vehicles_on_owner_document_type_id"
+    t.index ["user_id"], name: "index_vehicles_on_user_id"
+    t.index ["vehicle_type_id"], name: "index_vehicles_on_vehicle_type_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cargapp_integrations", "users"
+  add_foreign_key "challenges", "users"
   add_foreign_key "cities", "states"
   add_foreign_key "companies", "load_types"
   add_foreign_key "companies", "users"
+  add_foreign_key "coupons", "cargapp_models"
+  add_foreign_key "coupons", "users"
+  add_foreign_key "documents", "document_types"
+  add_foreign_key "documents", "status", column: "statu_id"
+  add_foreign_key "documents", "users"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_grants", "users", column: "resource_owner_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
@@ -309,9 +455,20 @@ ActiveRecord::Schema.define(version: 2019_08_06_202327) do
   add_foreign_key "permissions", "cargapp_models"
   add_foreign_key "permissions", "roles"
   add_foreign_key "permissions", "users"
+  add_foreign_key "profiles", "document_types"
+  add_foreign_key "profiles", "users"
   add_foreign_key "states", "countries"
   add_foreign_key "status", "cargapp_models"
   add_foreign_key "status", "users"
+  add_foreign_key "tickets", "status", column: "statu_id"
+  add_foreign_key "tickets", "users"
+  add_foreign_key "user_challenges", "challenges"
+  add_foreign_key "user_challenges", "users"
+  add_foreign_key "user_coupons", "cargapp_models"
+  add_foreign_key "user_coupons", "coupons"
+  add_foreign_key "user_coupons", "users"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
+  add_foreign_key "vehicles", "users"
+  add_foreign_key "vehicles", "vehicle_types"
 end

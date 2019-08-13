@@ -7,6 +7,14 @@ class User < ApplicationRecord
   has_many :user_roles, dependent: :destroy
   has_many :roles, through: :user_roles
   has_many :cargapp_integrations
+  has_many :companies
+  has_many :tickets
+  has_many :vehicles
+  has_many :documents
+  has_one :profile
+  has_many :challenges
+  has_many :user_challenges
+  has_many :user_coupons
 
   has_many :access_grants,
          class_name: 'Doorkeeper::AccessGrant',

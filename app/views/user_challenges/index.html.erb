@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>User Challenges</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Position</th>
+      <th>Point</th>
+      <th>Challenge</th>
+      <th>User</th>
+      <th>Active</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_challenges.each do |user_challenge| %>
+      <tr>
+        <td><%= user_challenge.position %></td>
+        <td><%= user_challenge.point %></td>
+        <td><%= user_challenge.challenge_id %></td>
+        <td><%= user_challenge.user_id %></td>
+        <td><%= user_challenge.active %></td>
+        <td><%= link_to 'Show', user_challenge %></td>
+        <td><%= link_to 'Edit', edit_user_challenge_path(user_challenge) %></td>
+        <td><%= link_to 'Destroy', user_challenge, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User Challenge', new_user_challenge_path %>

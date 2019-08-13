@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  discount: MyString
+  cargapp_model: one
+  applied_item_id: 1
+  coupon: one
+  user: one
+  active: false
+
+two:
+  discount: MyString
+  cargapp_model: two
+  applied_item_id: 1
+  coupon: two
+  user: two
+  active: false
