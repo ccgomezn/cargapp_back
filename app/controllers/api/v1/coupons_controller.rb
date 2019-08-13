@@ -3,6 +3,58 @@ class Api::V1::CouponsController < ApplicationController
   protect_from_forgery with: :null_session # Temporary
   before_action :set_user
 
+
+  swagger_controller :coupons, 'Coupons Management'
+
+  swagger_api :index do
+    summary 'Fetches all Coupons items'
+    notes 'This lists all the coupons'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Coupons items'
+    notes 'This lists all the active coupons'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Coupon'
+    param :form, :name, :string, :required, 'Name'
+    param :form, :code, :string, :required, 'Code'
+    param :form, :description, :string, :required, 'Description'
+    param :form, :cargapp_model_id, :integer, :required, 'Id of cargapp model associated on coupon'
+    param :form, :is_porcentage, :boolean, :required, 'Check if the value is percentage'
+    param :form, :value, :integer, :required, 'Value'
+    param :form, :quantity, :integer, :required, 'Quantity'
+    param :form, :user_id, :integer, :required, 'Id user on coupon'
+    param :form, :active, :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Coupon'
+    param :path, :id, :integer, :required, "Coupon Id"
+    param :form, :name, :string, :optional, 'Name'
+    param :form, :code, :string, :optional, 'Code'
+    param :form, :description, :string, :optional, 'Description'
+    param :form, :cargapp_model_id, :integer, :optional, 'Id of cargapp model associated on coupon'
+    param :form, :is_porcentage, :boolean, :optional, 'Check if the value is percentage'
+    param :form, :value, :integer, :optional, 'Value'
+    param :form, :quantity, :integer, :optional, 'Quantity'
+    param :form, :user_id, :integer, :optional, 'Id user on coupon'
+    param :form, :active, :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Coupon"
+    param :path, :id, :integer, :optional, "Coupon Id"
+    response :unauthorized
+    response :not_found
+  end
+
   # GET /coupons
   # GET /coupons.json
   def index

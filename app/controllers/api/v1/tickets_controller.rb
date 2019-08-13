@@ -3,6 +3,58 @@ class Api::V1::TicketsController < ApplicationController
   protect_from_forgery with: :null_session # Temporary
   before_action :set_user
 
+
+
+  swagger_controller :tickets, 'Tickets Management'
+
+  swagger_api :index do
+    summary 'Fetches all Ticket items'
+    notes 'This lists all the tickets'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Ticket items'
+    notes 'This lists all the active tickets'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Ticket'
+    param :form, :title, :string, :required, 'Title of ticket'
+    param :form, :body, :integer, :required, 'Body of ticket'
+    param :form, :image, :string, :required, 'Image associated to ticket'
+    param :form, :media, :string, :required, 'Media associated to ticket'
+    param :form, :status_id, :integer, :required, 'Id of status'
+    param :form, :user_id, :integer, :required, 'Id of user associated to ticket'
+    param :form, :active, :boolean, :required, 'Activation state'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Ticket'
+    param :path, :id, :integer, :required, "Ticket Id"
+    param :form, :title, :string, :optional, 'Title of ticket'
+    param :form, :body, :integer, :optional, 'Body of ticket'
+    param :form, :image, :string, :optional, 'Image associated to ticket'
+    param :form, :media, :string, :optional, 'Media associated to ticket'
+    param :form, :status_id, :integer, :optional, 'Id of status'
+    param :form, :user_id, :integer, :optional, 'Id of user associated to ticket'
+    param :form, :active, :boolean, :optional, 'Activation state'
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Ticket"
+    param :path, :id, :integer, :optional, "Ticket Id"
+    response :unauthorized
+    response :not_found
+  end
+
+
+
+
+
   # GET /tickets
   # GET /tickets.json
   def index
