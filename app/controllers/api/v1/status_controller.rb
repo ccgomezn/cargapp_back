@@ -16,12 +16,12 @@ class Api::V1::StatusController < ApplicationController
 
   swagger_api :create do
     summary 'Creates a new Status'
-    param :form, :name, :string, :required, 'Name'
-    param :form, :code, :string, :required, 'Code'
-    param :form, :description, :string, :required, 'Description'
-    param :form, :user_id, :integer, :required, 'User id related to status'
-    param :form, :cargapp_model_id, :integer, :required, 'Model id related to status'
-    param :form, :active, :boolean, :required, 'State of activation'
+    param :form, 'statu[name]', :string, :required, 'Name'
+    param :form, 'statu[code]', :string, :required, 'Code'
+    param :form, 'statu[description]', :string, :required, 'Description'
+    param :form, 'statu[user_id]', :integer, :required, 'User id related to status'
+    param :form, 'statu[cargapp_model_id]', :integer, :required, 'Model id related to status'
+    param :form, 'statu[active]', :boolean, :required, 'State of activation'
     response :unauthorized
     response :not_acceptable
   end
@@ -29,12 +29,12 @@ class Api::V1::StatusController < ApplicationController
   swagger_api :update do
     summary 'Updates an existing Status'
     param :path, :id, :integer, :required, "Status Id"
-    param :form, :name, :string, :optional, 'Name'
-    param :form, :code, :string, :optional, 'Code'
-    param :form, :description, :string, :optional, 'Description'
-    param :form, :user_id, :integer, :optional, 'User id related to status'
-    param :form, :cargapp_model_id, :integer, :optional, 'Model id related to status'
-    param :form, :active, :boolean, :optional, 'State of activation'
+    param :form, 'statu[name]', :string, :optional, 'Name'
+    param :form, 'statu[code]', :string, :optional, 'Code'
+    param :form, 'statu[description]', :string, :optional, 'Description'
+    param :form, 'statu[user_id]', :integer, :optional, 'User id related to status'
+    param :form, 'statu[cargapp_model_id]', :integer, :optional, 'Model id related to status'
+    param :form, 'statu[active]', :boolean, :optional, 'State of activation'
     response :unauthorized
     response :not_found
     response :not_acceptable

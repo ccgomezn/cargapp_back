@@ -18,14 +18,14 @@ class Api::V1::DocumentsController < ApplicationController
 
   swagger_api :create do
     summary 'Creates a new Document'
-    param :form, :document_id, :string, :required, 'Id of document'
-    param :form, :document_type_id, :integer, :required, 'Id of type associated to document'
-    param :form, :file, :string, :required, 'File'
-    param :form, :status_id, :integer, :required, 'Id of status associated to document'
-    param :form, :user_id, :integer, :required, 'Id user on coupon'
-    param :form, :expire_date, :string, :required, 'Expiration date of document'
-    param :form, :approved, :boolean, :required, 'Check if document is approved'
-    param :form, :active, :boolean, :required, 'State of activation'
+    param :form, 'document[document_id]', :string, :required, 'Id of document'
+    param :form, 'document[document_type_id]', :integer, :required, 'Id of type associated to document'
+    param :form, 'document[file]', :string, :required, 'File'
+    param :form, 'document[status_id]', :integer, :required, 'Id of status associated to document'
+    param :form, 'document[user_id]', :integer, :required, 'Id user on coupon'
+    param :form, 'document[expire_date]', :string, :required, 'Expiration date of document'
+    param :form, 'document[approved]', :boolean, :required, 'Check if document is approved'
+    param :form, 'document[active]', :boolean, :required, 'State of activation'
     response :unauthorized
     response :not_acceptable
   end
@@ -33,14 +33,14 @@ class Api::V1::DocumentsController < ApplicationController
   swagger_api :update do
     summary 'Updates an existing Coupon'
     param :path, :id, :integer, :required, "Coupon Id"
-    param :form, :document_id, :string, :optional, 'Id of document'
-    param :form, :document_type_id, :integer, :optional, 'Id of type associated to document'
-    param :form, :file, :string, :optional, 'File'
-    param :form, :status_id, :integer, :optional, 'Id of status associated to document'
-    param :form, :user_id, :integer, :optional, 'Id user on coupon'
-    param :form, :expire_date, :string, :optional, 'Expiration date of document'
-    param :form, :approved, :boolean, :optional, 'Check if document is approved'
-    param :form, :active, :boolean, :optional, 'State of activation'
+    param :form, 'document[document_id]', :string, :optional, 'Id of document'
+    param :form, 'document[document_type_id]', :integer, :optional, 'Id of type associated to document'
+    param :form, 'document[file]', :string, :optional, 'File'
+    param :form, 'document[status_id]', :integer, :optional, 'Id of status associated to document'
+    param :form, 'document[user_id]', :integer, :optional, 'Id user on coupon'
+    param :form, 'document[expire_date]', :string, :optional, 'Expiration date of document'
+    param :form, 'document[approved]', :boolean, :optional, 'Check if document is approved'
+    param :form, 'document[active]', :boolean, :optional, 'State of activation'
     response :not_found
     response :not_acceptable
   end

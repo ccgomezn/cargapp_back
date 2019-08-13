@@ -16,13 +16,13 @@ class Api::V1::PermissionsController < ApplicationController
 
   swagger_api :create do
     summary 'Creates a new Permission'
-    param :form, :role_id, :integer, :required, 'Id of role related to permission'
-    param :form, :model_id, :integer, :required, 'Id of model related to permission'
-    param :form, :action, :string, :required, 'Action'
-    param :form, :method, :string, :required, 'Method'
-    param :form, :user_id, :integer, :required, 'Id of user related to permission'
-    param :form, :allow, :boolean, :required, 'Allow all actions'
-    param :form, :active, :boolean, :required, 'State of activation'
+    param :form, 'permission[role_id]', :integer, :required, 'Id of role related to permission'
+    param :form, 'permission[model_id]', :integer, :required, 'Id of model related to permission'
+    param :form, 'permission[action]', :string, :required, 'Action'
+    param :form, 'permission[method]', :string, :required, 'Method'
+    param :form, 'permission[user_id]', :integer, :required, 'Id of user related to permission'
+    param :form, 'permission[allow]', :boolean, :required, 'Allow all actions'
+    param :form, 'permission[active]', :boolean, :required, 'State of activation'
     response :unauthorized
     response :not_acceptable
   end
@@ -30,13 +30,13 @@ class Api::V1::PermissionsController < ApplicationController
   swagger_api :update do
     summary 'Updates an existing Permission'
     param :path, :id, :integer, :required, "Permission Id"
-    param :form, :role_id, :integer, :optional, 'Id of role related to permission'
-    param :form, :model_id, :integer, :optional, 'Id of model related to permission'
-    param :form, :action, :string, :optional, 'Action'
-    param :form, :method, :string, :optional, 'Method'
-    param :form, :user_id, :integer, :optional, 'Id of user related to permission'
-    param :form, :allow, :boolean, :optional, 'Allow all actions'
-    param :form, :active, :boolean, :optional, 'State of activation'
+    param :form, 'permission[role_id]', :integer, :optional, 'Id of role related to permission'
+    param :form, 'permission[model_id]', :integer, :optional, 'Id of model related to permission'
+    param :form, 'permission[action]', :string, :optional, 'Action'
+    param :form, 'permission[method]', :string, :optional, 'Method'
+    param :form, 'permission[user_id]', :integer, :optional, 'Id of user related to permission'
+    param :form, 'permission[allow]', :boolean, :optional, 'Allow all actions'
+    param :form, 'permission[active]', :boolean, :optional, 'State of activation'
     response :unauthorized
     response :not_found
     response :not_acceptable

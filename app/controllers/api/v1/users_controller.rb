@@ -13,10 +13,10 @@ class Api::V1::UsersController < ApplicationController
 
   swagger_api :create do
     summary 'Creates a new User'
-    param :form, :email, :string, :required, 'Email'
-    param :form, :password, :string, :required, 'Password'
-    param :form, :password_confirmation, :string, :required, 'Password confirmation'
-    param :form, :phone_number, :string, :optional, 'Phone number'
+    param :form, 'user[email]', :string, :required, 'Email'
+    param :form, 'user[password]', :string, :required, 'Password'
+    param :form, 'user[password_confirmation]', :string, :required, 'Password confirmation'
+    param :form, 'user[phone_number]', :string, :optional, 'Phone number'
     response :unauthorized
     response :not_acceptable
   end

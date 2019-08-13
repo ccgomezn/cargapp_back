@@ -17,12 +17,12 @@ class Api::V1::ChallengesController < ApplicationController
 
   swagger_api :create do
     summary 'Creates a new Challenge'
-    param :form, :name, :string, :required, 'Name'
-    param :form, :body, :string, :required, 'Body'
-    param :form, :image, :string, :required, 'Image'
-    param :form, :point, :string, :required, 'Points related to challenge'
-    param :form, :user_id, :integer, :required, 'Id of user associated to challenge'
-    param :form, :active, :boolean, :required, 'State of activation'
+    param :form, 'challenge[name]', :string, :required, 'Name'
+    param :form, 'challenge[body]', :string, :required, 'Body'
+    param :form, 'challenge[image]', :string, :required, 'Image'
+    param :form, 'challenge[point]', :string, :required, 'Points related to challenge'
+    param :form, 'challenge[user_id]', :integer, :required, 'Id of user associated to challenge'
+    param :form, 'challenge[active]', :boolean, :required, 'State of activation'
     response :unauthorized
     response :not_acceptable
   end
@@ -30,13 +30,12 @@ class Api::V1::ChallengesController < ApplicationController
   swagger_api :update do
     summary 'Updates an existing Challenge'
     param :path, :id, :integer, :required, "Challenge Id"
-    param :form, :name, :string, :optional, 'Name'
-    param :form, :body, :string, :optional, 'Body'
-    param :form, :image, :string, :optional, 'Image'
-    param :form, :point, :string, :optional, 'Points related to challenge'
-    param :form, :user_id, :integer, :optional, 'Id of user associated to challenge'
-    param :form, :active, :boolean, :optional, 'State of activation'
-    response :unauthorized
+    param :form, 'challenge[name]', :string, :optional, 'Name'
+    param :form, 'challenge[body]', :string, :optional, 'Body'
+    param :form, 'challenge[image]', :string, :optional, 'Image'
+    param :form, 'challenge[point]', :string, :optional, 'Points related to challenge'
+    param :form, 'challenge[user_id]', :integer, :optional, 'Id of user associated to challenge'
+    param :form, 'challenge[active]', :boolean, :optional, 'State of activation'
     response :not_found
     response :not_acceptable
   end

@@ -16,11 +16,11 @@ class Api::V1::StatesController < ApplicationController
 
   swagger_api :create do
     summary 'Creates a new States'
-    param :form, :name, :string, :required, 'Name'
-    param :form, :code, :string, :required, 'Code'
-    param :form, :description, :string, :required, 'Description'
-    param :form, :country_id, :integer, :required, 'Country id related to status'
-    param :form, :active, :boolean, :required, 'State of activation'
+    param :form, 'state[name]', :string, :required, 'Name'
+    param :form, 'state[code]', :string, :required, 'Code'
+    param :form, 'state[description]', :string, :required, 'Description'
+    param :form, 'state[country_id]', :integer, :required, 'Country id related to status'
+    param :form, 'state[active]', :boolean, :required, 'State of activation'
     response :unauthorized
     response :not_acceptable
   end
@@ -28,11 +28,11 @@ class Api::V1::StatesController < ApplicationController
   swagger_api :update do
     summary 'Updates an existing State'
     param :path, :id, :integer, :required, "State Id"
-    param :form, :name, :string, :optional, 'Name'
-    param :form, :code, :string, :optional, 'Code'
-    param :form, :description, :string, :optional, 'Description'
-    param :form, :country_id, :integer, :optional, 'Country id related to status'
-    param :form, :active, :boolean, :optional, 'State of activation'
+    param :form, 'state[name]', :string, :optional, 'Name'
+    param :form, 'state[code]', :string, :optional, 'Code'
+    param :form, 'state[description]', :string, :optional, 'Description'
+    param :form, 'state[country_id]', :integer, :optional, 'Country id related to status'
+    param :form, 'state[active]', :boolean, :optional, 'State of activation'
     response :unauthorized
     response :not_found
     response :not_acceptable

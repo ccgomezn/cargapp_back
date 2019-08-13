@@ -17,17 +17,17 @@ class Api::V1::CompaniesController < ApplicationController
 
   swagger_api :create do
     summary 'Creates a new Company'
-    param :form, :name, :string, :required, 'Name'
-    param :form, :code, :string, :required, 'Code'
-    param :form, :company_type, :string, :required, 'Company Type'
-    param :form, :load_type_id, :integer, :required, 'Load Type related to Id'
-    param :form, :sector, :string, :required, 'Sector'
-    param :form, :legal_representative, :string, :required, 'Legal representative of the Company'
-    param :form, :address, :string, :required, 'Address'
-    param :form, :phone, :string, :required, 'Phone'
-    param :form, :user_id, :integer, :required, 'Id of user related to Company'
-    param :form, :constitution_date, :string, :required, 'Date of constitution of the company'
-    param :form, :active, :boolean, :required, 'State of activation'
+    param :form, 'company[name]', :string, :required, 'Name'
+    param :form, 'company[code]', :string, :required, 'Code'
+    param :form, 'company[company_type]', :string, :required, 'Company Type'
+    param :form, 'company[load_type_id]', :integer, :required, 'Load Type related to Id'
+    param :form, 'company[sector]', :string, :required, 'Sector'
+    param :form, 'company[legal_representative]', :string, :required, 'Legal representative of the Company'
+    param :form, 'company[address]', :string, :required, 'Address'
+    param :form, 'company[phone]', :string, :required, 'Phone'
+    param :form, 'company[user_id]', :integer, :required, 'Id of user related to Company'
+    param :form, 'company[constution_date]', :string, :required, 'Date of constitution of the company'
+    param :form, 'company[active]', :boolean, :required, 'State of activation'
     response :unauthorized
     response :not_acceptable
   end
@@ -35,17 +35,17 @@ class Api::V1::CompaniesController < ApplicationController
   swagger_api :update do
     summary 'Updates an existing Company'
     param :path, :id, :integer, :required, "Company Id"
-    param :form, :name, :string, :optional, 'Name'
-    param :form, :code, :string, :optional, 'Code'
-    param :form, :company_type, :string, :optional, 'Company Type'
-    param :form, :load_type_id, :integer, :optional, 'Load Type related to Id'
-    param :form, :sector, :string, :optional, 'Sector'
-    param :form, :legal_representative, :string, :optional, 'Legal representative of the Company'
-    param :form, :address, :string, :optional, 'Address'
-    param :form, :phone, :string, :optional, 'Phone'
-    param :form, :user_id, :integer, :optional, 'Id of user related to Company'
-    param :form, :constitution_date, :string, :optional, 'Date of constitution of the company'
-    param :form, :active, :boolean, :optional, 'State of activation'
+    param :form, 'company[name]', :string, :optional, 'Name'
+    param :form, 'company[code]', :string, :optional, 'Code'
+    param :form, 'company[company_type]', :string, :optional, 'Company Type'
+    param :form, 'company[load_type_id]', :integer, :optional, 'Load Type related to Id'
+    param :form, 'company[sector]', :string, :optional, 'Sector'
+    param :form, 'company[legal_representative]', :string, :optional, 'Legal representative of the Company'
+    param :form, 'company[address]', :string, :optional, 'Address'
+    param :form, 'company[phone]', :string, :optional, 'Phone'
+    param :form, 'company[user_id]', :integer, :optional, 'Id of user related to Company'
+    param :form, 'company[constution_date]', :string, :optional, 'Date of constitution of the company'
+    param :form, 'company[active]', :boolean, :optional, 'State of activation'
     response :unauthorized
     response :not_found
     response :not_acceptable

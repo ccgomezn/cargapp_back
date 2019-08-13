@@ -16,10 +16,10 @@ class Api::V1::DocumentTypesController < ApplicationController
 
   swagger_api :create do
     summary 'Creates a new Document Type'
-    param :form, :name, :string, :required, 'Name'
-    param :form, :code, :string, :required, 'Code'
-    param :form, :description, :string, :required, 'Description'
-    param :form, :active, :boolean, :required, 'State of activation'
+    param :form, 'document_type[name]', :string, :required, 'Name'
+    param :form, 'document_type[code]', :string, :required, 'Code'
+    param :form, 'document_type[description]', :string, :required, 'Description'
+    param :form, 'document_type[active]', :boolean, :required, 'State of activation'
     response :unauthorized
     response :not_acceptable
   end
@@ -27,10 +27,10 @@ class Api::V1::DocumentTypesController < ApplicationController
   swagger_api :update do
     summary 'Updates an existing Document Type'
     param :path, :id, :integer, :required, "Document Type Id"
-    param :form, :name, :string, :optional, 'Name'
-    param :form, :code, :string, :optional, 'Code'
-    param :form, :description, :string, :optional, 'Description'
-    param :form, :active, :boolean, :optional, 'State of activation'
+    param :form, 'document_type[name]', :string, :optional, 'Name'
+    param :form, 'document_type[code]', :string, :optional, 'Code'
+    param :form, 'document_type[description]', :string, :optional, 'Description'
+    param :form, 'document_type[active]', :boolean, :optional, 'State of activation'
     response :unauthorized
     response :not_found
     response :not_acceptable

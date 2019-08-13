@@ -1,0 +1,187 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:3000",
+  "resourcePath": "user_challenges",
+  "apis": [
+    {
+      "path": "/api/v1/user_challenges/active",
+      "operations": [
+        {
+          "summary": "Fetches all active User-Challenge items",
+          "notes": "This lists all the active User-Challenges",
+          "nickname": "Api::V1::UserChallenges#active",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/user_challenges",
+      "operations": [
+        {
+          "summary": "Fetches all User-Challenge items",
+          "notes": "This lists all the User-Challenges",
+          "nickname": "Api::V1::UserChallenges#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/user_challenges",
+      "operations": [
+        {
+          "summary": "Creates a new User-Challenge",
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "user_challenge[position]",
+              "type": "integer",
+              "description": "Position of user-challenge",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user_challenge[point]",
+              "type": "integer",
+              "description": "Points on challenge",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user_challenge[challenge_id]",
+              "type": "integer",
+              "description": "Id of challenge associated",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user_challenge[user_id]",
+              "type": "integer",
+              "description": "Id of user associated",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user_challenge[active]",
+              "type": "boolean",
+              "description": "Activation state",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Api::V1::UserChallenges#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/user_challenges/{id}",
+      "operations": [
+        {
+          "summary": "Updates an existing User-Challenge",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "User-Challenge Id",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user_challenge[position]",
+              "type": "integer",
+              "description": "Position of user-challenge",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "user_challenge[point]",
+              "type": "integer",
+              "description": "Points on challenge",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "user_challenge[challenge_id]",
+              "type": "integer",
+              "description": "Id of challenge associated",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "user_challenge[user_id]",
+              "type": "integer",
+              "description": "Id of user associated",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "user_challenge[active]",
+              "type": "boolean",
+              "description": "Activation state",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Api::V1::UserChallenges#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/user_challenges/{id}",
+      "operations": [
+        {
+          "summary": "Deletes an existing User-Challenge",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "User-Challenge Id",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::UserChallenges#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}
