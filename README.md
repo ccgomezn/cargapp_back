@@ -784,3 +784,73 @@ Code style checker
     }
 }
 ```
+
+## Activity
+* model
+* action
+* item
+* message
+* user_id
+
+
+```rails g scaffold Activity model action item message user:references ```
+
+1. GET http://api.cargapp.co/api/v1/activities 'Listar'
+2. GET http://api.cargapp.co/api/v1/activities/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/activities/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/activities 'Crear'
+5. PUT http://api.cargapp.co/api/v1/activities/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/activities/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/activities/me 'Ver los del usuario'
+
+```
+{
+    "activity": {
+        "model": "profiles",
+        "action": "me",
+        "item": "1"
+        "message": "ingreso al perfil"
+        "user_id": 1
+    }
+}
+```
+
+
+## PaymentMethod
+* name
+* uuid
+* description
+* email
+* app_id
+* secret_id
+* token
+* password
+* user_id
+* active
+
+```rails g scaffold PaymentMethod name uuid description:text email aap_id secret_id token password user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/payment_methods 'Listar'
+2. GET http://api.cargapp.co/api/v1/payment_methods/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/payment_methods/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/payment_methods 'Crear'
+5. PUT http://api.cargapp.co/api/v1/payment_methods/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/payment_methods/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/payment_methods/me 'Ver los del usuario'
+
+```
+{
+    "payment_method": {
+        "name": "efectivo",
+        "uuid": "cargapp2019",
+        "description": "metodo de pago en efectivo",
+        "email": "hello@cargapp.co",
+        "app_id": "cargapp2019",
+        "secret_id": "cargapp2019",
+        "token": "cargapp2019",
+        "password": "cargapp2019",
+        "user_id": 1,
+        "active": true
+    }
+}
+```
