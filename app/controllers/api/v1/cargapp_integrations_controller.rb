@@ -3,6 +3,78 @@ class Api::V1::CargappIntegrationsController < ApplicationController
   protect_from_forgery with: :null_session # Temporary
   before_action :set_user
 
+  swagger_controller :cargappIntegrantions, 'Cargapp Integrations Management'
+
+  swagger_api :index do
+    summary 'Fetches all Cargapp Intengrations items'
+    notes 'This lists all the cargapp integrations'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Cargapp Integrations items'
+    notes 'This lists all the active cargapp integrations'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Cargapp Integration'
+    param :form, :name, :string, :required, 'Name'
+    param :form, :description, :string, :required, 'Description'
+    param :form, :provider, :string, :required, 'Provider'
+    param :form, :code, :string, :required, 'Code'
+    param :form, :url, :string, :required, 'Url'
+    param :form, :url_provider, :string, :required, 'Url of Provider'
+    param :form, :url_production, :string, :required, 'Url for Production'
+    param :form, :url_develop, :string, :required, 'Url for Develop'
+    param :form, :email, :string, :required, 'Email'
+    param :form, :username, :string, :required, 'Username'
+    param :form, :password, :string, :required, 'Password'
+    param :form, :phone, :string, :required, 'Phone'
+    param :form, :pin, :string, :required, 'Pin'
+    param :form, :token, :string, :required, 'Token'
+    param :form, :app_id, :string, :required, 'Id of application'
+    param :form, :client_id, :string, :required, 'Id of client'
+    param :form, :api_key, :string, :required, 'Key of API'
+    param :form, :user, :integer, :required, 'Id of user associated on integration'
+    param :form, :active, :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Cargapp Integration'
+    param :path, :id, :integer, :required, "Cargapp Integration Id"
+    param :form, :name, :string, :optional, 'Name'
+    param :form, :description, :string, :optional, 'Description'
+    param :form, :provider, :string, :optional, 'Provider'
+    param :form, :code, :string, :optional, 'Code'
+    param :form, :url, :string, :optional, 'Url'
+    param :form, :url_provider, :string, :optional, 'Url of Provider'
+    param :form, :url_production, :string, :optional, 'Url for Production'
+    param :form, :url_develop, :string, :optional, 'Url for Develop'
+    param :form, :email, :string, :optional, 'Email'
+    param :form, :username, :string, :optional, 'Username'
+    param :form, :password, :string, :optional, 'Password'
+    param :form, :phone, :string, :optional, 'Phone'
+    param :form, :pin, :string, :optional, 'Pin'
+    param :form, :token, :string, :optional, 'Token'
+    param :form, :app_id, :string, :optional, 'Id of application'
+    param :form, :client_id, :string, :optional, 'Id of client'
+    param :form, :api_key, :string, :optional, 'Key of API'
+    param :form, :user, :integer, :optional, 'Id of user associated on integration'
+    param :form, :active, :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Cargapp Integration"
+    param :path, :id, :integer, :optional, "Cargapp Integration Id"
+    response :unauthorized
+    response :not_found
+  end
+
+
   # GET /cargapp_integrations
   # GET /cargapp_integrations.json
   def index

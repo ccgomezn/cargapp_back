@@ -3,6 +3,57 @@ class Api::V1::DocumentsController < ApplicationController
   protect_from_forgery with: :null_session # Temporary
   before_action :set_user
 
+
+  swagger_controller :documents, 'Documents Management'
+
+  swagger_api :index do
+    summary 'Fetches all Document items'
+    notes 'This lists all the documents'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Documt items'
+    notes 'This lists all the active documents'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Document'
+    param :form, :document_id, :string, :required, 'Id of document'
+    param :form, :document_type_id, :integer, :required, 'Id of type associated to document'
+    param :form, :file, :string, :required, 'File'
+    param :form, :status_id, :integer, :required, 'Id of status associated to document'
+    param :form, :user_id, :integer, :required, 'Id user on coupon'
+    param :form, :expire_date, :string, :required, 'Expiration date of document'
+    param :form, :approved, :boolean, :required, 'Check if document is approved'
+    param :form, :active, :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Coupon'
+    param :path, :id, :integer, :required, "Coupon Id"
+    param :form, :document_id, :string, :optional, 'Id of document'
+    param :form, :document_type_id, :integer, :optional, 'Id of type associated to document'
+    param :form, :file, :string, :optional, 'File'
+    param :form, :status_id, :integer, :optional, 'Id of status associated to document'
+    param :form, :user_id, :integer, :optional, 'Id user on coupon'
+    param :form, :expire_date, :string, :optional, 'Expiration date of document'
+    param :form, :approved, :boolean, :optional, 'Check if document is approved'
+    param :form, :active, :boolean, :optional, 'State of activation'
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Document"
+    param :path, :id, :integer, :optional, "Document Id"
+    response :unauthorized
+    response :not_found
+  end
+
+
+
   # GET /documents
   # GET /documents.json
   def index

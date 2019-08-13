@@ -3,6 +3,52 @@ class Api::V1::UserCouponsController < ApplicationController
   protect_from_forgery with: :null_session # Temporary
   before_action :set_user
 
+  swagger_controller :userCoupons, 'User-Coupon Relation Management'
+
+  swagger_api :index do
+    summary 'Fetches all User-Coupon items'
+    notes 'This lists all the User-Coupons'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active User-Coupon items'
+    notes 'This lists all the active User-Coupons'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new User-Coupon'
+    param :form, :applied_item_id, :integer, :required, 'Id of item on offer'
+    param :form, :cargapp_model_id, :integer, :required, 'Id of model associated'
+    param :form, :coupon_id, :integer, :required, 'Id of coupon associated'
+    param :form, :user_id, :integer, :required, 'Id of user associated'
+    param :form, :offert_id, :integer, :required, 'Id of offer associated'
+    param :form, :discount, :integer, :required, 'Discount'
+    param :form, :active, :boolean, :required, 'Activation state'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing User-Coupon'
+    param :path, :id, :integer, :required, "User-Coupon Id"
+     param :form, :applied_item_id, :integer, :optional, 'Id of item on offer'
+    param :form, :cargapp_model_id, :integer, :optional, 'Id of model associated'
+    param :form, :coupon_id, :integer, :optional, 'Id of coupon associated'
+    param :form, :user_id, :integer, :optional, 'Id of user associated'
+    param :form, :offert_id, :integer, :optional, 'Id of offer associated'
+    param :form, :discount, :integer, :optional, 'Discount'
+    param :form, :active, :boolean, :optional, 'Activation state'
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing User-Coupon"
+    param :path, :id, :integer, :optional, "User-Coupon Id"
+    response :unauthorized
+    response :not_found
+  end
+
   # GET /user_coupons
   # GET /user_coupons.json
   def index

@@ -2,6 +2,47 @@ class Api::V1::CargappModelsController < ApplicationController
   before_action :set_cargapp_model, only: %i[show update destroy]
   protect_from_forgery with: :null_session # Temporary
 
+  swagger_controller :cargappModels, 'Cargapp Models Management'
+
+  swagger_api :index do
+    summary 'Fetches all Cargapp Model items'
+    notes 'This lists all the cargapp models'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Cargapp Model items'
+    notes 'This lists all the active cargapp models'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Cargapp Model'
+    param :form, :name, :string, :required, 'Name'
+    param :form, :code, :string, :required, 'Code'
+    param :form, :description, :string, :required, 'Description'
+    param :form, :active, :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Cargapp Model'
+    param :path, :id, :integer, :required, "Cargapp Model Id"
+    param :form, :name, :string, :optional, 'Name'
+    param :form, :code, :string, :optional, 'Code'
+    param :form, :description, :string, :optional, 'Description'
+    param :form, :active, :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Cargapp Model"
+    param :path, :id, :integer, :optional, "Cargapp Model Id"
+    response :unauthorized
+    response :not_found
+  end
+
   # GET /cargapp_models
   # GET /cargapp_models.json
   def index

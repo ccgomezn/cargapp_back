@@ -2,6 +2,52 @@ class Api::V1::LoadTypesController < ApplicationController
   before_action :set_load_type, only: [:show, :edit, :update, :destroy]
   protect_from_forgery with: :null_session # Temporary
 
+  swagger_controller :loadTypes, 'Load Types Management'
+
+  swagger_api :index do
+    summary 'Fetches all Load Types items'
+    notes 'This lists all the load types'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Load Types items'
+    notes 'This lists all the active load types'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Load Type'
+    param :form, :name, :string, :required, 'Name'
+    param :form, :code, :string, :required, 'Code'
+    param :form, :description, :string, :required, 'Description'
+    param :form, :icon, :string, :required, 'Icon'
+    param :form, :active, :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Load Type'
+    param :path, :id, :integer, :required, "Load Type Id"
+    param :form, :name, :string, :optional, 'Name'
+    param :form, :code, :string, :optional, 'Code'
+    param :form, :description, :string, :optional, 'Description'
+    param :form, :icon, :string, :optional, 'Icon'
+    param :form, :active, :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Load Type"
+    param :path, :id, :integer, :optional, "Load Type Id"
+    response :unauthorized
+    response :not_found
+  end
+
+
+
+
   # GET /load_types
   # GET /load_types.json
   def index

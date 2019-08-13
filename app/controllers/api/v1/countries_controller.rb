@@ -2,6 +2,65 @@ class Api::V1::CountriesController < ApplicationController
   before_action :set_country, only: [:show, :edit, :update, :destroy]
   protect_from_forgery with: :null_session # Temporary
 
+  swagger_controller :countries, 'Countries Management'
+
+  swagger_api :index do
+    summary 'Fetches all Country items'
+    notes 'This lists all the countries'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Country items'
+    notes 'This lists all the active countries'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Country'
+    param :form, :name, :string, :required, 'Name'
+    param :form, :code, :string, :required, 'Code'
+    param :form, :description, :string, :required, 'Description'
+    param :form, :cioc, :string, :required, 'Cioc'
+    param :form, :currency_code, :string, :required, 'Currency Code'
+    param :form, :currency_name, :string, :required, 'Currency Name'
+    param :form, :currency_symbol, :string, :required, 'Currency Symbol'
+    param :form, :language_iso639, :string, :required, 'Language on iso639'
+    param :form, :language_name, :string, :required, 'Language Name'
+    param :form, :language_native_name, :string, :required, 'Language on Native Name'
+    param :form, :image, :string, :required, 'Image Of Flag'
+    param :form, :date_utc, :string, :required, 'Date UTC'
+    param :form, :active, :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Country'
+    param :path, :id, :integer, :required, "Country Id"
+    param :form, :name, :string, :optional, 'Name'
+    param :form, :code, :string, :optional, 'Code'
+    param :form, :description, :string, :optional, 'Description'
+    param :form, :cioc, :string, :optional, 'Cioc'
+    param :form, :currency_code, :string, :optional, 'Currency Code'
+    param :form, :currency_name, :string, :optional, 'Currency Name'
+    param :form, :currency_symbol, :string, :optional, 'Currency Symbol'
+    param :form, :language_iso639, :string, :optional, 'Language on iso639'
+    param :form, :language_name, :string, :optional, 'Language Name'
+    param :form, :language_native_name, :string, :optional, 'Language on Native Name'
+    param :form, :image, :string, :optional, 'Image Of Flag'
+    param :form, :date_utc, :string, :optional, 'Date UTC'
+    param :form, :active, :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Country"
+    param :path, :id, :integer, :optional, "Country Id"
+    response :unauthorized
+    response :not_found
+  end
+
   # GET /countries
   # GET /countries.json
   def index
