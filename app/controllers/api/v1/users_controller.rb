@@ -2,7 +2,8 @@
 
 class Api::V1::UsersController < ApplicationController
   protect_from_forgery with: :null_session
-  before_action :doorkeeper_authorize!, except: %i[create login]
+  before_action :doorkeeper_authorize!, except: %i[create login email_verify]
+  before_action :set_user
 
   swagger_controller :users, 'User Management'
 
@@ -21,6 +22,23 @@ class Api::V1::UsersController < ApplicationController
     response :not_acceptable
   end
 
+  def index
+    @users = User.all
+    render json: @users
+    # render json: { "name": 'hola'}, status: :created
+  end
+
+  def email_verify
+    user = User.find_by(user_email_params)
+    if user
+      user = { email: true, message: "exist"}
+      render json: user, status: :ok
+    else
+      user = { email: false, message: "does not exist"}
+      render json: user, status: :found
+    end
+  end
+
   def create
     @user = User.new(user_params)
 
@@ -31,13 +49,39 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  def index
-    @users = User.all
-    render json: @users
-    # render json: { "name": 'hola'}, status: :created
+  def login
+    client = OAuth2::Client.new(ENV['APP'], ENV['SECREPP_APP'], :site => ENV['URL'])
+    begin
+      token = client.password.get_token(params["user"]["email"], params["user"]["password"])
+      # token_reponse = { token: token, user: @user}
+      render json: token, status: :ok
+    rescue OAuth2::Error => e
+      reponse = { user: nil, message: "La contraseña o el correo es incorrecto" }
+      render json: reponse, status: :unauthorized
+    end
+  end
+
+  def me
+    if @user
+      @obj = {
+        user: @user
+      }
+      render json: @obj, status: :ok
+    else
+      head(:unprocessable_entity)
+    end
+  end
+
+  def show
+    @user_id = User.find_by(id: set_show_user)
+    render json: @user_id, status: :ok
   end
 
   private
+
+  def set_show_user
+    @user = User.find(params[:id])
+  end
 
   def set_user
     @user = User.find(doorkeeper_token.resource_owner_id) if doorkeeper_token
