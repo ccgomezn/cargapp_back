@@ -2,7 +2,7 @@
 
 class Api::V1::UsersController < ApplicationController
   protect_from_forgery with: :null_session
-  # before_action :doorkeeper_authorize!, except: %i[create login show update email_verify phone_verify]
+  before_action :doorkeeper_authorize!, except: %i[create login]
 
   swagger_controller :users, 'User Management'
 
