@@ -63,9 +63,38 @@ class Api::V1::UsersController < ApplicationController
 
   def me
     if @user
+      roles = []
+      permissions = []
+      @user.user_roles.each do |role|
+
+        permissions = []
+        role.role.permissions.each do |permission|
+          obj = {
+            id: permission.id,
+            cargapp_model: permission.cargapp_model.as_json(only: %i[name id]),
+            action: permission.action, method: permission.method,
+            allow: permission.allow, user_id: permission.user_id,
+            active: permission.active, created_at: permission.created_at,
+            updated_at: permission.updated_at
+          }
+          permissions << obj
+        end
+
+        obj = {
+          id: role.id, role_id: role.role.id, admin_id: role.admin_id, 
+          name: role.role.name, description: role.role.description,
+          active: role.active && role.role.active,
+          created_at: role.created_at, updated_at: role.updated_at,
+          permissions: permissions
+        }
+        roles << obj
+      end
+
       @obj = {
-        user: @user
+        user: @user,
+        roles: roles
       }
+
       render json: @obj, status: :ok
     else
       head(:unprocessable_entity)
