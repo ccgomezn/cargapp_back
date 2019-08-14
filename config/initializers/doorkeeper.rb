@@ -36,7 +36,7 @@ Doorkeeper.configure do
     # if current_user
       true
     else
-      redirect_to main_app.dasboard_path, notice: 'No tiene permisos.'
+      redirect_to main_app.root_path, notice: 'No tiene permisos.'
     end
   end
 
