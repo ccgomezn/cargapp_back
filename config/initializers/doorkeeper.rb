@@ -32,7 +32,8 @@ Doorkeeper.configure do
   admin_authenticator do |routes|
     current_user || warden.authenticate!(scope: :user)
 
-    if User.is_super?(current_user)
+    #if User.is_super?(current_user)
+    if current_user
       true
     else
       redirect_to main_app.dasboard_path, notice: 'No tiene permisos.'
