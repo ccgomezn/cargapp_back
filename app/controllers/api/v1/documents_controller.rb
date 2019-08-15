@@ -20,7 +20,7 @@ class Api::V1::DocumentsController < ApplicationController
     summary 'Creates a new Document'
     param :form, 'document[document_id]', :string, :required, 'Id of document'
     param :form, 'document[document_type_id]', :integer, :required, 'Id of type associated to document'
-    param :form, 'document[file]', :string, :required, 'File'
+    param :form, 'document[file]', :file, :required, 'File'
     param :form, 'document[status_id]', :integer, :required, 'Id of status associated to document'
     param :form, 'document[user_id]', :integer, :required, 'Id user on coupon'
     param :form, 'document[expire_date]', :string, :required, 'Expiration date of document'
@@ -35,7 +35,7 @@ class Api::V1::DocumentsController < ApplicationController
     param :path, :id, :integer, :required, "Coupon Id"
     param :form, 'document[document_id]', :string, :optional, 'Id of document'
     param :form, 'document[document_type_id]', :integer, :optional, 'Id of type associated to document'
-    param :form, 'document[file]', :string, :optional, 'File'
+    param :form, 'document[file]', :file, :optional, 'File'
     param :form, 'document[status_id]', :integer, :optional, 'Id of status associated to document'
     param :form, 'document[user_id]', :integer, :optional, 'Id user on coupon'
     param :form, 'document[expire_date]', :string, :optional, 'Expiration date of document'

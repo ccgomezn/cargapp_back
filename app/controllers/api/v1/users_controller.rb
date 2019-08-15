@@ -66,7 +66,6 @@ class Api::V1::UsersController < ApplicationController
       roles = []
       permissions = []
       @user.user_roles.each do |role|
-
         permissions = []
         role.role.permissions.each do |permission|
           obj = {

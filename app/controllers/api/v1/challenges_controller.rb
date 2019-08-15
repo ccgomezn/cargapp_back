@@ -19,7 +19,7 @@ class Api::V1::ChallengesController < ApplicationController
     summary 'Creates a new Challenge'
     param :form, 'challenge[name]', :string, :required, 'Name'
     param :form, 'challenge[body]', :string, :required, 'Body'
-    param :form, 'challenge[image]', :string, :required, 'Image'
+    param :form, 'challenge[image]', :file, :required, 'Image'
     param :form, 'challenge[point]', :string, :required, 'Points related to challenge'
     param :form, 'challenge[user_id]', :integer, :required, 'Id of user associated to challenge'
     param :form, 'challenge[active]', :boolean, :required, 'State of activation'
@@ -32,7 +32,7 @@ class Api::V1::ChallengesController < ApplicationController
     param :path, :id, :integer, :required, "Challenge Id"
     param :form, 'challenge[name]', :string, :optional, 'Name'
     param :form, 'challenge[body]', :string, :optional, 'Body'
-    param :form, 'challenge[image]', :string, :optional, 'Image'
+    param :form, 'challenge[image]', :file, :optional, 'Image'
     param :form, 'challenge[point]', :string, :optional, 'Points related to challenge'
     param :form, 'challenge[user_id]', :integer, :optional, 'Id of user associated to challenge'
     param :form, 'challenge[active]', :boolean, :optional, 'State of activation'

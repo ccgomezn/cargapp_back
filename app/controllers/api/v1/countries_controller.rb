@@ -26,7 +26,7 @@ class Api::V1::CountriesController < ApplicationController
     param :form, 'country[language_iso639]', :string, :required, 'Language on iso639'
     param :form, 'country[language_name]', :string, :required, 'Language Name'
     param :form, 'country[language_native_name]', :string, :required, 'Language on Native Name'
-    param :form, 'country[image]', :string, :required, 'Image Of Flag'
+    param :form, 'country[image]', :file, :required, 'Image Of Flag'
     param :form, 'country[date_utc]', :string, :required, 'Date UTC'
     param :form, 'country[active]', :boolean, :required, 'State of activation'
     response :unauthorized
@@ -46,7 +46,7 @@ class Api::V1::CountriesController < ApplicationController
     param :form, 'country[language_iso639]', :string, :optional, 'Language on iso639'
     param :form, 'country[language_name]', :string, :optional, 'Language Name'
     param :form, 'country[language_native_name]', :string, :optional, 'Language on Native Name'
-    param :form, 'country[image]', :string, :optional, 'Image Of Flag'
+    param :form, 'country[image]', :file, :optional, 'Image Of Flag'
     param :form, 'country[date_utc]', :string, :optional, 'Date UTC'
     param :form, 'country[active]', :boolean, :optional, 'State of activation'
     response :unauthorized
