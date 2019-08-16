@@ -192,7 +192,7 @@ class Api::V1::TicketsController < ApplicationController
   private
 
     def set_user
-      @user = User.all.first #User.find(doorkeeper_token.resource_owner_id) if doorkeeper_token
+      @user = User.find(doorkeeper_token.resource_owner_id) if doorkeeper_token
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_ticket
