@@ -3,6 +3,58 @@ class Api::V1::PrizesController < ApplicationController
   protect_from_forgery with: :null_session # Temporary
   before_action :set_user
 
+  swagger_controller :prizes, 'Prizes Management'
+
+  swagger_api :index do
+    summary 'Fetches all Prize items'
+    notes 'This lists all the prizes'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Prize items'
+    notes 'This lists all the active prizes'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Prize'
+    param :form, 'prize[name]', :string, :required, 'Name'
+    param :form, 'prize[code]', :string, :required, 'Code'
+    param :form, 'prize[point]', :integer, :required, 'Points on prize'
+    param :form, 'prize[description]', :string, :required, 'Description'
+    param :form, 'prize[body]', :string, :required, 'Body'
+    param :form, 'prize[image]', :file, :required, 'Image of prize'
+    param :form, 'prize[media]', :file, :required, 'Media of prize'
+    param :form, 'prize[expire_date]', :string, :required, 'Expiration date of prize'
+    param :form, 'prize[user_id]', :integer, :required, 'Id of user related'
+    param :form, 'prize[active]', :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Prize'
+    param :path, :id, :integer, :required, "Prize Id"
+    param :form, 'prize[name]', :string, :optional, 'Name'
+    param :form, 'prize[code]', :string, :optional, 'Code'
+    param :form, 'prize[point]', :integer, :optional, 'Points on prize'
+    param :form, 'prize[description]', :string, :optional, 'Description'
+    param :form, 'prize[body]', :string, :optional, 'Body'
+    param :form, 'prize[image]', :file, :optional, 'Image of prize'
+    param :form, 'prize[media]', :file, :optional, 'Media of prize'
+    param :form, 'prize[expire_date]', :string, :optional, 'Expiration date of prize'
+    param :form, 'prize[user_id]', :integer, :optional, 'Id of user related'
+    param :form, 'prize[active]', :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Prize"
+    param :path, :id, :integer, :optional, "Prize Id"
+    response :unauthorized
+    response :not_found
+  end
   # GET /prizes
   # GET /prizes.json
   def index

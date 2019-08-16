@@ -84,7 +84,7 @@ class Api::V1::UserRolesController < ApplicationController
   def update
     if @user_role.update(user_role_params)
         render json: @user_role
-        # 'user_role was successfully updated.'
+    # 'user_role was successfully updated.'
     else
         render json: @user_role.errors, status: :unprocessable_entity
     end
@@ -96,7 +96,7 @@ class Api::V1::UserRolesController < ApplicationController
     @user_role.destroy
   end
 
-    private
+  private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_user_role

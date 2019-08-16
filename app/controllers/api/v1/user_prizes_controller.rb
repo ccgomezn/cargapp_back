@@ -3,6 +3,48 @@ class Api::V1::UserPrizesController < ApplicationController
   protect_from_forgery with: :null_session # Temporary
   before_action :set_user
 
+  swagger_controller :userPrizes, 'Prizes-Users relation Management'
+
+  swagger_api :index do
+    summary 'Fetches all user-prizes items'
+    notes 'This lists all the user-prizes'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active user-prizes items'
+    notes 'This lists all the active user-prizes'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new user-prizes'
+    param :form, 'user_prize[point]', :string, :required, 'Points related to prize'
+    param :form, 'user_prize[expire_date]', :string, :required, 'Expiration date of user_prize'
+    param :form, 'user_prize[prize_id]', :integer, :required, 'Id of prize related'
+    param :form, 'user_prize[user_id]', :integer, :required, 'Id of user related'
+    param :form, 'user_prize[active]', :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing User-Prize'
+    param :path, :id, :integer, :required, "User-Prize Id"
+    param :form, 'user_prize[point]', :string, :optional, 'Points related to prize'
+    param :form, 'user_prize[expire_date]', :string, :optional, 'Expiration date of user_prize'
+    param :form, 'user_prize[prize_id]', :integer, :optional, 'Id of prize related'
+    param :form, 'user_prize[user_id]', :integer, :optional, 'Id of user related'
+    param :form, 'user_prize[active]', :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing User-Prize"
+    param :path, :id, :integer, :optional, "User-Prize Id"
+    response :unauthorized
+    response :not_found
+  end
   # GET /user_prizes
   # GET /user_prizes.json
   def index
