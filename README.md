@@ -989,16 +989,51 @@ Code style checker
     }
 }
 ```
+#AQUI
 
+## UserPaymentMethod
+* email
+* uuid
+* token
+* card_number
+* expiration
+* cvv
+* observation
+* user_id
+* payment_method_id
+* active
 
-Report
-Service
-Offert
-FavoriteRoute
-OffertDocument
-Payment
-PaymentMethod
-UserPaymentMethod
-PaymentAcount
-UserLocation
-OffertLocation
+```rails g scaffold UserPaymentMethod email uuid token card_number expiration:date cvv observation:text user:references payment_method:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/user_payment_methods 'Listar'
+2. GET http://api.cargapp.co/api/v1/user_payment_methods/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/user_payment_methods/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/user_payment_methods 'Crear'
+5. PUT http://api.cargapp.co/api/v1/user_payment_methods/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/user_payment_methods/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/user_payment_methods/me 'Ver los del usuario'
+
+```
+{
+    "payment_method": {
+        "email": "hello@cargapp.co",
+        "uuid": "cargapp2019",
+        "token": "cargapp2019",
+        "card_number": "123456789",
+        "expiration": "02/29",
+        "cvv": "029",
+        "observation": "metodo de pago en efectivo",
+        "payment_method_id": 1,
+        "user_id": 1,
+        "active": true
+    }
+}
+```
+
+# Login Local for console
+irb -r oauth2
+app = "ZRylaRGgSD19_gOQVoumEmLueIWlcaBLkw2EkcIKG7Y123456"
+secret = "UaF6H-ETL8XlY04V5_U3eUSyehHVHiopXU__bcAcIXI123456"
+client = OAuth2::Client.new(app, secret, site: 'http://localhost:3000')
+token = client.password.get_token('user@cargapp.co', '123456')
+puts token.token
