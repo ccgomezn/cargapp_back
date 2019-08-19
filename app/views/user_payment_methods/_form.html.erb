@@ -1,0 +1,67 @@
+<%= form_with(model: user_payment_method, local: true) do |form| %>
+  <% if user_payment_method.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user_payment_method.errors.count, "error") %> prohibited this user_payment_method from being saved:</h2>
+
+      <ul>
+        <% user_payment_method.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :uuid %>
+    <%= form.text_field :uuid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :token %>
+    <%= form.text_field :token %>
+  </div>
+
+  <div class="field">
+    <%= form.label :card_number %>
+    <%= form.text_field :card_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :expiration %>
+    <%= form.date_select :expiration %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cvv %>
+    <%= form.text_field :cvv %>
+  </div>
+
+  <div class="field">
+    <%= form.label :observation %>
+    <%= form.text_area :observation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :payment_method_id %>
+    <%= form.text_field :payment_method_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :active %>
+    <%= form.check_box :active %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

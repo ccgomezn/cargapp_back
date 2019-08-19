@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_19_191036) do
+ActiveRecord::Schema.define(version: 2019_08_19_193331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -432,6 +432,23 @@ ActiveRecord::Schema.define(version: 2019_08_19_191036) do
     t.index ["user_id"], name: "index_user_coupons_on_user_id"
   end
 
+  create_table "user_payment_methods", force: :cascade do |t|
+    t.string "email"
+    t.string "uuid"
+    t.string "token"
+    t.string "card_number"
+    t.date "expiration"
+    t.string "cvv"
+    t.text "observation"
+    t.bigint "user_id", null: false
+    t.bigint "payment_method_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["payment_method_id"], name: "index_user_payment_methods_on_payment_method_id"
+    t.index ["user_id"], name: "index_user_payment_methods_on_user_id"
+  end
+
   create_table "user_prizes", force: :cascade do |t|
     t.string "point"
     t.bigint "prize_id", null: false
@@ -533,6 +550,8 @@ ActiveRecord::Schema.define(version: 2019_08_19_191036) do
   add_foreign_key "user_coupons", "cargapp_models"
   add_foreign_key "user_coupons", "coupons"
   add_foreign_key "user_coupons", "users"
+  add_foreign_key "user_payment_methods", "payment_methods"
+  add_foreign_key "user_payment_methods", "users"
   add_foreign_key "user_prizes", "prizes"
   add_foreign_key "user_prizes", "users"
   add_foreign_key "user_roles", "roles"

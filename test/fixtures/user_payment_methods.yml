@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  email: MyString
+  uuid: MyString
+  token: MyString
+  card_number: MyString
+  expiration: 2019-08-19
+  cvv: MyString
+  observation: MyText
+  user: one
+  payment_method: one
+  active: false
+
+two:
+  email: MyString
+  uuid: MyString
+  token: MyString
+  card_number: MyString
+  expiration: 2019-08-19
+  cvv: MyString
+  observation: MyText
+  user: two
+  payment_method: two
+  active: false

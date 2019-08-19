@@ -989,7 +989,7 @@ Code style checker
     }
 }
 ```
-#AQUI
+
 
 ## UserPaymentMethod
 * email
@@ -1015,7 +1015,7 @@ Code style checker
 
 ```
 {
-    "payment_method": {
+    "user_payment_method": {
         "email": "hello@cargapp.co",
         "uuid": "cargapp2019",
         "token": "cargapp2019",

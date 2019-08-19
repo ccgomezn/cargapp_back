@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user_payment_method.email %>
+</p>
+
+<p>
+  <strong>Uuid:</strong>
+  <%= @user_payment_method.uuid %>
+</p>
+
+<p>
+  <strong>Token:</strong>
+  <%= @user_payment_method.token %>
+</p>
+
+<p>
+  <strong>Card number:</strong>
+  <%= @user_payment_method.card_number %>
+</p>
+
+<p>
+  <strong>Expiration:</strong>
+  <%= @user_payment_method.expiration %>
+</p>
+
+<p>
+  <strong>Cvv:</strong>
+  <%= @user_payment_method.cvv %>
+</p>
+
+<p>
+  <strong>Observation:</strong>
+  <%= @user_payment_method.observation %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @user_payment_method.user_id %>
+</p>
+
+<p>
+  <strong>Payment method:</strong>
+  <%= @user_payment_method.payment_method_id %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @user_payment_method.active %>
+</p>
+
+<%= link_to 'Edit', edit_user_payment_method_path(@user_payment_method) %> |
+<%= link_to 'Back', user_payment_methods_path %>
