@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @report.name %>
+</p>
+
+<p>
+  <strong>Origin:</strong>
+  <%= @report.origin %>
+</p>
+
+<p>
+  <strong>Destination:</strong>
+  <%= @report.destination %>
+</p>
+
+<p>
+  <strong>Cause:</strong>
+  <%= @report.cause %>
+</p>
+
+<p>
+  <strong>Sense:</strong>
+  <%= @report.sense %>
+</p>
+
+<p>
+  <strong>Novelty:</strong>
+  <%= @report.novelty %>
+</p>
+
+<p>
+  <strong>Geolocation:</strong>
+  <%= @report.geolocation %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @report.image %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @report.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @report.end_date %>
+</p>
+
+<p>
+  <strong>Report type:</strong>
+  <%= @report.report_type %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @report.user_id %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @report.active %>
+</p>
+
+<%= link_to 'Edit', edit_report_path(@report) %> |
+<%= link_to 'Back', reports_path %>

@@ -1,0 +1,82 @@
+<%= form_with(model: report, local: true) do |form| %>
+  <% if report.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(report.errors.count, "error") %> prohibited this report from being saved:</h2>
+
+      <ul>
+        <% report.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :origin %>
+    <%= form.text_field :origin %>
+  </div>
+
+  <div class="field">
+    <%= form.label :destination %>
+    <%= form.text_field :destination %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cause %>
+    <%= form.text_field :cause %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sense %>
+    <%= form.text_field :sense %>
+  </div>
+
+  <div class="field">
+    <%= form.label :novelty %>
+    <%= form.text_field :novelty %>
+  </div>
+
+  <div class="field">
+    <%= form.label :geolocation %>
+    <%= form.text_field :geolocation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+  </div>
+
+  <div class="field">
+    <%= form.label :start_date %>
+    <%= form.date_select :start_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_date %>
+    <%= form.date_select :end_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :report_type %>
+    <%= form.text_field :report_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :active %>
+    <%= form.check_box :active %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

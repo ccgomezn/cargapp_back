@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_13_154404) do
+ActiveRecord::Schema.define(version: 2019_08_19_181837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -323,6 +323,25 @@ ActiveRecord::Schema.define(version: 2019_08_13_154404) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
+  create_table "reports", force: :cascade do |t|
+    t.string "name"
+    t.string "origin"
+    t.string "destination"
+    t.string "cause"
+    t.string "sense"
+    t.string "novelty"
+    t.string "geolocation"
+    t.string "image"
+    t.date "start_date"
+    t.date "end_date"
+    t.string "report_type"
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_reports_on_user_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -486,6 +505,7 @@ ActiveRecord::Schema.define(version: 2019_08_13_154404) do
   add_foreign_key "prizes", "users"
   add_foreign_key "profiles", "document_types"
   add_foreign_key "profiles", "users"
+  add_foreign_key "reports", "users"
   add_foreign_key "states", "countries"
   add_foreign_key "status", "cargapp_models"
   add_foreign_key "status", "users"

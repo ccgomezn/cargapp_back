@@ -1030,6 +1030,45 @@ Code style checker
 }
 ```
 
+
+
+## Report
+* name
+* origin
+* destination
+* cause
+* sense
+* novelty
+* geolocation
+* image
+* start_date
+* end_date
+* report_type
+* user_id
+* active
+
+```rails g scaffold Report name origin destination cause sense novelty geolocation image start_date:date end_date:date report_type user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/report_types 'Listar'
+2. GET http://api.cargapp.co/api/v1/report_types/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/report_types/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/report_types 'Crear'
+5. PUT http://api.cargapp.co/api/v1/report_types/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/report_types/:id 'Elimina'
+
+```
+{
+    "report_type": {
+        "name": "creado",
+        "code": "creted",        
+        "description": "estado creado para el usro de los estados del modelo servicios o ofertas",
+        "icon": "image.png",
+        "active": true
+    }
+}
+```
+
+
 # Login Local for console
 irb -r oauth2
 app = "ZRylaRGgSD19_gOQVoumEmLueIWlcaBLkw2EkcIKG7Y123456"

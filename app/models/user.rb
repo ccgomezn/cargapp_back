@@ -16,6 +16,7 @@ class User < ApplicationRecord
   has_many :user_challenges
   has_many :user_coupons
   has_many :user_prizes
+  has_many :reports
 
   has_many :access_grants,
          class_name: 'Doorkeeper::AccessGrant',
