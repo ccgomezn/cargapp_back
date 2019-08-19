@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_19_181837) do
+ActiveRecord::Schema.define(version: 2019_08_19_191036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -277,6 +277,22 @@ ActiveRecord::Schema.define(version: 2019_08_19_181837) do
     t.index ["user_id"], name: "index_parameters_on_user_id"
   end
 
+  create_table "payment_methods", force: :cascade do |t|
+    t.string "name"
+    t.string "uuid"
+    t.text "description"
+    t.string "email"
+    t.string "aap_id"
+    t.string "secret_id"
+    t.string "token"
+    t.string "password"
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_payment_methods_on_user_id"
+  end
+
   create_table "permissions", force: :cascade do |t|
     t.bigint "role_id", null: false
     t.bigint "cargapp_model_id", null: false
@@ -499,6 +515,7 @@ ActiveRecord::Schema.define(version: 2019_08_19_181837) do
   add_foreign_key "oauth_access_tokens", "users", column: "resource_owner_id"
   add_foreign_key "parameters", "cargapp_models"
   add_foreign_key "parameters", "users"
+  add_foreign_key "payment_methods", "users"
   add_foreign_key "permissions", "cargapp_models"
   add_foreign_key "permissions", "roles"
   add_foreign_key "permissions", "users"

@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   resources :prizes
   resources :user_prizes
   resources :reports
+  resources :payment_methods
 
   namespace :api, defaults: { format: :json } do
     namespace :v1, defaults: { format: :json } do
@@ -102,6 +103,8 @@ Rails.application.routes.draw do
       get 'reports/me' => 'reports#me'
       get 'reports/active' => 'reports#active'
       resources :reports
+      get 'payment_methods/active' => 'payment_methods#active'
+      resources :payment_methods
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

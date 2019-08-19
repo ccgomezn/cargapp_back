@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @payment_method.name %>
+</p>
+
+<p>
+  <strong>Uuid:</strong>
+  <%= @payment_method.uuid %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @payment_method.description %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @payment_method.email %>
+</p>
+
+<p>
+  <strong>Aap:</strong>
+  <%= @payment_method.aap_id %>
+</p>
+
+<p>
+  <strong>Secret:</strong>
+  <%= @payment_method.secret_id %>
+</p>
+
+<p>
+  <strong>Token:</strong>
+  <%= @payment_method.token %>
+</p>
+
+<p>
+  <strong>Password:</strong>
+  <%= @payment_method.password %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @payment_method.user_id %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @payment_method.active %>
+</p>
+
+<%= link_to 'Edit', edit_payment_method_path(@payment_method) %> |
+<%= link_to 'Back', payment_methods_path %>
