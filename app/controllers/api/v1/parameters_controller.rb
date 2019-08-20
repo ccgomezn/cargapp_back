@@ -63,6 +63,38 @@ class Api::V1::ParametersController < ApplicationController
     render json: @parameters
   end
 
+  def find
+    puts 'ddddd'
+    puts params['code']
+    @parameter = Parameter.find_by(code: params['code'])
+
+    @result = []
+
+    if @parameter.value.include?('|')
+      @parameter.value.split('|').each do |parameter|
+        obj = {
+          name: parameter,
+          code: parameter
+        }
+        @result << obj
+      end
+    else
+      @parameter.value.split(',').each do |parameter|
+        obj = {
+          name: parameter,
+          code: parameter
+        }
+        @result << obj
+      end
+    end
+
+    @obj = {
+      parameter: @parameter,
+      parameters: @result
+    }
+    render json: @obj
+  end
+
   # GET /parameters/1
   # GET /parameters/1.json
   def show
