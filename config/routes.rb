@@ -48,6 +48,7 @@ Rails.application.routes.draw do
       get 'cargapp_models/active' => 'cargapp_models#active'
       resources :cargapp_models
       get 'parameters/active' => 'parameters#active'
+      get 'parameters/find/:code' => 'parameters#find'
       resources :parameters
       get 'permissions/active' => 'permissions#active'
       resources :permissions
