@@ -3,6 +3,58 @@ class Api::V1::UserPaymentMethodsController < ApplicationController
   protect_from_forgery with: :null_session # Temporary
   before_action :set_user
 
+  swagger_controller :user_payment_methods, 'Payment methods of user'
+
+  swagger_api :index do
+    summary 'Fetches all User-Payment items'
+    notes 'This lists all the user-payments'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active User-Payment items'
+    notes 'This lists all the active user-payments'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new User-Payment'
+    param :form, 'user_payment_method[email]', :string, :required, 'Email'
+    param :form, 'user_payment_method[uuid]', :string, :required, 'Uuid'
+    param :form, 'user_payment_method[token]', :string, :required, 'Token'
+    param :form, 'user_payment_method[card_number]', :string, :required, 'Card Number'
+    param :form, 'user_payment_method[expiration]', :date, :required, 'Expiration date'
+    param :form, 'user_payment_method[cvv]', :string, :required, 'Cvv'
+    param :form, 'user_payment_method[observation]', :string, :required, 'Observation'
+    param :form, 'user_payment_method[user_id]', :integer, :required, 'Id of user related'
+    param :form, 'user_payment_method[payment_method_id]', :integer, :required, 'Id of payment method associated'
+    param :form, 'user_payment_method[active]', :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing User-Payment'
+    param :path, :id, :integer, :required, "Payment method Id"
+    param :form, 'user_payment_method[email]', :string, :optional, 'Email'
+    param :form, 'user_payment_method[uuid]', :string, :optional, 'Uuid'
+    param :form, 'user_payment_method[token]', :string, :optional, 'Token'
+    param :form, 'user_payment_method[card_number]', :string, :optional, 'Card Number'
+    param :form, 'user_payment_method[expiration]', :date, :optional, 'Expiration date'
+    param :form, 'user_payment_method[cvv]', :string, :optional, 'Cvv'
+    param :form, 'user_payment_method[observation]', :string, :optional, 'Observation'
+    param :form, 'user_payment_method[user_id]', :integer, :optional, 'Id of user related'
+    param :form, 'user_payment_method[payment_method_id]', :integer, :optional, 'Id of payment method associated'
+    param :form, 'user_payment_method[active]', :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing User-Payment Method"
+    param :path, :id, :integer, :optional, "User-Payment Method Id"
+    response :unauthorized
+    response :not_found
+  end
   # GET /user_payment_methods
   # GET /user_payment_methods.json
   def index

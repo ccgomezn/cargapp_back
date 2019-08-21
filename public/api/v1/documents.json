@@ -49,7 +49,7 @@
             {
               "paramType": "form",
               "name": "document[file]",
-              "type": "string",
+              "type": "file",
               "description": "File",
               "required": true
             },
@@ -136,7 +136,7 @@
             {
               "paramType": "form",
               "name": "document[file]",
-              "type": "string",
+              "type": "file",
               "description": "File",
               "required": false
             },
