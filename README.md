@@ -1069,6 +1069,28 @@ Code style checker
 ```
 
 
+## Service
+* name
+* origin
+* destination
+* origin_longitude
+* origin_latitude
+* destination
+* destination_latitude
+* destination_longitude
+* price
+* description
+* note
+* user_id
+* user_driver_id
+* user_receiver_id
+* vehicle
+* statu_id
+* expiration_date
+* contact
+* active
+
+
 # Login Local for console
 irb -r oauth2
 app = "ZRylaRGgSD19_gOQVoumEmLueIWlcaBLkw2EkcIKG7Y123456"
