@@ -1,6 +1,6 @@
 class Api::V1::PermissionsController < ApplicationController
   before_action :set_permission, only: [:show, :edit, :update, :destroy]
-  protect_from_forgery with: :null_session # Temporary
+  before_action :doorkeeper_authorize!
 
   swagger_controller :permissions, 'Permissions Management'
 

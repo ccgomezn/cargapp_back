@@ -1,6 +1,6 @@
 class Api::V1::UserPrizesController < ApplicationController
   before_action :set_user_prize, only: [:show, :edit, :update, :destroy]
-  protect_from_forgery with: :null_session # Temporary
+  before_action :doorkeeper_authorize!
   before_action :set_user
 
   swagger_controller :userPrizes, 'Prizes-Users relation Management'

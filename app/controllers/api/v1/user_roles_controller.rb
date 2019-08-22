@@ -2,7 +2,7 @@
 
 class Api::V1::UserRolesController < ApplicationController
   before_action :set_user_role, only: %i[show update destroy]
-  protect_from_forgery with: :null_session # Temporary
+  before_action :doorkeeper_authorize!
 
   swagger_controller :userRoles, 'User and Roles relation Management'
 

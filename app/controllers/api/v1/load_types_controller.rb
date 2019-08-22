@@ -1,6 +1,6 @@
 class Api::V1::LoadTypesController < ApplicationController
   before_action :set_load_type, only: [:show, :edit, :update, :destroy]
-  protect_from_forgery with: :null_session # Temporary
+  before_action :doorkeeper_authorize!
 
   swagger_controller :loadTypes, 'Load Types Management'
 

@@ -1,6 +1,6 @@
 class Api::V1::ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
-  protect_from_forgery with: :null_session # Temporary
+  before_action :doorkeeper_authorize!
   before_action :set_user
 
 
