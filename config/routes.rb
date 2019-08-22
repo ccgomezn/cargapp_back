@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   resources :reports
   resources :payment_methods
   resources :user_payment_methods
+  resources :services
 
   namespace :api, defaults: { format: :json } do
     namespace :v1, defaults: { format: :json } do
@@ -110,6 +111,10 @@ Rails.application.routes.draw do
       get 'user_payment_methods/me' => 'user_payment_methods#me'
       get 'user_payment_methods/active' => 'user_payment_methods#active'
       resources :user_payment_methods
+      get 'services/me' => 'services#me' #Last Service active
+      get 'services/history' => 'services#history'
+      get 'services/active' => 'services#active'
+      resources :services
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

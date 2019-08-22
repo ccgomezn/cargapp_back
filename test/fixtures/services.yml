@@ -1,0 +1,53 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  origin: MyString
+  origin_city: one
+  origin_address: MyString
+  origin_longitude: MyString
+  origin_latitude: MyString
+  destination: MyString
+  destination_city: one
+  destination_address: MyString
+  destination_latitude: MyString
+  destination_longitude: MyString
+  price: 1
+  description: MyText
+  note: MyText
+  user: one
+  company: one
+  user_driver: one
+  user_receiver: one
+  vehicle_type: one
+  vehicle: one
+  statu: one
+  expiration_date: 2019-08-21
+  contact: MyString
+  active: false
+
+two:
+  name: MyString
+  origin: MyString
+  origin_city: two
+  origin_address: MyString
+  origin_longitude: MyString
+  origin_latitude: MyString
+  destination: MyString
+  destination_city: two
+  destination_address: MyString
+  destination_latitude: MyString
+  destination_longitude: MyString
+  price: 1
+  description: MyText
+  note: MyText
+  user: two
+  company: two
+  user_driver: two
+  user_receiver: two
+  vehicle_type: two
+  vehicle: two
+  statu: two
+  expiration_date: 2019-08-21
+  contact: MyString
+  active: false

@@ -1,0 +1,81 @@
+class Api::V1::ServicesController < ApplicationController
+  before_action :set_service, only: [:show, :edit, :update, :destroy]
+  protect_from_forgery with: :null_session # Temporary
+  before_action :set_user
+  before_action :doorkeeper_authorize!
+
+  # GET /services
+  # GET /services.json
+  def index
+    @services = Service.all
+  end
+
+  # GET /services/1
+  # GET /services/1.json
+  def show
+  end
+
+  # GET /services/new
+  def new
+    @service = Service.new
+  end
+
+  # GET /services/1/edit
+  def edit
+  end
+
+  # POST /services
+  # POST /services.json
+  def create
+    @service = Service.new(service_params)
+
+    respond_to do |format|
+      if @service.save
+        format.html { redirect_to @service, notice: 'Service was successfully created.' }
+        format.json { render :show, status: :created, location: @service }
+      else
+        format.html { render :new }
+        format.json { render json: @service.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /services/1
+  # PATCH/PUT /services/1.json
+  def update
+    respond_to do |format|
+      if @service.update(service_params)
+        format.html { redirect_to @service, notice: 'Service was successfully updated.' }
+        format.json { render :show, status: :ok, location: @service }
+      else
+        format.html { render :edit }
+        format.json { render json: @service.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /services/1
+  # DELETE /services/1.json
+  def destroy
+    @service.destroy
+    respond_to do |format|
+      format.html { redirect_to services_url, notice: 'Service was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    def set_user
+      @user = User.find(doorkeeper_token.resource_owner_id) if doorkeeper_token
+    end
+
+    # Use callbacks to share common setup or constraints between actions.
+    def set_service
+      @service = Service.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def service_params
+      params.require(:service).permit(:name, :origin, :origin_city_id, :origin_address, :origin_longitude, :origin_latitude, :destination, :destination_city_id, :destination_address, :destination_latitude, :destination_longitude, :price, :description, :note, :user_id, :company_id, :user_driver_id, :user_receiver_id, :vehicle_type, :vehicle_id, :statu_id, :expiration_date, :contact, :active)
+    end
+end

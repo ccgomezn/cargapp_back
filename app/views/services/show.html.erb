@@ -1,0 +1,124 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @service.name %>
+</p>
+
+<p>
+  <strong>Origin:</strong>
+  <%= @service.origin %>
+</p>
+
+<p>
+  <strong>Origin city:</strong>
+  <%= @service.origin_city_id %>
+</p>
+
+<p>
+  <strong>Origin address:</strong>
+  <%= @service.origin_address %>
+</p>
+
+<p>
+  <strong>Origin longitude:</strong>
+  <%= @service.origin_longitude %>
+</p>
+
+<p>
+  <strong>Origin latitude:</strong>
+  <%= @service.origin_latitude %>
+</p>
+
+<p>
+  <strong>Destination:</strong>
+  <%= @service.destination %>
+</p>
+
+<p>
+  <strong>Destination city:</strong>
+  <%= @service.destination_city_id %>
+</p>
+
+<p>
+  <strong>Destination address:</strong>
+  <%= @service.destination_address %>
+</p>
+
+<p>
+  <strong>Destination latitude:</strong>
+  <%= @service.destination_latitude %>
+</p>
+
+<p>
+  <strong>Destination longitude:</strong>
+  <%= @service.destination_longitude %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @service.price %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @service.description %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @service.note %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @service.user_id %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @service.company_id %>
+</p>
+
+<p>
+  <strong>User driver:</strong>
+  <%= @service.user_driver_id %>
+</p>
+
+<p>
+  <strong>User receiver:</strong>
+  <%= @service.user_receiver_id %>
+</p>
+
+<p>
+  <strong>Vehicle type:</strong>
+  <%= @service.vehicle_type_id %>
+</p>
+
+<p>
+  <strong>Vehicle:</strong>
+  <%= @service.vehicle_id %>
+</p>
+
+<p>
+  <strong>Statu:</strong>
+  <%= @service.statu_id %>
+</p>
+
+<p>
+  <strong>Expiration date:</strong>
+  <%= @service.expiration_date %>
+</p>
+
+<p>
+  <strong>Contact:</strong>
+  <%= @service.contact %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @service.active %>
+</p>
+
+<%= link_to 'Edit', edit_service_path(@service) %> |
+<%= link_to 'Back', services_path %>

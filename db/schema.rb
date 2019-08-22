@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_19_193331) do
+ActiveRecord::Schema.define(version: 2019_08_22_045020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,25 @@ ActiveRecord::Schema.define(version: 2019_08_19_193331) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "activities", force: :cascade do |t|
+    t.string "trackable_type"
+    t.bigint "trackable_id"
+    t.string "owner_type"
+    t.bigint "owner_id"
+    t.string "key"
+    t.text "parameters"
+    t.string "recipient_type"
+    t.bigint "recipient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
+    t.index ["owner_type", "owner_id"], name: "index_activities_on_owner_type_and_owner_id"
+    t.index ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type"
+    t.index ["recipient_type", "recipient_id"], name: "index_activities_on_recipient_type_and_recipient_id"
+    t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
+    t.index ["trackable_type", "trackable_id"], name: "index_activities_on_trackable_type_and_trackable_id"
   end
 
   create_table "cargapp_integrations", force: :cascade do |t|
@@ -188,27 +207,6 @@ ActiveRecord::Schema.define(version: 2019_08_19_193331) do
     t.index ["document_type_id"], name: "index_documents_on_document_type_id"
     t.index ["statu_id"], name: "index_documents_on_statu_id"
     t.index ["user_id"], name: "index_documents_on_user_id"
-  end
-
-  create_table "integrations", force: :cascade do |t|
-    t.string "name"
-    t.string "provider"
-    t.string "code"
-    t.string "url"
-    t.string "url_pro"
-    t.string "url_dev"
-    t.string "email"
-    t.string "username"
-    t.string "password"
-    t.string "phone"
-    t.string "pin"
-    t.string "token"
-    t.string "app_id"
-    t.string "client_id"
-    t.string "api_key"
-    t.boolean "active"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "load_types", force: :cascade do |t|
@@ -366,6 +364,44 @@ ActiveRecord::Schema.define(version: 2019_08_19_193331) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["code"], name: "index_roles_on_code"
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.string "name"
+    t.string "origin"
+    t.bigint "origin_city_id"
+    t.string "origin_address"
+    t.string "origin_longitude"
+    t.string "origin_latitude"
+    t.string "destination"
+    t.bigint "destination_city_id"
+    t.string "destination_address"
+    t.string "destination_latitude"
+    t.string "destination_longitude"
+    t.integer "price"
+    t.text "description"
+    t.text "note"
+    t.bigint "user_id", null: false
+    t.bigint "company_id", null: false
+    t.bigint "user_driver_id"
+    t.bigint "user_receiver_id"
+    t.bigint "vehicle_type_id", null: false
+    t.bigint "vehicle_id", null: false
+    t.bigint "statu_id", null: false
+    t.date "expiration_date"
+    t.string "contact"
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_services_on_company_id"
+    t.index ["destination_city_id"], name: "index_services_on_destination_city_id"
+    t.index ["origin_city_id"], name: "index_services_on_origin_city_id"
+    t.index ["statu_id"], name: "index_services_on_statu_id"
+    t.index ["user_driver_id"], name: "index_services_on_user_driver_id"
+    t.index ["user_id"], name: "index_services_on_user_id"
+    t.index ["user_receiver_id"], name: "index_services_on_user_receiver_id"
+    t.index ["vehicle_id"], name: "index_services_on_vehicle_id"
+    t.index ["vehicle_type_id"], name: "index_services_on_vehicle_type_id"
   end
 
   create_table "states", force: :cascade do |t|
@@ -540,6 +576,11 @@ ActiveRecord::Schema.define(version: 2019_08_19_193331) do
   add_foreign_key "profiles", "document_types"
   add_foreign_key "profiles", "users"
   add_foreign_key "reports", "users"
+  add_foreign_key "services", "companies"
+  add_foreign_key "services", "status", column: "statu_id"
+  add_foreign_key "services", "users"
+  add_foreign_key "services", "vehicle_types"
+  add_foreign_key "services", "vehicles"
   add_foreign_key "states", "countries"
   add_foreign_key "status", "cargapp_models"
   add_foreign_key "status", "users"

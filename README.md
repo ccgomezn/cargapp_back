@@ -1072,24 +1072,47 @@ Code style checker
 ## Service
 * name
 * origin
-* destination
+* origin_city_id
+* origin_address
 * origin_longitude
 * origin_latitude
 * destination
+* destination_city_id
+* destination_address
 * destination_latitude
 * destination_longitude
 * price
 * description
 * note
 * user_id
+* company_id
 * user_driver_id
 * user_receiver_id
-* vehicle
+* vehicle_type_id
+* vehicle_id
 * statu_id
 * expiration_date
 * contact
 * active
 
+```rails g scaffold Service name origin origin_city:references origin_address origin_longitude origin_latitude destination destination_city:references destination_address destination_latitude destination_longitude price:integer description:text note:text user:references company:references user_driver:references user_receiver:references vehicle_type:references vehicle:references statu:references expiration_date:date contact active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/services 'Listar'
+2. GET http://api.cargapp.co/api/v1/services/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/services/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/services 'Crear'
+5. PUT http://api.cargapp.co/api/v1/services/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/services/:id 'Elimina'
+
+```
+{
+    "service": {
+        "nams": "cali, medellin"
+        .....
+        "active": true
+    }
+}
+```
 
 # Login Local for console
 irb -r oauth2
