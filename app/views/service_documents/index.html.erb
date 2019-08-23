@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Service Documents</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Document type</th>
+      <th>Document</th>
+      <th>Service</th>
+      <th>User</th>
+      <th>Active</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @service_documents.each do |service_document| %>
+      <tr>
+        <td><%= service_document.name %></td>
+        <td><%= service_document.document_type %></td>
+        <td><%= service_document.document %></td>
+        <td><%= service_document.service_id %></td>
+        <td><%= service_document.user_id %></td>
+        <td><%= service_document.active %></td>
+        <td><%= link_to 'Show', service_document %></td>
+        <td><%= link_to 'Edit', edit_service_document_path(service_document) %></td>
+        <td><%= link_to 'Destroy', service_document, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Service Document', new_service_document_path %>

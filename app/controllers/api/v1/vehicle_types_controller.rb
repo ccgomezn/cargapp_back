@@ -1,6 +1,7 @@
 class Api::V1::VehicleTypesController < ApplicationController
   before_action :set_vehicle_type, only: %i[show edit update destroy]
-  protect_from_forgery with: :null_session # Temporary
+  protect_from_forgery with: :null_session
+  before_action :doorkeeper_authorize!
 
   swagger_controller :vehicleTypes, 'Vehicle Types Management'
 

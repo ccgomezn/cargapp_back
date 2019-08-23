@@ -1,0 +1,2 @@
+module FavoriteRoutesHelper
+end

@@ -1069,6 +1069,113 @@ Code style checker
 ```
 
 
+## Service
+* name
+* origin
+* origin_city_id
+* origin_address
+* origin_longitude
+* origin_latitude
+* destination
+* destination_city_id
+* destination_address
+* destination_latitude
+* destination_longitude
+* price
+* description
+* note
+* user_id
+* company_id
+* user_driver_id
+* user_receiver_id
+* vehicle_type_id
+* vehicle_id
+* statu_id
+* expiration_date
+* contact
+* active
+
+```rails g scaffold Service name origin origin_city:references origin_address origin_longitude origin_latitude destination destination_city:references destination_address destination_latitude destination_longitude price:integer description:text note:text user:references company:references user_driver:references user_receiver:references vehicle_type:references vehicle:references statu:references expiration_date:date contact active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/services 'Listar'
+2. GET http://api.cargapp.co/api/v1/services/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/services/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/services 'Crear'
+5. PUT http://api.cargapp.co/api/v1/services/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/services/:id 'Elimina'
+
+```
+{
+    "service": {
+        "name": "cali, medellin"
+        .....
+        "active": true
+    }
+}
+```
+
+
+## ServiceDocument
+* name
+* document_type
+* document_type_id
+* document
+* service_id
+* user_id
+* active
+
+```rails g scaffold ServiceDocument name document_type document service:references user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/services_documents 'Listar'
+2. GET http://api.cargapp.co/api/v1/services_documents/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/services_documents/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/services_documents 'Crear'
+5. PUT http://api.cargapp.co/api/v1/services_documents/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/services_documents/:id 'Elimina'
+
+```
+{
+    "service_document": {
+        "name": "factura de venta de producto",
+        "document_type": "FACTURA",
+        "document": "filel.pdf",
+        "service_id": 1,
+        "user_id": 1,
+        "active": true
+    }
+}
+```
+
+
+## FavoriteRoute
+* origin_city_id
+* destination_city_id
+* service_id
+* user_id
+* active
+
+```rails g scaffold FavoriteRoute origin_city:references destination_city:references service:references user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/favorite_routes 'Listar'
+2. GET http://api.cargapp.co/api/v1/favorite_routes/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/favorite_routes/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/favorite_routes 'Crear'
+5. PUT http://api.cargapp.co/api/v1/favorite_routes/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/favorite_routes/:id 'Elimina'
+
+```
+{
+    "favorite_route": {
+        "origin_city_id": 1,
+        "destination_city_id": 2,
+        "service_id": 1,
+        "user_id": 1,
+        "active": true
+    }
+}
+```
+
+
 # Login Local for console
 irb -r oauth2
 app = "ZRylaRGgSD19_gOQVoumEmLueIWlcaBLkw2EkcIKG7Y123456"

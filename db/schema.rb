@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_19_193331) do
+ActiveRecord::Schema.define(version: 2019_08_23_175841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -188,6 +188,18 @@ ActiveRecord::Schema.define(version: 2019_08_19_193331) do
     t.index ["document_type_id"], name: "index_documents_on_document_type_id"
     t.index ["statu_id"], name: "index_documents_on_statu_id"
     t.index ["user_id"], name: "index_documents_on_user_id"
+  end
+
+  create_table "favorite_routes", force: :cascade do |t|
+    t.bigint "origin_city_id"
+    t.bigint "destination_city_id"
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["destination_city_id"], name: "index_favorite_routes_on_destination_city_id"
+    t.index ["origin_city_id"], name: "index_favorite_routes_on_origin_city_id"
+    t.index ["user_id"], name: "index_favorite_routes_on_user_id"
   end
 
   create_table "integrations", force: :cascade do |t|
@@ -368,6 +380,57 @@ ActiveRecord::Schema.define(version: 2019_08_19_193331) do
     t.index ["code"], name: "index_roles_on_code"
   end
 
+  create_table "service_documents", force: :cascade do |t|
+    t.string "name"
+    t.string "document_type"
+    t.string "document"
+    t.bigint "service_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["service_id"], name: "index_service_documents_on_service_id"
+    t.index ["user_id"], name: "index_service_documents_on_user_id"
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.string "name"
+    t.string "origin"
+    t.bigint "origin_city_id"
+    t.string "origin_address"
+    t.string "origin_longitude"
+    t.string "origin_latitude"
+    t.string "destination"
+    t.bigint "destination_city_id"
+    t.string "destination_address"
+    t.string "destination_latitude"
+    t.string "destination_longitude"
+    t.integer "price"
+    t.text "description"
+    t.text "note"
+    t.bigint "user_id", null: false
+    t.bigint "company_id", null: false
+    t.bigint "user_driver_id"
+    t.bigint "user_receiver_id"
+    t.bigint "vehicle_type_id", null: false
+    t.bigint "vehicle_id", null: false
+    t.bigint "statu_id", null: false
+    t.date "expiration_date"
+    t.string "contact"
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_services_on_company_id"
+    t.index ["destination_city_id"], name: "index_services_on_destination_city_id"
+    t.index ["origin_city_id"], name: "index_services_on_origin_city_id"
+    t.index ["statu_id"], name: "index_services_on_statu_id"
+    t.index ["user_driver_id"], name: "index_services_on_user_driver_id"
+    t.index ["user_id"], name: "index_services_on_user_id"
+    t.index ["user_receiver_id"], name: "index_services_on_user_receiver_id"
+    t.index ["vehicle_id"], name: "index_services_on_vehicle_id"
+    t.index ["vehicle_type_id"], name: "index_services_on_vehicle_type_id"
+  end
+
   create_table "states", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -526,6 +589,7 @@ ActiveRecord::Schema.define(version: 2019_08_19_193331) do
   add_foreign_key "documents", "document_types"
   add_foreign_key "documents", "status", column: "statu_id"
   add_foreign_key "documents", "users"
+  add_foreign_key "favorite_routes", "users"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_grants", "users", column: "resource_owner_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
@@ -540,6 +604,13 @@ ActiveRecord::Schema.define(version: 2019_08_19_193331) do
   add_foreign_key "profiles", "document_types"
   add_foreign_key "profiles", "users"
   add_foreign_key "reports", "users"
+  add_foreign_key "service_documents", "services"
+  add_foreign_key "service_documents", "users"
+  add_foreign_key "services", "companies"
+  add_foreign_key "services", "status", column: "statu_id"
+  add_foreign_key "services", "users"
+  add_foreign_key "services", "vehicle_types"
+  add_foreign_key "services", "vehicles"
   add_foreign_key "states", "countries"
   add_foreign_key "status", "cargapp_models"
   add_foreign_key "status", "users"

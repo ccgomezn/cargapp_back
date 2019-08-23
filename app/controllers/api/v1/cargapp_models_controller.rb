@@ -1,6 +1,7 @@
 class Api::V1::CargappModelsController < ApplicationController
   before_action :set_cargapp_model, only: %i[show update destroy]
-  protect_from_forgery with: :null_session # Temporary
+  protect_from_forgery with: :null_session
+  before_action :doorkeeper_authorize!
 
   swagger_controller :cargappModels, 'Cargapp Models Management'
 

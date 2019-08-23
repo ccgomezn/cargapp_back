@@ -1,0 +1,73 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Services</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Origin</th>
+      <th>Origin city</th>
+      <th>Origin address</th>
+      <th>Origin longitude</th>
+      <th>Origin latitude</th>
+      <th>Destination</th>
+      <th>Destination city</th>
+      <th>Destination address</th>
+      <th>Destination latitude</th>
+      <th>Destination longitude</th>
+      <th>Price</th>
+      <th>Description</th>
+      <th>Note</th>
+      <th>User</th>
+      <th>Company</th>
+      <th>User driver</th>
+      <th>User receiver</th>
+      <th>Vehicle type</th>
+      <th>Vehicle</th>
+      <th>Statu</th>
+      <th>Expiration date</th>
+      <th>Contact</th>
+      <th>Active</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @services.each do |service| %>
+      <tr>
+        <td><%= service.name %></td>
+        <td><%= service.origin %></td>
+        <td><%= service.origin_city_id %></td>
+        <td><%= service.origin_address %></td>
+        <td><%= service.origin_longitude %></td>
+        <td><%= service.origin_latitude %></td>
+        <td><%= service.destination %></td>
+        <td><%= service.destination_city_id %></td>
+        <td><%= service.destination_address %></td>
+        <td><%= service.destination_latitude %></td>
+        <td><%= service.destination_longitude %></td>
+        <td><%= service.price %></td>
+        <td><%= service.description %></td>
+        <td><%= service.note %></td>
+        <td><%= service.user_id %></td>
+        <td><%= service.company_id %></td>
+        <td><%= service.user_driver_id %></td>
+        <td><%= service.user_receiver_id %></td>
+        <td><%= service.vehicle_type_id %></td>
+        <td><%= service.vehicle_id %></td>
+        <td><%= service.statu_id %></td>
+        <td><%= service.expiration_date %></td>
+        <td><%= service.contact %></td>
+        <td><%= service.active %></td>
+        <td><%= link_to 'Show', service %></td>
+        <td><%= link_to 'Edit', edit_service_path(service) %></td>
+        <td><%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Service', new_service_path %>

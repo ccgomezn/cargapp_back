@@ -1,5 +1,6 @@
 class UserPrizesController < ApplicationController
   before_action :set_user_prize, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /user_prizes
   # GET /user_prizes.json

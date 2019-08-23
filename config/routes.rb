@@ -33,6 +33,9 @@ Rails.application.routes.draw do
   resources :reports
   resources :payment_methods
   resources :user_payment_methods
+  resources :services
+  resources :service_documents
+  resources :favorite_routes
 
   namespace :api, defaults: { format: :json } do
     namespace :v1, defaults: { format: :json } do
@@ -110,6 +113,17 @@ Rails.application.routes.draw do
       get 'user_payment_methods/me' => 'user_payment_methods#me'
       get 'user_payment_methods/active' => 'user_payment_methods#active'
       resources :user_payment_methods
+      get 'services/me' => 'services#me' #Last Service active
+      get 'services/history' => 'services#history'
+      get 'services/active' => 'services#active'
+      resources :services
+      get 'service_documents/me' => 'service_documents#me' #Last Service active
+      get 'service_documents/active' => 'service_documents#active'
+      post 'service_documents/find_service' => 'service_documents#find_service'
+      resources :service_documents
+      get 'favorite_routes/me' => 'favorite_routes#me' #Last Service active
+      get 'favorite_routes/active' => 'favorite_routes#active'
+      resources :favorite_routes
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

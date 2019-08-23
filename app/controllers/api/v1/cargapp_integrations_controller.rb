@@ -1,6 +1,7 @@
 class Api::V1::CargappIntegrationsController < ApplicationController
   before_action :set_cargapp_integration, only: [:show, :edit, :update, :destroy]
-  protect_from_forgery with: :null_session # Temporary
+  protect_from_forgery with: :null_session
+  before_action :doorkeeper_authorize!
   before_action :set_user
 
   swagger_controller :cargappIntegrantions, 'Cargapp Integrations Management'

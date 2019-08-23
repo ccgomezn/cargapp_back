@@ -1,6 +1,7 @@
 class Api::V1::TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
-  protect_from_forgery with: :null_session # Temporary
+  protect_from_forgery with: :null_session
+  before_action :doorkeeper_authorize!
   before_action :set_user
 
 

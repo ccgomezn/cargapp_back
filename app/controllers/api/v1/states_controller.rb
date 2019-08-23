@@ -1,6 +1,7 @@
 class Api::V1::StatesController < ApplicationController
   before_action :set_state, only: [:show, :edit, :update, :destroy]
-  protect_from_forgery with: :null_session # Temporary
+  protect_from_forgery with: :null_session
+  before_action :doorkeeper_authorize!
 
   swagger_controller :states, 'States Location Management'
 

@@ -1,0 +1,137 @@
+<%= form_with(model: service, local: true) do |form| %>
+  <% if service.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(service.errors.count, "error") %> prohibited this service from being saved:</h2>
+
+      <ul>
+        <% service.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :origin %>
+    <%= form.text_field :origin %>
+  </div>
+
+  <div class="field">
+    <%= form.label :origin_city_id %>
+    <%= form.text_field :origin_city_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :origin_address %>
+    <%= form.text_field :origin_address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :origin_longitude %>
+    <%= form.text_field :origin_longitude %>
+  </div>
+
+  <div class="field">
+    <%= form.label :origin_latitude %>
+    <%= form.text_field :origin_latitude %>
+  </div>
+
+  <div class="field">
+    <%= form.label :destination %>
+    <%= form.text_field :destination %>
+  </div>
+
+  <div class="field">
+    <%= form.label :destination_city_id %>
+    <%= form.text_field :destination_city_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :destination_address %>
+    <%= form.text_field :destination_address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :destination_latitude %>
+    <%= form.text_field :destination_latitude %>
+  </div>
+
+  <div class="field">
+    <%= form.label :destination_longitude %>
+    <%= form.text_field :destination_longitude %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :note %>
+    <%= form.text_area :note %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :company_id %>
+    <%= form.text_field :company_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_driver_id %>
+    <%= form.text_field :user_driver_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_receiver_id %>
+    <%= form.text_field :user_receiver_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :vehicle_type_id %>
+    <%= form.text_field :vehicle_type_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :vehicle_id %>
+    <%= form.text_field :vehicle_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :statu_id %>
+    <%= form.text_field :statu_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :expiration_date %>
+    <%= form.date_select :expiration_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contact %>
+    <%= form.text_field :contact %>
+  </div>
+
+  <div class="field">
+    <%= form.label :active %>
+    <%= form.check_box :active %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
