@@ -4,6 +4,52 @@ class Api::V1::ServiceDocumentsController < ApplicationController
   before_action :doorkeeper_authorize!
   before_action :set_user
 
+
+  swagger_controller :serviceDocument, 'Service Documents Management'
+
+  swagger_api :index do
+    summary 'Fetches all Service Document items'
+    notes 'This lists all the service documents'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Service Document items'
+    notes 'This lists all the active service documents'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Service Document'
+    param :form, 'service_document[name]', :string, :required, 'Name'
+    param :form, 'service_document[document_type]', :string, :required, 'Document Type'
+    param :form, 'service_document[document]', :file, :required, 'Document'
+    param :form, 'service_document[service_id]', :integer, :required, 'Id of service related'
+    param :form, 'service_document[user_id]', :integer, :required, 'Id of user related'
+    param :form, 'service_document[active]', :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Service Document'
+    param :path, :id, :integer, :required, "Service Document Id"
+    param :form, 'service_document[name]', :string, :optional, 'Name'
+    param :form, 'service_document[document_type]', :string, :optional, 'Document Type'
+    param :form, 'service_document[document]', :file, :optional, 'Document'
+    param :form, 'service_document[service_id]', :integer, :optional, 'Id of service related'
+    param :form, 'service_document[user_id]', :integer, :optional, 'Id of user related'
+    param :form, 'service_document[active]', :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Service Document"
+    param :path, :id, :integer, :optional, "Service Document Id"
+    response :unauthorized
+    response :not_found
+  end
+
   # GET /service_documents
   # GET /service_documents.json
   def index

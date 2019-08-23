@@ -4,6 +4,47 @@ class Api::V1::FavoriteRoutesController < ApplicationController
   before_action :doorkeeper_authorize!
   before_action :set_user
 
+  swagger_controller :favoriteRoute, 'Favorite Routes Management'
+
+  swagger_api :index do
+    summary 'Fetches all Favorite Route items'
+    notes 'This lists all the favorite routes'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Favorite Route items'
+    notes 'This lists all the active favorite routes'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Document'
+    param :form, 'favorite_route[user_id]', :string, :required, 'Id of user'
+    param :form, 'favorite_route[origin_city_id]', :integer, :required, 'Id of City of origin'
+    param :form, 'favorite_route[destination_city_id]', :integer, :required, 'Id of City of destination'
+    param :form, 'favorite_route[active]', :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Favorite Route'
+    param :path, :id, :integer, :required, "Coupon Id"
+    param :form, 'favorite_route[user_id]', :string, :optional, 'Id of user'
+    param :form, 'favorite_route[origin_city_id]', :integer, :optional, 'Id of City of origin'
+    param :form, 'favorite_route[destination_city_id]', :integer, :optional, 'Id of City of destination'
+    param :form, 'favorite_route[active]', :boolean, :optional, 'State of activation'
+    param :form, 'document[active]', :boolean, :optional, 'State of activation'
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Favorite Route"
+    param :path, :id, :integer, :optional, "Favorite Route Id"
+    response :unauthorized
+    response :not_found
+  end
+
   # GET /favorite_routes
   # GET /favorite_routes.json
   def index
