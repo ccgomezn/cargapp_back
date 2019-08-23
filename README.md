@@ -1107,12 +1107,45 @@ Code style checker
 ```
 {
     "service": {
-        "nams": "cali, medellin"
+        "name": "cali, medellin"
         .....
         "active": true
     }
 }
 ```
+
+
+## ServiceDocument
+* name
+* document_type
+* document_type_id
+* document
+* service_id
+* user_id
+* active
+
+```rails g scaffold ServiceDocument name document_type document service:references user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/services_documents 'Listar'
+2. GET http://api.cargapp.co/api/v1/services_documents/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/services_documents/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/services_documents 'Crear'
+5. PUT http://api.cargapp.co/api/v1/services_documents/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/services_documents/:id 'Elimina'
+
+```
+{
+    "service_document": {
+        "name": "factura de venta de producto",
+        "document_type": "FACTURA",
+        "document": "filel.pdf",
+        "service_id": 1,
+        "user_id": 1,
+        "active": true
+    }
+}
+```
+
 
 # Login Local for console
 irb -r oauth2
