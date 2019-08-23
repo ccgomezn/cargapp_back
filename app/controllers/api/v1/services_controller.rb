@@ -1,5 +1,6 @@
 class Api::V1::ServicesController < ApplicationController
   before_action :set_service, only: [:show, :edit, :update, :destroy]
+  protect_from_forgery with: :null_session
   before_action :set_user
   before_action :doorkeeper_authorize!
 

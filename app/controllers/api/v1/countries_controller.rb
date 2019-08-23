@@ -1,5 +1,6 @@
 class Api::V1::CountriesController < ApplicationController
   before_action :set_country, only: [:show, :edit, :update, :destroy]
+  protect_from_forgery with: :null_session
   before_action :doorkeeper_authorize!
 
   swagger_controller :countries, 'Countries Management'

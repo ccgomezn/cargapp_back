@@ -1,5 +1,6 @@
 class Api::V1::DocumentTypesController < ApplicationController
   before_action :set_document_type, only: [:show, :edit, :update, :destroy]
+  protect_from_forgery with: :null_session
   before_action :doorkeeper_authorize!
 
   swagger_controller :loadTypes, 'Document Types Management'

@@ -1,5 +1,6 @@
 class Api::V1::UserCouponsController < ApplicationController
   before_action :set_user_coupon, only: [:show, :edit, :update, :destroy]
+  protect_from_forgery with: :null_session
   before_action :doorkeeper_authorize!
   before_action :set_user
 
