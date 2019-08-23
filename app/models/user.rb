@@ -20,6 +20,7 @@ class User < ApplicationRecord
   has_many :user_payment_methods
   has_many :services
   has_many :service_documents
+  has_many :favorite_routes  
   
 
   has_many :access_grants,

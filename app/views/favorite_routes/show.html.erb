@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Origin city:</strong>
+  <%= @favorite_route.origin_city_id %>
+</p>
+
+<p>
+  <strong>Destination city:</strong>
+  <%= @favorite_route.destination_city_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @favorite_route.user_id %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @favorite_route.active %>
+</p>
+
+<%= link_to 'Edit', edit_favorite_route_path(@favorite_route) %> |
+<%= link_to 'Back', favorite_routes_path %>

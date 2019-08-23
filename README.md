@@ -1147,6 +1147,35 @@ Code style checker
 ```
 
 
+## FavoriteRoute
+* origin_city_id
+* destination_city_id
+* service_id
+* user_id
+* active
+
+```rails g scaffold FavoriteRoute origin_city:references destination_city:references service:references user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/favorite_routes 'Listar'
+2. GET http://api.cargapp.co/api/v1/favorite_routes/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/favorite_routes/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/favorite_routes 'Crear'
+5. PUT http://api.cargapp.co/api/v1/favorite_routes/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/favorite_routes/:id 'Elimina'
+
+```
+{
+    "favorite_route": {
+        "origin_city_id": 1,
+        "destination_city_id": 2,
+        "service_id": 1,
+        "user_id": 1,
+        "active": true
+    }
+}
+```
+
+
 # Login Local for console
 irb -r oauth2
 app = "ZRylaRGgSD19_gOQVoumEmLueIWlcaBLkw2EkcIKG7Y123456"

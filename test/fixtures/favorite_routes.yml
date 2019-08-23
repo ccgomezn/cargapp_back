@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  origin_city: one
+  destination_city: one
+  user: one
+  active: false
+
+two:
+  origin_city: two
+  destination_city: two
+  user: two
+  active: false
