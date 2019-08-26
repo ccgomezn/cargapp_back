@@ -1,7 +1,7 @@
 class Api::V1::ServiceDocumentsController < ApplicationController
   before_action :set_service_document, only: [:show, :edit, :update, :destroy]
   protect_from_forgery with: :null_session
-  before_action :doorkeeper_authorize!
+  # before_action :doorkeeper_authorize!
   before_action :set_user
 
   # GET /service_documents
@@ -83,7 +83,7 @@ class Api::V1::ServiceDocumentsController < ApplicationController
   end
 
   def find_service
-    service_id = params[:services_document][:service_id]
+    service_id = params[:id]
     @service_documents = ServiceDocument.where(service_id: service_id, active: true)
 
     @result = []
@@ -94,7 +94,7 @@ class Api::V1::ServiceDocumentsController < ApplicationController
         document: document.document.attached? ? url_for(document.document) : nil,
         service_id: document.service_id,
         user_id: document.user_id,
-        active: document.active,        
+        active: document.active,
         created_at: document.created_at,
         updated_at: document.updated_at
       }
@@ -139,7 +139,7 @@ class Api::V1::ServiceDocumentsController < ApplicationController
         updated_at: @service_document.updated_at
       }
       render json: @obj, status: :ok, location: @service_document
-    else    
+    else
       render json: @service_document.errors, status: :unprocessable_entity
     end
   end

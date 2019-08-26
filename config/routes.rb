@@ -119,7 +119,7 @@ Rails.application.routes.draw do
       resources :services
       get 'service_documents/me' => 'service_documents#me' #Last Service active
       get 'service_documents/active' => 'service_documents#active'
-      post 'service_documents/find_service' => 'service_documents#find_service'
+      get 'service_documents/find_service/:id' => 'service_documents#find_service'
       resources :service_documents
       get 'favorite_routes/me' => 'favorite_routes#me' #Last Service active
       get 'favorite_routes/active' => 'favorite_routes#active'
