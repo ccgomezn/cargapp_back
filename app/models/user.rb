@@ -33,7 +33,6 @@ class User < ApplicationRecord
          foreign_key: :resource_owner_id,
          dependent: :delete_all # or :destroy if you need callbacks
 
-
   def is_super?
     state = false
     roles.each do |role|
@@ -45,10 +44,14 @@ class User < ApplicationRecord
   private
   def self.is_super?(user)
     state = false
-    user.roles.each do |role|
-      state = true if role.name.eql?(ENV['SUPER_N'] || ENV['SUPER_C']) && user.user_roles.find_by(role_id: role.id, active: true)
+    puts user.to_json
+    user.roles.where(active: true).each do |role|
+      if role.name.eql?(ENV['SUPER_N'] || ENV['SUPER_C'])
+        if user.user_roles.find_by(role_id: role.id, active: true)
+          state = true
+        end
+      end
     end
-    state    
-    # User is admin ? User.is_admin?(current_user)
+    state
   end
 end
