@@ -114,7 +114,18 @@ class Api::V1::RolesController < ApplicationController
   def permissions
     if @user
       has_permission = false
-      # aqui
+      @user.roles.where(active: true).each do |role|
+        next if role.permissions.where(active: true).empty?
+        role.permissions.where(active: true).each do |permission|
+          if (permission.cargapp_model.value.eql?(controller_name) && permission.active) && permission.action.eql?('all')
+            has_permission = true
+          elsif (permission.cargapp_model.value.eql?(controller_name) && permission.active) && permission.allow
+            has_permission = true
+          elsif (permission.cargapp_model.value.eql?(controller_name) && permission.active) && permission.action.eql?(action_name)
+            has_permission = true
+          end
+        end
+      end
 
       if if_super()
         has_permission = true
