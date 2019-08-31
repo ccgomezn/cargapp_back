@@ -113,11 +113,6 @@ class Api::V1::FavoriteRoutesController < ApplicationController
       @if_super = (User.is_super?(@user) if @user) || false
     end
 
-    
-    def set_user
-      @user = User.find(doorkeeper_token.resource_owner_id) if doorkeeper_token
-    end
-
     # Use callbacks to share common setup or constraints between actions.
     def set_favorite_route
       @favorite_route = FavoriteRoute.find(params[:id])
