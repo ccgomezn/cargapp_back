@@ -1,0 +1,77 @@
+<%= form_with(model: cargapp_ad, local: true) do |form| %>
+  <% if cargapp_ad.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cargapp_ad.errors.count, "error") %> prohibited this cargapp_ad from being saved:</h2>
+
+      <ul>
+        <% cargapp_ad.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :body %>
+    <%= form.text_area :body %>
+  </div>
+
+  <div class="field">
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+  </div>
+
+  <div class="field">
+    <%= form.label :url %>
+    <%= form.text_field :url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :media %>
+    <%= form.file_field :media %>
+  </div>
+
+  <div class="field">
+    <%= form.label :have_discoun %>
+    <%= form.check_box :have_discoun %>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_percentage %>
+    <%= form.check_box :is_percentage %>
+  </div>
+
+  <div class="field">
+    <%= form.label :discoun %>
+    <%= form.number_field :discoun %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :active %>
+    <%= form.check_box :active %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

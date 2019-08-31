@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  price: 1
+  description: MyText
+  body: MyText
+  image: MyString
+  url: MyString
+  media: MyString
+  have_discoun: false
+  is_percentage: false
+  discoun: 1
+  user: one
+  active: false
+
+two:
+  name: MyString
+  price: 1
+  description: MyText
+  body: MyText
+  image: MyString
+  url: MyString
+  media: MyString
+  have_discoun: false
+  is_percentage: false
+  discoun: 1
+  user: two
+  active: false

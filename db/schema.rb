@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_23_175841) do
+ActiveRecord::Schema.define(version: 2019_08_31_120323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,24 @@ ActiveRecord::Schema.define(version: 2019_08_23_175841) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "cargapp_ads", force: :cascade do |t|
+    t.string "name"
+    t.integer "price"
+    t.text "description"
+    t.text "body"
+    t.string "image"
+    t.string "url"
+    t.string "media"
+    t.boolean "have_discoun"
+    t.boolean "is_percentage"
+    t.integer "discoun"
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_cargapp_ads_on_user_id"
   end
 
   create_table "cargapp_integrations", force: :cascade do |t|
@@ -579,6 +597,7 @@ ActiveRecord::Schema.define(version: 2019_08_23_175841) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cargapp_ads", "users"
   add_foreign_key "cargapp_integrations", "users"
   add_foreign_key "challenges", "users"
   add_foreign_key "cities", "states"
