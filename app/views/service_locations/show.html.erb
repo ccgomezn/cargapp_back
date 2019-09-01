@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @service_location.longitude %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @service_location.latitude %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @service_location.city_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @service_location.user_id %>
+</p>
+
+<p>
+  <strong>Service:</strong>
+  <%= @service_location.service_id %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @service_location.active %>
+</p>
+
+<%= link_to 'Edit', edit_service_location_path(@service_location) %> |
+<%= link_to 'Back', service_locations_path %>
