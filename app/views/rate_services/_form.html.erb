@@ -1,0 +1,52 @@
+<%= form_with(model: rate_service, local: true) do |form| %>
+  <% if rate_service.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(rate_service.errors.count, "error") %> prohibited this rate_service from being saved:</h2>
+
+      <ul>
+        <% rate_service.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :service_point %>
+    <%= form.number_field :service_point %>
+  </div>
+
+  <div class="field">
+    <%= form.label :driver_point %>
+    <%= form.number_field :driver_point %>
+  </div>
+
+  <div class="field">
+    <%= form.label :point %>
+    <%= form.number_field :point %>
+  </div>
+
+  <div class="field">
+    <%= form.label :service_id %>
+    <%= form.text_field :service_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :driver_id %>
+    <%= form.text_field :driver_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :active %>
+    <%= form.check_box :active %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

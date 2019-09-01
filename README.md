@@ -1313,6 +1313,42 @@ Code style checker
 }
 ```
 
+
+## RateService
+* id
+* service_point
+* driver_point
+* point
+* service_id
+* user_id
+* driver_id
+* active
+
+```rails g scaffold RateService service_point:integer driver_point:integer point:integer service:references user:references driver:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/rate_services 'Listar'
+2. GET http://api.cargapp.co/api/v1/rate_services/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/rate_services/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/rate_services 'Crear'
+5. PUT http://api.cargapp.co/api/v1/rate_services/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/rate_services/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/rate_services/me 'Ver las del usuario'
+
+
+```
+{
+    "rate_service": {
+        "service_point": 1,
+        "driver_point": 2,
+        "point": 1,
+        "service_id": 1,
+        "user_id": 1,
+        "driver_id": 1,
+        "active": true
+    }
+}
+```
+
 # Login Local for console
 irb -r oauth2
 app = "ZRylaRGgSD19_gOQVoumEmLueIWlcaBLkw2EkcIKG7Y123456"

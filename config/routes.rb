@@ -1,4 +1,4 @@
-Rails.application.routes.draw do        
+Rails.application.routes.draw do          
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   use_doorkeeper
 
@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   resources :user_locations
   resources :service_locations
   resources :bank_accounts
+  resources :rate_services
 
   namespace :api, defaults: { format: :json } do
     namespace :v1, defaults: { format: :json } do
@@ -140,6 +141,9 @@ Rails.application.routes.draw do
       get 'bank_accounts/me' => 'bank_accounts#me'
       get 'bank_accounts/active' => 'bank_accounts#active'
       resources :bank_accounts
+      get 'rate_services/me' => 'rate_services#me'
+      get 'rate_services/active' => 'rate_services#active'
+      resources :rate_services
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

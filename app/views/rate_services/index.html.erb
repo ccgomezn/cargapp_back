@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Rate Services</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Service point</th>
+      <th>Driver point</th>
+      <th>Point</th>
+      <th>Service</th>
+      <th>User</th>
+      <th>Driver</th>
+      <th>Active</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rate_services.each do |rate_service| %>
+      <tr>
+        <td><%= rate_service.service_point %></td>
+        <td><%= rate_service.driver_point %></td>
+        <td><%= rate_service.point %></td>
+        <td><%= rate_service.service_id %></td>
+        <td><%= rate_service.user_id %></td>
+        <td><%= rate_service.driver_id %></td>
+        <td><%= rate_service.active %></td>
+        <td><%= link_to 'Show', rate_service %></td>
+        <td><%= link_to 'Edit', edit_rate_service_path(rate_service) %></td>
+        <td><%= link_to 'Destroy', rate_service, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rate Service', new_rate_service_path %>

@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  service_point: 1
+  driver_point: 1
+  point: 1
+  service: one
+  user: one
+  driver: one
+  active: false
+
+two:
+  service_point: 1
+  driver_point: 1
+  point: 1
+  service: two
+  user: two
+  driver: two
+  active: false

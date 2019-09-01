@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Service point:</strong>
+  <%= @rate_service.service_point %>
+</p>
+
+<p>
+  <strong>Driver point:</strong>
+  <%= @rate_service.driver_point %>
+</p>
+
+<p>
+  <strong>Point:</strong>
+  <%= @rate_service.point %>
+</p>
+
+<p>
+  <strong>Service:</strong>
+  <%= @rate_service.service_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @rate_service.user_id %>
+</p>
+
+<p>
+  <strong>Driver:</strong>
+  <%= @rate_service.driver_id %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @rate_service.active %>
+</p>
+
+<%= link_to 'Edit', edit_rate_service_path(@rate_service) %> |
+<%= link_to 'Back', rate_services_path %>
