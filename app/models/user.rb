@@ -22,6 +22,7 @@ class User < ApplicationRecord
   has_many :service_documents
   has_many :favorite_routes
   has_many :cargapp_ads
+  has_many :user_locations
   
 
   has_many :access_grants,

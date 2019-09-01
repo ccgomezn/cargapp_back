@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   resources :service_documents
   resources :favorite_routes
   resources :cargapp_ads
+  resources :user_locations
 
   namespace :api, defaults: { format: :json } do
     namespace :v1, defaults: { format: :json } do
@@ -128,6 +129,9 @@ Rails.application.routes.draw do
       get 'cargapp_ads/me' => 'cargapp_ads#me'
       get 'cargapp_ads/active' => 'cargapp_ads#active'
       resources :cargapp_ads
+      get 'user_locations/me' => 'user_locations#me'
+      get 'user_locations/active' => 'user_locations#active'
+      resources :user_locations
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

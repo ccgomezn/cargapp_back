@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_31_120323) do
+ActiveRecord::Schema.define(version: 2019_09_01_033007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -513,6 +513,18 @@ ActiveRecord::Schema.define(version: 2019_08_31_120323) do
     t.index ["user_id"], name: "index_user_coupons_on_user_id"
   end
 
+  create_table "user_locations", force: :cascade do |t|
+    t.string "longitude"
+    t.string "latitude"
+    t.bigint "city_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["city_id"], name: "index_user_locations_on_city_id"
+    t.index ["user_id"], name: "index_user_locations_on_user_id"
+  end
+
   create_table "user_payment_methods", force: :cascade do |t|
     t.string "email"
     t.string "uuid"
@@ -640,6 +652,8 @@ ActiveRecord::Schema.define(version: 2019_08_31_120323) do
   add_foreign_key "user_coupons", "cargapp_models"
   add_foreign_key "user_coupons", "coupons"
   add_foreign_key "user_coupons", "users"
+  add_foreign_key "user_locations", "cities"
+  add_foreign_key "user_locations", "users"
   add_foreign_key "user_payment_methods", "payment_methods"
   add_foreign_key "user_payment_methods", "users"
   add_foreign_key "user_prizes", "prizes"

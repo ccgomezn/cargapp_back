@@ -1214,6 +1214,37 @@ Code style checker
 ```
 
 
+## UserLocation
+* id
+* longitude
+* latitude
+* city_id
+* user_id
+* active
+
+```rails g scaffold UserLocation longitude latitude city:references user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/user_locations 'Listar'
+2. GET http://api.cargapp.co/api/v1/user_locations/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/user_locations/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/user_locations 'Crear'
+5. PUT http://api.cargapp.co/api/v1/user_locations/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/user_locations/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/user_locations/me 'Ver las del usuario'
+
+
+```
+{
+    "user_location": {
+        "longitude": 1,
+        "latitude": 2,
+        "city_id": 1,
+        "user_id": 1,
+        "active": true
+    }
+}
+```
+
 # Login Local for console
 irb -r oauth2
 app = "ZRylaRGgSD19_gOQVoumEmLueIWlcaBLkw2EkcIKG7Y123456"
