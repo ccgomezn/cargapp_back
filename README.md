@@ -1279,6 +1279,40 @@ Code style checker
 }
 ```
 
+
+## BankAccount
+* id
+* account_number
+* account_type
+* bank
+* user_id
+* statu_id
+* active
+
+```rails g scaffold BankAccount account_number:integer account_type bank user:references statu:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/bank_accounts 'Listar'
+2. GET http://api.cargapp.co/api/v1/bank_accounts/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/bank_accounts/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/bank_accounts 'Crear'
+5. PUT http://api.cargapp.co/api/v1/bank_accounts/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/bank_accounts/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/bank_accounts/me 'Ver las del usuario'
+
+
+```
+{
+    "bank_account": {
+        "account_number": 1,
+        "account_type": 2,
+        "bank": 1,
+        "user_id": 1,
+        "statu_id": 1,
+        "active": true
+    }
+}
+```
+
 # Login Local for console
 irb -r oauth2
 app = "ZRylaRGgSD19_gOQVoumEmLueIWlcaBLkw2EkcIKG7Y123456"

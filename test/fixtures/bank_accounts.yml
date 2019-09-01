@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  account_number: 1
+  account_type: MyString
+  bank: MyString
+  user: one
+  statu: one
+  active: false
+
+two:
+  account_number: 1
+  account_type: MyString
+  bank: MyString
+  user: two
+  statu: two
+  active: false
