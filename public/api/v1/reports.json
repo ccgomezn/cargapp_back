@@ -2,123 +2,123 @@
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
   "basePath": "",
-  "resourcePath": "countries",
+  "resourcePath": "reports",
   "apis": [
     {
-      "path": "/api/v1/countries/active",
+      "path": "/api/v1/reports/active",
       "operations": [
         {
-          "summary": "Fetches all active Country items",
-          "notes": "This lists all the active countries",
-          "nickname": "Api::V1::Countries#active",
+          "summary": "Fetches all active Report items",
+          "notes": "This lists all the active reports",
+          "nickname": "Api::V1::Reports#active",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/countries",
+      "path": "/api/v1/reports",
       "operations": [
         {
-          "summary": "Fetches all Country items",
-          "notes": "This lists all the countries",
-          "nickname": "Api::V1::Countries#index",
+          "summary": "Fetches all Report items",
+          "notes": "This lists all the reports",
+          "nickname": "Api::V1::Reports#index",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/countries",
+      "path": "/api/v1/reports",
       "operations": [
         {
-          "summary": "Creates a new Country",
+          "summary": "Creates a new Report",
           "parameters": [
             {
               "paramType": "form",
-              "name": "country[name]",
+              "name": "report[name]",
               "type": "string",
               "description": "Name",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "country[code]",
+              "name": "report[origin]",
               "type": "string",
-              "description": "Code",
+              "description": "Origin",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "country[description]",
+              "name": "report[destination]",
               "type": "string",
-              "description": "Description",
+              "description": "Destination",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "country[cioc]",
+              "name": "report[cause]",
               "type": "string",
-              "description": "Cioc",
+              "description": "Cause",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "country[currency_code]",
-              "type": "string",
-              "description": "Currency Code",
+              "name": "report[sense]",
+              "type": "date",
+              "description": "Sense",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "country[currency_name]",
+              "name": "report[novelty]",
               "type": "string",
-              "description": "Currency Name",
+              "description": "Novelty",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "country[currency_symbol]",
+              "name": "report[geolocation]",
               "type": "string",
-              "description": "Currency Symbol",
+              "description": "Geolocation",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "country[language_iso639]",
-              "type": "string",
-              "description": "Language on iso639",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "country[language_name]",
-              "type": "string",
-              "description": "Language Name",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "country[language_native_name]",
-              "type": "string",
-              "description": "Language on Native Name",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "country[image]",
+              "name": "report[image]",
               "type": "file",
-              "description": "Image Of Flag",
+              "description": "Image",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "country[date_utc]",
+              "name": "report[start_date]",
+              "type": "date",
+              "description": "Start date",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "report[end_date]",
+              "type": "date",
+              "description": "End date",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "report[report_type]",
               "type": "string",
-              "description": "Date UTC",
+              "description": "Report type related",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "country[active]",
+              "name": "report[user_id]",
+              "type": "integer",
+              "description": "Id of user related",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "report[active]",
               "type": "boolean",
               "description": "State of activation",
               "required": true
@@ -136,111 +136,111 @@
               "message": "Not Acceptable"
             }
           ],
-          "nickname": "Api::V1::Countries#create",
+          "nickname": "Api::V1::Reports#create",
           "method": "post"
         }
       ]
     },
     {
-      "path": "/api/v1/countries/{id}",
+      "path": "/api/v1/reports/{id}",
       "operations": [
         {
-          "summary": "Updates an existing Country",
+          "summary": "Updates an existing User-Payment",
           "parameters": [
             {
               "paramType": "path",
               "name": "id",
               "type": "integer",
-              "description": "Country Id",
+              "description": "Report Id",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "country[name]",
+              "name": "report[name]",
               "type": "string",
               "description": "Name",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "country[code]",
+              "name": "report[origin]",
               "type": "string",
-              "description": "Code",
+              "description": "Origin",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "country[description]",
+              "name": "report[destination]",
               "type": "string",
-              "description": "Description",
+              "description": "Destination",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "country[cioc]",
+              "name": "report[cause]",
               "type": "string",
-              "description": "Cioc",
+              "description": "Cause",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "country[currency_code]",
-              "type": "string",
-              "description": "Currency Code",
+              "name": "report[sense]",
+              "type": "date",
+              "description": "Sense",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "country[currency_name]",
+              "name": "report[novelty]",
               "type": "string",
-              "description": "Currency Name",
+              "description": "Novelty",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "country[currency_symbol]",
+              "name": "report[geolocation]",
               "type": "string",
-              "description": "Currency Symbol",
+              "description": "Geolocation",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "country[language_iso639]",
-              "type": "string",
-              "description": "Language on iso639",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "country[language_name]",
-              "type": "string",
-              "description": "Language Name",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "country[language_native_name]",
-              "type": "string",
-              "description": "Language on Native Name",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "country[image]",
+              "name": "report[image]",
               "type": "file",
-              "description": "Image Of Flag",
+              "description": "Image",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "country[date_utc]",
+              "name": "report[start_date]",
+              "type": "date",
+              "description": "Start date",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "report[end_date]",
+              "type": "date",
+              "description": "End date",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "report[report_type]",
               "type": "string",
-              "description": "Date UTC",
+              "description": "Report type related",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "country[active]",
+              "name": "report[user_id]",
+              "type": "integer",
+              "description": "Id of user related",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "report[active]",
               "type": "boolean",
               "description": "State of activation",
               "required": false
@@ -263,22 +263,22 @@
               "message": "Not Acceptable"
             }
           ],
-          "nickname": "Api::V1::Countries#update",
+          "nickname": "Api::V1::Reports#update",
           "method": "patch"
         }
       ]
     },
     {
-      "path": "/api/v1/countries/{id}",
+      "path": "/api/v1/reports/{id}",
       "operations": [
         {
-          "summary": "Deletes an existing Country",
+          "summary": "Deletes an existing Report",
           "parameters": [
             {
               "paramType": "path",
               "name": "id",
               "type": "integer",
-              "description": "Country Id",
+              "description": "Report Id",
               "required": false
             }
           ],
@@ -294,7 +294,7 @@
               "message": "Not Found"
             }
           ],
-          "nickname": "Api::V1::Countries#destroy",
+          "nickname": "Api::V1::Reports#destroy",
           "method": "delete"
         }
       ]

@@ -1,7 +1,7 @@
 {
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
-  "basePath": "http://localhost:3001",
+  "basePath": "http://localhost:3000",
   "apis": [
     {
       "path": "/api/v1/users.{format}",
@@ -102,6 +102,30 @@
     {
       "path": "/api/v1/user_prizes.{format}",
       "description": "Prizes-Users relation Management"
+    },
+    {
+      "path": "/api/v1/reports.{format}",
+      "description": "Reports"
+    },
+    {
+      "path": "/api/v1/payment_methods.{format}",
+      "description": "Payment Methods"
+    },
+    {
+      "path": "/api/v1/user_payment_methods.{format}",
+      "description": "Payment methods of user"
+    },
+    {
+      "path": "/api/v1/services.{format}",
+      "description": "Services Management"
+    },
+    {
+      "path": "/api/v1/service_documents.{format}",
+      "description": "Service Documents Management"
+    },
+    {
+      "path": "/api/v1/favorite_routes.{format}",
+      "description": "Favorite Routes Management"
     }
   ],
   "authorizations": null,

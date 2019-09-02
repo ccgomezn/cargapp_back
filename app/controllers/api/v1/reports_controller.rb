@@ -3,6 +3,64 @@ class Api::V1::ReportsController < ApplicationController
   protect_from_forgery with: :null_session
   before_action :doorkeeper_authorize!
   before_action :set_user
+  swagger_controller :reports, 'Reports'
+
+  swagger_api :index do
+    summary 'Fetches all Report items'
+    notes 'This lists all the reports'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Report items'
+    notes 'This lists all the active reports'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Report'
+    param :form, 'report[name]', :string, :required, 'Name'
+    param :form, 'report[origin]', :string, :required, 'Origin'
+    param :form, 'report[destination]', :string, :required, 'Destination'
+    param :form, 'report[cause]', :string, :required, 'Cause'
+    param :form, 'report[sense]', :date, :required, 'Sense'
+    param :form, 'report[novelty]', :string, :required, 'Novelty'
+    param :form, 'report[geolocation]', :string, :required, 'Geolocation'
+    param :form, 'report[image]', :file, :required, 'Image'
+    param :form, 'report[start_date]', :date, :required, 'Start date'
+    param :form, 'report[end_date]', :date, :required, 'End date'
+    param :form, 'report[report_type]', :string, :required, 'Report type related'
+    param :form, 'report[user_id]', :integer, :required, 'Id of user related'
+    param :form, 'report[active]', :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing User-Payment'
+    param :path, :id, :integer, :required, "Report Id"
+    param :form, 'report[name]', :string, :optional, 'Name'
+    param :form, 'report[origin]', :string, :optional, 'Origin'
+    param :form, 'report[destination]', :string, :optional, 'Destination'
+    param :form, 'report[cause]', :string, :optional, 'Cause'
+    param :form, 'report[sense]', :date, :optional, 'Sense'
+    param :form, 'report[novelty]', :string, :optional, 'Novelty'
+    param :form, 'report[geolocation]', :string, :optional, 'Geolocation'
+    param :form, 'report[image]', :file, :optional, 'Image'
+    param :form, 'report[start_date]', :date, :optional, 'Start date'
+    param :form, 'report[end_date]', :date, :optional, 'End date'
+    param :form, 'report[report_type]', :string, :optional, 'Report type related'
+    param :form, 'report[user_id]', :integer, :optional, 'Id of user related'
+    param :form, 'report[active]', :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Report"
+    param :path, :id, :integer, :optional, "Report Id"
+    response :unauthorized
+    response :not_found
+  end
 
   # GET /reports
   # GET /reports.json

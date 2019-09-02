@@ -4,6 +4,88 @@ class Api::V1::ServicesController < ApplicationController
   before_action :set_user
   before_action :doorkeeper_authorize!
 
+
+  swagger_controller :service, 'Services Management'
+
+  swagger_api :index do
+    summary 'Fetches all Service items'
+    notes 'This lists all the services'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Service items'
+    notes 'This lists all the active services'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Service'
+    param :form, 'service[name]', :string, :required, 'Name'
+    param :form, 'service[origin]', :string, :required, 'Origin'
+    param :form, 'service[origin_city_id]', :integer, :required, 'Id of origin city'
+    param :form, 'service[origin_address]', :string, :required, 'Address of origin'
+    param :form, 'service[origin_longitude]', :string, :required, 'Longitude of origin'
+    param :form, 'service[origin_latitude]', :string, :required, 'Latitude of origin'
+    param :form, 'service[destination]', :string, :required, 'Destination'
+    param :form, 'service[destination_city_id]', :integer, :required, 'Id of destination city'
+    param :form, 'service[destination_address]', :string, :required, 'Address of destination'
+    param :form, 'service[destination_latitude]', :string, :required, 'Latitude of destination'
+    param :form, 'service[destination_longitude]', :string, :required, 'Longitude of destination'
+    param :form, 'service[price]', :string, :required, 'Price'
+    param :form, 'service[description]', :string, :required, 'Description'
+    param :form, 'service[note]', :string, :required, 'Note'
+    param :form, 'service[user_id]', :integer, :required, 'Id of user related'
+    param :form, 'service[company_id]', :integer, :required, 'Id of company related'
+    param :form, 'service[user_driver_id]', :integer, :optional, 'Id of driver related'
+    param :form, 'service[user_receiver_id]', :integer, :optional, 'Id of receiver related'
+    param :form, 'service[vehicle_type_id]', :integer, :optional, 'Id of vehicle type related'
+    param :form, 'service[vehicle_id]', :integer, :optional, 'Id of vehicle related'
+    param :form, 'service[statu_id]', :integer, :required, 'Id of status related'
+    param :form, 'service[expiration_date]', :date, :required, 'Expiration date'
+    param :form, 'service[contact]', :string, :required, 'Contact'
+    param :form, 'state[active]', :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Service'
+    param :path, :id, :integer, :required, "Service Id"
+    param :form, 'service[name]', :string, :optional, 'Name'
+    param :form, 'service[origin]', :string, :optional, 'Origin'
+    param :form, 'service[origin_city_id]', :integer, :optional, 'Id of origin city'
+    param :form, 'service[origin_address]', :string, :optional, 'Address of origin'
+    param :form, 'service[origin_longitude]', :string, :optional, 'Longitude of origin'
+    param :form, 'service[origin_latitude]', :string, :optional, 'Latitude of origin'
+    param :form, 'service[destination]', :string, :optional, 'Destination'
+    param :form, 'service[destination_city_id]', :integer, :optional, 'Id of destination city'
+    param :form, 'service[destination_address]', :string, :optional, 'Address of destination'
+    param :form, 'service[destination_latitude]', :string, :optional, 'Latitude of destination'
+    param :form, 'service[destination_longitude]', :string, :optional, 'Longitude of destination'
+    param :form, 'service[price]', :string, :optional, 'Price'
+    param :form, 'service[description]', :string, :optional, 'Description'
+    param :form, 'service[note]', :string, :optional, 'Note'
+    param :form, 'service[user_id]', :integer, :optional, 'Id of user related'
+    param :form, 'service[company_id]', :integer, :optional, 'Id of company related'
+    param :form, 'service[user_driver_id]', :integer, :optional, 'Id of driver related'
+    param :form, 'service[user_receiver_id]', :integer, :optional, 'Id of receiver related'
+    param :form, 'service[vehicle_type_id]', :integer, :optional, 'Id of vehicle type related'
+    param :form, 'service[vehicle_id]', :integer, :optional, 'Id of vehicle related'
+    param :form, 'service[statu_id]', :integer, :optional, 'Id of status related'
+    param :form, 'service[expiration_date]', :date, :optional, 'Expiration date'
+    param :form, 'service[contact]', :string, :optional, 'Contact'
+    param :form, 'state[active]', :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Service"
+    param :path, :id, :integer, :optional, "Service Id"
+    response :unauthorized
+    response :not_found
+  end
+
   # GET /services
   # GET /services.json
   def index

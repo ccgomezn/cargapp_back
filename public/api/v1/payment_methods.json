@@ -2,123 +2,102 @@
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
   "basePath": "",
-  "resourcePath": "countries",
+  "resourcePath": "payment_methods",
   "apis": [
     {
-      "path": "/api/v1/countries/active",
+      "path": "/api/v1/payment_methods/active",
       "operations": [
         {
-          "summary": "Fetches all active Country items",
-          "notes": "This lists all the active countries",
-          "nickname": "Api::V1::Countries#active",
+          "summary": "Fetches all active Payment Method items",
+          "notes": "This lists all the active payment methods",
+          "nickname": "Api::V1::PaymentMethods#active",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/countries",
+      "path": "/api/v1/payment_methods",
       "operations": [
         {
-          "summary": "Fetches all Country items",
-          "notes": "This lists all the countries",
-          "nickname": "Api::V1::Countries#index",
+          "summary": "Fetches all Payment Method items",
+          "notes": "This lists all the payment methods",
+          "nickname": "Api::V1::PaymentMethods#index",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/countries",
+      "path": "/api/v1/payment_methods",
       "operations": [
         {
-          "summary": "Creates a new Country",
+          "summary": "Creates a new Payment Method",
           "parameters": [
             {
               "paramType": "form",
-              "name": "country[name]",
+              "name": "payment_method[name]",
               "type": "string",
               "description": "Name",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "country[code]",
+              "name": "payment_method[uuid]",
               "type": "string",
-              "description": "Code",
+              "description": "Uuid",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "country[description]",
+              "name": "payment_method[description]",
               "type": "string",
               "description": "Description",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "country[cioc]",
+              "name": "payment_method[email]",
               "type": "string",
-              "description": "Cioc",
+              "description": "Email",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "country[currency_code]",
+              "name": "payment_method[app_id]",
+              "type": "integer",
+              "description": "Id of app associated",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "payment_method[secret_id]",
+              "type": "integer",
+              "description": "Id of secret related to payment method",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "payment_method[token]",
               "type": "string",
-              "description": "Currency Code",
+              "description": "Token",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "country[currency_name]",
+              "name": "payment_method[password]",
               "type": "string",
-              "description": "Currency Name",
+              "description": "Password",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "country[currency_symbol]",
-              "type": "string",
-              "description": "Currency Symbol",
+              "name": "payment_method[user_id]",
+              "type": "integer",
+              "description": "Id of user associated to payment method",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "country[language_iso639]",
-              "type": "string",
-              "description": "Language on iso639",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "country[language_name]",
-              "type": "string",
-              "description": "Language Name",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "country[language_native_name]",
-              "type": "string",
-              "description": "Language on Native Name",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "country[image]",
-              "type": "file",
-              "description": "Image Of Flag",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "country[date_utc]",
-              "type": "string",
-              "description": "Date UTC",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "country[active]",
+              "name": "payment_method[active]",
               "type": "boolean",
               "description": "State of activation",
               "required": true
@@ -136,111 +115,90 @@
               "message": "Not Acceptable"
             }
           ],
-          "nickname": "Api::V1::Countries#create",
+          "nickname": "Api::V1::PaymentMethods#create",
           "method": "post"
         }
       ]
     },
     {
-      "path": "/api/v1/countries/{id}",
+      "path": "/api/v1/payment_methods/{id}",
       "operations": [
         {
-          "summary": "Updates an existing Country",
+          "summary": "Updates an existing Parameter",
           "parameters": [
             {
               "paramType": "path",
               "name": "id",
               "type": "integer",
-              "description": "Country Id",
+              "description": "Payment method Id",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "country[name]",
+              "name": "payment_method[name]",
               "type": "string",
               "description": "Name",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "country[code]",
+              "name": "payment_method[uuid]",
               "type": "string",
-              "description": "Code",
+              "description": "Uuid",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "country[description]",
+              "name": "payment_method[description]",
               "type": "string",
               "description": "Description",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "country[cioc]",
+              "name": "payment_method[email]",
               "type": "string",
-              "description": "Cioc",
+              "description": "Email",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "country[currency_code]",
+              "name": "payment_method[app_id]",
+              "type": "integer",
+              "description": "Id of app associated",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "payment_method[secret_id]",
+              "type": "integer",
+              "description": "Id of secret related to payment method",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "payment_method[token]",
               "type": "string",
-              "description": "Currency Code",
+              "description": "Token",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "country[currency_name]",
+              "name": "payment_method[password]",
               "type": "string",
-              "description": "Currency Name",
+              "description": "Password",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "country[currency_symbol]",
-              "type": "string",
-              "description": "Currency Symbol",
+              "name": "payment_method[user_id]",
+              "type": "integer",
+              "description": "Id of user associated to payment method",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "country[language_iso639]",
-              "type": "string",
-              "description": "Language on iso639",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "country[language_name]",
-              "type": "string",
-              "description": "Language Name",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "country[language_native_name]",
-              "type": "string",
-              "description": "Language on Native Name",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "country[image]",
-              "type": "file",
-              "description": "Image Of Flag",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "country[date_utc]",
-              "type": "string",
-              "description": "Date UTC",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "country[active]",
+              "name": "payment_method[active]",
               "type": "boolean",
               "description": "State of activation",
               "required": false
@@ -263,22 +221,22 @@
               "message": "Not Acceptable"
             }
           ],
-          "nickname": "Api::V1::Countries#update",
+          "nickname": "Api::V1::PaymentMethods#update",
           "method": "patch"
         }
       ]
     },
     {
-      "path": "/api/v1/countries/{id}",
+      "path": "/api/v1/payment_methods/{id}",
       "operations": [
         {
-          "summary": "Deletes an existing Country",
+          "summary": "Deletes an existing Payment Method",
           "parameters": [
             {
               "paramType": "path",
               "name": "id",
               "type": "integer",
-              "description": "Country Id",
+              "description": "Payment Method Id",
               "required": false
             }
           ],
@@ -294,7 +252,7 @@
               "message": "Not Found"
             }
           ],
-          "nickname": "Api::V1::Countries#destroy",
+          "nickname": "Api::V1::PaymentMethods#destroy",
           "method": "delete"
         }
       ]
