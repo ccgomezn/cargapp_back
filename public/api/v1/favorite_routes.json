@@ -2,88 +2,60 @@
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
   "basePath": "",
-  "resourcePath": "documents",
+  "resourcePath": "favorite_routes",
   "apis": [
     {
-      "path": "/api/v1/documents/active",
+      "path": "/api/v1/favorite_routes/active",
       "operations": [
         {
-          "summary": "Fetches all active Documt items",
-          "notes": "This lists all the active documents",
-          "nickname": "Api::V1::Documents#active",
+          "summary": "Fetches all active Favorite Route items",
+          "notes": "This lists all the active favorite routes",
+          "nickname": "Api::V1::FavoriteRoutes#active",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/documents",
+      "path": "/api/v1/favorite_routes",
       "operations": [
         {
-          "summary": "Fetches all Document items",
-          "notes": "This lists all the documents",
-          "nickname": "Api::V1::Documents#index",
+          "summary": "Fetches all Favorite Route items",
+          "notes": "This lists all the favorite routes",
+          "nickname": "Api::V1::FavoriteRoutes#index",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/documents",
+      "path": "/api/v1/favorite_routes",
       "operations": [
         {
           "summary": "Creates a new Document",
           "parameters": [
             {
               "paramType": "form",
-              "name": "document[document_id]",
+              "name": "favorite_route[user_id]",
               "type": "string",
-              "description": "Id of document",
+              "description": "Id of user",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "document[document_type_id]",
+              "name": "favorite_route[origin_city_id]",
               "type": "integer",
-              "description": "Id of type associated to document",
+              "description": "Id of City of origin",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "document[file]",
-              "type": "file",
-              "description": "File",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "document[status_id]",
+              "name": "favorite_route[destination_city_id]",
               "type": "integer",
-              "description": "Id of status associated to document",
+              "description": "Id of City of destination",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "document[user_id]",
-              "type": "integer",
-              "description": "Id user on coupon",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "document[expire_date]",
-              "type": "string",
-              "description": "Expiration date of document",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "document[approved]",
-              "type": "boolean",
-              "description": "Check if document is approved",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "document[active]",
+              "name": "favorite_route[active]",
               "type": "boolean",
               "description": "State of activation",
               "required": true
@@ -101,16 +73,16 @@
               "message": "Not Acceptable"
             }
           ],
-          "nickname": "Api::V1::Documents#create",
+          "nickname": "Api::V1::FavoriteRoutes#create",
           "method": "post"
         }
       ]
     },
     {
-      "path": "/api/v1/documents/{id}",
+      "path": "/api/v1/favorite_routes/{id}",
       "operations": [
         {
-          "summary": "Updates an existing Coupon",
+          "summary": "Updates an existing Favorite Route",
           "parameters": [
             {
               "paramType": "path",
@@ -121,51 +93,30 @@
             },
             {
               "paramType": "form",
-              "name": "document[document_id]",
+              "name": "favorite_route[user_id]",
               "type": "string",
-              "description": "Id of document",
+              "description": "Id of user",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "document[document_type_id]",
+              "name": "favorite_route[origin_city_id]",
               "type": "integer",
-              "description": "Id of type associated to document",
+              "description": "Id of City of origin",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "document[file]",
-              "type": "file",
-              "description": "File",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "document[status_id]",
+              "name": "favorite_route[destination_city_id]",
               "type": "integer",
-              "description": "Id of status associated to document",
+              "description": "Id of City of destination",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "document[user_id]",
-              "type": "integer",
-              "description": "Id user on coupon",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "document[expire_date]",
-              "type": "string",
-              "description": "Expiration date of document",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "document[approved]",
+              "name": "favorite_route[active]",
               "type": "boolean",
-              "description": "Check if document is approved",
+              "description": "State of activation",
               "required": false
             },
             {
@@ -188,22 +139,22 @@
               "message": "Not Acceptable"
             }
           ],
-          "nickname": "Api::V1::Documents#update",
+          "nickname": "Api::V1::FavoriteRoutes#update",
           "method": "patch"
         }
       ]
     },
     {
-      "path": "/api/v1/documents/{id}",
+      "path": "/api/v1/favorite_routes/{id}",
       "operations": [
         {
-          "summary": "Deletes an existing Document",
+          "summary": "Deletes an existing Favorite Route",
           "parameters": [
             {
               "paramType": "path",
               "name": "id",
               "type": "integer",
-              "description": "Document Id",
+              "description": "Favorite Route Id",
               "required": false
             }
           ],
@@ -219,7 +170,7 @@
               "message": "Not Found"
             }
           ],
-          "nickname": "Api::V1::Documents#destroy",
+          "nickname": "Api::V1::FavoriteRoutes#destroy",
           "method": "delete"
         }
       ]
