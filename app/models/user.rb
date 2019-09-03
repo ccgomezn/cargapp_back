@@ -25,6 +25,7 @@ class User < ApplicationRecord
   has_many :user_locations
   has_many :service_locations
   has_many :bank_accounts
+  has_many :cargapp_payments
   
 
   has_many :access_grants,

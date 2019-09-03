@@ -1349,6 +1349,48 @@ Code style checker
 }
 ```
 
+
+## CargappPayment
+* id
+* uuid
+* amount
+* transaction_code
+* observation
+* payment_method_id
+* statu_id 
+* generator_id
+* receiver_id
+* user_id
+* bank_account_id
+* service_id
+* company_id
+* active
+
+```rails g scaffold CargappPayment uuid amount:integer transaction_code observation:text payment_method:references statu:references generator:references receiver:references bank_account:references service:references company:references user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/cargapp_payments 'Listar'
+2. GET http://api.cargapp.co/api/v1/cargapp_payments/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/cargapp_payments/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/cargapp_payments 'Crear'
+5. PUT http://api.cargapp.co/api/v1/cargapp_payments/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/cargapp_payments/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/cargapp_payments/me 'Ver las del usuario'
+
+
+```
+{
+    "cargapp_payment": {
+        "service_point": 1,
+        "driver_point": 2,
+        "point": 1,
+        "service_id": 1,
+        "user_id": 1,
+        "driver_id": 1,
+        "active": true
+    }
+}
+```
+
 # Login Local for console
 irb -r oauth2
 app = "ZRylaRGgSD19_gOQVoumEmLueIWlcaBLkw2EkcIKG7Y123456"

@@ -1,0 +1,82 @@
+<%= form_with(model: cargapp_payment, local: true) do |form| %>
+  <% if cargapp_payment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cargapp_payment.errors.count, "error") %> prohibited this cargapp_payment from being saved:</h2>
+
+      <ul>
+        <% cargapp_payment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :uuid %>
+    <%= form.text_field :uuid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amount %>
+    <%= form.number_field :amount %>
+  </div>
+
+  <div class="field">
+    <%= form.label :transaction_code %>
+    <%= form.text_field :transaction_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :observation %>
+    <%= form.text_area :observation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :payment_method_id %>
+    <%= form.text_field :payment_method_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :statu_id %>
+    <%= form.text_field :statu_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :generator_id %>
+    <%= form.text_field :generator_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :receiver_id %>
+    <%= form.text_field :receiver_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bank_account_id %>
+    <%= form.text_field :bank_account_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :service_id %>
+    <%= form.text_field :service_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :company_id %>
+    <%= form.text_field :company_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :active %>
+    <%= form.check_box :active %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

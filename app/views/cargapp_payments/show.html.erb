@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Uuid:</strong>
+  <%= @cargapp_payment.uuid %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @cargapp_payment.amount %>
+</p>
+
+<p>
+  <strong>Transaction code:</strong>
+  <%= @cargapp_payment.transaction_code %>
+</p>
+
+<p>
+  <strong>Observation:</strong>
+  <%= @cargapp_payment.observation %>
+</p>
+
+<p>
+  <strong>Payment method:</strong>
+  <%= @cargapp_payment.payment_method_id %>
+</p>
+
+<p>
+  <strong>Statu:</strong>
+  <%= @cargapp_payment.statu_id %>
+</p>
+
+<p>
+  <strong>Generator:</strong>
+  <%= @cargapp_payment.generator_id %>
+</p>
+
+<p>
+  <strong>Receiver:</strong>
+  <%= @cargapp_payment.receiver_id %>
+</p>
+
+<p>
+  <strong>Bank account:</strong>
+  <%= @cargapp_payment.bank_account_id %>
+</p>
+
+<p>
+  <strong>Service:</strong>
+  <%= @cargapp_payment.service_id %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @cargapp_payment.company_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @cargapp_payment.user_id %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @cargapp_payment.active %>
+</p>
+
+<%= link_to 'Edit', edit_cargapp_payment_path(@cargapp_payment) %> |
+<%= link_to 'Back', cargapp_payments_path %>

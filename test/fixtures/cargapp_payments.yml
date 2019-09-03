@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  uuid: MyString
+  amount: 1
+  transaction_code: MyString
+  observation: MyText
+  payment_method: one
+  statu: one
+  generator: one
+  receiver: one
+  bank_account: one
+  service: one
+  company: one
+  user: one
+  active: false
+
+two:
+  uuid: MyString
+  amount: 1
+  transaction_code: MyString
+  observation: MyText
+  payment_method: two
+  statu: two
+  generator: two
+  receiver: two
+  bank_account: two
+  service: two
+  company: two
+  user: two
+  active: false
