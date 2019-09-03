@@ -1380,13 +1380,73 @@ Code style checker
 ```
 {
     "cargapp_payment": {
-        "service_point": 1,
-        "driver_point": 2,
-        "point": 1,
-        "service_id": 1,
+        "uuid": "asdasd5",
+        "amount": 20,
+        "transaction_code": "445454",
+        "observation": "asdasdasd",
+        "payment_method_id": 1,
+        "statu_id": 7,
+        "generator_id": 1,
+        "receiver_id": 2,
+        "bank_account_id": 1,
+        "service_id": 11,
+        "company_id": 2,
         "user_id": 1,
-        "driver_id": 1,
         "active": true
+    }
+}
+```
+
+
+## Payment
+* id
+* uuid
+* total
+* sub_total
+* taxes
+* transaction_code
+* observation
+* coupon_id
+* coupon_code
+* coupon_amount
+* user_payment_method_id
+* payment_method_id
+* statu_id
+* user_id
+* is_service
+* service_id
+* active
+
+```rails g scaffold Payment uuid total:integer sub_total:integer taxes:integer  transaction_code observation:text coupon:references coupon_code coupon_amount:integer user_payment_method:references payment_method:references statu:references service:references is_service:boolean user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/cargapp_payments 'Listar'
+2. GET http://api.cargapp.co/api/v1/cargapp_payments/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/cargapp_payments/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/cargapp_payments 'Crear'
+5. PUT http://api.cargapp.co/api/v1/cargapp_payments/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/cargapp_payments/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/cargapp_payments/me 'Ver las del usuario'
+
+
+```
+{
+    "payment": {
+        "uuid": "",
+        "total": null,
+        "sub_total": null,
+        "taxes": null,
+        "transaction_code": "",
+        "observation": "",
+        "coupon_id": null,
+        "coupon_code": "",
+        "coupon_amount": null,
+        "user_payment_method_id": 4,
+        "payment_method_id": 1,
+        "statu_id": 6,
+        "service_id": 11,
+        "is_service": true,
+        "user_id": 1,
+        "active": false
     }
 }
 ```

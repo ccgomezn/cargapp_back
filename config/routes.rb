@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   resources :bank_accounts
   resources :rate_services
   resources :cargapp_payments
+  resources :payments
 
   namespace :api, defaults: { format: :json } do
     namespace :v1, defaults: { format: :json } do
@@ -148,6 +149,9 @@ Rails.application.routes.draw do
       get 'cargapp_payments/me' => 'cargapp_payments#me'
       get 'cargapp_payments/active' => 'cargapp_payments#active'
       resources :cargapp_payments
+      get 'payments/me' => 'payments#me'
+      get 'payments/active' => 'payments#active'
+      resources :payments
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

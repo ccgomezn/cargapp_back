@@ -1,0 +1,97 @@
+<%= form_with(model: payment, local: true) do |form| %>
+  <% if payment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
+
+      <ul>
+        <% payment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :uuid %>
+    <%= form.text_field :uuid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :total %>
+    <%= form.number_field :total %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sub_total %>
+    <%= form.number_field :sub_total %>
+  </div>
+
+  <div class="field">
+    <%= form.label :taxes %>
+    <%= form.number_field :taxes %>
+  </div>
+
+  <div class="field">
+    <%= form.label :transaction_code %>
+    <%= form.text_field :transaction_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :observation %>
+    <%= form.text_area :observation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :coupon_id %>
+    <%= form.text_field :coupon_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :coupon_code %>
+    <%= form.text_field :coupon_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :coupon_amount %>
+    <%= form.number_field :coupon_amount %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_payment_method_id %>
+    <%= form.text_field :user_payment_method_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :payment_method_id %>
+    <%= form.text_field :payment_method_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :statu_id %>
+    <%= form.text_field :statu_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :service_id %>
+    <%= form.text_field :service_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_service %>
+    <%= form.check_box :is_service %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :active %>
+    <%= form.check_box :active %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

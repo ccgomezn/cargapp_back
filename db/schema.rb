@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_03_044413) do
+ActiveRecord::Schema.define(version: 2019_09_03_050437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -362,6 +362,33 @@ ActiveRecord::Schema.define(version: 2019_09_03_044413) do
     t.index ["user_id"], name: "index_payment_methods_on_user_id"
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.string "uuid"
+    t.integer "total"
+    t.integer "sub_total"
+    t.integer "taxes"
+    t.string "transaction_code"
+    t.text "observation"
+    t.bigint "coupon_id"
+    t.string "coupon_code"
+    t.integer "coupon_amount"
+    t.bigint "user_payment_method_id", null: false
+    t.bigint "payment_method_id", null: false
+    t.bigint "statu_id", null: false
+    t.bigint "service_id"
+    t.boolean "is_service"
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["coupon_id"], name: "index_payments_on_coupon_id"
+    t.index ["payment_method_id"], name: "index_payments_on_payment_method_id"
+    t.index ["service_id"], name: "index_payments_on_service_id"
+    t.index ["statu_id"], name: "index_payments_on_statu_id"
+    t.index ["user_id"], name: "index_payments_on_user_id"
+    t.index ["user_payment_method_id"], name: "index_payments_on_user_payment_method_id"
+  end
+
   create_table "permissions", force: :cascade do |t|
     t.bigint "role_id", null: false
     t.bigint "cargapp_model_id", null: false
@@ -704,6 +731,10 @@ ActiveRecord::Schema.define(version: 2019_09_03_044413) do
   add_foreign_key "parameters", "cargapp_models"
   add_foreign_key "parameters", "users"
   add_foreign_key "payment_methods", "users"
+  add_foreign_key "payments", "payment_methods"
+  add_foreign_key "payments", "status", column: "statu_id"
+  add_foreign_key "payments", "user_payment_methods"
+  add_foreign_key "payments", "users"
   add_foreign_key "permissions", "cargapp_models"
   add_foreign_key "permissions", "roles"
   add_foreign_key "permissions", "users"

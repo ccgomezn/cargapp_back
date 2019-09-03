@@ -1,0 +1,84 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Uuid:</strong>
+  <%= @payment.uuid %>
+</p>
+
+<p>
+  <strong>Total:</strong>
+  <%= @payment.total %>
+</p>
+
+<p>
+  <strong>Sub total:</strong>
+  <%= @payment.sub_total %>
+</p>
+
+<p>
+  <strong>Taxes:</strong>
+  <%= @payment.taxes %>
+</p>
+
+<p>
+  <strong>Transaction code:</strong>
+  <%= @payment.transaction_code %>
+</p>
+
+<p>
+  <strong>Observation:</strong>
+  <%= @payment.observation %>
+</p>
+
+<p>
+  <strong>Coupon:</strong>
+  <%= @payment.coupon_id %>
+</p>
+
+<p>
+  <strong>Coupon code:</strong>
+  <%= @payment.coupon_code %>
+</p>
+
+<p>
+  <strong>Coupon amount:</strong>
+  <%= @payment.coupon_amount %>
+</p>
+
+<p>
+  <strong>User payment method:</strong>
+  <%= @payment.user_payment_method_id %>
+</p>
+
+<p>
+  <strong>Payment method:</strong>
+  <%= @payment.payment_method_id %>
+</p>
+
+<p>
+  <strong>Statu:</strong>
+  <%= @payment.statu_id %>
+</p>
+
+<p>
+  <strong>Service:</strong>
+  <%= @payment.service_id %>
+</p>
+
+<p>
+  <strong>Is service:</strong>
+  <%= @payment.is_service %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @payment.user_id %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @payment.active %>
+</p>
+
+<%= link_to 'Edit', edit_payment_path(@payment) %> |
+<%= link_to 'Back', payments_path %>
