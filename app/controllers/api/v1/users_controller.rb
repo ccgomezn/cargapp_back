@@ -61,8 +61,7 @@ class Api::V1::UsersController < ApplicationController
                 else
                   'user validate'
                 end
-      # user.update(mobile_verify: true, active: true, confirmed_at: Time.new)
-      user.update(mobile_verify: true, active: true)
+      user.update(mobile_verify: true, active: true, confirmed_at: Time.new)
       render json: user = { user: user, message: message }
     else
       user = { user: user, message: 'not found' }
