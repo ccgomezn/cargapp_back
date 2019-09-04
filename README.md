@@ -67,6 +67,27 @@ Code style checker
 ```
 
 
+## User
+* email
+* password
+* phone_number
+* mobile_verify
+* verification_code
+* identifiation
+* code
+* uuid
+* provider
+* username
+* referal_code
+* user_referal_code
+* pin
+* online
+* active
+
+
+```rails g migration AddPhoneToUser phone_number mobile_verify:boolean mobile_code identifiation uuid provider referal_code user_referal_code pin online:boolean active:boolean```
+
+
 ## UserRole
 * role_id
 * user_id
@@ -890,7 +911,7 @@ Code style checker
 
 ## Blocking (After)
 * description
-* reason_id
+* reason_type_id
 * statu_id
 * user_id
 * driver_id
@@ -1451,6 +1472,8 @@ Code style checker
 }
 ```
 
+
+
 # Login Local for console
 irb -r oauth2
 app = "ZRylaRGgSD19_gOQVoumEmLueIWlcaBLkw2EkcIKG7Y123456"
@@ -1458,3 +1481,8 @@ secret = "UaF6H-ETL8XlY04V5_U3eUSyehHVHiopXU__bcAcIXI123456"
 client = OAuth2::Client.new(app, secret, site: 'http://localhost:3000')
 token = client.password.get_token('user@cargapp.co', '123456')
 puts token.token
+
+
+Service
+duration
+distance

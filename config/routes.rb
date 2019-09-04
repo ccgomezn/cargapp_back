@@ -47,8 +47,11 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1, defaults: { format: :json } do
       post 'users/email_verify' => 'users#email_verify'
+      post 'users/phone_verify' => 'users#phone_verify'
+      post 'users/validate_number' => 'users#validate_number'
       get 'users/me' => 'users#me'
       post 'users/login' => 'users#login'
+      put 'users/update_password' => 'users#update_password'
       resources :users #, only: [:create, :update, :show]
       # -------------------
       get 'roles/active' => 'roles#active'

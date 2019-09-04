@@ -2,7 +2,7 @@
 
 class Api::V1::UsersController < ApplicationController
   protect_from_forgery with: :null_session
-  before_action :doorkeeper_authorize!, except: %i[create login email_verify]
+  before_action :doorkeeper_authorize!, except: %i[create login email_verify phone_verify validate_number]
   before_action :set_user
 
   swagger_controller :users, 'User Management'
@@ -30,12 +30,52 @@ class Api::V1::UsersController < ApplicationController
 
   def email_verify
     user = User.find_by(user_email_params)
-    if user
+    if user && user.email.eql?(params[:user][:email])
       user = { email: true, message: "exist"}
       render json: user, status: :ok
     else
       user = { email: false, message: "does not exist"}
       render json: user, status: :found
+    end
+  end
+
+  def phone_verify
+    user = User.find_by(user_phone_params)
+    puts '---------------------'
+    puts user.to_json
+    if user && user.phone_number.eql?(params[:user][:phone_number])
+      user = { phone_number: true, message: "exist"}
+      render json: user, status: :ok
+    else
+      user = { phone_number: false, message: "does not exist"}
+      render json: user, status: :found
+    end
+  end
+
+  # Falta en la migracion agregar la confirmacion de cuentas del devise
+  def validate_number
+    user = User.find_by(user_verify_phone_params)
+    if user
+      message = if user.active && user.mobile_verify
+                  'it has already been validated'
+                else
+                  'user validate'
+                end
+      # user.update(mobile_verify: true, active: true, confirmed_at: Time.new)
+      user.update(mobile_verify: true, active: true)
+      render json: user = { user: user, message: message }
+    else
+      user = { user: user, message: 'not found' }
+      render json: user, status: :found
+    end
+  end
+
+  def active
+    if @user
+      @user.update(online: params['user']['online'])
+      render json: @user, status: :ok
+    else
+      head(:unprocessable_entity)
     end
   end
 
@@ -58,6 +98,25 @@ class Api::V1::UsersController < ApplicationController
     rescue OAuth2::Error => e
       reponse = { user: nil, message: "La contraseña o el correo es incorrecto" }
       render json: reponse, status: :unauthorized
+    end
+  end
+
+  def update_password
+    # @user = User.find_by(email: params["user"]["email"]) || User.find_by(phone_number: params["user"]["phone_number"])
+    if @user.valid_password?(params[:user][:current_password])
+      if @user.update(user_password_params)
+        # Sign in the user by passing validation in case their password changed
+        bypass_sign_in(@user)
+        render json: @user, status: :ok
+      else
+        head(:unprocessable_entity)
+      end
+    else
+      object_instance = {
+        user: @user,
+        message: 'incorrect current password '
+      }
+      render json: object_instance, status: :not_modified
     end
   end
 
@@ -121,6 +180,10 @@ class Api::V1::UsersController < ApplicationController
 
   def user_phone_params
     params.require(:user).permit(:phone_number)
+  end
+
+  def user_verify_phone_params
+    params.require(:user).permit(:phone_number, :mobile_code)
   end
 
   def user_password_params
