@@ -125,4 +125,3 @@ Rails.application.configure do
     authentication:       ENV['MAILER_POWER_AUT'],
     enable_starttls_auto: true }
 end
-end
