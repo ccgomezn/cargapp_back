@@ -26,6 +26,9 @@ gem 'capistrano-rails', '~> 1.4'
 gem 'capistrano-passenger', '~> 0.2.0'
 gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
 
+gem 'twilio-ruby', '~> 5.26.0'
+
+
 # END New GEM
 
 ruby '2.6.1'

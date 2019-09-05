@@ -82,6 +82,7 @@ class Api::V1::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      profile()
       render json: @user, status: :created
     else
       head(:unprocessable_entity)
@@ -165,6 +166,18 @@ class Api::V1::UsersController < ApplicationController
 
   private
 
+  def profile
+    doct_type = DocumentType.find_by(code: ENV['DOC_TYPE_CC'])
+    # Formatear el username
+    profile = Profile.create(user_id: @user.id,
+      firt_name: params[:user][:username],
+      document_type_id: doct_type.id, 
+      document_id: @user.identifiation,
+      phone: @user.phone_number 
+    )
+    profile.save
+  end
+
   def set_show_user
     @user = User.find(params[:id])
   end
@@ -196,8 +209,8 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def user_params
-    # params.require(:user).permit(:email, :password, :password_confirmation, :username, :phone_number, :driver_referal_code)
-    params.require(:user).permit(:email, :password, :password_confirmation)
+    params.require(:user).permit(:email, :password, :password_confirmation, :identifiation, :phone_number)
+    #params.require(:user).permit(:email, :password, :password_confirmation)
   end
 
   def user_update_params

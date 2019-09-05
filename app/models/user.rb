@@ -48,11 +48,32 @@ class User < ApplicationRecord
     state
   end
 
+  # Create codes of user
+  before_create :build_user
+  def build_user
+    number_randon = [(0..9)].map { |i| i.to_a }.flatten
+    code = [('A'..'Z'), (0..9)].map { |i| i.to_a }.flatten
+    referal_code = (0...8).map { code[rand(code.length)] }.join
+    pin = (0...4).map { number_randon[rand(number_randon.length)] }.join
+    mobile_code = (0...4).map { number_randon[rand(number_randon.length)] }.join
+    self.mobile_code ||= mobile_code
+    self.referal_code ||= referal_code
+    self.user_referal_code ||= 'N/A'
+    self.pin ||= pin
+    self.mobile_verify ||= false
+    self.online ||= false
+    self.active ||= false
+  end
+
+  after_create :build_profile
+  def build_profile
+    #@client = Twilio::REST::Client.new ENV['TWILLIO_ACCOUNT_SID'], ENV['TWILLIO_AUT_TOKEN']
+    #@client.api.account.messages.create(from: ENV['TWILLIO_FROM'], to: "+#{self.phone_number}", body: "Hola tu codigo de verificacion PowerTaxi es: #{mobile_code}")
+  end
+
   private
 
   def self.permissions(user)
-    puts '------------------'
-    puts user 
     @user = user
     if @user
       has_permission = false
