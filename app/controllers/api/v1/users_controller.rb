@@ -2,7 +2,7 @@
 
 class Api::V1::UsersController < ApplicationController
   protect_from_forgery with: :null_session
-  before_action :doorkeeper_authorize!, except: %i[create login email_verify phone_verify validate_number]
+  before_action :doorkeeper_authorize!, except: %i[create login email_verify phone_verify validate_number truora_check_user]
   before_action :set_user
 
   swagger_controller :users, 'User Management'
@@ -197,7 +197,21 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def truora_check_user
+    uri = URI.parse("#{ENV['URL_TRUORA']}/checks")
+    request = Net::HTTP::Post.new(uri)
+    # request.set_form_data(country: 'co', type: 'person', national_id: '36835533', force_creation: true )
+    # request.set_form_data(country: 'co', type: 'vehicle', national_id: '36835533', license_plate: 'VZB227',force_creation: true )
+    request["Truora-Api-Key"] = ENV['TOKEN_TRUORA']
 
+    req_options = {
+      use_ssl: uri.scheme == "https",
+    }
+
+    response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+      http.request(request)
+    end
+
+    render json: response.body
   end
 
   private
