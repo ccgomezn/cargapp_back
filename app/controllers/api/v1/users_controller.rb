@@ -164,6 +164,42 @@ class Api::V1::UsersController < ApplicationController
     render json: @user_id, status: :ok
   end
 
+  def truora_users
+    uri = URI.parse("#{ENV['URL_TRUORA']}/checks")
+    request = Net::HTTP::Get.new(uri)
+    request["Truora-Api-Key"] = ENV['TOKEN_TRUORA']
+
+    req_options = {
+      use_ssl: uri.scheme == "https",
+    }
+
+    response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+      http.request(request)
+    end
+
+    render json: response.body
+  end
+
+  def truora_user
+    uri = URI.parse("#{ENV['URL_TRUORA']}/checks/#{params[:id]}")
+    request = Net::HTTP::Get.new(uri)
+    request["Truora-Api-Key"] = ENV['TOKEN_TRUORA']
+
+    req_options = {
+      use_ssl: uri.scheme == "https",
+    }
+
+    response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+      http.request(request)
+    end
+
+    render json: response.body
+  end
+
+  def truora_check_user
+
+  end
+
   private
 
   def profile
