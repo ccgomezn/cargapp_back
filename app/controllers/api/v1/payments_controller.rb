@@ -4,6 +4,71 @@ class Api::V1::PaymentsController < ApplicationController
   before_action :doorkeeper_authorize!
   before_action :set_user
 
+  swagger_controller :payments, 'Payments'
+
+  swagger_api :index do
+    summary 'Fetches all Payment items'
+    notes 'This lists all the payment methods'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Payment items'
+    notes 'This lists all the active payment'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Payment'
+    param :form, 'payment[uuid]', :string, :required, 'Uuid'
+    param :form, 'payment[total]', :string, :required, 'Total'
+    param :form, 'payment[sub_total]', :string, :required, 'Sub total'
+    param :form, 'payment[taxes]', :string, :required, 'Taxes'
+    param :form, 'payment[transaction_code]', :integer, :required, 'Transaction code'
+    param :form, 'payment[observation]', :integer, :required, 'Observation'
+    param :form, 'payment[coupon_id]', :string, :required, 'Id of coupon'
+    param :form, 'payment[coupon_code]', :string, :required, 'Coupon code'
+    param :form, 'payment[coupon_amount]', :integer, :required, 'Coupon amount'
+    param :form, 'payment[user_payment_method_id]', :integer, :required, 'Id of user payment method'
+    param :form, 'payment[payment_method_id]', :integer, :required, 'Id of payment method'
+    param :form, 'payment[statu_id]', :integer, :required, 'Id of status'
+    param :form, 'payment[user_id]', :integer, :required, 'Id of user'
+    param :form, 'payment[is_service]', :boolean, :required, 'Checked if is service'
+    param :form, 'payment[service_id]', :integer, :required, 'Id of service related'
+    param :form, 'payment[active]', :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Parameter'
+    param :path, :id, :integer, :required, "Payment method Id"
+    param :form, 'payment[uuid]', :string, :optional, 'Uuid'
+    param :form, 'payment[total]', :string, :optional, 'Total'
+    param :form, 'payment[sub_total]', :string, :optional, 'Sub total'
+    param :form, 'payment[taxes]', :string, :optional, 'Taxes'
+    param :form, 'payment[transaction_code]', :integer, :optional, 'Transaction code'
+    param :form, 'payment[observation]', :integer, :optional, 'Observation'
+    param :form, 'payment[coupon_id]', :string, :optional, 'Id of coupon'
+    param :form, 'payment[coupon_code]', :string, :optional, 'Coupon code'
+    param :form, 'payment[coupon_amount]', :integer, :optional, 'Coupon amount'
+    param :form, 'payment[user_payment_method_id]', :integer, :optional, 'Id of user payment method'
+    param :form, 'payment[payment_method_id]', :integer, :optional, 'Id of payment method'
+    param :form, 'payment[statu_id]', :integer, :optional, 'Id of status'
+    param :form, 'payment[user_id]', :integer, :optional, 'Id of user'
+    param :form, 'payment[is_service]', :boolean, :optional, 'Checked if is service'
+    param :form, 'payment[service_id]', :integer, :optional, 'Id of service related'
+    param :form, 'payment[active]', :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Payment Method"
+    param :path, :id, :integer, :optional, "Payment Method Id"
+    response :unauthorized
+    response :not_found
+  end
+
   # GET /payments
   # GET /payments.json
   def index

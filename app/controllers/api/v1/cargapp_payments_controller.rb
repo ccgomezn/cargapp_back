@@ -4,6 +4,65 @@ class Api::V1::CargappPaymentsController < ApplicationController
   before_action :doorkeeper_authorize!
   before_action :set_user
 
+  swagger_controller :cargappPayments, 'Cargapp Payments Management'
+
+  swagger_api :index do
+    summary 'Fetches all Cargapp Payments items'
+    notes 'This lists all the cargapp payments'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Cargapp Payments items'
+    notes 'This lists all the active cargapp payments'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Cargapp Payment'
+    param :form, 'cargapp_payment[uuid]', :string, :required, 'Uuid'
+    param :form, 'cargapp_payment[amount]', :string, :required, 'Amount'
+    param :form, 'cargapp_payment[transaction_code]', :string, :required, 'Transaction code'
+    param :form, 'cargapp_payment[observation]', :string, :required, 'Observation'
+    param :form, 'cargapp_payment[payment_method_id]', :string, :required, 'Id of payment method related'
+    param :form, 'cargapp_payment[statu_id]', :string, :required, 'Id of status related'
+    param :form, 'cargapp_payment[generator_id]', :string, :required, 'Id of generator'
+    param :form, 'cargapp_payment[receiver_id]', :string, :required, 'Id of receiver'
+    param :form, 'cargapp_payment[user_id]', :string, :required, 'Id of user'
+    param :form, 'cargapp_payment[bank_account_id]', :string, :required, 'Id of Bank Account'
+    param :form, 'cargapp_payment[service_id]', :string, :required, 'Id of service related'
+    param :form, 'cargapp_payment[company_id]', :string, :required, 'Id of company related'
+    param :form, 'cargapp_payment[active]', :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Cargapp Payment'
+    param :path, :id, :integer, :required, "Cargapp Payment Id"
+    param :form, 'cargapp_payment[uuid]', :string, :optional, 'Uuid'
+    param :form, 'cargapp_payment[amount]', :string, :optional, 'Amount'
+    param :form, 'cargapp_payment[transaction_code]', :string, :optional, 'Transaction code'
+    param :form, 'cargapp_payment[observation]', :string, :optional, 'Observation'
+    param :form, 'cargapp_payment[payment_method_id]', :string, :optional, 'Id of payment method related'
+    param :form, 'cargapp_payment[statu_id]', :string, :optional, 'Id of status related'
+    param :form, 'cargapp_payment[generator_id]', :string, :optional, 'Id of generator'
+    param :form, 'cargapp_payment[receiver_id]', :string, :optional, 'Id of receiver'
+    param :form, 'cargapp_payment[user_id]', :string, :optional, 'Id of user'
+    param :form, 'cargapp_payment[bank_account_id]', :string, :optional, 'Id of Bank Account'
+    param :form, 'cargapp_payment[service_id]', :string, :optional, 'Id of service related'
+    param :form, 'cargapp_payment[company_id]', :string, :optional, 'Id of company related'
+    param :form, 'cargapp_payment[active]', :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Cargapp Payment"
+    param :path, :id, :integer, :optional, "Cargapp Payment Id"
+    response :unauthorized
+    response :not_found
+  end
+
   # GET /cargapp_payments
   # GET /cargapp_payments.json
   def index
