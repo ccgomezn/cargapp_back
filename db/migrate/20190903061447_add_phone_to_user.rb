@@ -3,7 +3,7 @@ class AddPhoneToUser < ActiveRecord::Migration[6.0]
     add_column :users, :phone_number, :integer, :limit => 8
     add_column :users, :mobile_verify, :boolean
     add_column :users, :mobile_code, :string
-    add_column :users, :identifiation, :string
+    add_column :users, :identification, :string
     add_column :users, :uuid, :string
     add_column :users, :provider, :string
     add_column :users, :referal_code, :string

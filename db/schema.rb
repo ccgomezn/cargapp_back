@@ -672,7 +672,7 @@ ActiveRecord::Schema.define(version: 2019_09_03_061447) do
     t.bigint "phone_number"
     t.boolean "mobile_verify"
     t.string "mobile_code"
-    t.string "identifiation"
+    t.string "identification"
     t.string "uuid"
     t.string "provider"
     t.string "referal_code"
