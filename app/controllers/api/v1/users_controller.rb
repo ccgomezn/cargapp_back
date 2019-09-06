@@ -180,8 +180,9 @@ class Api::V1::UsersController < ApplicationController
     render json: response.body
   end
 
+  # Send { "user": { "id": 1 }  }
   def truora_user
-    uri = URI.parse("#{ENV['URL_TRUORA']}/checks/#{params[:id]}")
+    uri = URI.parse("#{ENV['URL_TRUORA']}/checks/#{params[:id]}/details")
     request = Net::HTTP::Get.new(uri)
     request["Truora-Api-Key"] = ENV['TOKEN_TRUORA']
 
@@ -197,6 +198,54 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def truora_check_user
+    user = User.find_by(check_user_params)
+    if user.identification.eql?(user.profile ? user.profile.document_id.to_s : nil)
+      if user.identification
+        vehicle = user.vehicles.where(active: true).first
+        if vehicle
+          check = check_user(user, vehicle)
+        end
+      end
+      check = JSON.parse(check.to_s)
+
+      #puts check['check']['check_id']
+      #user.update(check_id: check['check']['check_id'] )
+
+      response =  {
+        menssaje: "in process of validation",
+        check: check,
+        user: user
+      }
+
+      render json: response
+    else
+      response =  {
+        menssaje: "validate your identification",
+        user_identification: user.identification,
+        profile_document: user.profile ? user.profile.document_id : nil
+      }
+      render json: response
+    end
+  end
+
+  def check_user(user, vehicle)
+    uri = URI.parse("#{ENV['URL_TRUORA']}/checks")
+    request = Net::HTTP::Post.new(uri)
+    request.set_form_data(country: 'co', type: 'vehicle', national_id: user.identification, license_plate: vehicle.plate, force_creation: true )
+    request["Truora-Api-Key"] = ENV['TOKEN_TRUORA']
+
+    req_options = {
+        use_ssl: uri.scheme == "https",
+    }
+
+    response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+        http.request(request)
+    end
+
+    response.body 
+  end
+
+  def truora_check_user_test
     uri = URI.parse("#{ENV['URL_TRUORA']}/checks")
     request = Net::HTTP::Post.new(uri)
     # request.set_form_data(country: 'co', type: 'person', national_id: '36835533', force_creation: true )
@@ -238,6 +287,10 @@ class Api::V1::UsersController < ApplicationController
 
   def user_email_params
     params.require(:user).permit(:email)
+  end
+
+  def check_user_params
+    params.require(:user).permit(:id)
   end
 
   def user_phone_params
