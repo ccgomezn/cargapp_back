@@ -28,6 +28,12 @@ class Api::V1::UsersController < ApplicationController
     # render json: { "name": 'hola'}, status: :created
   end
 
+  def active
+    @users = User.where(active: true)
+    render json: @users
+    # render json: { "name": 'hola'}, status: :created
+  end
+
   def email_verify
     user = User.find_by(user_email_params)
     if user && user.email.eql?(params[:user][:email])
@@ -271,7 +277,7 @@ class Api::V1::UsersController < ApplicationController
     profile = Profile.create(user_id: @user.id,
       firt_name: params[:user][:username],
       document_type_id: doct_type.id, 
-      document_id: @user.identifiation,
+      document_id: @user.identification,
       phone: @user.phone_number 
     )
     profile.save
@@ -312,7 +318,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :identifiation, :phone_number)
+    params.require(:user).permit(:email, :password, :password_confirmation, :identification, :phone_number)
     #params.require(:user).permit(:email, :password, :password_confirmation)
   end
 
