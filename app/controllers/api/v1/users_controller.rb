@@ -28,6 +28,12 @@ class Api::V1::UsersController < ApplicationController
     # render json: { "name": 'hola'}, status: :created
   end
 
+  def active
+    @users = User.where(active: true)
+    render json: @users
+    # render json: { "name": 'hola'}, status: :created
+  end
+
   def email_verify
     user = User.find_by(user_email_params)
     if user && user.email.eql?(params[:user][:email])
@@ -180,8 +186,9 @@ class Api::V1::UsersController < ApplicationController
     render json: response.body
   end
 
+  # Send { "user": { "id": 1 }  }
   def truora_user
-    uri = URI.parse("#{ENV['URL_TRUORA']}/checks/#{params[:id]}")
+    uri = URI.parse("#{ENV['URL_TRUORA']}/checks/#{params[:id]}/details")
     request = Net::HTTP::Get.new(uri)
     request["Truora-Api-Key"] = ENV['TOKEN_TRUORA']
 
@@ -197,6 +204,54 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def truora_check_user
+    user = User.find_by(check_user_params)
+    if user.identification.eql?(user.profile ? user.profile.document_id.to_s : nil)
+      if user.identification
+        vehicle = user.vehicles.where(active: true).first
+        if vehicle
+          check = check_user(user, vehicle)
+        end
+      end
+      check = JSON.parse(check.to_s)
+
+      #puts check['check']['check_id']
+      #user.update(check_id: check['check']['check_id'] )
+
+      response =  {
+        menssaje: "in process of validation",
+        check: check,
+        user: user
+      }
+
+      render json: response
+    else
+      response =  {
+        menssaje: "validate your identification",
+        user_identification: user.identification,
+        profile_document: user.profile ? user.profile.document_id : nil
+      }
+      render json: response
+    end
+  end
+
+  def check_user(user, vehicle)
+    uri = URI.parse("#{ENV['URL_TRUORA']}/checks")
+    request = Net::HTTP::Post.new(uri)
+    request.set_form_data(country: 'co', type: 'vehicle', national_id: user.identification, license_plate: vehicle.plate, force_creation: true )
+    request["Truora-Api-Key"] = ENV['TOKEN_TRUORA']
+
+    req_options = {
+        use_ssl: uri.scheme == "https",
+    }
+
+    response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+        http.request(request)
+    end
+
+    response.body 
+  end
+
+  def truora_check_user_test
     uri = URI.parse("#{ENV['URL_TRUORA']}/checks")
     request = Net::HTTP::Post.new(uri)
     # request.set_form_data(country: 'co', type: 'person', national_id: '36835533', force_creation: true )
@@ -222,7 +277,7 @@ class Api::V1::UsersController < ApplicationController
     profile = Profile.create(user_id: @user.id,
       firt_name: params[:user][:username],
       document_type_id: doct_type.id, 
-      document_id: @user.identifiation,
+      document_id: @user.identification,
       phone: @user.phone_number 
     )
     profile.save
@@ -238,6 +293,10 @@ class Api::V1::UsersController < ApplicationController
 
   def user_email_params
     params.require(:user).permit(:email)
+  end
+
+  def check_user_params
+    params.require(:user).permit(:id)
   end
 
   def user_phone_params
@@ -259,7 +318,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :identifiation, :phone_number)
+    params.require(:user).permit(:email, :password, :password_confirmation, :identification, :phone_number)
     #params.require(:user).permit(:email, :password, :password_confirmation)
   end
 
