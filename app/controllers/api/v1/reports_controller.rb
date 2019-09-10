@@ -146,7 +146,7 @@ class Api::V1::ReportsController < ApplicationController
   end
 
   def find_user
-    user = User.find_by(id: parans[:user][:id])
+    user = User.find_by(id: params[:user][:id])
     @reports = user.reports
     @result = []
     @reports.each do |report|

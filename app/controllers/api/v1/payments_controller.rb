@@ -22,7 +22,7 @@ class Api::V1::PaymentsController < ApplicationController
   end
 
   def find_user
-    user = User.find_by(id: parans[:user][:id])
+    user = User.find_by(id: params[:user][:id])
     payments = user.payments.where(active: true)
     render json: @payments
   end
