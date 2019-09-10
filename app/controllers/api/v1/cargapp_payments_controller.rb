@@ -21,6 +21,27 @@ class Api::V1::CargappPaymentsController < ApplicationController
     render json: @cargapp_payments
   end  
 
+  def find_user
+    user = User.find_by(id: parans[:user][:id])
+    @cargapp_payments = user.cargapp_payments.where(active: true)
+    render json: @cargapp_payments
+  end
+
+  def find_receiver
+    @cargapp_payments = CargappPayment.where(receiver_id: parans[:user][:id], active: true)
+    render json: @cargapp_payments
+  end
+
+  def find_generator
+    @cargapp_payments = CargappPayment.where(receiver_id: parans[:user][:id], active: true)
+    render json: @cargapp_payments
+  end
+
+  def find_company
+    @cargapp_payments = CargappPayment.where(company_id: parans[:user][:id], active: true)
+    render json: @cargapp_payments
+  end
+
   # GET /cargapp_payments/1
   # GET /cargapp_payments/1.json
   def show

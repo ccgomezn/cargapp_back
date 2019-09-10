@@ -21,6 +21,12 @@ class Api::V1::PaymentsController < ApplicationController
     render json: @payments
   end
 
+  def find_user
+    user = User.find_by(id: parans[:user][:id])
+    payments = user.payments.where(active: true)
+    render json: @payments
+  end
+
   # GET /payments/1
   # GET /payments/1.json
   def show

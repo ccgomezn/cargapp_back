@@ -62,6 +62,12 @@ class Api::V1::FavoriteRoutesController < ApplicationController
     render json: @favorite_routes
   end
 
+  def find_user
+    user = User.find_by(id: params[:user][:id])
+    @favorite_routes = user.favorite_routes.where(active: true)
+    render json: @favorite_routes
+  end
+
   # GET /favorite_routes/1
   # GET /favorite_routes/1.json
   def show
