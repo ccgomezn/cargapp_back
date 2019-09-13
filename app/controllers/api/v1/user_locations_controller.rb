@@ -4,6 +4,51 @@ class Api::V1::UserLocationsController < ApplicationController
   before_action :doorkeeper_authorize!
   before_action :set_user
 
+
+
+  swagger_controller :userLocation, 'User Locations Management'
+
+  swagger_api :index do
+    summary 'Fetches all user Location items'
+    notes 'This lists all the user locations'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active User Location items'
+    notes 'This lists all the active user locations'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Service Location'
+    param :form, 'user_location[longitude]', :string, :required, 'Longitude'
+    param :form, 'user_location[latitude]', :string, :required, 'Latitude'
+    param :form, 'user_location[city_id]', :file, :required, 'Id of city related'
+    param :form, 'user_location[user_id]', :integer, :required, 'Id of user related'
+    param :form, 'user_location[active]', :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing User Location'
+    param :path, :id, :integer, :required, "User Location Id"
+    param :form, 'user_location[longitude]', :string, :optional, 'Longitude'
+    param :form, 'user_location[latitude]', :string, :optional, 'Latitude'
+    param :form, 'user_location[city_id]', :file, :optional, 'Id of city related'
+    param :form, 'user_location[user_id]', :integer, :optional, 'Id of user related'
+    param :form, 'user_location[active]', :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing User Location"
+    param :path, :id, :integer, :optional, "User Location Id"
+    response :unauthorized
+    response :not_found
+  end
+
   # GET /user_locations
   # GET /user_locations.json
   def index

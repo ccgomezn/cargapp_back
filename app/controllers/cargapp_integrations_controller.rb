@@ -62,13 +62,14 @@ class CargappIntegrationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_cargapp_integration
-      @cargapp_integration = CargappIntegration.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def cargapp_integration_params
-      params.require(:cargapp_integration).permit(:name, :description, :provider, :code, :url, :url_provider, :url_production, :url_develop, :email, :username, :password, :phone, :pin, :token, :app_id, :client_id, :api_key, :user_id, :active)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_cargapp_integration
+    @cargapp_integration = CargappIntegration.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def cargapp_integration_params
+    params.require(:cargapp_integration).permit(:name, :description, :provider, :code, :url, :url_provider, :url_production, :url_develop, :email, :username, :password, :phone, :pin, :token, :app_id, :client_id, :api_key, :user_id, :active)
+  end
 end

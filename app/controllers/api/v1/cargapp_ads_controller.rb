@@ -4,6 +4,66 @@ class Api::V1::CargappAdsController < ApplicationController
   before_action :doorkeeper_authorize!
   before_action :set_user
 
+
+
+  swagger_controller :cargappAds, 'Cargapp Ads Management'
+
+  swagger_api :index do
+    summary 'Fetches all Cargapp Ads items'
+    notes 'This lists all the cargapp ads'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Cargapp Ads items'
+    notes 'This lists all the active cargapp ads'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Bank Account'
+    param :form, "cargapp_ad[name]", :string, :required, 'Name'
+    param :form, "cargapp_ad[price]", :string, :required, 'Price'
+    param :form, "cargapp_ad[price]", :string, :required, 'Description'
+    param :form, "cargapp_ad[body]", :string, :required, 'Body'
+    param :form, "cargapp_ad[image]", :file, :required, 'Image'
+    param :form, "cargapp_ad[url]", :string, :required, 'Url'
+    param :form, "cargapp_ad[media]", :file, :required, 'Media'
+    param :form, "cargapp_ad[have_discoun]", :boolean, :required, 'Have discount'
+    param :form, "cargapp_ad[is_percentage]", :string, :required, 'Is percentage'
+    param :form, "cargapp_ad[discoun]", :string, :required, 'Discount'
+    param :form, "cargapp_ad[user_id]", :integer, :required, 'Id of user related'
+    param :form, "cargapp_ad[active]", :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Cargapp Ad'
+    param :path, :id, :integer, :required, "Cargapp Ad Id"
+    param :form, "cargapp_ad[name]", :string, :optional, 'Name'
+    param :form, "cargapp_ad[price]", :string, :optional, 'Price'
+    param :form, "cargapp_ad[price]", :string, :optional, 'Description'
+    param :form, "cargapp_ad[body]", :string, :optional, 'Body'
+    param :form, "cargapp_ad[image]", :file, :optional, 'Image'
+    param :form, "cargapp_ad[url]", :string, :optional, 'Url'
+    param :form, "cargapp_ad[media]", :file, :optional, 'Media'
+    param :form, "cargapp_ad[have_discoun]", :boolean, :optional, 'Have discount'
+    param :form, "cargapp_ad[is_percentage]", :string, :optional, 'Is percentage'
+    param :form, "cargapp_ad[discoun]", :string, :optional, 'Discount'
+    param :form, "cargapp_ad[user_id]", :integer, :optional, 'Id of user related'
+    param :form, "cargapp_ad[active]", :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Cargapp Ad"
+    param :path, :id, :integer, :optional, "Cargapp Ad Id"
+    response :unauthorized
+    response :not_found
+  end
+
+
   # GET /cargapp_ads
   # GET /cargapp_ads.json
   def index

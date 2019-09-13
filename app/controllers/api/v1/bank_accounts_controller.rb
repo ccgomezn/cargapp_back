@@ -4,6 +4,53 @@ class Api::V1::BankAccountsController < ApplicationController
   before_action :doorkeeper_authorize!
   before_action :set_user
 
+
+
+  swagger_controller :bankAccounts, 'Bank Accounts Management'
+
+  swagger_api :index do
+    summary 'Fetches all Bank Accounts items'
+    notes 'This lists all the bank accounts'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Bank accounts items'
+    notes 'This lists all the active bank accounts'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Bank Account'
+    param :form, "bank_account[account_number]", :string, :required, 'Account Number'
+    param :form, "bank_account[account_type]", :string, :required, 'Account Type'
+    param :form, "bank_account[bank]", :string, :required, 'Bank'
+    param :form, "bank_account[user_id]", :string, :required, 'Id related to user'
+    param :form, "bank_account[statu_id]", :string, :required, 'Id related to status'
+    param :form, "bank_account[active]", :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Bank Account'
+    param :path, :id, :integer, :required, "Bank Account Id"
+    param :form, "bank_account[account_number]", :string, :optional, 'Account Number'
+    param :form, "bank_account[account_type]", :string, :optional, 'Account Type'
+    param :form, "bank_account[bank]", :string, :optional, 'Bank'
+    param :form, "bank_account[user_id]", :string, :optional, 'Id related to user'
+    param :form, "bank_account[statu_id]", :string, :optional, 'Id related to status'
+    param :form, "bank_account[active]", :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Bank Account"
+    param :path, :id, :integer, :optional, "Bank Account Id"
+    response :unauthorized
+    response :not_found
+  end
+
   # GET /bank_accounts
   # GET /bank_accounts.json
   def index

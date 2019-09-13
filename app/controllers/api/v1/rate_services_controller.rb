@@ -4,6 +4,58 @@ class Api::V1::RateServicesController < ApplicationController
   before_action :doorkeeper_authorize!
   before_action :set_user
 
+
+  swagger_controller :rateServices, 'Rate Services Management'
+
+  swagger_api :index do
+    summary 'Fetches all Rate service items'
+    notes 'This lists all the Rate services'
+  end
+
+  swagger_api :active do
+    summary 'Fetches all active Rate service items'
+    notes 'This lists all the active rate services'
+  end
+
+  swagger_api :create do
+    summary 'Creates a new Rate Service'
+    param :form, 'rate_service[service_point]', :integer, :required, 'Service point'
+    param :form, 'rate_service[driver_point]', :integer, :required, 'Driver point'
+    param :form, 'rate_service[point]', :string, :required, 'Point'
+    param :form, 'rate_service[service_id]', :string, :required, 'Id of service related'
+    param :form, 'rate_service[user_id]', :integer, :required, 'Id of user related'
+    param :form, 'rate_service[driver_id]', :boolean, :required, 'Id of driver related'
+    param :form, 'rate_service[active]', :boolean, :required, 'State of activation'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update do
+    summary 'Updates an existing Rate Service'
+    param :path, :id, :integer, :required, "Rate Service Id"
+    param :form, 'rate_service[service_point]', :integer, :optional, 'Service point'
+    param :form, 'rate_service[driver_point]', :integer, :optional, 'Driver point'
+    param :form, 'rate_service[point]', :string, :optional, 'Point'
+    param :form, 'rate_service[service_id]', :string, :optional, 'Id of service related'
+    param :form, 'rate_service[user_id]', :integer, :optional, 'Id of user related'
+    param :form, 'rate_service[driver_id]', :boolean, :optional, 'Id of driver related'
+    param :form, 'rate_service[active]', :boolean, :optional, 'State of activation'
+    response :unauthorized
+    response :not_found
+    response :not_acceptable
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Rate Service"
+    param :path, :id, :integer, :optional, "Rate service Id"
+    response :unauthorized
+    response :not_found
+  end
+
+
+
+
+
   # GET /rate_services
   # GET /rate_services.json
   def index
