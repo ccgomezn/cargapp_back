@@ -145,6 +145,34 @@ class Api::V1::ReportsController < ApplicationController
     render json: @result
   end
 
+  def find_user
+    user = User.find_by(id: params[:user][:id])
+    @reports = user.reports
+    @result = []
+    @reports.each do |report|
+      @obj = {
+        id: report.id,
+        name: report.name,
+        origin: report.origin,
+        destination: report.destination,
+        report_type: report.report_type,
+        cause: report.cause,
+        sense: report.sense,
+        novelty: report.novelty,
+        geolocation: report.geolocation,
+        image: report.image.attached? ? url_for(report.image) : nil,
+        start_date: report.start_date,
+        end_date: report.end_date,
+        active: report.active,        
+        user_id: report.user_id,
+        created_at: report.created_at,
+        updated_at: report.updated_at
+      }
+      @result << @obj
+    end
+    render json: @result
+  end
+
   # GET /reports/1
   # GET /reports/1.json
   def show

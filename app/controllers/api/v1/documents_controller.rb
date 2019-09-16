@@ -123,6 +123,29 @@ class Api::V1::DocumentsController < ApplicationController
     render json: @result
   end
 
+  def find_user
+    user = User.find_by(id: params[:user][:id])
+    @documents = user.documents.where(active: true)
+    @result = []
+    @documents.each do |document|
+      @obj = {
+        id: document.id,
+        document_id: document.document_id,
+        document_type_id: document.document_type_id,
+        expire_date: document.expire_date,
+        statu_id: document.statu_id,
+        user_id: document.user_id,
+        active: document.active,
+        approved: document.approved,
+        file: document.file.attached? ? url_for(document.file) : nil,
+        created_at: document.created_at,
+        updated_at: document.updated_at
+      }
+      @result << @obj
+    end
+    render json: @result
+  end
+
   # GET /documents/1
   # GET /documents/1.json
   def show

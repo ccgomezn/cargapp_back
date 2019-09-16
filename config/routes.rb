@@ -94,6 +94,7 @@ Rails.application.routes.draw do
       resources :tickets
       get 'documents/me' => 'documents#me'
       get 'documents/active' => 'documents#active'
+      post 'documents/find_user' => 'documents#find_user'      
       resources :documents
       get 'vehicles/me' => 'vehicles#me'
       get 'vehicles/active' => 'vehicles#active'
@@ -120,6 +121,7 @@ Rails.application.routes.draw do
       resources :user_prizes
       get 'reports/me' => 'reports#me'
       get 'reports/active' => 'reports#active'
+      post 'reports/find_user' => 'reports#find_user'
       resources :reports
       get 'payment_methods/active' => 'payment_methods#active'
       resources :payment_methods
@@ -136,6 +138,7 @@ Rails.application.routes.draw do
       resources :service_documents
       get 'favorite_routes/me' => 'favorite_routes#me' #Last Service active
       get 'favorite_routes/active' => 'favorite_routes#active'
+      post 'favorite_routes/find_user' => 'favorite_routes#find_user'
       resources :favorite_routes
       get 'cargapp_ads/me' => 'cargapp_ads#me'
       get 'cargapp_ads/active' => 'cargapp_ads#active'
@@ -153,10 +156,15 @@ Rails.application.routes.draw do
       get 'rate_services/active' => 'rate_services#active'
       resources :rate_services
       get 'cargapp_payments/me' => 'cargapp_payments#me'
+      post 'cargapp_payments/find_user' => 'cargapp_payments#find_user'
+      post 'cargapp_payments/find_receiver' => 'cargapp_payments#find_receiver'
+      post 'cargapp_payments/find_generator' => 'cargapp_payments#find_generator'
+      post 'cargapp_payments/find_company' => 'cargapp_payments#find_company'
       get 'cargapp_payments/active' => 'cargapp_payments#active'
       resources :cargapp_payments
       get 'payments/me' => 'payments#me'
       get 'payments/active' => 'payments#active'
+      post 'payments/find_user' => 'payments#find_user'
       resources :payments
     end
   end
