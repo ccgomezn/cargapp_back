@@ -52,6 +52,18 @@ class Api::V1::RateServicesController < ApplicationController
     response :not_found
   end
 
+  swagger_api :me do
+    summary "Shows mine rate_services"
+    response :unauthorized
+  end
+
+  swagger_api :show do
+    summary "Shows Rate Service"
+    param :path, :id, :integer, :optional, "Rate service Id"
+    response :unauthorized
+    response :not_found
+  end
+
 
 
 

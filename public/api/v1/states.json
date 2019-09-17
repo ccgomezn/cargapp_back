@@ -89,6 +89,37 @@
       "path": "/api/v1/states/{id}",
       "operations": [
         {
+          "summary": "Shows an State",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "State Id",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::States#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/states/{id}",
+      "operations": [
+        {
           "summary": "Updates an existing State",
           "parameters": [
             {

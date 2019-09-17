@@ -5,6 +5,23 @@
   "resourcePath": "user_coupons",
   "apis": [
     {
+      "path": "/api/v1/user_coupons/me",
+      "operations": [
+        {
+          "summary": "Shows mine existing User-Coupons",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "nickname": "Api::V1::UserCoupons#me",
+          "method": "get"
+        }
+      ]
+    },
+    {
       "path": "/api/v1/user_coupons/active",
       "operations": [
         {
@@ -96,6 +113,37 @@
           ],
           "nickname": "Api::V1::UserCoupons#create",
           "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/user_coupons/{id}",
+      "operations": [
+        {
+          "summary": "Shows an User-Coupon",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "User-Coupon Id",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::UserCoupons#show",
+          "method": "get"
         }
       ]
     },

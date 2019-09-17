@@ -47,6 +47,13 @@ class Api::V1::StatesController < ApplicationController
     response :not_found
   end
 
+  swagger_api :show do
+    summary "Shows an State"
+    param :path, :id, :integer, :optional, "State Id"
+    response :unauthorized
+    response :not_found
+  end
+
   # GET /states
   # GET /states.json
   def index

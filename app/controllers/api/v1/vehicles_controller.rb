@@ -60,6 +60,16 @@ class Api::V1::VehiclesController < ApplicationController
     response :unauthorized
     response :not_found
   end
+  swagger_api :show do
+    summary "Shoes a Vehicle"
+    param :path, :id, :integer, :optional, "Vehicle Id"
+    response :unauthorized
+    response :not_found
+  end
+  swagger_api :me do
+    summary "Shows mine Vehicles"
+    response :unauthorized
+  end
 
 
   # GET /vehicles

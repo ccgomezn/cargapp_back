@@ -55,7 +55,12 @@ class Api::V1::CargappPaymentsController < ApplicationController
     response :not_found
     response :not_acceptable
   end
+  swagger_api :show do
 
+    summary 'Fetches detailed Payment items'
+    param :path, :id, :integer, :optional, "Cargapp Payment Id"
+    notes 'This lists detailed payments'
+  end
   swagger_api :destroy do
     summary "Deletes an existing Cargapp Payment"
     param :path, :id, :integer, :optional, "Cargapp Payment Id"

@@ -62,7 +62,16 @@ class Api::V1::CountriesController < ApplicationController
     response :unauthorized
     response :not_found
   end
+  swagger_api :show do
+    summary 'Fetches detailed Country items'
+    param :path, :id, :integer, :optional, "Country Id"
+    notes 'This lists detailed coutries'
+  end
 
+  swagger_api :migration do
+    summary 'Migrates all Countries'
+    notes 'This migrates all countries'
+  end
   # GET /countries
   # GET /countries.json
   def index

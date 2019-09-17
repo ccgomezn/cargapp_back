@@ -5,6 +5,17 @@
   "resourcePath": "coupons",
   "apis": [
     {
+      "path": "/api/v1/coupons/me",
+      "operations": [
+        {
+          "summary": "Fetches mine Coupon items",
+          "notes": "This lists mine coupons",
+          "nickname": "Api::V1::Coupons#me",
+          "method": "get"
+        }
+      ]
+    },
+    {
       "path": "/api/v1/coupons/active",
       "operations": [
         {
@@ -110,6 +121,26 @@
           ],
           "nickname": "Api::V1::Coupons#create",
           "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/coupons/{id}",
+      "operations": [
+        {
+          "summary": "Fetches detailed Coupon items",
+          "notes": "This lists detailed coupons",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Coupon Id",
+              "required": false
+            }
+          ],
+          "nickname": "Api::V1::Coupons#show",
+          "method": "get"
         }
       ]
     },

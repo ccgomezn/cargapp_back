@@ -82,6 +82,26 @@
       "path": "/api/v1/document_types/{id}",
       "operations": [
         {
+          "summary": "Fetches detailed Document Type items",
+          "notes": "This lists detailed document types",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Document Type Id",
+              "required": false
+            }
+          ],
+          "nickname": "Api::V1::DocumentTypes#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/document_types/{id}",
+      "operations": [
+        {
           "summary": "Updates an existing Document Type",
           "parameters": [
             {

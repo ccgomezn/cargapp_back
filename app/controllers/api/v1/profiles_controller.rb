@@ -53,6 +53,17 @@ class Api::V1::ProfilesController < ApplicationController
     response :not_found
   end
 
+  swagger_api :me do
+    summary "Show mine Profiles"
+    response :unauthorized
+  end
+
+  swagger_api :show do
+    summary "Show a Profile"
+    param :path, :id, :integer, :optional, "Profile Id"
+    response :unauthorized
+    response :not_found
+  end
 
   # GET /profiles
   # GET /profiles.json

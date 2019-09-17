@@ -2,69 +2,87 @@
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
   "basePath": "",
-  "resourcePath": "vehicle_types",
+  "resourcePath": "bank_accounts",
   "apis": [
     {
-      "path": "/api/v1/vehicle_types/active",
+      "path": "/api/v1/bank_accounts/me",
       "operations": [
         {
-          "summary": "Fetches all active Vehicle Types items",
-          "notes": "This lists all the active vehicle types",
-          "nickname": "Api::V1::VehicleTypes#active",
+          "summary": "Fetches mine Bank Accounts items",
+          "notes": "This lists mine the bank accounts",
+          "nickname": "Api::V1::BankAccounts#me",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/vehicle_types",
+      "path": "/api/v1/bank_accounts/active",
       "operations": [
         {
-          "summary": "Fetches all Vehicle Types items",
-          "notes": "This lists all the vehicle types",
-          "nickname": "Api::V1::VehicleTypes#index",
+          "summary": "Fetches all active Bank accounts items",
+          "notes": "This lists all the active bank accounts",
+          "nickname": "Api::V1::BankAccounts#active",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/vehicle_types",
+      "path": "/api/v1/bank_accounts",
       "operations": [
         {
-          "summary": "Creates a new Vehicle Type",
+          "summary": "Fetches all Bank Accounts items",
+          "notes": "This lists all the bank accounts",
+          "nickname": "Api::V1::BankAccounts#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/bank_accounts",
+      "operations": [
+        {
+          "summary": "Creates a new Bank Account",
           "parameters": [
             {
               "paramType": "form",
-              "name": "vehicle_type[name]",
+              "name": "bank_account[account_number]",
               "type": "string",
-              "description": "Name",
+              "description": "Account Number",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "vehicle_type[code]",
+              "name": "bank_account[account_type]",
               "type": "string",
-              "description": "Code",
+              "description": "Account Type",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "vehicle_type[description]",
+              "name": "bank_account[bank]",
               "type": "string",
-              "description": "Description",
+              "description": "Bank",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "vehicle_type[icon]",
+              "name": "bank_account[user_id]",
               "type": "string",
-              "description": "Icon",
+              "description": "Id related to user",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "vehicle_type[active]",
+              "name": "bank_account[statu_id]",
+              "type": "string",
+              "description": "Id related to status",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "bank_account[active]",
               "type": "boolean",
-              "description": "Activation State",
+              "description": "State of activation",
               "required": true
             }
           ],
@@ -80,88 +98,84 @@
               "message": "Not Acceptable"
             }
           ],
-          "nickname": "Api::V1::VehicleTypes#create",
+          "nickname": "Api::V1::BankAccounts#create",
           "method": "post"
         }
       ]
     },
     {
-      "path": "/api/v1/vehicle_types/{id}",
+      "path": "/api/v1/bank_accounts/{id}",
       "operations": [
         {
-          "summary": "Show a Vehicle Type",
+          "summary": "Fetches detailed Bank Accounts items",
+          "notes": "This lists detailed bank accounts",
           "parameters": [
             {
               "paramType": "path",
               "name": "id",
               "type": "integer",
-              "description": "Vehicle Type Id",
-              "required": false
+              "description": "Bank Account Id",
+              "required": true
             }
           ],
-          "responseMessages": [
-            {
-              "code": 401,
-              "responseModel": null,
-              "message": "Unauthorized"
-            },
-            {
-              "code": 404,
-              "responseModel": null,
-              "message": "Not Found"
-            }
-          ],
-          "nickname": "Api::V1::VehicleTypes#show",
+          "nickname": "Api::V1::BankAccounts#show",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/vehicle_types/{id}",
+      "path": "/api/v1/bank_accounts/{id}",
       "operations": [
         {
-          "summary": "Updates an existing Vehicle Type",
+          "summary": "Updates an existing Bank Account",
           "parameters": [
             {
               "paramType": "path",
               "name": "id",
               "type": "integer",
-              "description": "Vehicle Type Id",
+              "description": "Bank Account Id",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "vehicle_type[name]",
+              "name": "bank_account[account_number]",
               "type": "string",
-              "description": "Name",
+              "description": "Account Number",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "vehicle_type[code]",
+              "name": "bank_account[account_type]",
               "type": "string",
-              "description": "Code",
+              "description": "Account Type",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "vehicle_type[description]",
+              "name": "bank_account[bank]",
               "type": "string",
-              "description": "Description",
+              "description": "Bank",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "vehicle_type[icon]",
+              "name": "bank_account[user_id]",
               "type": "string",
-              "description": "Icon",
+              "description": "Id related to user",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "vehicle_type[active]",
+              "name": "bank_account[statu_id]",
+              "type": "string",
+              "description": "Id related to status",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "bank_account[active]",
               "type": "boolean",
-              "description": "Activation State",
+              "description": "State of activation",
               "required": false
             }
           ],
@@ -182,22 +196,22 @@
               "message": "Not Acceptable"
             }
           ],
-          "nickname": "Api::V1::VehicleTypes#update",
+          "nickname": "Api::V1::BankAccounts#update",
           "method": "patch"
         }
       ]
     },
     {
-      "path": "/api/v1/vehicle_types/{id}",
+      "path": "/api/v1/bank_accounts/{id}",
       "operations": [
         {
-          "summary": "Deletes an existing Vehicle Type",
+          "summary": "Deletes an existing Bank Account",
           "parameters": [
             {
               "paramType": "path",
               "name": "id",
               "type": "integer",
-              "description": "Vehicle Type Id",
+              "description": "Bank Account Id",
               "required": false
             }
           ],
@@ -213,7 +227,7 @@
               "message": "Not Found"
             }
           ],
-          "nickname": "Api::V1::VehicleTypes#destroy",
+          "nickname": "Api::V1::BankAccounts#destroy",
           "method": "delete"
         }
       ]

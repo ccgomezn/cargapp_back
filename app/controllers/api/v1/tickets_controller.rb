@@ -50,6 +50,18 @@ class Api::V1::TicketsController < ApplicationController
     response :not_found
   end
 
+  swagger_api :show do
+    summary "Shows a Ticket"
+    param :path, :id, :integer, :optional, "Ticket Id"
+    response :unauthorized
+    response :not_found
+  end
+
+  swagger_api :me do
+    summary "Shows mine existing Ticket"
+    response :unauthorized
+  end
+
 
 
 

@@ -49,6 +49,18 @@ class Api::V1::UserLocationsController < ApplicationController
     response :not_found
   end
 
+  swagger_api :show do
+    summary "Shows an User Location"
+    param :path, :id, :integer, :optional, "User Location Id"
+    response :unauthorized
+    response :not_found
+  end
+
+  swagger_api :me do
+    summary "Shows mine existing User Locations"
+    response :unauthorized
+  end
+
   # GET /user_locations
   # GET /user_locations.json
   def index

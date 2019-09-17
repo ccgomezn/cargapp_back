@@ -16,6 +16,17 @@
       ]
     },
     {
+      "path": "/api/v1/countries/migration",
+      "operations": [
+        {
+          "summary": "Migrates all Countries",
+          "notes": "This migrates all countries",
+          "nickname": "Api::V1::Countries#migration",
+          "method": "get"
+        }
+      ]
+    },
+    {
       "path": "/api/v1/countries",
       "operations": [
         {
@@ -138,6 +149,26 @@
           ],
           "nickname": "Api::V1::Countries#create",
           "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/countries/{id}",
+      "operations": [
+        {
+          "summary": "Fetches detailed Country items",
+          "notes": "This lists detailed coutries",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Country Id",
+              "required": false
+            }
+          ],
+          "nickname": "Api::V1::Countries#show",
+          "method": "get"
         }
       ]
     },

@@ -45,6 +45,23 @@ class Api::V1::FavoriteRoutesController < ApplicationController
     response :not_found
   end
 
+  swagger_api :me do
+    summary 'Fetches mine Favorite route items'
+    notes 'This lists mine favorite routes'
+  end
+
+  swagger_api :show do
+    summary 'Fetches detailed Favorite route items'
+    param :path, :id, :integer, :optional, "Favorite route Id"
+    notes 'This lists detailed favorite routes'
+  end
+
+  swagger_api :find_user do
+    summary 'Fetches detailed Favorite route items of an user'
+    param :path, :id, :integer, :optional, "User Id"
+    notes 'This lists the favorite routes of an user'
+  end
+
   # GET /favorite_routes
   # GET /favorite_routes.json
   def index

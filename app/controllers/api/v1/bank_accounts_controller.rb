@@ -13,6 +13,17 @@ class Api::V1::BankAccountsController < ApplicationController
     notes 'This lists all the bank accounts'
   end
 
+  swagger_api :me do
+    summary 'Fetches mine Bank Accounts items'
+    notes 'This lists mine the bank accounts'
+  end
+
+  swagger_api :show do
+    summary 'Fetches detailed Bank Accounts items'
+    param :path, :id, :integer, :required, "Bank Account Id"
+    notes 'This lists detailed bank accounts'
+  end
+
   swagger_api :active do
     summary 'Fetches all active Bank accounts items'
     notes 'This lists all the active bank accounts'

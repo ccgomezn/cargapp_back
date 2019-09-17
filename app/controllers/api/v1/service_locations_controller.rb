@@ -50,6 +50,18 @@ class Api::V1::ServiceLocationsController < ApplicationController
     response :not_found
   end
 
+  swagger_api :me do
+    summary "Shows mine Service Location"
+    response :unauthorized
+  end
+
+  swagger_api :show do
+    summary "Shows Service Location"
+    param :path, :id, :integer, :optional, "Service Location Id"
+    response :unauthorized
+    response :not_found
+  end
+
   # GET /service_locations
   # GET /service_locations.json
   def index

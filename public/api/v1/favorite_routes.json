@@ -5,6 +5,17 @@
   "resourcePath": "favorite_routes",
   "apis": [
     {
+      "path": "/api/v1/favorite_routes/me",
+      "operations": [
+        {
+          "summary": "Fetches mine Favorite route items",
+          "notes": "This lists mine favorite routes",
+          "nickname": "Api::V1::FavoriteRoutes#me",
+          "method": "get"
+        }
+      ]
+    },
+    {
       "path": "/api/v1/favorite_routes/active",
       "operations": [
         {
@@ -12,6 +23,20 @@
           "notes": "This lists all the active favorite routes",
           "nickname": "Api::V1::FavoriteRoutes#active",
           "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/favorite_routes/find_user",
+      "operations": [
+        {
+          "summary": "Fetches detailed Favorite route items of an user",
+          "notes": "This lists the favorite routes of an user",
+          "parameters": [
+
+          ],
+          "nickname": "Api::V1::FavoriteRoutes#find_user",
+          "method": "post"
         }
       ]
     },
@@ -75,6 +100,26 @@
           ],
           "nickname": "Api::V1::FavoriteRoutes#create",
           "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/favorite_routes/{id}",
+      "operations": [
+        {
+          "summary": "Fetches detailed Favorite route items",
+          "notes": "This lists detailed favorite routes",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Favorite route Id",
+              "required": false
+            }
+          ],
+          "nickname": "Api::V1::FavoriteRoutes#show",
+          "method": "get"
         }
       ]
     },

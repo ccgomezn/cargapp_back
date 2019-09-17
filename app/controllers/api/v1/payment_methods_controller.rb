@@ -33,7 +33,7 @@ class Api::V1::PaymentMethodsController < ApplicationController
 
   swagger_api :update do
     summary 'Updates an existing Parameter'
-    param :path, :id, :integer, :required, "Payment method Id"
+    param :path, :id, :integer, :required, 'Payment method Id'
     param :form, 'payment_method[name]', :string, :optional, 'Name'
     param :form, 'payment_method[uuid]', :string, :optional, 'Uuid'
     param :form, 'payment_method[description]', :string, :optional, 'Description'
@@ -50,8 +50,15 @@ class Api::V1::PaymentMethodsController < ApplicationController
   end
 
   swagger_api :destroy do
-    summary "Deletes an existing Payment Method"
-    param :path, :id, :integer, :optional, "Payment Method Id"
+    summary 'Deletes an existing Payment Method'
+    param :path, :id, :integer, :optional, 'Payment Method Id'
+    response :unauthorized
+    response :not_found
+  end
+
+  swagger_api :show do
+    summary 'Fetches detailed Payment Method'
+    param :path, :id, :integer, :optional, 'Payment Method Id'
     response :unauthorized
     response :not_found
   end
@@ -131,7 +138,7 @@ class Api::V1::PaymentMethodsController < ApplicationController
         if has_permission
           true
         else
-          response = { response: "Does not have permissions" }
+          response = { response: 'Does not have permissions' }
           render json: response, status: :unprocessable_entity
         end
       else
@@ -150,7 +157,7 @@ class Api::V1::PaymentMethodsController < ApplicationController
         if has_permission
           true
         else
-          response = { response: "Does not have permissions" }
+          response = { response: 'Does not have permissions' }
           render json: response, status: :unprocessable_entity
         end
       end

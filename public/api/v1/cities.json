@@ -89,6 +89,26 @@
       "path": "/api/v1/cities/{id}",
       "operations": [
         {
+          "summary": "Fetches detailed City items",
+          "notes": "This lists detailed cities",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "City Id",
+              "required": false
+            }
+          ],
+          "nickname": "Api::V1::Cities#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/cities/{id}",
+      "operations": [
+        {
           "summary": "Updates an existing City",
           "parameters": [
             {

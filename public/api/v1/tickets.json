@@ -5,6 +5,23 @@
   "resourcePath": "tickets",
   "apis": [
     {
+      "path": "/api/v1/tickets/me",
+      "operations": [
+        {
+          "summary": "Shows mine existing Ticket",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "nickname": "Api::V1::Tickets#me",
+          "method": "get"
+        }
+      ]
+    },
+    {
       "path": "/api/v1/tickets/active",
       "operations": [
         {
@@ -89,6 +106,37 @@
           ],
           "nickname": "Api::V1::Tickets#create",
           "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/tickets/{id}",
+      "operations": [
+        {
+          "summary": "Shows a Ticket",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Ticket Id",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::Tickets#show",
+          "method": "get"
         }
       ]
     },

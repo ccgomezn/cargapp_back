@@ -5,6 +5,17 @@
   "resourcePath": "challenges",
   "apis": [
     {
+      "path": "/api/v1/challenges/me",
+      "operations": [
+        {
+          "summary": "Fetches mine Challenge items",
+          "notes": "This lists mine challenges",
+          "nickname": "Api::V1::Challenges#me",
+          "method": "get"
+        }
+      ]
+    },
+    {
       "path": "/api/v1/challenges/active",
       "operations": [
         {
@@ -89,6 +100,26 @@
           ],
           "nickname": "Api::V1::Challenges#create",
           "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/challenges/{id}",
+      "operations": [
+        {
+          "summary": "Fetches detailed Challenge items",
+          "notes": "This lists detailed challenges",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Challenge Id",
+              "required": false
+            }
+          ],
+          "nickname": "Api::V1::Challenges#show",
+          "method": "get"
         }
       ]
     },

@@ -2,135 +2,125 @@
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
   "basePath": "",
-  "resourcePath": "vehicles",
+  "resourcePath": "cargapp_payments",
   "apis": [
     {
-      "path": "/api/v1/vehicles/me",
+      "path": "/api/v1/cargapp_payments/active",
       "operations": [
         {
-          "summary": "Shows mine Vehicles",
-          "responseMessages": [
-            {
-              "code": 401,
-              "responseModel": null,
-              "message": "Unauthorized"
-            }
-          ],
-          "nickname": "Api::V1::Vehicles#me",
+          "summary": "Fetches all active Cargapp Payments items",
+          "notes": "This lists all the active cargapp payments",
+          "nickname": "Api::V1::CargappPayments#active",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/vehicles/active",
+      "path": "/api/v1/cargapp_payments",
       "operations": [
         {
-          "summary": "Fetches all active Vehicle items",
-          "notes": "This lists all the active Vehicles",
-          "nickname": "Api::V1::Vehicles#active",
+          "summary": "Fetches all Cargapp Payments items",
+          "notes": "This lists all the cargapp payments",
+          "nickname": "Api::V1::CargappPayments#index",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/vehicles",
+      "path": "/api/v1/cargapp_payments",
       "operations": [
         {
-          "summary": "Fetches all Vehicle items",
-          "notes": "This lists all the Vehicles",
-          "nickname": "Api::V1::Vehicles#index",
-          "method": "get"
-        }
-      ]
-    },
-    {
-      "path": "/api/v1/vehicles",
-      "operations": [
-        {
-          "summary": "Creates a new Vehicle",
+          "summary": "Creates a new Cargapp Payment",
           "parameters": [
             {
               "paramType": "form",
-              "name": "vehicle[brand]",
+              "name": "cargapp_payment[uuid]",
               "type": "string",
-              "description": "Brand",
+              "description": "Uuid",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "vehicle[model]",
+              "name": "cargapp_payment[amount]",
               "type": "string",
-              "description": "Model",
+              "description": "Amount",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "vehicle[model_year]",
+              "name": "cargapp_payment[transaction_code]",
               "type": "string",
-              "description": "Model Year",
+              "description": "Transaction code",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "vehicle[color]",
+              "name": "cargapp_payment[observation]",
               "type": "string",
-              "description": "Color",
+              "description": "Observation",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "vehicle[plate]",
+              "name": "cargapp_payment[payment_method_id]",
               "type": "string",
-              "description": "Plate",
+              "description": "Id of payment method related",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "vehicle[chassis]",
+              "name": "cargapp_payment[statu_id]",
               "type": "string",
-              "description": "Chassis",
+              "description": "Id of status related",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "vehicle[owner_vehicle]",
+              "name": "cargapp_payment[generator_id]",
               "type": "string",
-              "description": "Id of the vehicles owner",
+              "description": "Id of generator",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "vehicle[vehicle_type_id]",
-              "type": "integer",
-              "description": "Id of the vehicle type",
+              "name": "cargapp_payment[receiver_id]",
+              "type": "string",
+              "description": "Id of receiver",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "vehicle[owner_document_type_id]",
-              "type": "integer",
-              "description": "Document type of the owner",
+              "name": "cargapp_payment[user_id]",
+              "type": "string",
+              "description": "Id of user",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "vehicle[owner_document_id]",
-              "type": "integer",
-              "description": "Id of the driver",
+              "name": "cargapp_payment[bank_account_id]",
+              "type": "string",
+              "description": "Id of Bank Account",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "vehicle[user_id]",
-              "type": "integer",
-              "description": "Id of the user",
+              "name": "cargapp_payment[service_id]",
+              "type": "string",
+              "description": "Id of service related",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "vehicle[active]",
+              "name": "cargapp_payment[company_id]",
+              "type": "string",
+              "description": "Id of company related",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_payment[active]",
               "type": "boolean",
-              "description": "Activation state",
+              "description": "State of activation",
               "required": true
             }
           ],
@@ -146,22 +136,133 @@
               "message": "Not Acceptable"
             }
           ],
-          "nickname": "Api::V1::Vehicles#create",
+          "nickname": "Api::V1::CargappPayments#create",
           "method": "post"
         }
       ]
     },
     {
-      "path": "/api/v1/vehicles/{id}",
+      "path": "/api/v1/cargapp_payments/{id}",
       "operations": [
         {
-          "summary": "Shoes a Vehicle",
+          "summary": "Fetches detailed Payment items",
+          "notes": "This lists detailed payments",
           "parameters": [
             {
               "paramType": "path",
               "name": "id",
               "type": "integer",
-              "description": "Vehicle Id",
+              "description": "Cargapp Payment Id",
+              "required": false
+            }
+          ],
+          "nickname": "Api::V1::CargappPayments#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/cargapp_payments/{id}",
+      "operations": [
+        {
+          "summary": "Updates an existing Cargapp Payment",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Cargapp Payment Id",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_payment[uuid]",
+              "type": "string",
+              "description": "Uuid",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_payment[amount]",
+              "type": "string",
+              "description": "Amount",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_payment[transaction_code]",
+              "type": "string",
+              "description": "Transaction code",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_payment[observation]",
+              "type": "string",
+              "description": "Observation",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_payment[payment_method_id]",
+              "type": "string",
+              "description": "Id of payment method related",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_payment[statu_id]",
+              "type": "string",
+              "description": "Id of status related",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_payment[generator_id]",
+              "type": "string",
+              "description": "Id of generator",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_payment[receiver_id]",
+              "type": "string",
+              "description": "Id of receiver",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_payment[user_id]",
+              "type": "string",
+              "description": "Id of user",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_payment[bank_account_id]",
+              "type": "string",
+              "description": "Id of Bank Account",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_payment[service_id]",
+              "type": "string",
+              "description": "Id of service related",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_payment[company_id]",
+              "type": "string",
+              "description": "Id of company related",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_payment[active]",
+              "type": "boolean",
+              "description": "State of activation",
               "required": false
             }
           ],
@@ -171,116 +272,6 @@
               "responseModel": null,
               "message": "Unauthorized"
             },
-            {
-              "code": 404,
-              "responseModel": null,
-              "message": "Not Found"
-            }
-          ],
-          "nickname": "Api::V1::Vehicles#show",
-          "method": "get"
-        }
-      ]
-    },
-    {
-      "path": "/api/v1/vehicles/{id}",
-      "operations": [
-        {
-          "summary": "Updates an existing Vehicle",
-          "parameters": [
-            {
-              "paramType": "path",
-              "name": "id",
-              "type": "integer",
-              "description": "Vehicle Id",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[brand]",
-              "type": "string",
-              "description": "Brand",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[model]",
-              "type": "string",
-              "description": "Model",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[model_year]",
-              "type": "string",
-              "description": "Model Year",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[color]",
-              "type": "string",
-              "description": "Color",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[plate]",
-              "type": "string",
-              "description": "Plate",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[chassis]",
-              "type": "string",
-              "description": "Chassis",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[owner_vehicle]",
-              "type": "string",
-              "description": "Id of the vehicles owner",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[vehicle_type_id]",
-              "type": "integer",
-              "description": "Id of the vehicle type",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[owner_document_type_id]",
-              "type": "integer",
-              "description": "Document type of the owner",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[owner_document_id]",
-              "type": "integer",
-              "description": "Id of the driver",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[user_id]",
-              "type": "integer",
-              "description": "Id of the user",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[active]",
-              "type": "boolean",
-              "description": "Activation state",
-              "required": false
-            }
-          ],
-          "responseMessages": [
             {
               "code": 404,
               "responseModel": null,
@@ -292,22 +283,22 @@
               "message": "Not Acceptable"
             }
           ],
-          "nickname": "Api::V1::Vehicles#update",
+          "nickname": "Api::V1::CargappPayments#update",
           "method": "patch"
         }
       ]
     },
     {
-      "path": "/api/v1/vehicles/{id}",
+      "path": "/api/v1/cargapp_payments/{id}",
       "operations": [
         {
-          "summary": "Deletes an existing Vehicle",
+          "summary": "Deletes an existing Cargapp Payment",
           "parameters": [
             {
               "paramType": "path",
               "name": "id",
               "type": "integer",
-              "description": "Vehicle Id",
+              "description": "Cargapp Payment Id",
               "required": false
             }
           ],
@@ -323,7 +314,7 @@
               "message": "Not Found"
             }
           ],
-          "nickname": "Api::V1::Vehicles#destroy",
+          "nickname": "Api::V1::CargappPayments#destroy",
           "method": "delete"
         }
       ]

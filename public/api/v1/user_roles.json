@@ -82,6 +82,37 @@
       "path": "/api/v1/user_roles/{id}",
       "operations": [
         {
+          "summary": "Shows an existing User-Role",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "User-Role Id",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::UserRoles#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/user_roles/{id}",
+      "operations": [
+        {
           "summary": "Updates an existing User-Role",
           "parameters": [
             {

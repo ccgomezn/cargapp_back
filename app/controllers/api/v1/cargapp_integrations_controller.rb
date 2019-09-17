@@ -16,6 +16,17 @@ class Api::V1::CargappIntegrationsController < ApplicationController
     notes 'This lists all the active cargapp integrations'
   end
 
+  swagger_api :show do
+    summary 'Fetches detailed Integration items'
+    param :path, :id, :integer, :required, "Cargapp Integration Id"
+    notes 'This lists detailed integrations'
+  end
+
+  swagger_api :me do
+    summary 'Fetches mine Integration items'
+    notes 'This lists mine integrations'
+  end
+
   swagger_api :create do
     summary 'Creates a new Cargapp Integration'
     param :form, "cargapp_integration[name]", :string, :required, 'Name'

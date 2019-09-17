@@ -50,6 +50,25 @@ class Api::V1::ServiceDocumentsController < ApplicationController
     response :not_found
   end
 
+  swagger_api :show do
+    summary "Shows Service Document"
+    param :path, :id, :integer, :optional, "Service Document Id"
+    response :unauthorized
+    response :not_found
+  end
+
+  swagger_api :me do
+    summary "Shows mine Service Document"
+    response :unauthorized
+  end
+
+  swagger_api :find_service do
+    summary "Shows Service Documents of an specific service"
+    param :path, :id, :integer, :optional, "Service Id"
+    response :unauthorized
+    response :not_found
+  end
+
   # GET /service_documents
   # GET /service_documents.json
   def index

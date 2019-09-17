@@ -56,6 +56,14 @@ class Api::V1::PrizesController < ApplicationController
     response :unauthorized
     response :not_found
   end
+
+
+  swagger_api :show do
+    summary "Show Prize"
+    param :path, :id, :integer, :optional, "Prize Id"
+    response :unauthorized
+    response :not_found
+  end
   # GET /prizes
   # GET /prizes.json
   def index

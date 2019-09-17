@@ -2,102 +2,98 @@
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
   "basePath": "",
-  "resourcePath": "prizes",
+  "resourcePath": "rate_services",
   "apis": [
     {
-      "path": "/api/v1/prizes/active",
+      "path": "/api/v1/rate_services/me",
       "operations": [
         {
-          "summary": "Fetches all active Prize items",
-          "notes": "This lists all the active prizes",
-          "nickname": "Api::V1::Prizes#active",
+          "summary": "Shows mine rate_services",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "nickname": "Api::V1::RateServices#me",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/prizes",
+      "path": "/api/v1/rate_services/active",
       "operations": [
         {
-          "summary": "Fetches all Prize items",
-          "notes": "This lists all the prizes",
-          "nickname": "Api::V1::Prizes#index",
+          "summary": "Fetches all active Rate service items",
+          "notes": "This lists all the active rate services",
+          "nickname": "Api::V1::RateServices#active",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/prizes",
+      "path": "/api/v1/rate_services",
       "operations": [
         {
-          "summary": "Creates a new Prize",
+          "summary": "Fetches all Rate service items",
+          "notes": "This lists all the Rate services",
+          "nickname": "Api::V1::RateServices#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/rate_services",
+      "operations": [
+        {
+          "summary": "Creates a new Rate Service",
           "parameters": [
             {
               "paramType": "form",
-              "name": "prize[name]",
-              "type": "string",
-              "description": "Name",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "prize[code]",
-              "type": "string",
-              "description": "Code",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "prize[point]",
+              "name": "rate_service[service_point]",
               "type": "integer",
-              "description": "Points on prize",
+              "description": "Service point",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "prize[description]",
+              "name": "rate_service[driver_point]",
+              "type": "integer",
+              "description": "Driver point",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "rate_service[point]",
               "type": "string",
-              "description": "Description",
+              "description": "Point",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "prize[body]",
+              "name": "rate_service[service_id]",
               "type": "string",
-              "description": "Body",
+              "description": "Id of service related",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "prize[image]",
-              "type": "file",
-              "description": "Image of prize",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "prize[media]",
-              "type": "file",
-              "description": "Media of prize",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "prize[expire_date]",
-              "type": "string",
-              "description": "Expiration date of prize",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "prize[user_id]",
+              "name": "rate_service[user_id]",
               "type": "integer",
               "description": "Id of user related",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "prize[active]",
+              "name": "rate_service[driver_id]",
+              "type": "boolean",
+              "description": "Id of driver related",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "rate_service[active]",
               "type": "boolean",
               "description": "State of activation",
               "required": true
@@ -115,22 +111,22 @@
               "message": "Not Acceptable"
             }
           ],
-          "nickname": "Api::V1::Prizes#create",
+          "nickname": "Api::V1::RateServices#create",
           "method": "post"
         }
       ]
     },
     {
-      "path": "/api/v1/prizes/{id}",
+      "path": "/api/v1/rate_services/{id}",
       "operations": [
         {
-          "summary": "Show Prize",
+          "summary": "Shows Rate Service",
           "parameters": [
             {
               "paramType": "path",
               "name": "id",
               "type": "integer",
-              "description": "Prize Id",
+              "description": "Rate service Id",
               "required": false
             }
           ],
@@ -146,90 +142,69 @@
               "message": "Not Found"
             }
           ],
-          "nickname": "Api::V1::Prizes#show",
+          "nickname": "Api::V1::RateServices#show",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/prizes/{id}",
+      "path": "/api/v1/rate_services/{id}",
       "operations": [
         {
-          "summary": "Updates an existing Prize",
+          "summary": "Updates an existing Rate Service",
           "parameters": [
             {
               "paramType": "path",
               "name": "id",
               "type": "integer",
-              "description": "Prize Id",
+              "description": "Rate Service Id",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "prize[name]",
-              "type": "string",
-              "description": "Name",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "prize[code]",
-              "type": "string",
-              "description": "Code",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "prize[point]",
+              "name": "rate_service[service_point]",
               "type": "integer",
-              "description": "Points on prize",
+              "description": "Service point",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "prize[description]",
+              "name": "rate_service[driver_point]",
+              "type": "integer",
+              "description": "Driver point",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "rate_service[point]",
               "type": "string",
-              "description": "Description",
+              "description": "Point",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "prize[body]",
+              "name": "rate_service[service_id]",
               "type": "string",
-              "description": "Body",
+              "description": "Id of service related",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "prize[image]",
-              "type": "file",
-              "description": "Image of prize",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "prize[media]",
-              "type": "file",
-              "description": "Media of prize",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "prize[expire_date]",
-              "type": "string",
-              "description": "Expiration date of prize",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "prize[user_id]",
+              "name": "rate_service[user_id]",
               "type": "integer",
               "description": "Id of user related",
               "required": false
             },
             {
               "paramType": "form",
-              "name": "prize[active]",
+              "name": "rate_service[driver_id]",
+              "type": "boolean",
+              "description": "Id of driver related",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "rate_service[active]",
               "type": "boolean",
               "description": "State of activation",
               "required": false
@@ -252,22 +227,22 @@
               "message": "Not Acceptable"
             }
           ],
-          "nickname": "Api::V1::Prizes#update",
+          "nickname": "Api::V1::RateServices#update",
           "method": "patch"
         }
       ]
     },
     {
-      "path": "/api/v1/prizes/{id}",
+      "path": "/api/v1/rate_services/{id}",
       "operations": [
         {
-          "summary": "Deletes an existing Prize",
+          "summary": "Deletes an existing Rate Service",
           "parameters": [
             {
               "paramType": "path",
               "name": "id",
               "type": "integer",
-              "description": "Prize Id",
+              "description": "Rate service Id",
               "required": false
             }
           ],
@@ -283,7 +258,7 @@
               "message": "Not Found"
             }
           ],
-          "nickname": "Api::V1::Prizes#destroy",
+          "nickname": "Api::V1::RateServices#destroy",
           "method": "delete"
         }
       ]

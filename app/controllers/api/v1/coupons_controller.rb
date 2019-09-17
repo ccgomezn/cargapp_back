@@ -56,6 +56,17 @@ class Api::V1::CouponsController < ApplicationController
     response :not_found
   end
 
+  swagger_api :show do
+    summary 'Fetches detailed Coupon items'
+    param :path, :id, :integer, :optional, "Coupon Id"
+    notes 'This lists detailed coupons'
+  end
+
+  swagger_api :me do
+    summary 'Fetches mine Coupon items'
+    notes 'This lists mine coupons'
+  end
+
   # GET /coupons
   # GET /coupons.json
   def index

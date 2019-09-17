@@ -45,6 +45,12 @@ class Api::V1::CargappModelsController < ApplicationController
     response :not_found
   end
 
+  swagger_api :show do
+    summary 'Fetches detailed Model items'
+    param :path, :id, :integer, :required, "Cargapp Model Id"
+    notes 'This lists detailed models'
+  end
+
   # GET /cargapp_models
   # GET /cargapp_models.json
   def index
