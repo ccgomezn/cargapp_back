@@ -356,7 +356,9 @@ class Api::V1::UsersController < ApplicationController
   def user_role
     role = Role.find_by(code: ENV['USER_C'])
     user_role = UserRole.create(user_id: @user.id,
-      role_id: params[:user][:role_id] || role.id
+      role_id: params[:user][:role_id] || role.id,
+      admin_id: @user.id,
+      active: true
     )
     user_role.save
   end
