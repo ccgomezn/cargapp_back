@@ -278,8 +278,9 @@ class Api::V1::UsersController < ApplicationController
     if user.identification.eql?(user.profile ? user.profile.document_id.to_s : nil)
       if user.identification
         vehicle = user.vehicles.where(active: true).first
+        check = params[:user][:force_creation] || false
         if vehicle
-          check = check_user(user, vehicle)
+          check = check_user(user, vehicle, check)
         end
       end
       check = JSON.parse(check.to_s)
@@ -304,10 +305,10 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  def check_user(user, vehicle)
+  def check_user(user, vehicle, check)
     uri = URI.parse("#{ENV['URL_TRUORA']}/checks")
     request = Net::HTTP::Post.new(uri)
-    request.set_form_data(country: 'co', type: 'vehicle', national_id: user.identification, license_plate: vehicle.plate, force_creation: true )
+    request.set_form_data(country: 'co', type: 'vehicle', national_id: user.identification, license_plate: vehicle.plate, force_creation: check )
     request["Truora-Api-Key"] = ENV['TOKEN_TRUORA']
 
     req_options = {
