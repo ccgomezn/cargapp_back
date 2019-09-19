@@ -89,6 +89,26 @@
       "path": "/api/v1/load_types/{id}",
       "operations": [
         {
+          "summary": "Fetches detailed Load type items",
+          "notes": "This lists detailed load types",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Load type Id",
+              "required": false
+            }
+          ],
+          "nickname": "Api::V1::LoadTypes#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/load_types/{id}",
+      "operations": [
+        {
           "summary": "Updates an existing Load Type",
           "parameters": [
             {

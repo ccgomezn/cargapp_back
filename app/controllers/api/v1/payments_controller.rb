@@ -69,6 +69,27 @@ class Api::V1::PaymentsController < ApplicationController
     response :not_found
   end
 
+  swagger_api :show do
+    summary "Fetches detailed Payment Method"
+    param :path, :id, :integer, :optional, "Payment Method Id"
+    response :unauthorized
+    response :not_found
+  end
+  swagger_api :me do
+    summary "Fetches mine Payment Method"
+    param :path, :id, :integer, :optional, "Payment Method Id"
+    response :unauthorized
+  end
+
+  swagger_api :find_user do
+    summary "Fetches Payment Methods of user"
+    param :path, :id, :integer, :optional, "User Id"
+    response :unauthorized
+  end
+
+
+
+
   # GET /payments
   # GET /payments.json
   def index

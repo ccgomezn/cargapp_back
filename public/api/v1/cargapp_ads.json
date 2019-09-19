@@ -2,135 +2,129 @@
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
   "basePath": "",
-  "resourcePath": "vehicles",
+  "resourcePath": "cargapp_ads",
   "apis": [
     {
-      "path": "/api/v1/vehicles/me",
+      "path": "/api/v1/cargapp_ads/me",
       "operations": [
         {
-          "summary": "Shows mine Vehicles",
-          "responseMessages": [
-            {
-              "code": 401,
-              "responseModel": null,
-              "message": "Unauthorized"
-            }
-          ],
-          "nickname": "Api::V1::Vehicles#me",
+          "summary": "Fetches mine Ad items",
+          "notes": "This lists mine ads",
+          "nickname": "Api::V1::CargappAds#me",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/vehicles/active",
+      "path": "/api/v1/cargapp_ads/active",
       "operations": [
         {
-          "summary": "Fetches all active Vehicle items",
-          "notes": "This lists all the active Vehicles",
-          "nickname": "Api::V1::Vehicles#active",
+          "summary": "Fetches all active Cargapp Ads items",
+          "notes": "This lists all the active cargapp ads",
+          "nickname": "Api::V1::CargappAds#active",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/vehicles",
+      "path": "/api/v1/cargapp_ads",
       "operations": [
         {
-          "summary": "Fetches all Vehicle items",
-          "notes": "This lists all the Vehicles",
-          "nickname": "Api::V1::Vehicles#index",
+          "summary": "Fetches all Cargapp Ads items",
+          "notes": "This lists all the cargapp ads",
+          "nickname": "Api::V1::CargappAds#index",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/vehicles",
+      "path": "/api/v1/cargapp_ads",
       "operations": [
         {
-          "summary": "Creates a new Vehicle",
+          "summary": "Creates a new Bank Account",
           "parameters": [
             {
               "paramType": "form",
-              "name": "vehicle[brand]",
+              "name": "cargapp_ad[name]",
               "type": "string",
-              "description": "Brand",
+              "description": "Name",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "vehicle[model]",
+              "name": "cargapp_ad[price]",
               "type": "string",
-              "description": "Model",
+              "description": "Price",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "vehicle[model_year]",
+              "name": "cargapp_ad[price]",
               "type": "string",
-              "description": "Model Year",
+              "description": "Description",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "vehicle[color]",
+              "name": "cargapp_ad[body]",
               "type": "string",
-              "description": "Color",
+              "description": "Body",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "vehicle[plate]",
+              "name": "cargapp_ad[image]",
+              "type": "file",
+              "description": "Image",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_ad[url]",
               "type": "string",
-              "description": "Plate",
+              "description": "Url",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "vehicle[chassis]",
-              "type": "string",
-              "description": "Chassis",
+              "name": "cargapp_ad[media]",
+              "type": "file",
+              "description": "Media",
               "required": true
             },
             {
               "paramType": "form",
-              "name": "vehicle[owner_vehicle]",
-              "type": "string",
-              "description": "Id of the vehicles owner",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[vehicle_type_id]",
-              "type": "integer",
-              "description": "Id of the vehicle type",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[owner_document_type_id]",
-              "type": "integer",
-              "description": "Document type of the owner",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[owner_document_id]",
-              "type": "integer",
-              "description": "Id of the driver",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[user_id]",
-              "type": "integer",
-              "description": "Id of the user",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[active]",
+              "name": "cargapp_ad[have_discoun]",
               "type": "boolean",
-              "description": "Activation state",
+              "description": "Have discount",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_ad[is_percentage]",
+              "type": "string",
+              "description": "Is percentage",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_ad[discoun]",
+              "type": "string",
+              "description": "Discount",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_ad[user_id]",
+              "type": "integer",
+              "description": "Id of user related",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_ad[active]",
+              "type": "boolean",
+              "description": "State of activation",
               "required": true
             }
           ],
@@ -146,22 +140,126 @@
               "message": "Not Acceptable"
             }
           ],
-          "nickname": "Api::V1::Vehicles#create",
+          "nickname": "Api::V1::CargappAds#create",
           "method": "post"
         }
       ]
     },
     {
-      "path": "/api/v1/vehicles/{id}",
+      "path": "/api/v1/cargapp_ads/{id}",
       "operations": [
         {
-          "summary": "Shoes a Vehicle",
+          "summary": "Fetches detailed Ad items",
+          "notes": "This lists detailed ads",
           "parameters": [
             {
               "paramType": "path",
               "name": "id",
               "type": "integer",
-              "description": "Vehicle Id",
+              "description": "Cargapp Ad Id",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::CargappAds#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/cargapp_ads/{id}",
+      "operations": [
+        {
+          "summary": "Updates an existing Cargapp Ad",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Cargapp Ad Id",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_ad[name]",
+              "type": "string",
+              "description": "Name",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_ad[price]",
+              "type": "string",
+              "description": "Price",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_ad[price]",
+              "type": "string",
+              "description": "Description",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_ad[body]",
+              "type": "string",
+              "description": "Body",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_ad[image]",
+              "type": "file",
+              "description": "Image",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_ad[url]",
+              "type": "string",
+              "description": "Url",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_ad[media]",
+              "type": "file",
+              "description": "Media",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_ad[have_discoun]",
+              "type": "boolean",
+              "description": "Have discount",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_ad[is_percentage]",
+              "type": "string",
+              "description": "Is percentage",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_ad[discoun]",
+              "type": "string",
+              "description": "Discount",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_ad[user_id]",
+              "type": "integer",
+              "description": "Id of user related",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "cargapp_ad[active]",
+              "type": "boolean",
+              "description": "State of activation",
               "required": false
             }
           ],
@@ -171,116 +269,6 @@
               "responseModel": null,
               "message": "Unauthorized"
             },
-            {
-              "code": 404,
-              "responseModel": null,
-              "message": "Not Found"
-            }
-          ],
-          "nickname": "Api::V1::Vehicles#show",
-          "method": "get"
-        }
-      ]
-    },
-    {
-      "path": "/api/v1/vehicles/{id}",
-      "operations": [
-        {
-          "summary": "Updates an existing Vehicle",
-          "parameters": [
-            {
-              "paramType": "path",
-              "name": "id",
-              "type": "integer",
-              "description": "Vehicle Id",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[brand]",
-              "type": "string",
-              "description": "Brand",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[model]",
-              "type": "string",
-              "description": "Model",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[model_year]",
-              "type": "string",
-              "description": "Model Year",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[color]",
-              "type": "string",
-              "description": "Color",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[plate]",
-              "type": "string",
-              "description": "Plate",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[chassis]",
-              "type": "string",
-              "description": "Chassis",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[owner_vehicle]",
-              "type": "string",
-              "description": "Id of the vehicles owner",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[vehicle_type_id]",
-              "type": "integer",
-              "description": "Id of the vehicle type",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[owner_document_type_id]",
-              "type": "integer",
-              "description": "Document type of the owner",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[owner_document_id]",
-              "type": "integer",
-              "description": "Id of the driver",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[user_id]",
-              "type": "integer",
-              "description": "Id of the user",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "vehicle[active]",
-              "type": "boolean",
-              "description": "Activation state",
-              "required": false
-            }
-          ],
-          "responseMessages": [
             {
               "code": 404,
               "responseModel": null,
@@ -292,22 +280,22 @@
               "message": "Not Acceptable"
             }
           ],
-          "nickname": "Api::V1::Vehicles#update",
+          "nickname": "Api::V1::CargappAds#update",
           "method": "patch"
         }
       ]
     },
     {
-      "path": "/api/v1/vehicles/{id}",
+      "path": "/api/v1/cargapp_ads/{id}",
       "operations": [
         {
-          "summary": "Deletes an existing Vehicle",
+          "summary": "Deletes an existing Cargapp Ad",
           "parameters": [
             {
               "paramType": "path",
               "name": "id",
               "type": "integer",
-              "description": "Vehicle Id",
+              "description": "Cargapp Ad Id",
               "required": false
             }
           ],
@@ -323,7 +311,7 @@
               "message": "Not Found"
             }
           ],
-          "nickname": "Api::V1::Vehicles#destroy",
+          "nickname": "Api::V1::CargappAds#destroy",
           "method": "delete"
         }
       ]

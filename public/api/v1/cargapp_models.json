@@ -82,6 +82,26 @@
       "path": "/api/v1/cargapp_models/{id}",
       "operations": [
         {
+          "summary": "Fetches detailed Model items",
+          "notes": "This lists detailed models",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Cargapp Model Id",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::CargappModels#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/cargapp_models/{id}",
+      "operations": [
+        {
           "summary": "Updates an existing Cargapp Model",
           "parameters": [
             {

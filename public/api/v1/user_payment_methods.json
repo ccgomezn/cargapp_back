@@ -124,6 +124,37 @@
       "path": "/api/v1/user_payment_methods/{id}",
       "operations": [
         {
+          "summary": "Shows an User-Payment Method",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "User-Payment Method Id",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::UserPaymentMethods#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/user_payment_methods/{id}",
+      "operations": [
+        {
           "summary": "Updates an existing User-Payment",
           "parameters": [
             {

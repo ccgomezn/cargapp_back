@@ -5,6 +5,283 @@
   "resourcePath": "users",
   "apis": [
     {
+      "path": "/api/v1/users/truora_users",
+      "operations": [
+        {
+          "summary": "Get Truora users",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "nickname": "Api::V1::Users#truora_users",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/users/truora_user/{id}",
+      "operations": [
+        {
+          "summary": "Shows Truora user",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "User Id",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::Users#truora_user",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/users/truora_check_user",
+      "operations": [
+        {
+          "summary": "Check Truora user",
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "user[user_id]",
+              "type": "string",
+              "description": "Password confirmation",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::Users#truora_check_user",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/users/email_verify",
+      "operations": [
+        {
+          "summary": "Verify email",
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "user[email]",
+              "type": "string",
+              "description": "Email",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Api::V1::Users#email_verify",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/users/phone_verify",
+      "operations": [
+        {
+          "summary": "Verify phone",
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "user[phone_number]",
+              "type": "string",
+              "description": "Phone",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Api::V1::Users#phone_verify",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/users/validate_number",
+      "operations": [
+        {
+          "summary": "Validate phone number",
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "user[phone_number]",
+              "type": "string",
+              "description": "Phone",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user[mobile_code]",
+              "type": "string",
+              "description": "Code",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Api::V1::Users#validate_number",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/users/me",
+      "operations": [
+        {
+          "summary": "Shows mine existing User-Role",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::Users#me",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/users/login",
+      "operations": [
+        {
+          "summary": "Login",
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "user[email]",
+              "type": "string",
+              "description": "Email",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user[password]",
+              "type": "string",
+              "description": "Password",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Api::V1::Users#login",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/users/update_password",
+      "operations": [
+        {
+          "summary": "Update password",
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "user[password_comfirmation]",
+              "type": "string",
+              "description": "Password confirmation",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user[password]",
+              "type": "string",
+              "description": "Password",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Api::V1::Users#update_password",
+          "method": "put"
+        }
+      ]
+    },
+    {
       "path": "/api/v1/users",
       "operations": [
         {

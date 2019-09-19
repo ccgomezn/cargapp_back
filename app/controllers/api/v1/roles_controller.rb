@@ -47,6 +47,13 @@ class Api::V1::RolesController < ApplicationController
     response :not_found
   end
 
+  swagger_api :show do
+    summary "Show Role"
+    param :path, :id, :integer, :optional, "Role Id"
+    response :unauthorized
+    response :not_found
+  end
+
 
   # GET /roles
   def index

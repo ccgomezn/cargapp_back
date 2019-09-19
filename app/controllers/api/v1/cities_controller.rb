@@ -47,6 +47,14 @@ class Api::V1::CitiesController < ApplicationController
     response :not_found
   end
 
+
+  swagger_api :show do
+    summary 'Fetches detailed City items'
+    param :path, :id, :integer, :optional, "City Id"
+    notes 'This lists detailed cities'
+  end
+
+
   # GET /cities
   # GET /cities.json
   def index

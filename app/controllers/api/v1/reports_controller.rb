@@ -36,7 +36,7 @@ class Api::V1::ReportsController < ApplicationController
 
   swagger_api :update do
     summary 'Updates an existing User-Payment'
-    param :path, :id, :integer, :required, "Report Id"
+    param :path, :id, :integer, :required, 'Report Id'
     param :form, 'report[name]', :string, :optional, 'Name'
     param :form, 'report[origin]', :string, :optional, 'Origin'
     param :form, 'report[destination]', :string, :optional, 'Destination'
@@ -56,8 +56,27 @@ class Api::V1::ReportsController < ApplicationController
   end
 
   swagger_api :destroy do
-    summary "Deletes an existing Report"
-    param :path, :id, :integer, :optional, "Report Id"
+    summary 'Deletes an existing Report'
+    param :path, :id, :integer, :optional, 'Report Id'
+    response :unauthorized
+    response :not_found
+  end
+
+  swagger_api :me do
+    summary 'Shows mine Report'
+    response :unauthorized
+  end
+
+  swagger_api :show do
+    summary 'Shows Report'
+    param :path, :id, :integer, :optional, 'Report Id'
+    response :unauthorized
+    response :not_found
+  end
+
+  swagger_api :find_user do
+    summary 'Shows reports of an specific user'
+    param :path, :id, :integer, :optional, 'User Id'
     response :unauthorized
     response :not_found
   end
@@ -294,7 +313,7 @@ class Api::V1::ReportsController < ApplicationController
         if has_permission
           true
         else
-          response = { response: "Does not have permissions" }
+          response = { response: 'Does not have permissions' }
           render json: response, status: :unprocessable_entity
         end
       else
@@ -313,7 +332,7 @@ class Api::V1::ReportsController < ApplicationController
         if has_permission
           true
         else
-          response = { response: "Does not have permissions" }
+          response = { response: 'Does not have permissions' }
           render json: response, status: :unprocessable_entity
         end
       end

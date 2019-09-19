@@ -18,6 +18,17 @@ class Api::V1::CargappAdsController < ApplicationController
     notes 'This lists all the active cargapp ads'
   end
 
+  swagger_api :show do
+    summary 'Fetches detailed Ad items'
+    param :path, :id, :integer, :required, "Cargapp Ad Id"
+    notes 'This lists detailed ads'
+  end
+
+  swagger_api :me do
+    summary 'Fetches mine Ad items'
+    notes 'This lists mine ads'
+  end
+
   swagger_api :create do
     summary 'Creates a new Bank Account'
     param :form, "cargapp_ad[name]", :string, :required, 'Name'

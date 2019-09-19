@@ -38,6 +38,12 @@ class Api::V1::DocumentTypesController < ApplicationController
     response :not_acceptable
   end
 
+  swagger_api :show do
+    summary 'Fetches detailed Document Type items'
+    param :path, :id, :integer, :optional, "Document Type Id"
+    notes 'This lists detailed document types'
+  end
+
   swagger_api :destroy do
     summary "Deletes an existing Document Type"
     param :path, :id, :integer, :optional, "Document Type Id"

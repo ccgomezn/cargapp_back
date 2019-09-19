@@ -103,6 +103,37 @@
       "path": "/api/v1/permissions/{id}",
       "operations": [
         {
+          "summary": "Show Permission",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Permission Id",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::Permissions#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/permissions/{id}",
+      "operations": [
+        {
           "summary": "Updates an existing Permission",
           "parameters": [
             {

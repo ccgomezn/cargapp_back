@@ -53,6 +53,17 @@ class Api::V1::DocumentsController < ApplicationController
     response :not_found
   end
 
+  swagger_api :me do
+    summary 'Fetches mine Document items'
+    notes 'This lists mine documents'
+  end
+
+  swagger_api :show do
+    summary 'Fetches detailed Document items'
+    param :path, :id, :integer, :optional, "Document Id"
+    notes 'This lists detailed documents'
+  end
+
 
 
   # GET /documents

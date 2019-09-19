@@ -5,6 +5,23 @@
   "resourcePath": "profiles",
   "apis": [
     {
+      "path": "/api/v1/profiles/me",
+      "operations": [
+        {
+          "summary": "Show mine Profiles",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "nickname": "Api::V1::Profiles#me",
+          "method": "get"
+        }
+      ]
+    },
+    {
       "path": "/api/v1/profiles/active",
       "operations": [
         {
@@ -103,6 +120,37 @@
           ],
           "nickname": "Api::V1::Profiles#create",
           "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/profiles/{id}",
+      "operations": [
+        {
+          "summary": "Show a Profile",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Profile Id",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::Profiles#show",
+          "method": "get"
         }
       ]
     },

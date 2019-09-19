@@ -82,6 +82,37 @@
       "path": "/api/v1/roles/{id}",
       "operations": [
         {
+          "summary": "Show Role",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Role Id",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::Roles#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/roles/{id}",
+      "operations": [
+        {
           "summary": "Updates an existing Role",
           "parameters": [
             {

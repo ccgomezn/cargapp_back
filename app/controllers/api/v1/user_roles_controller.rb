@@ -47,6 +47,13 @@ class Api::V1::UserRolesController < ApplicationController
     response :not_found
   end
 
+  swagger_api :show do
+    summary "Shows an existing User-Role"
+    param :path, :id, :integer, :optional, "User-Role Id"
+    response :unauthorized
+    response :not_found
+  end
+
 
   # GET /user_roles
   # GET /user_roles.json

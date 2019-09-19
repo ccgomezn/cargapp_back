@@ -46,6 +46,18 @@ class Api::V1::UserPrizesController < ApplicationController
     response :unauthorized
     response :not_found
   end
+
+  swagger_api :show do
+    summary "Shows an existing User-Prize"
+    param :path, :id, :integer, :optional, "User-Prize Id"
+    response :unauthorized
+    response :not_found
+  end
+
+  swagger_api :me do
+    summary "Shows mine User-Prize"
+    response :unauthorized
+  end
   # GET /user_prizes
   # GET /user_prizes.json
   def index

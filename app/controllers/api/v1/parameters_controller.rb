@@ -16,6 +16,12 @@ class Api::V1::ParametersController < ApplicationController
     notes 'This lists all the active parameters'
   end
 
+  swagger_api :show do
+    summary 'Fetches detailed Parameters items'
+    param :path, :id, :integer, :optional, "Parameter Id"
+    notes 'This lists detailed active parameters'
+  end
+
   swagger_api :create do
     summary 'Creates a new Parameter'
     param :form, 'parameter[name]', :string, :required, 'Name'
@@ -47,6 +53,12 @@ class Api::V1::ParametersController < ApplicationController
   swagger_api :destroy do
     summary "Deletes an existing Parameter"
     param :path, :id, :integer, :optional, "Parameter Id"
+    response :unauthorized
+    response :not_found
+  end
+  swagger_api :find do
+    summary "Fetches parameters by code"
+    param :path, :id, :integer, :optional, "Parameter Code"
     response :unauthorized
     response :not_found
   end

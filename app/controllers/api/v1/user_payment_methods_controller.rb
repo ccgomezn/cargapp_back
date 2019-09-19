@@ -56,6 +56,20 @@ class Api::V1::UserPaymentMethodsController < ApplicationController
     response :unauthorized
     response :not_found
   end
+
+  swagger_api :show do
+    summary "Shows an User-Payment Method"
+    param :path, :id, :integer, :optional, "User-Payment Method Id"
+    response :unauthorized
+    response :not_found
+  end
+
+  swagger_api :mine do
+    summary "Shows mine User-Payment Method"
+    param :path, :id, :integer, :optional, "User-Payment Method Id"
+    response :unauthorized
+    response :not_found
+  end
   # GET /user_payment_methods
   # GET /user_payment_methods.json
   def index

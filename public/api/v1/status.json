@@ -96,6 +96,37 @@
       "path": "/api/v1/status/{id}",
       "operations": [
         {
+          "summary": "Shows an Status",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Status Id",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::Status#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/status/{id}",
+      "operations": [
+        {
           "summary": "Updates an existing Status",
           "parameters": [
             {

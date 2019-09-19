@@ -59,6 +59,17 @@ class Api::V1::CompaniesController < ApplicationController
     response :not_found
   end
 
+  swagger_api :show do
+    summary 'Fetches detailed Company items'
+    param :path, :id, :integer, :optional, "Company Id"
+    notes 'This lists detailed companies'
+  end
+
+  swagger_api :me do
+    summary 'Fetches mine Company items'
+    notes 'This lists mine companies'
+  end
+
   # GET /companies
   # GET /companies.json
   def index

@@ -49,6 +49,16 @@ class Api::V1::UserCouponsController < ApplicationController
     response :unauthorized
     response :not_found
   end
+  swagger_api :show do
+    summary "Shows an User-Coupon"
+    param :path, :id, :integer, :optional, "User-Coupon Id"
+    response :unauthorized
+    response :not_found
+  end
+  swagger_api :me do
+    summary "Shows mine existing User-Coupons"
+    response :unauthorized
+  end
 
   # GET /user_coupons
   # GET /user_coupons.json

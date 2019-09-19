@@ -41,6 +41,17 @@ class Api::V1::ChallengesController < ApplicationController
     response :not_acceptable
   end
 
+  swagger_api :show do
+    summary 'Fetches detailed Challenge items'
+    param :path, :id, :integer, :optional, "Challenge Id"
+    notes 'This lists detailed challenges'
+  end
+
+  swagger_api :me do
+    summary 'Fetches mine Challenge items'
+    notes 'This lists mine challenges'
+  end
+
   swagger_api :destroy do
     summary "Deletes an existing Challenge"
     param :path, :id, :integer, :optional, "Challenge Id"

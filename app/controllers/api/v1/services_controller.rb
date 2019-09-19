@@ -86,6 +86,18 @@ class Api::V1::ServicesController < ApplicationController
     response :not_found
   end
 
+  swagger_api :me do
+    summary "Shows mine existing Service"
+    response :unauthorized
+  end
+
+  swagger_api :show do
+    summary "Shows a Service"
+    param :path, :id, :integer, :optional, "Service Id"
+    response :unauthorized
+    response :not_found
+  end
+
   # GET /services
   # GET /services.json
   def index

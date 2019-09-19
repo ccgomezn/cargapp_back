@@ -49,6 +49,13 @@ class Api::V1::StatusController < ApplicationController
     response :not_found
   end
 
+  swagger_api :show do
+    summary "Shows an Status"
+    param :path, :id, :integer, :optional, "Status Id"
+    response :unauthorized
+    response :not_found
+  end
+
   # GET /status
   # GET /status.json
   def index

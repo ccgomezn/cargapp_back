@@ -47,6 +47,13 @@ class Api::V1::LoadTypesController < ApplicationController
     response :not_found
   end
 
+  swagger_api :show do
+    summary 'Fetches detailed Load type items'
+    param :path, :id, :integer, :optional, "Load type Id"
+    notes 'This lists detailed load types'
+  end
+
+
 
 
 

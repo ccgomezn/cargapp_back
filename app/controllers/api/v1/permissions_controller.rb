@@ -51,6 +51,14 @@ class Api::V1::PermissionsController < ApplicationController
     response :not_found
   end
 
+  swagger_api :show do
+    summary "Show Permission"
+    param :path, :id, :integer, :optional, "Permission Id"
+    response :unauthorized
+    response :not_found
+  end
+
+
   # GET /permissions
   # GET /permissions.json
   def index

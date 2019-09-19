@@ -12,6 +12,31 @@ class Api::V1::UsersController < ApplicationController
     notes 'This lists all the users'
   end
 
+  swagger_api :active do
+    summary 'Fetches active User items'
+    notes 'This lists active the users'
+  end
+
+  swagger_api :email_verify do
+    summary 'Verify email'
+    param :form, 'user[email]', :string, :required, 'Email'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+
+  swagger_api :phone_verify do
+    summary 'Verify phone'
+    param :form, 'user[phone_number]', :string, :required, 'Phone'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :truora_users do
+    summary 'Get Truora users'
+    response :unauthorized
+  end
+
   swagger_api :create do
     summary 'Creates a new User'
     param :form, 'user[email]', :string, :required, 'Email'
@@ -20,6 +45,50 @@ class Api::V1::UsersController < ApplicationController
     param :form, 'user[phone_number]', :string, :optional, 'Phone number'
     response :unauthorized
     response :not_acceptable
+  end
+
+  swagger_api :validate_number do
+    summary 'Validate phone number'
+    param :form, 'user[phone_number]', :string, :required, 'Phone'
+    param :form, 'user[mobile_code]', :string, :required, 'Code'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :login do
+    summary 'Login'
+    param :form, 'user[email]', :string, :required, 'Email'
+    param :form, 'user[password]', :string, :required, 'Password'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :update_password do
+    summary 'Update password'
+    param :form, 'user[password_comfirmation]', :string, :required, 'Password confirmation'
+    param :form, 'user[password]', :string, :required, 'Password'
+    response :unauthorized
+    response :not_acceptable
+  end
+
+  swagger_api :me do
+    summary "Shows mine existing User-Role"
+    response :unauthorized
+    response :not_found
+  end
+
+  swagger_api :truora_user do
+    summary "Shows Truora user"
+    param :path, :id, :integer, :optional, "User Id"
+    response :unauthorized
+    response :not_found
+  end
+
+  swagger_api :truora_check_user do
+    summary "Check Truora user"
+    param :form, 'user[user_id]', :string, :required, 'Password confirmation'
+    response :unauthorized
+    response :not_found
   end
 
   def index

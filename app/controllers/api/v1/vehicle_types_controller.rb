@@ -47,6 +47,13 @@ class Api::V1::VehicleTypesController < ApplicationController
     response :not_found
   end
 
+  swagger_api :show do
+    summary "Show a Vehicle Type"
+    param :path, :id, :integer, :optional, "Vehicle Type Id"
+    response :unauthorized
+    response :not_found
+  end
+
   # GET /vehicle_types
   # GET /vehicle_types.json
   def index

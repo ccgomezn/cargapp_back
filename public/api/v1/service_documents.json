@@ -5,12 +5,60 @@
   "resourcePath": "service_documents",
   "apis": [
     {
+      "path": "/api/v1/service_documents/me",
+      "operations": [
+        {
+          "summary": "Shows mine Service Document",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "nickname": "Api::V1::ServiceDocuments#me",
+          "method": "get"
+        }
+      ]
+    },
+    {
       "path": "/api/v1/service_documents/active",
       "operations": [
         {
           "summary": "Fetches all active Service Document items",
           "notes": "This lists all the active service documents",
           "nickname": "Api::V1::ServiceDocuments#active",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/service_documents/find_service/{id}",
+      "operations": [
+        {
+          "summary": "Shows Service Documents of an specific service",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Service Id",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::ServiceDocuments#find_service",
           "method": "get"
         }
       ]
@@ -89,6 +137,37 @@
           ],
           "nickname": "Api::V1::ServiceDocuments#create",
           "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/service_documents/{id}",
+      "operations": [
+        {
+          "summary": "Shows Service Document",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Service Document Id",
+              "required": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Api::V1::ServiceDocuments#show",
+          "method": "get"
         }
       ]
     },

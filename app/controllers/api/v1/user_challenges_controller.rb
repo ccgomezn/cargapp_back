@@ -46,6 +46,18 @@ class Api::V1::UserChallengesController < ApplicationController
     response :not_found
   end
 
+  swagger_api :show do
+    summary "Show an User-Challenge"
+    param :path, :id, :integer, :optional, "User-Challenge Id"
+    response :unauthorized
+    response :not_found
+  end
+
+  swagger_api :me do
+    summary "Shows mine existing User-Challenge"
+    response :unauthorized
+  end
+
   # GET /user_challenges
   # GET /user_challenges.json
   def index
