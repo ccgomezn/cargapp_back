@@ -67,8 +67,8 @@ class User < ApplicationRecord
 
   after_create :build_profile
   def build_profile
-    #@client = Twilio::REST::Client.new ENV['TWILLIO_ACCOUNT_SID'], ENV['TWILLIO_AUT_TOKEN']
-    #@client.api.account.messages.create(from: ENV['TWILLIO_FROM'], to: "+#{self.phone_number}", body: "Hola tu codigo de verificacion PowerTaxi es: #{mobile_code}")
+    @client = Twilio::REST::Client.new ENV['TWILLIO_ACCOUNT_SID'], ENV['TWILLIO_AUT_TOKEN']
+    @client.api.account.messages.create(from: ENV['TWILLIO_FROM'], to: "+#{self.phone_number}", body: "Hola tu codigo de verificacion PowerTaxi es: #{mobile_code}")
   end
 
   private
