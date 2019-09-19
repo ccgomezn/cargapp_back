@@ -157,6 +157,7 @@ class Api::V1::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      user_role()
       profile()
       render json: @user, status: :created
     else
@@ -352,6 +353,14 @@ class Api::V1::UsersController < ApplicationController
     profile.save
   end
 
+  def user_role
+    role = Role.find_by(code: ENV['USER_C'])
+    user_role = UserRole.create(user_id: @user.id,
+      role_id: params[:user][:role_id] || role.id
+    )
+    user_role.save
+  end
+
   def set_show_user
     @user = User.find(params[:id])
   end
@@ -388,7 +397,7 @@ class Api::V1::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation, :identification, :phone_number)
-    #params.require(:user).permit(:email, :password, :password_confirmation)
+    #params.require(:user).permit(:email, :password, :password_confirmation, :identification, :phone_number, :username, :avatar)
   end
 
   def user_update_params
