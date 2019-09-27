@@ -28,6 +28,8 @@ class User < ApplicationRecord
   has_many :bank_accounts
   has_many :cargapp_payments
   has_many :payments
+  validates :phone_number, presence: true
+  validates :phone_number, uniqueness: true
   
 
   has_many :access_grants,

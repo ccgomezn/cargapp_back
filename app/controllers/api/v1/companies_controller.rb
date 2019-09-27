@@ -79,7 +79,7 @@ class Api::V1::CompaniesController < ApplicationController
   end
   
   def active
-    @companies = Company.where(ative: true)
+    @companies = Company.where(active: true)
 
     render json: @companies
   end

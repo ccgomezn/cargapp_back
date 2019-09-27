@@ -114,6 +114,30 @@ class Api::V1::ServicesController < ApplicationController
     @services = @user.services
     render json: @services
   end
+
+  def find_driver
+    @services = Service.where(user_driver_id: @user.id)
+    render json: @services
+  end
+
+  def find_company
+    company = Company.find_by(id: params[:id], active: true)
+    @services = Service.where(company_id: company.id)
+    render json: @services
+  end
+
+  def find_receiver
+    receiver = User.find_by(id: params[:id])
+    @services = Service.where(user_receiver_id: receiver.id)
+    render json: @services
+  end
+
+  def find_vehicle
+    vehicle = User.find_by(id: params[:id])
+    @services = Service.where(vehicle_id: vehicle.id)
+    render json: @services
+  end
+
   # GET /services/1
   # GET /services/1.json
   def show

@@ -82,7 +82,7 @@ class Api::V1::ServiceLocationsController < ApplicationController
   # GET /service_locations/1
   # GET /service_locations/1.json
   def show
-    render json: @service_locations
+    render json: @service_location
   end
 
   # POST /service_locations

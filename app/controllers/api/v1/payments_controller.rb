@@ -110,7 +110,7 @@ class Api::V1::PaymentsController < ApplicationController
   def find_user
     user = User.find_by(id: params[:user][:id])
     payments = user.payments.where(active: true)
-    render json: @payments
+    render json: payments
   end
 
   # GET /payments/1
