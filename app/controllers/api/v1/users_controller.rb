@@ -2,7 +2,7 @@
 
 class Api::V1::UsersController < ApplicationController
   protect_from_forgery with: :null_session
-  before_action :doorkeeper_authorize!, except: %i[create login email_verify phone_verify validate_number]
+  before_action :doorkeeper_authorize!, except: %i[create login email_verify phone_verify validate_number resend_code]
   before_action :set_user
 
   swagger_controller :users, 'User Management'
@@ -125,6 +125,24 @@ class Api::V1::UsersController < ApplicationController
       user = { phone_number: false, message: "does not exist"}
       render json: user, status: :found
     end
+  end
+
+  def resend_code 
+    user = User.find_by(phone_number: params[:user][:phone_number])
+    if user && user.phone_number.eql?(params[:user][:phone_number])
+      # Genero el nuevo codigo
+      number_randon = [(0..9)].map { |i| i.to_a }.flatten
+      mobile_code = (0...4).map { number_randon[rand(number_randon.length)] }.join
+      #Actualizo el codigo
+      user.update(mobile_code: mobile_code)
+      #Envio el nuevo mensaje con el nuevo codigo
+      new_code(user.phone_number, mobile_code)
+      user = { phone_number: true, message: "code send"}
+      render json: user, status: :ok
+    else
+      user = { phone_number: false, message: "does not exist"}
+      render json: user, status: :found
+    end 
   end
 
   # Falta en la migracion agregar la confirmacion de cuentas del devise
@@ -341,6 +359,11 @@ class Api::V1::UsersController < ApplicationController
   end
 
   private
+
+  def new_code(phone_number, mobile_code)
+    @client = Twilio::REST::Client.new ENV['TWILLIO_ACCOUNT_SID'], ENV['TWILLIO_AUT_TOKEN']
+    @client.api.account.messages.create(from: ENV['TWILLIO_FROM'], to: "+#{phone_number}", body: "Hola tu codigo de verificacion Cargapp es: #{mobile_code}")
+  end
 
   def profile
     doct_type = DocumentType.find_by(code: ENV['DOC_TYPE_CC'])

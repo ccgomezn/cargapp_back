@@ -52,6 +52,7 @@ Rails.application.routes.draw do
       post 'users/email_verify' => 'users#email_verify'
       post 'users/phone_verify' => 'users#phone_verify'
       post 'users/validate_number' => 'users#validate_number'
+      post 'users/resend_code' => 'users#resend_code'
       get 'users/me' => 'users#me'
       post 'users/login' => 'users#login'
       put 'users/update_password' => 'users#update_password'
