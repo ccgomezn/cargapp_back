@@ -200,7 +200,7 @@ class Api::V1::CargappAdsController < ApplicationController
         have_discoun: @cargapp_ad.have_discoun,
         is_percentage: @cargapp_ad.is_percentage,
         discoun: @cargapp_ad.discoun,
-        active: cargapp_ad.active,
+        active: @cargapp_ad.active,
         user_id: @cargapp_ad.user_id,
         created_at: @cargapp_ad.created_at,
         updated_at: @cargapp_ad.updated_at
@@ -227,7 +227,7 @@ class Api::V1::CargappAdsController < ApplicationController
           have_discoun: @cargapp_ad.have_discoun,
           is_percentage: @cargapp_ad.is_percentage,
           discoun: @cargapp_ad.discoun,
-          active: cargapp_ad.active,
+          active: @cargapp_ad.active,
           user_id: @cargapp_ad.user_id,
           created_at: @cargapp_ad.created_at,
           updated_at: @cargapp_ad.updated_at
