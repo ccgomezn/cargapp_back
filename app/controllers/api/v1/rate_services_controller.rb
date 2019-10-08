@@ -1,8 +1,8 @@
 class Api::V1::RateServicesController < ApplicationController
   before_action :set_rate_service, only: [:show, :edit, :update, :destroy]
   protect_from_forgery with: :null_session
-  #before_action :doorkeeper_authorize!
-  #before_action :set_user
+  before_action :doorkeeper_authorize!
+  before_action :set_user
 
 
   swagger_controller :rateServices, 'Rate Services Management'

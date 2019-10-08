@@ -187,8 +187,14 @@ class Api::V1::UsersController < ApplicationController
     client = OAuth2::Client.new(ENV['APP'], ENV['SECREPP_APP'], :site => ENV['URL'])
     begin
       token = client.password.get_token(params["user"]["email"], params["user"]["password"])
-      # token_reponse = { token: token, user: @user}
-      render json: token, status: :ok
+      #token_reponse = { token: token, user: @user}
+      @user = User.find_by(email: params["user"]["email"])
+      if @user.active && @user.mobile_verify
+        render json: token, status: :ok
+      else
+        reponse = { user: nil, message: "Usuario no activado o verificado" }
+        render json: reponse, status: :unauthorized
+      end
     rescue OAuth2::Error => e
       reponse = { user: nil, message: "La contraseña o el correo es incorrecto" }
       render json: reponse, status: :unauthorized
