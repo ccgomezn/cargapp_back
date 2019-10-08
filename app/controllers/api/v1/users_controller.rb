@@ -192,8 +192,9 @@ class Api::V1::UsersController < ApplicationController
       if @user.active && @user.mobile_verify
         render json: token, status: :ok
       else
-        reponse = { user: nil, message: "Usuario no activado o verificado" }
-        render json: reponse, status: :unauthorized
+        #reponse = { user: nil, message: "Usuario no activado o verificado" }
+        #render json: reponse, status: :unauthorized
+        render json: token, status: :ok
       end
     rescue OAuth2::Error => e
       reponse = { user: nil, message: "La contraseña o el correo es incorrecto" }
