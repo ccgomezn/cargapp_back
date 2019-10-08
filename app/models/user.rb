@@ -6,28 +6,28 @@ class User < ApplicationRecord
          :confirmable
   
   has_many :user_roles, dependent: :destroy
-  has_many :roles, through: :user_roles
-  has_many :cargapp_integrations
-  has_many :companies
-  has_many :tickets
-  has_many :vehicles
-  has_many :documents
-  has_one :profile
-  has_many :challenges
-  has_many :user_challenges
-  has_many :user_coupons
-  has_many :user_prizes
-  has_many :reports
-  has_many :user_payment_methods
-  has_many :services
-  has_many :service_documents
-  has_many :favorite_routes
-  has_many :cargapp_ads
-  has_many :user_locations
-  has_many :service_locations
-  has_many :bank_accounts
-  has_many :cargapp_payments
-  has_many :payments
+  has_many :roles, through: :user_roles, dependent: :destroy
+  has_many :cargapp_integrations, dependent: :destroy
+  has_many :companies, dependent: :destroy
+  has_many :tickets, dependent: :destroy
+  has_many :vehicles, dependent: :destroy
+  has_many :documents, dependent: :destroy
+  has_one :profile, dependent: :destroy
+  has_many :challenges, dependent: :destroy
+  has_many :user_challenges, dependent: :destroy
+  has_many :user_coupons, dependent: :destroy
+  has_many :user_prizes, dependent: :destroy
+  has_many :reports, dependent: :destroy
+  has_many :user_payment_methods, dependent: :destroy
+  has_many :services, dependent: :destroy
+  has_many :service_documents, dependent: :destroy
+  has_many :favorite_routes, dependent: :destroy
+  has_many :cargapp_ads, dependent: :destroy
+  has_many :user_locations, dependent: :destroy
+  has_many :service_locations, dependent: :destroy
+  has_many :bank_accounts, dependent: :destroy
+  has_many :cargapp_payments, dependent: :destroy
+  has_many :payments, dependent: :destroy
   validates :phone_number, presence: true
   validates :phone_number, uniqueness: true
   

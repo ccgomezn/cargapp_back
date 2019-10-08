@@ -358,6 +358,22 @@ class Api::V1::UsersController < ApplicationController
     render json: response.body
   end
 
+  # DELETE /user_documents/1
+  # DELETE /user_documents/1.json
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    result = { user: params[:id], menssage: 'User was successfully destroyed.'}
+    render json: result 
+  end
+
+  def destroy_temporarily
+    @user = User.find(params[:id])
+    @user.update(active: false, online: false, mobile_verify: false)
+    result = { user: @user, menssage: 'User was successfully destroyed temporarily.'}
+    render json: result
+  end
+
   private
 
   def new_code(phone_number, mobile_code)

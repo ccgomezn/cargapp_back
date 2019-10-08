@@ -54,6 +54,7 @@ Rails.application.routes.draw do
       post 'users/validate_number' => 'users#validate_number'
       post 'users/resend_code' => 'users#resend_code'
       get 'users/me' => 'users#me'
+      get 'users/temporarily/:id' => 'users#destroy_temporarily'
       post 'users/login' => 'users#login'
       put 'users/update_password' => 'users#update_password'
       resources :users #, only: [:create, :update, :show]
