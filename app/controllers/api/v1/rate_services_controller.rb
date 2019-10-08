@@ -1,8 +1,8 @@
 class Api::V1::RateServicesController < ApplicationController
   before_action :set_rate_service, only: [:show, :edit, :update, :destroy]
   protect_from_forgery with: :null_session
-  before_action :doorkeeper_authorize!
-  before_action :set_user
+  #before_action :doorkeeper_authorize!
+  #before_action :set_user
 
 
   swagger_controller :rateServices, 'Rate Services Management'
@@ -83,6 +83,51 @@ class Api::V1::RateServicesController < ApplicationController
   def me
     @rate_services = @user.rate_services
     render json: @rate_services
+  end
+
+  def find_user
+    @rate_services = RateService.where(user_id: params[:id])
+    render json: @rate_services
+  end
+
+  def find_driver
+    @rate_services = RateService.where(driver_id: params[:id])
+    render json: @rate_services
+  end
+
+  def find_service
+    @rate_services = RateService.where(service_id: params[:id])
+    render json: @rate_services
+  end
+
+  def point_user
+    @user = User.find(params[:id])
+    @rate_services = RateService.where(user_id: params[:id])
+    point, service_point = 0, 0
+    total = 0
+    @rate_services.each do |rate|
+      point += rate.point
+      service_point += rate.service_point
+      total += 1
+    end
+    result = { points: point, points_services: service_point,
+          services_total: total, user: @user, rates: @rate_services }
+    render json: result
+  end
+
+  def point_driver
+    @user = User.find(params[:id])
+    @rate_services = RateService.where(driver_id: params[:id])
+    point, driver_point = 0, 0
+    total = 0
+    @rate_services.each do |rate|
+      point += rate.point
+      driver_point += rate.driver_point
+      total += 1
+    end
+    result = { points: point, driver_point: driver_point,
+          services_total: total, user: @user, rates: @rate_services }
+    render json: result
   end
 
   # GET /rate_services/1

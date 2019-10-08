@@ -150,6 +150,7 @@ Rails.application.routes.draw do
       get 'cargapp_ads/active' => 'cargapp_ads#active'
       resources :cargapp_ads
       get 'user_locations/me' => 'user_locations#me'
+      get 'user_locations/find_user/:id' => 'user_locations#find_user'
       get 'user_locations/active' => 'user_locations#active'
       resources :user_locations
       get 'service_locations/me' => 'service_locations#me'
@@ -159,6 +160,11 @@ Rails.application.routes.draw do
       get 'bank_accounts/active' => 'bank_accounts#active'
       resources :bank_accounts
       get 'rate_services/me' => 'rate_services#me'
+      get 'rate_services/find_user/:id' => 'rate_services#find_user'
+      get 'rate_services/find_service/:id' => 'rate_services#find_service'
+      get 'rate_services/find_driver/:id' => 'rate_services#find_driver'
+      get 'rate_services/point_user/:id' => 'rate_services#point_user'
+      get 'rate_services/point_driver/:id' => 'rate_services#point_driver'
       get 'rate_services/active' => 'rate_services#active'
       resources :rate_services
       get 'cargapp_payments/me' => 'cargapp_payments#me'

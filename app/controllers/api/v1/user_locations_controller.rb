@@ -1,5 +1,5 @@
 class Api::V1::UserLocationsController < ApplicationController
-  before_action :set_user_location, only: [:show, :edit, :update, :destroy]
+  before_action :set_user_location, only: [:show, :edit, :update, :destroy, :find_driver]
   protect_from_forgery with: :null_session
   before_action :doorkeeper_authorize!
   before_action :set_user
@@ -75,6 +75,11 @@ class Api::V1::UserLocationsController < ApplicationController
 
   def me
     @user_locations = @user.user_locations
+    render json: @user_locations
+  end
+
+  def find_user
+    @user_locations = UserLocation.where(user_id: params[:id])
     render json: @user_locations
   end
 
