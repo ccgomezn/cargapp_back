@@ -139,7 +139,7 @@ class Api::V1::ServiceDocumentsController < ApplicationController
   def show
     @obj = {
       id: @service_document.id,
-      name: document.name,
+      name: @service_document.name,
       document_type: @service_document.document_type,
       document: @service_document.document.attached? ? url_for(@service_document.document) : nil,
       service_id: @service_document.service_id,
@@ -180,7 +180,7 @@ class Api::V1::ServiceDocumentsController < ApplicationController
     if @service_document.save
       @obj = {
         id: @service_document.id,
-        name: document.name,
+        name: @service_documen.name,
         document_type: @service_document.document_type,
         document: @service_document.document.attached? ? url_for(@service_document.document) : nil,
         service_id: @service_document.service_id,
@@ -201,7 +201,7 @@ class Api::V1::ServiceDocumentsController < ApplicationController
     if @service_document.update(service_document_params)
       @obj = {
         id: @service_document.id,
-        name: document.name,
+        name: @service_documen.name,
         document_type: @service_document.document_type,
         document: @service_document.document.attached? ? url_for(@service_document.document) : nil,
         service_id: @service_document.service_id,
