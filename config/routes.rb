@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   resources :rate_services
   resources :cargapp_payments
   resources :payments
+  resources :company_users
 
   namespace :api, defaults: { format: :json } do
     namespace :v1, defaults: { format: :json } do
@@ -93,6 +94,9 @@ Rails.application.routes.draw do
       resources :companies
       get 'tickets/me' => 'tickets#me'
       get 'tickets/active' => 'tickets#active'
+      get 'company_users/active' => 'company_users#active'
+      get 'company_users/me' => 'company_users#me'
+      resources :company_users
       resources :tickets
       get 'documents/me' => 'documents#me'
       get 'documents/active' => 'documents#active'
