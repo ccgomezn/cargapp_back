@@ -1,4 +1,4 @@
-Rails.application.routes.draw do          
+Rails.application.routes.draw do           
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   use_doorkeeper
 
@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   resources :cargapp_payments
   resources :payments
   resources :company_users
+  resources :service_users
 
   namespace :api, defaults: { format: :json } do
     namespace :v1, defaults: { format: :json } do
@@ -142,6 +143,10 @@ Rails.application.routes.draw do
       get 'services/history' => 'services#history'
       get 'services/active' => 'services#active'
       resources :services
+      get 'service_users/me' => 'service_users#active'
+      get 'service_users/active' => 'service_users#active'
+      get 'service_users/approved' => 'service_users#approved'
+      resources :service_users
       get 'service_documents/me' => 'service_documents#me' #Last Service active
       get 'service_documents/active' => 'service_documents#active'
       get 'service_documents/find_service/:id' => 'service_documents#find_service'

@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Service:</strong>
+  <%= @service_user.service_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @service_user.user_id %>
+</p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @service_user.position %>
+</p>
+
+<p>
+  <strong>Approved:</strong>
+  <%= @service_user.approved %>
+</p>
+
+<p>
+  <strong>Expiration date:</strong>
+  <%= @service_user.expiration_date %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @service_user.active %>
+</p>
+
+<%= link_to 'Edit', edit_service_user_path(@service_user) %> |
+<%= link_to 'Back', service_users_path %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_11_172803) do
+ActiveRecord::Schema.define(version: 2019_10_11_174743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -516,6 +516,19 @@ ActiveRecord::Schema.define(version: 2019_10_11_172803) do
     t.index ["user_id"], name: "index_service_locations_on_user_id"
   end
 
+  create_table "service_users", force: :cascade do |t|
+    t.bigint "service_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "position"
+    t.boolean "approved"
+    t.date "expiration_date"
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["service_id"], name: "index_service_users_on_service_id"
+    t.index ["user_id"], name: "index_service_users_on_user_id"
+  end
+
   create_table "services", force: :cascade do |t|
     t.string "name"
     t.string "origin"
@@ -776,6 +789,8 @@ ActiveRecord::Schema.define(version: 2019_10_11_172803) do
   add_foreign_key "service_locations", "cities"
   add_foreign_key "service_locations", "services"
   add_foreign_key "service_locations", "users"
+  add_foreign_key "service_users", "services"
+  add_foreign_key "service_users", "users"
   add_foreign_key "services", "companies"
   add_foreign_key "services", "status", column: "statu_id"
   add_foreign_key "services", "users"
