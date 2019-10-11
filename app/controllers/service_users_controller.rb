@@ -1,5 +1,6 @@
 class ServiceUsersController < ApplicationController
   before_action :set_service_user, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /service_users
   # GET /service_users.json

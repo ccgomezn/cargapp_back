@@ -1,5 +1,6 @@
 class CargappModelsController < ApplicationController
   before_action :set_cargapp_model, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /cargapp_models
   # GET /cargapp_models.json

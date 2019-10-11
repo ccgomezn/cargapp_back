@@ -1,5 +1,6 @@
 class LoadTypesController < ApplicationController
   before_action :set_load_type, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /load_types
   # GET /load_types.json

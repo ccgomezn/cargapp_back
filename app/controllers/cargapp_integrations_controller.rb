@@ -1,5 +1,6 @@
 class CargappIntegrationsController < ApplicationController
   before_action :set_cargapp_integration, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /cargapp_integrations
   # GET /cargapp_integrations.json

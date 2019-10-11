@@ -1,5 +1,6 @@
 class CompanyUsersController < ApplicationController
   before_action :set_company_user, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /company_users
   # GET /company_users.json

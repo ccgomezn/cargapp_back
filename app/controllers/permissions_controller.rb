@@ -1,6 +1,7 @@
 class PermissionsController < ApplicationController
   before_action :set_permission, only: [:show, :edit, :update, :destroy]
   before_action :models
+  before_action :authenticate_user!
 
   # GET /permissions
   # GET /permissions.json

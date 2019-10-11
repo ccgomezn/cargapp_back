@@ -1,5 +1,6 @@
 class CargappPaymentsController < ApplicationController
   before_action :set_cargapp_payment, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /cargapp_payments
   # GET /cargapp_payments.json

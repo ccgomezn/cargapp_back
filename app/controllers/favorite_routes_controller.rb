@@ -1,5 +1,6 @@
 class FavoriteRoutesController < ApplicationController
   before_action :set_favorite_route, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /favorite_routes
   # GET /favorite_routes.json

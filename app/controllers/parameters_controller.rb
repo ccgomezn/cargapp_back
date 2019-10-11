@@ -1,6 +1,7 @@
 class ParametersController < ApplicationController
   before_action :set_parameter, only: [:show, :edit, :update, :destroy]
   before_action :models
+  before_action :authenticate_user!
 
   # GET /parameters
   # GET /parameters.json

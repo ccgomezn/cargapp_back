@@ -1,5 +1,6 @@
 class StatusController < ApplicationController
   before_action :set_status, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /status
   # GET /status.json

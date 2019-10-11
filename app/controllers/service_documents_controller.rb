@@ -1,5 +1,6 @@
 class ServiceDocumentsController < ApplicationController
   before_action :set_service_document, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /service_documents
   # GET /service_documents.json
