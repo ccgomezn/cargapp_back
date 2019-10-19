@@ -167,6 +167,25 @@ class Api::V1::ProfilesController < ApplicationController
     render json: profile
   end
 
+  def find_user
+    user = User.find_by(id: params[:id])
+    @profile = user.profile
+    profile = {
+      id: @profile.id,
+      firt_name: @profile.firt_name,
+      last_name: @profile.last_name,
+      avatar: @profile.avatar.attached? ? url_for(@profile.avatar) : nil,
+      phone: @profile.phone,
+      birth_date: @profile.birth_date,
+      document_id: @profile.document_id,
+      document_type_id: @profile.document_type_id,
+      user_id: @profile.user_id,
+      created_at: @profile.created_at,
+      updated_at: @profile.updated_at
+    }
+    render json: profile
+  end 
+
   # POST /profiles
   # POST /profiles.json
   def create

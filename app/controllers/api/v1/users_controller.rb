@@ -250,7 +250,8 @@ class Api::V1::UsersController < ApplicationController
 
       @obj = {
         user: @user,
-        roles: roles
+        roles: roles,
+        profile: @user.profile
       }
 
       render json: @obj, status: :ok

@@ -108,6 +108,7 @@ Rails.application.routes.draw do
       resources :vehicles
       get 'profiles/me' => 'profiles#me'
       get 'profiles/active' => 'profiles#active'
+      get 'profiles/find_user/:id' => 'profiles#find_user'
       resources :profiles
       get 'challenges/me' => 'challenges#me'
       get 'challenges/active' => 'challenges#active'
