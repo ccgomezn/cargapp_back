@@ -21,6 +21,20 @@ class Api::V1::ServiceUsersController < ApplicationController
     render json: @service_users
   end
 
+  def find_service
+    @service_user = ServiceUser.where(service_id: params[:id])
+    users = []
+    @service_user.each do |user|
+      user_obj = {
+        service_user: user,
+        user: user.user
+        #profile: user.user.profile
+      }
+      users << user_obj || user.user
+    end
+    render json: users
+  end
+
   # GET /service_users/1
   # GET /service_users/1.json
   def show

@@ -147,6 +147,7 @@ Rails.application.routes.draw do
       get 'service_users/me' => 'service_users#active'
       get 'service_users/active' => 'service_users#active'
       get 'service_users/approved' => 'service_users#approved'
+      get 'service_users/find_service/:id' => 'service_users#find_service'
       resources :service_users
       get 'service_documents/me' => 'service_documents#me' #Last Service active
       get 'service_documents/active' => 'service_documents#active'
