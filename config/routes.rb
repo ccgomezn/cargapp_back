@@ -92,11 +92,13 @@ Rails.application.routes.draw do
       resources :cargapp_integrations
       get 'companies/me' => 'companies#me'
       get 'companies/active' => 'companies#active'
+      get 'companies/find_users/:id' => 'companies#find_users'
       resources :companies
       get 'tickets/me' => 'tickets#me'
       get 'tickets/active' => 'tickets#active'
       get 'company_users/active' => 'company_users#active'
       get 'company_users/me' => 'company_users#me'
+      get 'company_users/find_company/:id' => 'company_users#find_company'
       resources :company_users
       resources :tickets
       get 'documents/me' => 'documents#me'

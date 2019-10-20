@@ -25,6 +25,19 @@ class Api::V1::CompanyUsersController < ApplicationController
     render json: @company_users
   end
 
+  def find_company
+    @company_users = CompanyUser.where(company_id: params[:id])
+    users = []
+    @company_users.each do |company|
+      user_obj = {
+        user:  company.user
+        #profile:  company.user.profile
+      }
+      users << company.user
+    end 
+    render json: users || @company_users
+  end
+
   # GET /company_users/1
   # GET /company_users/1.json
   def show
