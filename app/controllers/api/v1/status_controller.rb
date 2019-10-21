@@ -70,6 +70,12 @@ class Api::V1::StatusController < ApplicationController
     render json: @status
   end
 
+  def find_model
+    model = CargappModel.find_by(id: params[:id])
+    status = Statu.where(cargapp_model_id: model.id)
+    render json: status
+  end
+
   # GET /status/1
   # GET /status/1.json
   def show

@@ -73,6 +73,7 @@ Rails.application.routes.draw do
       get 'permissions/active' => 'permissions#active'
       resources :permissions
       get 'status/active' => 'status#active'
+      get 'status/find_model/:id' => 'status#find_model'
       resources :status
       get 'countries/active' => 'countries#active'
       get 'countries/migration' => 'countries#migration'
