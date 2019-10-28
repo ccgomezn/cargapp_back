@@ -18,6 +18,7 @@ gem 'rails_admin', '~> 2.0.0.beta'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 gem 'exponent-server-sdk'
 # gem 'activestorage-digitalocean'
+gem 'aws-sdk-s3'
 
 gem 'rack-cors'
 
