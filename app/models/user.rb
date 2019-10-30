@@ -73,6 +73,18 @@ class User < ApplicationRecord
     #@client.api.account.messages.create(from: ENV['TWILLIO_FROM'], to: "+#{self.phone_number}", body: "Hola tu codigo de verificacion Cargapp es: #{mobile_code}")
   end
 
+  def send_reset_password_instructions
+    # Email
+    # token = set_reset_password_token
+    
+    # Phone
+    number_randon = [(0..9)].map { |i| i.to_a }.flatten
+    token = (0...6).map { number_randon[rand(number_randon.length)] }.join
+
+    send_reset_password_instructions_notification(token)
+    token
+  end
+
   private
 
   def self.permissions(user)

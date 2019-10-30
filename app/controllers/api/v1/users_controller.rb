@@ -2,7 +2,7 @@
 
 class Api::V1::UsersController < ApplicationController
   protect_from_forgery with: :null_session
-  before_action :doorkeeper_authorize!, except: %i[create login email_verify phone_verify validate_number resend_code]
+  before_action :doorkeeper_authorize!, except: %i[create login email_verify phone_verify validate_number resend_code new_password reset_password]
   before_action :set_user
 
   swagger_controller :users, 'User Management'
@@ -89,6 +89,37 @@ class Api::V1::UsersController < ApplicationController
     param :form, 'user[user_id]', :string, :required, 'Password confirmation'
     response :unauthorized
     response :not_found
+  end
+
+  # Metodo para buscar usuario y envias codigo para restaurar el password
+  def reset_password
+    user = User.find_by(email: params[:user][:email])
+    code = user.send_reset_password_instructions
+    user.update(pin: code)
+    @parameter = Parameter.find_by(code: ENV['PHONE'])
+    if params[:user][:notify].eql?(@parameter.value)
+      result = { "message": "Sending code to phone" }
+    else
+      result = { "message": "Sending url yo email" }
+    end
+    render json: result
+  end
+
+  def new_password
+    # Valido email y token para cambiar el password
+    user = User.find_by(email: params[:user][:email])
+    params_pin = params[:user][:pin]
+    new_password = params[:user][:new_password]
+    new_password_confirmation = params[:user][:new_password_confirmation]
+
+    if user.pin.eql?(params_pin)
+      user = user.reset_password(new_password, new_password_confirmation)
+      result = { "message": "Password update" }
+    else
+      result = { "message": "The code is not correct" }
+    end
+
+    render json: result
   end
 
   def index

@@ -59,6 +59,8 @@ Rails.application.routes.draw do
       get 'users/temporarily/:id' => 'users#destroy_temporarily'
       post 'users/login' => 'users#login'
       put 'users/update_password' => 'users#update_password'
+      post 'users/reset_password' => 'users#reset_password'      
+      post 'users/new_password' => 'users#new_password'      
       resources :users #, only: [:create, :update, :show]
       # -------------------
       get 'roles/active' => 'roles#active'
