@@ -98,7 +98,9 @@ class Api::V1::UsersController < ApplicationController
     user.update(pin: code)
     @parameter = Parameter.find_by(code: ENV['PHONE'])
     if params[:user][:notify].eql?(@parameter.value)
-      result = { "message": "Sending code to phone" }
+      @client = Twilio::REST::Client.new ENV['TWILLIO_ACCOUNT_SID'], ENV['TWILLIO_AUT_TOKEN']
+      @client.api.account.messages.create(from: ENV['TWILLIO_FROM'], to: "+#{self.phone_number}", body: "Hola tu codigo para recuperar la contraseña es: #{code}")
+      result = { "message": "Sending code to phone #{code}" }
     else
       result = { "message": "Sending url yo email" }
     end
