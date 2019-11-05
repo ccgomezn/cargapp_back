@@ -101,8 +101,10 @@ class Api::V1::UsersController < ApplicationController
       @client = Twilio::REST::Client.new ENV['TWILLIO_ACCOUNT_SID'], ENV['TWILLIO_AUT_TOKEN']
       @client.api.account.messages.create(from: ENV['TWILLIO_FROM'], to: "+#{user.phone_number}", body: "Hola tu codigo para recuperar la contraseña es: #{code}")
       result = { "message": "Sending code to phone #{code}" }
+      #render json: result
     else
       result = { "message": "Sending url yo email" }
+      #render json: user, status: :found
     end
     render json: result
   end
@@ -114,14 +116,16 @@ class Api::V1::UsersController < ApplicationController
     new_password = params[:user][:new_password]
     new_password_confirmation = params[:user][:new_password_confirmation]
 
-    if user.pin.eql?(params_pin)
+    if user.pin.eql?(params_pin) && new_password.eql?(new_password_confirmation) # validar el password 
       user = user.reset_password(new_password, new_password_confirmation)
       result = { "message": "Password update" }
+      render json: result
     else
-      result = { "message": "The code is not correct" }
+      # reponder con otro codigo de error
+      result = { "message": "The code or password is not correct" }
+      render json: result, status: :found
     end
 
-    render json: result
   end
 
   def index
