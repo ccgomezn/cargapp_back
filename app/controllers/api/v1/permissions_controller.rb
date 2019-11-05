@@ -79,6 +79,29 @@ class Api::V1::PermissionsController < ApplicationController
     render json: @permission
   end
 
+  def me
+    # Busco los roles del usuario
+    roles = []
+    @user.user_roles.each do |role|
+      roles << role.role
+    end
+
+    # Busco los modelos de los roles
+    models = []
+    @user.user_roles.each do |role|
+      role.role.permissions.each do |model|
+        models << model.cargapp_model
+      end
+    end
+    
+    @obj = {
+      user_role: @user.user_roles,
+      roles: roles,
+      models: CargappModel.where(id: models.uniq.pluck(:id) ) || models.uniq.pluck(:id)
+    }
+
+    render json: @obj, status: :ok
+  end
   
   # POST /permissions
   # POST /permissions.json

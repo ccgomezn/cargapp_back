@@ -73,6 +73,7 @@ Rails.application.routes.draw do
       get 'parameters/find/:code' => 'parameters#find'
       resources :parameters
       get 'permissions/active' => 'permissions#active'
+      get 'permissions/me' => 'permissions#me'
       resources :permissions
       get 'status/active' => 'status#active'
       get 'status/find_model/:id' => 'status#find_model'
