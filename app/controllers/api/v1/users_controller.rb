@@ -123,7 +123,7 @@ class Api::V1::UsersController < ApplicationController
     else
       # reponder con otro codigo de error
       result = { "message": "The code or password is not correct" }
-      render json: result, status: :found
+      render json: result, status: :unprocessable_entity
     end
 
   end
