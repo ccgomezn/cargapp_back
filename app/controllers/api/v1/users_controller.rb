@@ -94,19 +94,24 @@ class Api::V1::UsersController < ApplicationController
   # Metodo para buscar usuario y envias codigo para restaurar el password
   def reset_password
     user = User.find_by(email: params[:user][:email])
-    code = user.send_reset_password_instructions
-    user.update(pin: code)
-    @parameter = Parameter.find_by(code: ENV['PHONE'])
-    if params[:user][:notify].eql?(@parameter.value)
-      @client = Twilio::REST::Client.new ENV['TWILLIO_ACCOUNT_SID'], ENV['TWILLIO_AUT_TOKEN']
-      @client.api.account.messages.create(from: ENV['TWILLIO_FROM'], to: "+#{user.phone_number}", body: "Hola tu codigo para recuperar la contraseña es: #{code}")
-      result = { "message": "Sending code to phone #{code}" }
-      #render json: result
+    if user 
+      code = user.send_reset_password_instructions
+      user.update(pin: code)
+      @parameter = Parameter.find_by(code: ENV['PHONE'])
+      if params[:user][:notify].eql?(@parameter.value)
+        @client = Twilio::REST::Client.new ENV['TWILLIO_ACCOUNT_SID'], ENV['TWILLIO_AUT_TOKEN']
+        @client.api.account.messages.create(from: ENV['TWILLIO_FROM'], to: "+#{user.phone_number}", body: "Hola tu codigo para recuperar la contraseña es: #{code}")
+        result = { "message": "Sending code to phone #{code}" }
+        #render json: result
+      else
+        result = { "message": "Sending url yo email" }
+        #render json: user, status: :found
+      end
+      render json: result
     else
-      result = { "message": "Sending url yo email" }
-      #render json: user, status: :found
+      result = { "message": "Email is not valid" }
+      render json: result, status: :unprocessable_entity
     end
-    render json: result
   end
 
   def new_password
