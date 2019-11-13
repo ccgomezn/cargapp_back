@@ -142,7 +142,9 @@ class Api::V1::UsersController < ApplicationController
   def check
     roles = []
     @user.user_roles.each do |role|
-      roles << role.role
+      if role.role != "status"
+        roles << role.role
+      end
     end
 
     # Busco los modelos de los roles
