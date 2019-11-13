@@ -61,6 +61,7 @@ Rails.application.routes.draw do
       put 'users/update_password' => 'users#update_password'
       post 'users/reset_password' => 'users#reset_password'      
       post 'users/new_password' => 'users#new_password'      
+      get 'users/check' => 'users#check'      
       resources :users #, only: [:create, :update, :show]
       # -------------------
       get 'roles/active' => 'roles#active'

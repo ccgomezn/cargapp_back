@@ -138,6 +138,39 @@ class Api::V1::UsersController < ApplicationController
     render json: @users
     # render json: { "name": 'hola'}, status: :created
   end
+  
+  def check
+    roles = []
+    @user.user_roles.each do |role|
+      roles << role.role
+    end
+
+    # Busco los modelos de los roles
+    models = []
+    @user.user_roles.each do |role|
+      role.role.permissions.each do |model|
+        models << model.cargapp_model
+      end
+    end
+
+    @models = CargappModel.where(id: models.uniq.pluck(:id))
+    @relations_obj = []
+    @models.each do |model|
+      # "#{model.value}".classify.singularize.classify.constantize.all
+      # @obj << "#{model.value}".classify.singularize.classify.constantize.all
+      # @obj << model_find_by_user("#{model.value}", @user.id) || model_all("#{model.value}")
+      # @obj << {"#{model.value}": model_all("#{model.value}")}
+      if "#{model.value}".classify.singularize.classify.constantize.has_attribute?("user_id")
+        if model_find_by_user("#{model.value}", @user.id)
+          @relations_obj << {"#{model.value}": model_find_by_user("#{model.value}", @user.id)}
+        else
+          @relations_obj << {"#{model.value}": nil}
+        end
+      end
+    end
+
+    render json: @relations_obj
+  end
 
   def active
     @users = User.where(active: true)
@@ -424,6 +457,16 @@ class Api::V1::UsersController < ApplicationController
   end
 
   private
+
+  def model_all(model)
+    # "#{model.value}".classify.singularize.classify.constantize.all
+    "#{model}".classify.singularize.classify.constantize.all
+  end
+
+  def model_find_by_user(model, user)
+    # "#{model.value}".classify.singularize.classify.constantize.all
+    "#{model}".classify.singularize.classify.constantize.where(user: user)
+  end
 
   def new_code(phone_number, mobile_code)
     @client = Twilio::REST::Client.new ENV['TWILLIO_ACCOUNT_SID'], ENV['TWILLIO_AUT_TOKEN']
