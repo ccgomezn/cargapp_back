@@ -116,7 +116,14 @@ class Api::V1::ServicesController < ApplicationController
   end
 
   def find_driver
-    @services = Service.where(user_driver_id: @user.id)
+    user = User.find(params[:id])
+    @services = Service.where(user_driver_id: user.id)
+    render json: @services
+  end
+
+  def find_user
+    user = User.find(id: params[:id])
+    @services = Service.where(user_id: user.id)
     render json: @services
   end
 
