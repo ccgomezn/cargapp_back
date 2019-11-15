@@ -163,9 +163,10 @@ class Api::V1::UsersController < ApplicationController
       if "#{model.value}".classify.singularize.classify != "Status"
         if "#{model.value}".classify.singularize.classify.constantize.has_attribute?("user_id")
           if model_find_by_user("#{model.value}", @user.id)
-            @relations_obj << {"#{model.value}": model_find_by_user("#{model.value}", @user.id)}
+            # @relations_obj << {"#{model.value}": model_find_by_user("#{model.value}", @user.id)}
+            @relations_obj << {"#{model.value}": true}
           else
-            @relations_obj << {"#{model.value}": nil}
+            @relations_obj << {"#{model.value}": false}
           end
         end
       end
