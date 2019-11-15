@@ -468,7 +468,7 @@ class Api::V1::UsersController < ApplicationController
 
   def model_find_by_user(model, user)
     # "#{model.value}".classify.singularize.classify.constantize.all
-    "#{model}".classify.singularize.classify.constantize.where(user: user).ignored_columns("employee_email")
+    "#{model}".classify.singularize.classify.constantize.where(user: user)
   end
 
   def new_code(phone_number, mobile_code)
