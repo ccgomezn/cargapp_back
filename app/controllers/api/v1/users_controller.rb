@@ -164,9 +164,9 @@ class Api::V1::UsersController < ApplicationController
         if "#{model.value}".classify.singularize.classify.constantize.has_attribute?("user_id")
           if model_find_by_user("#{model.value}", @user.id)
             # @relations_obj << {"#{model.value}": model_find_by_user("#{model.value}", @user.id)}
-            @relations_obj << {name: model.value, permission: true, data: model_find_by_user("#{model.value}", @user.id) }
+            @relations_obj << {name: model.value, permission: true }#, data: model_find_by_user("#{model.value}", @user.id) }
           else
-            @relations_obj << {name: model.value, permission: false, data: nil}
+            @relations_obj << {name: model.value, permission: false }#, data: nil}
           end
         end
       end
@@ -468,7 +468,7 @@ class Api::V1::UsersController < ApplicationController
 
   def model_find_by_user(model, user)
     # "#{model.value}".classify.singularize.classify.constantize.all
-    "#{model}".classify.singularize.classify.constantize.where(user: user)
+    "#{model}".classify.singularize.classify.constantize.where(user: user).ignored_columns("employee_email")
   end
 
   def new_code(phone_number, mobile_code)
