@@ -160,7 +160,7 @@ class Api::V1::UsersController < ApplicationController
       # @obj << "#{model.value}".classify.singularize.classify.constantize.all
       # @obj << model_find_by_user("#{model.value}", @user.id) || model_all("#{model.value}")
       # @obj << {"#{model.value}": model_all("#{model.value}")}
-      #if model.value != "status"
+      if model.value != "status"
         if "#{model.value}".classify.singularize.classify.constantize.has_attribute?("user_id")
           if model_find_by_user("#{model.value}", @user.id)
             @relations_obj << {"#{model.value}": model_find_by_user("#{model.value}", @user.id)}
@@ -168,7 +168,7 @@ class Api::V1::UsersController < ApplicationController
             @relations_obj << {"#{model.value}": nil}
           end
         end
-      #end
+      end
     end
 
     render json: @relations_obj
