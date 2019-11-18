@@ -163,10 +163,13 @@ class Api::V1::UsersController < ApplicationController
       if "#{model.value}".classify.singularize.classify != "Status"
         if "#{model.value}".classify.singularize.classify.constantize.has_attribute?("user_id")
           if model_find_by_user("#{model.value}", @user.id)
-            # @relations_obj << {"#{model.value}": model_find_by_user("#{model.value}", @user.id)}
-            @relations_obj << {name: model.value, permission: true }#, data: model_find_by_user("#{model.value}", @user.id) }
+            if model_find_by_user("#{model.value}", @user.id).length > 0
+              @relations_obj << {name: model.value, permission: true } #, data: model_find_by_user("#{model.value}", @user.id) }
+            else 
+              @relations_obj << {name: model.value, permission: false } #, data: model_find_by_user("#{model.value}", @user.id) }
+            end
           else
-            @relations_obj << {name: model.value, permission: false }#, data: nil}
+            @relations_obj << {name: model.value, permission: false } #, data: nil}
           end
         end
       end
