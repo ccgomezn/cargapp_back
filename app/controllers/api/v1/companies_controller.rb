@@ -1,8 +1,8 @@
 class Api::V1::CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
   protect_from_forgery with: :null_session
-  before_action :doorkeeper_authorize!
-  before_action :set_user
+  #before_action :doorkeeper_authorize!
+  #before_action :set_user
 
   swagger_controller :companies, 'Companies Management'
 
@@ -75,19 +75,85 @@ class Api::V1::CompaniesController < ApplicationController
   def index
     @companies = Company.all
 
-    render json: @companies
+    @result = []
+    @companies.each do |company|
+      @obj = {
+        id: company.id,
+        name: company.name,
+        identify: company.identify,
+        image: company.image.attached? ? url_for(company.image) : nil,
+        description: company.description,
+        company_type: company.company_type,
+        load_type_id: company.load_type_id,
+        sector: company.sector,
+        legal_representative: company.legal_representative,
+        address: company.address,
+        phone: company.phone,
+        phone: company.phone,
+        constitution_date: company.constitution_date,
+        active: company.active,
+        created_at: company.created_at,
+        updated_at: company.updated_at
+      }
+      @result << @obj
+    end
+    render json: @result
   end
   
   def active
     @companies = Company.where(active: true)
 
-    render json: @companies
+    @result = []
+    @companies.each do |company|
+      @obj = {
+        id: company.id,
+        name: company.name,
+        identify: company.identify,
+        image: company.image.attached? ? url_for(company.image) : nil,
+        description: company.description,
+        company_type: company.company_type,
+        load_type_id: company.load_type_id,
+        sector: company.sector,
+        legal_representative: company.legal_representative,
+        address: company.address,
+        phone: company.phone,
+        phone: company.phone,
+        constitution_date: company.constitution_date,
+        active: company.active,
+        created_at: company.created_at,
+        updated_at: company.updated_at
+      }
+      @result << @obj
+    end
+    render json: @result
   end
 
   def me
     @companies = @user.companies #CargappIntegration.where(active: true, user_id: @user)
 
-    render json: @companies
+    @result = []
+    @companies.each do |company|
+      @obj = {
+        id: company.id,
+        name: company.name,
+        identify: company.identify,
+        image: company.image.attached? ? url_for(company.image) : nil,
+        description: company.description,
+        company_type: company.company_type,
+        load_type_id: company.load_type_id,
+        sector: company.sector,
+        legal_representative: company.legal_representative,
+        address: company.address,
+        phone: company.phone,
+        phone: company.phone,
+        constitution_date: company.constitution_date,
+        active: company.active,
+        created_at: company.created_at,
+        updated_at: company.updated_at
+      }
+      @result << @obj
+    end
+    render json: @result
   end
 
   def find_users
@@ -96,9 +162,25 @@ class Api::V1::CompaniesController < ApplicationController
     @company.company_users.each do |company|
       user_obj = {
         user: company.user,
-        company_users: company
+        company_users: {  id: @company.id,
+          name: @company.name,
+          identify: @company.identify,
+          image: @company.image.attached? ? url_for(@company.image) : nil,
+          description: @company.description,
+          company_type: @company.company_type,
+          load_type_id: @company.load_type_id,
+          sector: @company.sector,
+          legal_representative: @company.legal_representative,
+          address: @company.address,
+          phone: @company.phone,
+          phone: @company.phone,
+          constitution_date: @company.constitution_date,
+          active: @company.active,
+          created_at: @company.created_at,
+          updated_at: @company.updated_at
+        }
       }
-      users << user_obj || company.user
+      users << user_obj || @company.user
     end 
     render json: users
   end
@@ -106,7 +188,24 @@ class Api::V1::CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
-    render json: @company
+    company = {  id: @company.id,
+      name: @company.name,
+      identify: @company.identify,
+      image: @company.image.attached? ? url_for(@company.image) : nil,
+      description: @company.description,
+      company_type: @company.company_type,
+      load_type_id: @company.load_type_id,
+      sector: @company.sector,
+      legal_representative: @company.legal_representative,
+      address: @company.address,
+      phone: @company.phone,
+      phone: @company.phone,
+      constitution_date: @company.constitution_date,
+      active: @company.active,
+      created_at: @company.created_at,
+      updated_at: @company.updated_at
+    }
+    render json: company
   end
 
   # POST /companies
@@ -115,7 +214,24 @@ class Api::V1::CompaniesController < ApplicationController
     @company = Company.new(company_params)
 
     if @company.save
-      render json: @company, status: :created, location: @company
+      @obj = {  id: @company.id,
+        name: @company.name,
+        identify: @company.identify,
+        image: @company.image.attached? ? url_for(@company.image) : nil,
+        description: @company.description,
+        company_type: @company.company_type,
+        load_type_id: @company.load_type_id,
+        sector: @company.sector,
+        legal_representative: @company.legal_representative,
+        address: @company.address,
+        phone: @company.phone,
+        phone: @company.phone,
+        constitution_date: @company.constitution_date,
+        active: @company.active,
+        created_at: @company.created_at,
+        updated_at: @company.updated_at
+      }
+      render json: @obj, status: :created, location: @obj
       # 'company was successfully created.'
     else
       render json: @company.errors, status: :unprocessable_entity
@@ -126,7 +242,25 @@ class Api::V1::CompaniesController < ApplicationController
   # PATCH/PUT /companies/1.json
   def update
     if @company.update(company_params)
-      render json: @company
+      @obj = {  id: @company.id,
+        name: @company.name,
+        identify: @company.identify,
+        image: @company.image.attached? ? url_for(@company.image) : nil,
+        description: @company.description,
+        company_type: @company.company_type,
+        load_type_id: @company.load_type_id,
+        sector: @company.sector,
+        legal_representative: @company.legal_representative,
+        address: @company.address,
+        phone: @company.phone,
+        phone: @company.phone,
+        constitution_date: @company.constitution_date,
+        active: @company.active,
+        created_at: @company.created_at,
+        updated_at: @company.updated_at
+      }
+
+      render json: @obj
       # 'company was successfully updated.'
     else
       render json: @company.errors, status: :unprocessable_entity
@@ -205,6 +339,6 @@ class Api::V1::CompaniesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
-      params.require(:company).permit(:name, :description, :company_type, :load_type_id, :sector, :legal_representative, :address, :phone, :user_id, :constitution_date, :active)
+      params.require(:company).permit(:name, :description, :company_type, :load_type_id, :sector, :legal_representative, :address, :phone, :user_id, :constitution_date, :active, :image, :identify)
     end
 end
