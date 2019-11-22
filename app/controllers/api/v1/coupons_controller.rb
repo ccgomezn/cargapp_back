@@ -182,6 +182,6 @@ class Api::V1::CouponsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def coupon_params
-      params.require(:coupon).permit(:name, :code, :description, :is_porcentage, :value, :quantity, :cargapp_model_id, :user_id, :active)
+      params.require(:coupon).permit(:name, :code, :description, :is_porcentage, :value, :quantity, :cargapp_model_id, :user_id, :active, :company_id)
     end
 end

@@ -230,7 +230,9 @@ ActiveRecord::Schema.define(version: 2019_11_22_171233) do
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "company_id"
     t.index ["cargapp_model_id"], name: "index_coupons_on_cargapp_model_id"
+    t.index ["company_id"], name: "index_coupons_on_company_id"
     t.index ["user_id"], name: "index_coupons_on_user_id"
   end
 
@@ -761,6 +763,7 @@ ActiveRecord::Schema.define(version: 2019_11_22_171233) do
   add_foreign_key "company_users", "companies"
   add_foreign_key "company_users", "users"
   add_foreign_key "coupons", "cargapp_models"
+  add_foreign_key "coupons", "companies"
   add_foreign_key "coupons", "users"
   add_foreign_key "documents", "document_types"
   add_foreign_key "documents", "status", column: "statu_id"

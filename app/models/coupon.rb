@@ -1,6 +1,7 @@
 class Coupon < ApplicationRecord
   belongs_to :cargapp_model
   belongs_to :user
+  belongs_to :company
 
   validates :name, :code, uniqueness: true
   validates :name, :code, presence: true
