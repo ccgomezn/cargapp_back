@@ -254,14 +254,22 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    $error_tw ||= false
 
-    if @user.save
+    if @user.save && !$error_tw
       user_role()
       profile()
       render json: @user, status: :created
     else
-      head(:unprocessable_entity)
+      if $error_tw
+        data = { message: 'error twillio' }
+        render json: data, status: :created
+      else
+        # head(:unprocessable_entity)
+        render json: @user.errors, status: :unprocessable_entity
+      end
     end
+    $error_tw = false
   end
 
   def login

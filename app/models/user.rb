@@ -67,10 +67,18 @@ class User < ApplicationRecord
     self.active ||= false
   end
 
+  def twillio_error(data)
+    $error_tw = data
+  end
+
   after_create :build_profile
   def build_profile
-    @client = Twilio::REST::Client.new ENV['TWILLIO_ACCOUNT_SID'], ENV['TWILLIO_AUT_TOKEN']
-    @client.api.account.messages.create(from: ENV['TWILLIO_FROM'], to: "+#{self.phone_number}", body: "Hola tu codigo de verificacion Cargapp es: #{mobile_code}")
+    begin
+      @client = Twilio::REST::Client.new ENV['TWILLIO_ACCOUNT_SID'], ENV['TWILLIO_AUT_TOKEN']
+      @client.api.account.messages.create(from: ENV['TWILLIO_FROM'], to: "+#{self.phone_number}", body: "Hola tu codigo de verificacion Cargapp es: #{mobile_code}")
+    rescue Twilio::REST::RestError => e
+      twillio_error(true)
+    end
   end
 
   def send_reset_password_instructions
