@@ -22,7 +22,7 @@ class Api::V1::CompanyUsersController < ApplicationController
     @company_users.each do |company|
       company_users << company.company_users
     end 
-    render json: @company_users
+    render json: company_users
   end
 
   def find_company
