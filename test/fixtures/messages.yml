@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  room: one
+  message_type: MyString
+  uuid: MyString
+  message: MyString
+  file: MyString
+  user: one
+  active: false
+
+two:
+  room: two
+  message_type: MyString
+  uuid: MyString
+  message: MyString
+  file: MyString
+  user: two
+  active: false

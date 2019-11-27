@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_27_003015) do
+ActiveRecord::Schema.define(version: 2019_11_27_044101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -302,6 +302,20 @@ ActiveRecord::Schema.define(version: 2019_11_27_003015) do
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "room_id", null: false
+    t.string "message_type"
+    t.string "uuid"
+    t.string "message"
+    t.string "file"
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|
@@ -793,6 +807,8 @@ ActiveRecord::Schema.define(version: 2019_11_27_003015) do
   add_foreign_key "documents", "status", column: "statu_id"
   add_foreign_key "documents", "users"
   add_foreign_key "favorite_routes", "users"
+  add_foreign_key "messages", "rooms"
+  add_foreign_key "messages", "users"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_grants", "users", column: "resource_owner_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"

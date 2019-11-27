@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   resources :service_users
   resources :rooms
   resources :room_users
+  resources :messages
 
   namespace :api, defaults: { format: :json } do
     namespace :v1, defaults: { format: :json } do
@@ -209,6 +210,10 @@ Rails.application.routes.draw do
       get 'room_users/users_room/:id' => 'room_users#users_room'
       get 'room_users/check/:id' => 'room_users#check'
       resources :room_users
+      get 'messages/me' => 'messages#me'
+      get 'messages/active' => 'messages#active'
+      get 'messages/room/:id' => 'messages#room'
+      resources :messages
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -1589,6 +1589,39 @@ Code style checker
 ```
 
 
+Messages
+- room
+- message_type
+- uuid
+- message
+- file
+- user
+- active
+
+```rails g scaffold Message room:references message_type uuid message file user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/messages 'Listar'
+2. GET http://api.cargapp.co/api/v1/messages/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/messages/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/messages 'Crear'
+5. PUT http://api.cargapp.co/api/v1/messages/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/messages/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/messages/me 'Ver las del usuario'
+
+
+```
+{
+    "message": {
+        "room_id": 1,
+        "message_type": "text",
+        "uuid": "1122522",
+        "message": "hola mundo",
+        "file": "url.png"
+        "user_id": 1,
+        "active": false
+    }
+}
+```
 
 
 # Login Local for console

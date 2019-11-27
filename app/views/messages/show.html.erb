@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Room:</strong>
+  <%= @message.room_id %>
+</p>
+
+<p>
+  <strong>Message type:</strong>
+  <%= @message.message_type %>
+</p>
+
+<p>
+  <strong>Uuid:</strong>
+  <%= @message.uuid %>
+</p>
+
+<p>
+  <strong>Message:</strong>
+  <%= @message.message %>
+</p>
+
+<p>
+  <strong>File:</strong>
+  <%= @message.file %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @message.user_id %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @message.active %>
+</p>
+
+<%= link_to 'Edit', edit_message_path(@message) %> |
+<%= link_to 'Back', messages_path %>
