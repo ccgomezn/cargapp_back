@@ -1566,6 +1566,29 @@ Code style checker
 ```
 
 
+```rails g scaffold RoomUser service:references room:references user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/room_users 'Listar'
+2. GET http://api.cargapp.co/api/v1/room_users/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/room_users/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/room_users 'Crear'
+5. PUT http://api.cargapp.co/api/v1/room_users/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/room_users/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/room_users/me 'Ver las del usuario'
+
+
+```
+{
+    "room_user": {
+        "service_id": 11,
+        "room_id": 1,
+        "user_id": 1,
+        "active": false
+    }
+}
+```
+
+
 
 
 # Login Local for console

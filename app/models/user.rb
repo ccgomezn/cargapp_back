@@ -30,7 +30,8 @@ class User < ApplicationRecord
   has_many :payments, dependent: :destroy
   validates :phone_number, presence: true
   validates :phone_number, uniqueness: true
-  
+  has_many :rooms, dependent: :destroy
+  has_many :room_users, dependent: :destroy
 
   has_many :access_grants,
          class_name: 'Doorkeeper::AccessGrant',
