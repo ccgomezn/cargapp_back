@@ -1472,6 +1472,100 @@ Code style checker
 }
 ```
 
+## CompanyUser
+* id
+* user_id
+* company_id
+* active
+
+```rails g scaffold CompanyUser company:references user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/company_users 'Listar'
+2. GET http://api.cargapp.co/api/v1/company_users/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/company_users/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/company_users 'Crear'
+5. PUT http://api.cargapp.co/api/v1/company_users/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/company_users/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/company_users/me 'Ver las del usuario'
+
+
+```
+{
+	"company_user": {
+		"company_id": 1,
+		"user_id": 2,
+		"active": true
+	}
+}
+```
+
+## ServiceUser
+* id
+* service_id
+* user_id
+* position
+* approved
+* expiration_date
+* active
+
+```rails g scaffold ServiceUser service:references user:references position:integer approved:boolean expiration_date:date active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/company_users 'Listar'
+2. GET http://api.cargapp.co/api/v1/company_users/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/company_users/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/company_users 'Crear'
+5. PUT http://api.cargapp.co/api/v1/company_users/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/company_users/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/company_users/me 'Ver las del usuario'
+
+
+```
+{
+    "payment": {
+        "uuid": "",
+        "total": null,
+        "sub_total": null,
+        "taxes": null,
+        "transaction_code": "",
+        "observation": "",
+        "coupon_id": null,
+        "coupon_code": "",
+        "coupon_amount": null,
+        "user_payment_method_id": 4,
+        "payment_method_id": 1,
+        "statu_id": 6,
+        "service_id": 11,
+        "is_service": true,
+        "user_id": 1,
+        "active": false
+    }
+}
+```
+
+```rails g scaffold Room name note service:references user:references active:boolean```
+
+1. GET http://api.cargapp.co/api/v1/rooms 'Listar'
+2. GET http://api.cargapp.co/api/v1/rooms/active 'Ver activos'
+3. GET http://api.cargapp.co/api/v1/rooms/:id 'Ver detalle'
+4. POST http://api.cargapp.co/api/v1/rooms 'Crear'
+5. PUT http://api.cargapp.co/api/v1/rooms/:id 'Actualiza'
+6. DELETE http://api.cargapp.co/api/v1/rooms/:id 'Elimina'
+7. GET http://api.cargapp.co/api/v1/rooms/me 'Ver las del usuario'
+
+
+```
+{
+    "room": {
+        "name": "",
+        "note": null,
+        "service_id": 11,
+        "user_id": 1,
+        "active": false
+    }
+}
+```
+
+
 
 
 # Login Local for console
@@ -1483,6 +1577,10 @@ token = client.password.get_token('user@cargapp.co', '123456')
 puts token.token
 
 
-Service
-duration
-distance
+# Login Local for console
+irb -r oauth2
+app = "ZRylaRGgSD19_gOQVoumEmLueIWlcaBLkw2EkcIKG7Y"
+secret = "UaF6H-ETL8XlY04V5_U3eUSyehHVHiopXU__bcAcIXI"
+client = OAuth2::Client.new(app, secret, site: 'http://localhost:3000')
+token = client.password.get_token('segundo.espana1@gmail.com', 'lol52800')
+puts token.token

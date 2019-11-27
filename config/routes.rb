@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   resources :payments
   resources :company_users
   resources :service_users
+  resources :rooms
 
   namespace :api, defaults: { format: :json } do
     namespace :v1, defaults: { format: :json } do
@@ -198,6 +199,9 @@ Rails.application.routes.draw do
       get 'payments/active' => 'payments#active'
       post 'payments/find_user' => 'payments#find_user'
       resources :payments
+      get 'rooms/me' => 'rooms#me'
+      get 'rooms/active' => 'rooms#active'
+      resources :rooms
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

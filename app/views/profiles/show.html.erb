@@ -13,6 +13,7 @@
 <p>
   <strong>Avatar:</strong>
   <%= @profile.avatar %>
+  <%= @profile.avatar.attached? ? url_for(@profile.avatar) : '/report/images/single/1.jpg' %>
 </p>
 
 <p>

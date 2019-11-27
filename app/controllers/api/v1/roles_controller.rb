@@ -3,8 +3,8 @@
 class Api::V1::RolesController < ApplicationController
   before_action :set_role, only: %i[show update destroy]
   protect_from_forgery with: :null_session
-  #before_action :doorkeeper_authorize!
-  #before_action :set_user
+  before_action :doorkeeper_authorize!
+  before_action :set_user
 
   swagger_controller :roles, 'Roles Management'
 
