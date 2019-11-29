@@ -1,8 +1,8 @@
 class Api::V1::ServicesController < ApplicationController
   before_action :set_service, only: [:show, :edit, :update, :destroy]
   protect_from_forgery with: :null_session
-  before_action :set_user
-  before_action :doorkeeper_authorize!
+  #before_action :set_user
+  #before_action :doorkeeper_authorize!
 
 
   swagger_controller :service, 'Services Management'
@@ -108,6 +108,26 @@ class Api::V1::ServicesController < ApplicationController
   def active
     @services = Service.where(active: true)
     render json: @services
+  end
+
+  def destinations
+    @services = Service.where(active: true)
+
+    @origins = []
+    origins = @services.group(:origin).count
+    origins.each do |origin|
+      @origins << { name: origin[0], count: origin[1]}
+    end
+    
+    @destinations = []
+    destinations = @services.group(:destination).count
+    destinations.each do |destination|
+      @destinations << { name: destination[0], count: destination[1]}
+    end
+    
+    result = { origins: @origins,  destinations: @destinations }
+
+    render json: result
   end
 
   def filter
