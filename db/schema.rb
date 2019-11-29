@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_27_044101) do
+ActiveRecord::Schema.define(version: 2019_11_29_164809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -567,8 +567,10 @@ ActiveRecord::Schema.define(version: 2019_11_27_044101) do
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "vehicle_id"
     t.index ["service_id"], name: "index_service_users_on_service_id"
     t.index ["user_id"], name: "index_service_users_on_user_id"
+    t.index ["vehicle_id"], name: "index_service_users_on_vehicle_id"
   end
 
   create_table "services", force: :cascade do |t|
@@ -841,6 +843,7 @@ ActiveRecord::Schema.define(version: 2019_11_27_044101) do
   add_foreign_key "service_locations", "users"
   add_foreign_key "service_users", "services"
   add_foreign_key "service_users", "users"
+  add_foreign_key "service_users", "vehicles"
   add_foreign_key "services", "companies"
   add_foreign_key "services", "status", column: "statu_id"
   add_foreign_key "services", "users"

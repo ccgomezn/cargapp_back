@@ -115,13 +115,12 @@ class Api::V1::ServicesController < ApplicationController
     end_price = params[:end_price].to_i.eql?(0) ? 100000 : params[:end_price].to_i
     origin = params[:origin] 
     destination = params[:destination]
-    created_at = params[:created_at]
+    created_at = params[:created_at].eql?('null') ? DateTime.now.to_date - 1.month : params[:created_at]
     vehicle_type = params[:vehicle_type]
-
     @services = Service.where('active = ? AND price >= ? AND price <= ?
-      AND vehicle_type_id <= ?', true, start_price, end_price, vehicle_type)
-      #.where('origin = ? AND destination = ? AND created_at >= ?', origin, destination, created_at)
-      #.where(price: params[:start_price])
+      AND vehicle_type_id = ?', true, start_price, end_price, vehicle_type)
+      .where('origin = ?', origin).where('destination = ?', destination)
+      .where('created_at >= ?', created_at)
     render json: @services
   end
   

@@ -134,6 +134,6 @@ class Api::V1::ServiceUsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_user_params
-      params.require(:service_user).permit(:service_id, :user_id, :position, :approved, :expiration_date, :active)
+      params.require(:service_user).permit(:service_id, :user_id, :position, :approved, :expiration_date, :active, :vehicle_id)
     end
 end
