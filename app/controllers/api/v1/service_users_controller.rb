@@ -16,6 +16,11 @@ class Api::V1::ServiceUsersController < ApplicationController
     render json: @service_users
   end
 
+  def me
+    @service_users = @user.service_users
+    render json: @service_users
+  end
+
   def approved
     @service_users = ServiceUser.where(approved: true)
     render json: @service_users

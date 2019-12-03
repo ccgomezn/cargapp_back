@@ -157,7 +157,7 @@ Rails.application.routes.draw do
       get 'services/history' => 'services#history'
       get 'services/active' => 'services#active'
       resources :services
-      get 'service_users/me' => 'service_users#active'
+      get 'service_users/me' => 'service_users#me'
       get 'service_users/active' => 'service_users#active'
       get 'service_users/approved' => 'service_users#approved'
       get 'service_users/find_service/:id' => 'service_users#find_service'
