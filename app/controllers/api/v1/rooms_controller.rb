@@ -1,14 +1,24 @@
 class Api::V1::RoomsController < ApplicationController
   before_action :set_room, only: [:show, :edit, :update, :destroy]
   protect_from_forgery with: :null_session
-  before_action :doorkeeper_authorize!
-  before_action :set_user
+  #before_action :doorkeeper_authorize!
+  #before_action :set_user
 
   # GET /rooms
   # GET /rooms.json
   def index
     @rooms = Room.all
     render json: @rooms
+  end
+
+  def close_rooms
+    status = Statu.find_by(code: ENV['CLOSE_CHAT'])
+    @services = Service.where(statu_id: status.id)
+    result = []
+    @services.each do |service|
+      result << service.room.update(active: false)
+    end
+    render json: result
   end
 
   def active

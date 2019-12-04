@@ -8,4 +8,5 @@ class Service < ApplicationRecord
   belongs_to :vehicle_type, optional: true
   belongs_to :vehicle, optional: true
   belongs_to :statu
+  has_one :room
 end

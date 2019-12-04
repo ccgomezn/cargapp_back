@@ -101,12 +101,12 @@ class Api::V1::ServicesController < ApplicationController
   # GET /services
   # GET /services.json
   def index
-    @services = Service.all
+    @services = Service.all.order('created_at DESC').
     render json: @services
   end
 
   def active
-    @services = Service.where(active: true)
+    @services = Service.where(active: true).order('created_at DESC').
     render json: @services
   end
 

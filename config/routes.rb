@@ -202,6 +202,7 @@ Rails.application.routes.draw do
       get 'payments/active' => 'payments#active'
       post 'payments/find_user' => 'payments#find_user'
       resources :payments
+      get 'rooms/close_rooms' => 'rooms#close_rooms'
       get 'rooms/me' => 'rooms#me'
       get 'rooms/active' => 'rooms#active'
       resources :rooms
