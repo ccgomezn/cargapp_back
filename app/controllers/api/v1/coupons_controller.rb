@@ -71,23 +71,99 @@ class Api::V1::CouponsController < ApplicationController
   # GET /coupons.json
   def index
     @coupons = Coupon.all
-    render json: @coupons
+    @result = []
+    @coupons.each do |coupon|
+      @obj = {
+        id: coupon.id,
+        name: coupon.name,
+        code: coupon.code,
+        description: coupon.description,
+        is_porcentage: coupon.is_porcentage,
+        value: coupon.value,
+        quantity: coupon.quantity,
+        cargapp_model_id: coupon.cargapp_model_id,
+        user_id: coupon.user_id,
+        company_id: coupon.company_id,
+        active: coupon.active,
+        image: coupon.image.attached? ? url_for(coupon.image) : nil,
+        created_at: coupon.created_at,
+        updated_at: coupon.updated_at
+      }      
+      @result << @obj
+    end
+    render json: @result
   end
 
   def active
     @coupons = Coupon.where(active: true)
-    render json: @coupons
+    @result = []
+    @coupons.each do |coupon|
+      @obj = {
+        id: coupon.id,
+        name: coupon.name,
+        code: coupon.code,
+        description: coupon.description,
+        is_porcentage: coupon.is_porcentage,
+        value: coupon.value,
+        quantity: coupon.quantity,
+        cargapp_model_id: coupon.cargapp_model_id,
+        user_id: coupon.user_id,
+        company_id: coupon.company_id,
+        active: coupon.active,
+        image: coupon.image.attached? ? url_for(coupon.image) : nil,
+        created_at: coupon.created_at,
+        updated_at: coupon.updated_at
+      }      
+      @result << @obj
+    end
+    render json: @result
   end
 
   def me
     @coupons = @user.coupons
-    render json: @coupons
+    @result = []
+    @coupons.each do |coupon|
+      @obj = {
+        id: coupon.id,
+        name: coupon.name,
+        code: coupon.code,
+        description: coupon.description,
+        is_porcentage: coupon.is_porcentage,
+        value: coupon.value,
+        quantity: coupon.quantity,
+        cargapp_model_id: coupon.cargapp_model_id,
+        user_id: coupon.user_id,
+        company_id: coupon.company_id,
+        active: coupon.active,
+        image: coupon.image.attached? ? url_for(coupon.image) : nil,
+        created_at: coupon.created_at,
+        updated_at: coupon.updated_at
+      }      
+      @result << @obj
+    end
+    render json: @result
   end
 
   # GET /coupons/1
   # GET /coupons/1.json
   def show
-    render json: @coupon
+    @obj = {
+      id: @coupon.id,
+      name: @coupon.name,
+      code: @coupon.code,
+      description: @coupon.description,
+      is_porcentage: @coupon.is_porcentage,
+      value: @coupon.value,
+      quantity: @coupon.quantity,
+      cargapp_model_id: @coupon.cargapp_model_id,
+      user_id: @coupon.user_id,
+      company_id: @coupon.company_id,
+      active: @coupon.active,
+      image: @coupon.image.attached? ? url_for(@coupon.image) : nil,
+      created_at: @coupon.created_at,
+      updated_at: @coupon.updated_at
+    }
+    render json: @obj
   end
 
   # POST /coupons
@@ -95,7 +171,23 @@ class Api::V1::CouponsController < ApplicationController
   def create
     @coupon = Coupon.new(coupon_params)
     if @coupon.save
-      render json: @coupon, status: :created, location: @coupon
+      @obj = {
+        id: @coupon.id,
+        name: @coupon.name,
+        code: @coupon.code,
+        description: @coupon.description,
+        is_porcentage: @coupon.is_porcentage,
+        value: @coupon.value,
+        quantity: @coupon.quantity,
+        cargapp_model_id: @coupon.cargapp_model_id,
+        user_id: @coupon.user_id,
+        company_id: @coupon.company_id,
+        active: @coupon.active,
+        image: @coupon.image.attached? ? url_for(@coupon.image) : nil,
+        created_at: @coupon.created_at,
+        updated_at: @coupon.updated_at
+      }
+      render json: @obj, status: :created, location: @coupon
     else
       render json: @coupon.errors, status: :unprocessable_entity
     end
@@ -105,7 +197,23 @@ class Api::V1::CouponsController < ApplicationController
   # PATCH/PUT /coupons/1.json
   def update
     if @coupon.update(coupon_params)
-      render json: @coupon, status: :ok, location: @coupon
+      @obj = {
+        id: @coupon.id,
+        name: @coupon.name,
+        code: @coupon.code,
+        description: @coupon.description,
+        is_porcentage: @coupon.is_porcentage,
+        value: @coupon.value,
+        quantity: @coupon.quantity,
+        cargapp_model_id: @coupon.cargapp_model_id,
+        user_id: @coupon.user_id,
+        company_id: @coupon.company_id,
+        active: @coupon.active,
+        image: @coupon.image.attached? ? url_for(@coupon.image) : nil,
+        created_at: @coupon.created_at,
+        updated_at: @coupon.updated_at
+      }
+      render json: @obj, status: :ok, location: @coupon
     else
       render json: @coupon.errors, status: :unprocessable_entity
     end

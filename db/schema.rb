@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_29_164809) do
+ActiveRecord::Schema.define(version: 2019_12_09_054859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 2019_11_29_164809) do
   end
 
   create_table "bank_accounts", force: :cascade do |t|
-    t.integer "account_number"
+    t.string "account_number"
     t.string "account_type"
     t.string "bank"
     t.bigint "user_id", null: false
@@ -231,6 +231,7 @@ ActiveRecord::Schema.define(version: 2019_11_29_164809) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "company_id"
+    t.string "image"
     t.index ["cargapp_model_id"], name: "index_coupons_on_cargapp_model_id"
     t.index ["company_id"], name: "index_coupons_on_company_id"
     t.index ["user_id"], name: "index_coupons_on_user_id"

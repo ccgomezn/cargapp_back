@@ -34,6 +34,7 @@ class User < ApplicationRecord
   has_many :room_users, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :service_users, dependent: :destroy
+  has_many :coupons, dependent: :destroy
 
   has_many :access_grants,
          class_name: 'Doorkeeper::AccessGrant',
