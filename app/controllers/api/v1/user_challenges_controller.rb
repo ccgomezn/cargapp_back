@@ -65,6 +65,27 @@ class Api::V1::UserChallengesController < ApplicationController
     render json: @user_challenges
   end
 
+  ## Falta ordenar por
+  # 18. servicio que envie usuarios con cmayor numero de puntos
+  #19. servicio para ver en que raking estoy
+  #20. kilometros acumulados de un usuarios (con estados terminados)
+  #21. puntos amululados de un usuario
+  def top
+    @user_challenges = @user.user_challenges
+    points = @user_challenges.map(&:point).inject(0, &:+)
+    
+    users_challenges = UserChallenge.group(:user_id).count
+    users = []
+    users_challenges.each do |user|
+      point = UserChallenge.where(active: true, user_id: user[0]).map(&:point).inject(0, &:+)
+      users << { user_id: user[0], point: point, position: 0 }
+    end
+    
+    me = { my_points: points, my_position: 528 }
+    @obj = { me: me, users: users }
+    render json: @obj
+  end
+
   def active
     @user_challenges = UserChallenge.where(active: true)
     render json: @user_challenges

@@ -337,8 +337,11 @@ class Api::V1::UsersController < ApplicationController
         roles << obj
       end
 
+      # PAra tomar tiempos y distancias toca agregar variable<
+      top = @user.services.where(statu_id: 2)
       @obj = {
         user: @user,
+        top: top,
         roles: roles
         #profile: @user.profile
       }

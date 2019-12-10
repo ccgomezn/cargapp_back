@@ -123,6 +123,7 @@ Rails.application.routes.draw do
       get 'challenges/me' => 'challenges#me'
       get 'challenges/active' => 'challenges#active'
       resources :challenges
+      get 'user_challenges/top' => 'user_challenges#top'
       get 'user_challenges/me' => 'user_challenges#me'
       get 'user_challenges/active' => 'user_challenges#active'
       resources :user_challenges
