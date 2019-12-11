@@ -353,7 +353,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def top
-    @user_challenges = @user.user_challenges
+    @user_challenges = @user.user_challenges.where(active: true)
     points = @user_challenges.map(&:point).inject(0, &:+)
     me = { my_points: points, position: 0 }
 
@@ -364,7 +364,7 @@ class Api::V1::UsersController < ApplicationController
     # users = UserChallenge.select(:user_id).distinct    
     # users = UserChallenge.select("user_id as user_id, sum(point) as total_points").group("user_id")
     users_select = UserChallenge.select("user_id as user_id, sum(point) as total_points").group("user_id")
-    users_all = users_select.order(total_points: :desc)
+    users_all = users_select.where(active: true).order(total_points: :desc)
     users = [] 
     position = 0
     users_all.each do |user|
