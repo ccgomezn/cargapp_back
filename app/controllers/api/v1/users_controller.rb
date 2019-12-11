@@ -355,15 +355,23 @@ class Api::V1::UsersController < ApplicationController
   def top
     @user_challenges = @user.user_challenges
     points = @user_challenges.map(&:point).inject(0, &:+)
-    
-    users_challenges = UserChallenge.group(:user_id).count
-    users = []
-    users_challenges.each do |user|
-      point = UserChallenge.where(active: true, user_id: user[0]).map(&:point).inject(0, &:+)
-      users << { user_id: user[0], point: point, position: 0 }
+    me = { user: @user, my_points: points, position: 0 }
+
+    # users = UserChallenge.order(:point)
+    # users = User.joins(:user_challenges).where(user_challenges: { user_id: 1 })
+    # users = UserChallenge.where(created_at: (Time.now - 30.day)..Time.now)
+    # users = UserChallenge.where(active: true).or(UserChallenge.where(user_id: [1]))
+    # users = UserChallenge.select(:user_id).distinct    
+    # users = UserChallenge.select("user_id as user_id, sum(point) as total_points").group("user_id")
+    users_select = UserChallenge.select("user_id as user_id, sum(point) as total_points").group("user_id")
+    users_all = users_select.order(total_points: :desc)
+    users = [] 
+    position = 0
+    users_all.each do |user|
+      # name = user.user.profile ? %'#{user.user.profile.firt_name} #{user.user.profile.last_name}' : nil
+      users << { user_id: user.user_id, name: nil , points: user.total_points, position: position += 1}
     end
-    
-    me = { my_points: points, my_position: 528 }
+
     @obj = { me: me, users: users }
     render json: @obj
   end
