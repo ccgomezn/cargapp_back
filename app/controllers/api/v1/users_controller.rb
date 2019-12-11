@@ -352,6 +352,22 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def top
+    @user_challenges = @user.user_challenges
+    points = @user_challenges.map(&:point).inject(0, &:+)
+    
+    users_challenges = UserChallenge.group(:user_id).count
+    users = []
+    users_challenges.each do |user|
+      point = UserChallenge.where(active: true, user_id: user[0]).map(&:point).inject(0, &:+)
+      users << { user_id: user[0], point: point, position: 0 }
+    end
+    
+    me = { my_points: points, my_position: 528 }
+    @obj = { me: me, users: users }
+    render json: @obj
+  end
+
   def show
     @user_id = User.find_by(id: set_show_user)
     render json: @user_id, status: :ok
