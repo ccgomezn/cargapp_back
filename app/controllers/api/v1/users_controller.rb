@@ -355,7 +355,7 @@ class Api::V1::UsersController < ApplicationController
   def top
     @user_challenges = @user.user_challenges
     points = @user_challenges.map(&:point).inject(0, &:+)
-    me = { user: @user, my_points: points, position: 0 }
+    me = { my_points: points, position: 0 }
 
     # users = UserChallenge.order(:point)
     # users = User.joins(:user_challenges).where(user_challenges: { user_id: 1 })
