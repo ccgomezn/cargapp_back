@@ -62,6 +62,7 @@ class User < ApplicationRecord
     referal_code = (0...8).map { code[rand(code.length)] }.join
     pin = (0...4).map { number_randon[rand(number_randon.length)] }.join
     mobile_code = (0...4).map { number_randon[rand(number_randon.length)] }.join
+    # password la cedula
     self.mobile_code ||= mobile_code
     self.referal_code ||= referal_code
     self.user_referal_code ||= 'N/A'
