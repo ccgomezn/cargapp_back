@@ -11,4 +11,5 @@ class Service < ApplicationRecord
   has_one :cargapp_payment #P
   has_one :room, dependent: :destroy #P
   has_many :service_users, dependent: :destroy #P
+  has_many :service_documents, dependent: :destroy #P
 end
