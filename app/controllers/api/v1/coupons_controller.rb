@@ -77,6 +77,7 @@ class Api::V1::CouponsController < ApplicationController
         id: coupon.id,
         name: coupon.name,
         code: coupon.code,
+        category: coupon.category,
         description: coupon.description,
         is_porcentage: coupon.is_porcentage,
         value: coupon.value,
@@ -102,6 +103,7 @@ class Api::V1::CouponsController < ApplicationController
         id: coupon.id,
         name: coupon.name,
         code: coupon.code,
+        category: coupon.category,
         description: coupon.description,
         is_porcentage: coupon.is_porcentage,
         value: coupon.value,
@@ -127,6 +129,7 @@ class Api::V1::CouponsController < ApplicationController
         id: coupon.id,
         name: coupon.name,
         code: coupon.code,
+        category: coupon.category,
         description: coupon.description,
         is_porcentage: coupon.is_porcentage,
         value: coupon.value,
@@ -151,6 +154,7 @@ class Api::V1::CouponsController < ApplicationController
       id: @coupon.id,
       name: @coupon.name,
       code: @coupon.code,
+      category: coupon.category,
       description: @coupon.description,
       is_porcentage: @coupon.is_porcentage,
       value: @coupon.value,
@@ -175,6 +179,7 @@ class Api::V1::CouponsController < ApplicationController
         id: @coupon.id,
         name: @coupon.name,
         code: @coupon.code,
+        category: coupon.category,
         description: @coupon.description,
         is_porcentage: @coupon.is_porcentage,
         value: @coupon.value,
@@ -201,6 +206,7 @@ class Api::V1::CouponsController < ApplicationController
         id: @coupon.id,
         name: @coupon.name,
         code: @coupon.code,
+        category: coupon.category,
         description: @coupon.description,
         is_porcentage: @coupon.is_porcentage,
         value: @coupon.value,
@@ -290,6 +296,6 @@ class Api::V1::CouponsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def coupon_params
-      params.require(:coupon).permit(:name, :code, :description, :is_porcentage, :value, :quantity, :cargapp_model_id, :user_id, :active, :company_id, :image)
+      params.require(:coupon).permit(:name, :code, :description, :is_porcentage, :value, :quantity, :cargapp_model_id, :user_id, :active, :company_id, :image, :category)
     end
 end
