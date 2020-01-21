@@ -118,14 +118,14 @@ class Api::V1::ServicesController < ApplicationController
     origins.each do |origin|
       @origins << { name: origin[0], count: origin[1]}
     end
-    
+
     @destinations = []
     destinations = @services.group(:destination).count
     destinations.each do |destination|
       @destinations << { name: destination[0], count: destination[1]}
     end
-    
-    result = { origins: @origins,  destinations: @destinations }
+
+    result = { origins: @origins, destinations: @destinations }
 
     render json: result
   end
@@ -137,13 +137,23 @@ class Api::V1::ServicesController < ApplicationController
     destination = params[:destination]
     created_at = params[:created_at].eql?('null') ? DateTime.now.to_date - 1.month : params[:created_at]
     vehicle_type = params[:vehicle_type]
-    @services = Service.where('active = ? AND price >= ? AND price <= ?
-      AND vehicle_type_id = ?', true, start_price, end_price, vehicle_type)
-      .where('origin = ?', origin).where('destination = ?', destination)
-      .where('created_at >= ?', created_at)
+
+    @services = Service.where('active = ? AND price >= ? AND price <= ?', true, start_price, end_price)
+    if !vehicle_type.eql?('null')
+      @services = @services.where('vehicle_type_id = ?', vehicle_type)
+    end
+
+    if !origin.eql?('null')
+      @services = @services.where('origin = ?', origin)
+    end
+
+    if !destination.eql?('null')
+      @services = @services.where('destination = ?', destination)
+    end
+
     render json: @services
   end
-  
+
   def me
     @services = @user.services
     render json: @services
@@ -152,6 +162,7 @@ class Api::V1::ServicesController < ApplicationController
   def find_driver
     user = User.find(params[:id])
     @services = Service.where(user_driver_id: user.id)
+    #  ajustar  y enviar calificacion
     render json: @services
   end
 
