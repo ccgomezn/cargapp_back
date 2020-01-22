@@ -13,4 +13,13 @@ class Service < ApplicationRecord
   has_many :service_users, dependent: :destroy #P
   has_many :service_documents, dependent: :destroy #P
   has_many :rate_services, dependent: :destroy #P
+
+  before_create :default_values
+  def default_values
+    self.origin = self.origin.capitalize
+    self.destination = self.destination.capitalize
+    self.name = %'#{self.origin}-#{self.destination}'
+    #distance
+    #duration
+  end
 end

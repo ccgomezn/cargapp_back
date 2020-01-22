@@ -139,6 +139,7 @@ class Api::V1::ServicesController < ApplicationController
     vehicle_type = params[:vehicle_type]
 
     @services = Service.where('active = ? AND price >= ? AND price <= ?', true, start_price, end_price)
+      .where('created_at >= ?', created_at)
     if !vehicle_type.eql?('null')
       @services = @services.where('vehicle_type_id = ?', vehicle_type)
     end
@@ -288,6 +289,6 @@ class Api::V1::ServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_params
-      params.require(:service).permit(:name, :origin, :origin_city_id, :origin_address, :origin_longitude, :origin_latitude, :destination, :destination_city_id, :destination_address, :destination_latitude, :destination_longitude, :price, :description, :note, :user_id, :company_id, :user_driver_id, :user_receiver_id, :vehicle_type_id, :vehicle_id, :statu_id, :expiration_date, :contact, :active)
+      params.require(:service).permit(:name, :origin, :origin_city_id, :origin_address, :origin_longitude, :origin_latitude, :destination, :destination_city_id, :destination_address, :destination_latitude, :destination_longitude, :price, :description, :note, :user_id, :company_id, :user_driver_id, :user_receiver_id, :vehicle_type_id, :vehicle_id, :statu_id, :expiration_date, :contact, :active, :distance, :duration)
     end
 end
