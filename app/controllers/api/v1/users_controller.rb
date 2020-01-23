@@ -24,7 +24,6 @@ class Api::V1::UsersController < ApplicationController
     response :not_acceptable
   end
 
-
   swagger_api :phone_verify do
     summary 'Verify phone'
     param :form, 'user[phone_number]', :string, :required, 'Phone'
@@ -72,20 +71,20 @@ class Api::V1::UsersController < ApplicationController
   end
 
   swagger_api :me do
-    summary "Shows mine existing User-Role"
+    summary 'Shows mine existing User-Role'
     response :unauthorized
     response :not_found
   end
 
   swagger_api :truora_user do
-    summary "Shows Truora user"
-    param :path, :id, :integer, :optional, "User Id"
+    summary 'Shows Truora user'
+    param :path, :id, :integer, :optional, 'User Id'
     response :unauthorized
     response :not_found
   end
 
   swagger_api :truora_check_user do
-    summary "Check Truora user"
+    summary 'Check Truora user'
     param :form, 'user[user_id]', :string, :required, 'Password confirmation'
     response :unauthorized
     response :not_found
@@ -94,7 +93,7 @@ class Api::V1::UsersController < ApplicationController
   # Metodo para buscar usuario y envias codigo para restaurar el password
   def reset_password
     user = User.find_by(email: params[:user][:email])
-    if user 
+    if user
       code = user.send_reset_password_instructions
       user.update(pin: code)
       @parameter = Parameter.find_by(code: ENV['PHONE'])
@@ -102,14 +101,14 @@ class Api::V1::UsersController < ApplicationController
         @client = Twilio::REST::Client.new ENV['TWILLIO_ACCOUNT_SID'], ENV['TWILLIO_AUT_TOKEN']
         @client.api.account.messages.create(from: ENV['TWILLIO_FROM'], to: "+#{user.phone_number}", body: "Hola tu codigo para recuperar la contraseña es: #{code}")
         result = { "message": "Sending code to phone #{code}" }
-        #render json: result
+        # render json: result
       else
-        result = { "message": "Sending url yo email" }
-        #render json: user, status: :found
+        result = { "message": 'Sending url yo email' }
+        # render json: user, status: :found
       end
       render json: result
     else
-      result = { "message": "Email is not valid" }
+      result = { "message": 'Email is not valid' }
       render json: result, status: :unprocessable_entity
     end
   end
@@ -121,16 +120,15 @@ class Api::V1::UsersController < ApplicationController
     new_password = params[:user][:new_password]
     new_password_confirmation = params[:user][:new_password_confirmation]
 
-    if user.pin.eql?(params_pin) && new_password.eql?(new_password_confirmation) # validar el password 
+    if user.pin.eql?(params_pin) && new_password.eql?(new_password_confirmation) # validar el password
       user = user.reset_password(new_password, new_password_confirmation)
-      result = { "message": "Password update" }
+      result = { "message": 'Password update' }
       render json: result
     else
       # reponder con otro codigo de error
-      result = { "message": "The code or password is not correct" }
+      result = { "message": 'The code or password is not correct' }
       render json: result, status: :unprocessable_entity
     end
-
   end
 
   def index
@@ -138,7 +136,7 @@ class Api::V1::UsersController < ApplicationController
     render json: @users
     # render json: { "name": 'hola'}, status: :created
   end
-  
+
   def check
     roles = []
     @user.user_roles.each do |role|
@@ -160,17 +158,17 @@ class Api::V1::UsersController < ApplicationController
       # @obj << "#{model.value}".classify.singularize.classify.constantize.all
       # @obj << model_find_by_user("#{model.value}", @user.id) || model_all("#{model.value}")
       # @obj << {"#{model.value}": model_all("#{model.value}")}
-      if "#{model.value}".classify.singularize.classify != "Status"
-        if "#{model.value}".classify.singularize.classify.constantize.has_attribute?("user_id")
-          if model_find_by_user("#{model.value}", @user.id)
-            if model_find_by_user("#{model.value}", @user.id).length > 0
-              @relations_obj << {name: model.value, permission: true } #, data: model_find_by_user("#{model.value}", @user.id) }
-            else 
-              @relations_obj << {name: model.value, permission: false } #, data: model_find_by_user("#{model.value}", @user.id) }
-            end
+      next unless model.value.to_s.classify.singularize.classify != 'Status'
+
+      if model.value.to_s.classify.singularize.classify.constantize.has_attribute?('user_id')
+        if model_find_by_user(model.value.to_s, @user.id)
+          if !model_find_by_user(model.value.to_s, @user.id).empty?
+            @relations_obj << { name: model.value, permission: true } # , data: model_find_by_user("#{model.value}", @user.id) }
           else
-            @relations_obj << {name: model.value, permission: false } #, data: nil}
+            @relations_obj << { name: model.value, permission: false } # , data: model_find_by_user("#{model.value}", @user.id) }
           end
+        else
+          @relations_obj << { name: model.value, permission: false } # , data: nil}
         end
       end
     end
@@ -187,10 +185,10 @@ class Api::V1::UsersController < ApplicationController
   def email_verify
     user = User.find_by(user_email_params)
     if user && user.email.eql?(params[:user][:email])
-      user = { email: true, message: "exist"}
+      user = { email: true, message: 'exist' }
       render json: user, status: :ok
     else
-      user = { email: false, message: "does not exist"}
+      user = { email: false, message: 'does not exist' }
       render json: user, status: :found
     end
   end
@@ -200,30 +198,30 @@ class Api::V1::UsersController < ApplicationController
     puts '---------------------'
     puts user.to_json
     if user && user.phone_number.eql?(params[:user][:phone_number])
-      user = { phone_number: true, message: "exist"}
+      user = { phone_number: true, message: 'exist' }
       render json: user, status: :ok
     else
-      user = { phone_number: false, message: "does not exist"}
+      user = { phone_number: false, message: 'does not exist' }
       render json: user, status: :found
     end
   end
 
-  def resend_code 
+  def resend_code
     user = User.find_by(phone_number: params[:user][:phone_number])
     if user && user.phone_number.eql?(params[:user][:phone_number])
       # Genero el nuevo codigo
-      number_randon = [(0..9)].map { |i| i.to_a }.flatten
+      number_randon = [(0..9)].map(&:to_a).flatten
       mobile_code = (0...4).map { number_randon[rand(number_randon.length)] }.join
-      #Actualizo el codigo
+      # Actualizo el codigo
       user.update(mobile_code: mobile_code)
-      #Envio el nuevo mensaje con el nuevo codigo
+      # Envio el nuevo mensaje con el nuevo codigo
       new_code(user.phone_number, mobile_code)
-      user = { phone_number: true, message: "code send"}
+      user = { phone_number: true, message: 'code send' }
       render json: user, status: :ok
     else
-      user = { phone_number: false, message: "does not exist"}
+      user = { phone_number: false, message: 'does not exist' }
       render json: user, status: :found
-    end 
+    end
   end
 
   # Falta en la migracion agregar la confirmacion de cuentas del devise
@@ -257,8 +255,9 @@ class Api::V1::UsersController < ApplicationController
     $error_tw ||= false
 
     if @user.save && !$error_tw
-      user_role()
-      profile()
+      user_role
+      profile
+      # password definido por el atribut
       render json: @user, status: :created
     else
       if $error_tw
@@ -273,19 +272,19 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def login
-    client = OAuth2::Client.new(ENV['APP'], ENV['SECREPP_APP'], :site => ENV['URL'])
+    client = OAuth2::Client.new(ENV['APP'], ENV['SECREPP_APP'], site: ENV['URL'])
     begin
-      token = client.password.get_token(params["user"]["email"], params["user"]["password"])
-      #token_reponse = { token: token, user: @user}
-      @user = User.find_by(email: params["user"]["email"])
+      token = client.password.get_token(params['user']['email'], params['user']['password'])
+      # token_reponse = { token: token, user: @user}
+      @user = User.find_by(email: params['user']['email'])
       if @user.active && @user.mobile_verify
         render json: token, status: :ok
       else
-        reponse = { user: nil, message: "Usuario no activado o verificado" }
+        reponse = { user: nil, message: 'Usuario no activado o verificado' }
         render json: reponse, status: :unauthorized
       end
     rescue OAuth2::Error => e
-      reponse = { user: nil, message: "La contraseña o el correo es incorrecto" }
+      reponse = { user: nil, message: 'La contraseña o el correo es incorrecto' }
       render json: reponse, status: :unauthorized
     end
   end
@@ -328,7 +327,7 @@ class Api::V1::UsersController < ApplicationController
         end
 
         obj = {
-          id: role.id, role_id: role.role.id, admin_id: role.admin_id, 
+          id: role.id, role_id: role.role.id, admin_id: role.admin_id,
           name: role.role.name, description: role.role.description,
           active: role.active && role.role.active,
           created_at: role.created_at, updated_at: role.updated_at,
@@ -343,7 +342,7 @@ class Api::V1::UsersController < ApplicationController
         user: @user,
         top: top,
         roles: roles
-        #profile: @user.profile
+        # profile: @user.profile
       }
 
       render json: @obj, status: :ok
@@ -355,22 +354,41 @@ class Api::V1::UsersController < ApplicationController
   def top
     @user_challenges = @user.user_challenges.where(active: true)
     points = @user_challenges.map(&:point).inject(0, &:+)
-    me = { my_points: points, position: 0 }
 
     # users = UserChallenge.order(:point)
     # users = User.joins(:user_challenges).where(user_challenges: { user_id: 1 })
     # users = UserChallenge.where(created_at: (Time.now - 30.day)..Time.now)
     # users = UserChallenge.where(active: true).or(UserChallenge.where(user_id: [1]))
-    # users = UserChallenge.select(:user_id).distinct    
+    # users = UserChallenge.select(:user_id).distinct
     # users = UserChallenge.select("user_id as user_id, sum(point) as total_points").group("user_id")
-    users_select = UserChallenge.select("user_id as user_id, sum(point) as total_points").group("user_id")
+    users_select = UserChallenge.select('user_id as user_id, sum(point) as total_points').group('user_id')
     users_all = users_select.where(active: true).order(total_points: :desc)
-    users = [] 
+    users = []
     position = 0
+    my_position = 0
     users_all.each do |user|
-      # name = user.user.profile ? %'#{user.user.profile.firt_name} #{user.user.profile.last_name}' : nil
-      users << { user_id: user.user_id, name: nil , points: user.total_points, position: position += 1}
+      user_services = Service.where(active: true, statu_id: 2, user_id: user.user_id)
+      total_km = 0.0
+      user_services.each do |service|
+        total_km += service.distance
+      end
+
+      name = user.user.profile ? !user.user.profile.firt_name.eql?('') ?
+        user.user.profile.firt_name :  user.user.email : user.user.email
+      users << { user_id: user.user_id, name: name, points: user.total_points,
+                 position: position += 1, kilometres: total_km }
+
+      my_position = position if user.user.email.eql?(@user.email)
     end
+
+    me_user_services = Service.where(active: true, statu_id: 2, user_id: @user.id)
+    me_total_km = 0.0
+    me_user_services.each do |service|
+      me_total_km += service.distance
+    end
+
+    me = { my_points: points, position: my_position, kilometres: me_total_km,
+           user_id: @user.id }
 
     @obj = { me: me, users: users }
     render json: @obj
@@ -384,10 +402,10 @@ class Api::V1::UsersController < ApplicationController
   def truora_users
     uri = URI.parse("#{ENV['URL_TRUORA']}/checks")
     request = Net::HTTP::Get.new(uri)
-    request["Truora-Api-Key"] = ENV['TOKEN_TRUORA']
+    request['Truora-Api-Key'] = ENV['TOKEN_TRUORA']
 
     req_options = {
-      use_ssl: uri.scheme == "https",
+      use_ssl: uri.scheme == 'https'
     }
 
     response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
@@ -401,10 +419,10 @@ class Api::V1::UsersController < ApplicationController
   def truora_user
     uri = URI.parse("#{ENV['URL_TRUORA']}/checks/#{params[:id]}/details")
     request = Net::HTTP::Get.new(uri)
-    request["Truora-Api-Key"] = ENV['TOKEN_TRUORA']
+    request['Truora-Api-Key'] = ENV['TOKEN_TRUORA']
 
     req_options = {
-      use_ssl: uri.scheme == "https",
+      use_ssl: uri.scheme == 'https'
     }
 
     response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
@@ -420,17 +438,15 @@ class Api::V1::UsersController < ApplicationController
       if user.identification
         vehicle = user.vehicles.where(active: true).first
         check = params[:user][:force_creation] || false
-        if vehicle
-          check = check_user(user, vehicle, check)
-        end
+        check = check_user(user, vehicle, check) if vehicle
       end
       check = JSON.parse(check.to_s)
 
-      #puts check['check']['check_id']
-      #user.update(check_id: check['check']['check_id'] )
+      # puts check['check']['check_id']
+      # user.update(check_id: check['check']['check_id'] )
 
       response =  {
-        menssaje: "in process of validation",
+        menssaje: 'in process of validation',
         check: check,
         user: user
       }
@@ -438,7 +454,7 @@ class Api::V1::UsersController < ApplicationController
       render json: response
     else
       response =  {
-        menssaje: "validate your identification",
+        menssaje: 'validate your identification',
         user_identification: user.identification,
         profile_document: user.profile ? user.profile.document_id : nil
       }
@@ -449,18 +465,18 @@ class Api::V1::UsersController < ApplicationController
   def check_user(user, vehicle, check)
     uri = URI.parse("#{ENV['URL_TRUORA']}/checks")
     request = Net::HTTP::Post.new(uri)
-    request.set_form_data(country: 'co', type: 'vehicle', national_id: user.identification, license_plate: vehicle.plate, force_creation: check )
-    request["Truora-Api-Key"] = ENV['TOKEN_TRUORA']
+    request.set_form_data(country: 'co', type: 'vehicle', national_id: user.identification, license_plate: vehicle.plate, force_creation: check)
+    request['Truora-Api-Key'] = ENV['TOKEN_TRUORA']
 
     req_options = {
-        use_ssl: uri.scheme == "https",
+      use_ssl: uri.scheme == 'https'
     }
 
     response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-        http.request(request)
+      http.request(request)
     end
 
-    response.body 
+    response.body
   end
 
   def truora_check_user_test
@@ -468,10 +484,10 @@ class Api::V1::UsersController < ApplicationController
     request = Net::HTTP::Post.new(uri)
     # request.set_form_data(country: 'co', type: 'person', national_id: '36835533', force_creation: true )
     # request.set_form_data(country: 'co', type: 'vehicle', national_id: '36835533', license_plate: 'VZB227',force_creation: true )
-    request["Truora-Api-Key"] = ENV['TOKEN_TRUORA']
+    request['Truora-Api-Key'] = ENV['TOKEN_TRUORA']
 
     req_options = {
-      use_ssl: uri.scheme == "https",
+      use_ssl: uri.scheme == 'https'
     }
 
     response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
@@ -486,14 +502,14 @@ class Api::V1::UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    result = { user: params[:id], menssage: 'User was successfully destroyed.'}
-    render json: result 
+    result = { user: params[:id], menssage: 'User was successfully destroyed.' }
+    render json: result
   end
 
   def destroy_temporarily
     @user = User.find(params[:id])
     @user.update(active: false, online: false, mobile_verify: false)
-    result = { user: @user, menssage: 'User was successfully destroyed temporarily.'}
+    result = { user: @user, menssage: 'User was successfully destroyed temporarily.' }
     render json: result
   end
 
@@ -501,12 +517,12 @@ class Api::V1::UsersController < ApplicationController
 
   def model_all(model)
     # "#{model.value}".classify.singularize.classify.constantize.all
-    "#{model}".classify.singularize.classify.constantize.all
+    model.to_s.classify.singularize.classify.constantize.all
   end
 
   def model_find_by_user(model, user)
     # "#{model.value}".classify.singularize.classify.constantize.all
-    "#{model}".classify.singularize.classify.constantize.where(user: user)
+    model.to_s.classify.singularize.classify.constantize.where(user: user)
   end
 
   def new_code(phone_number, mobile_code)
@@ -518,21 +534,19 @@ class Api::V1::UsersController < ApplicationController
     doct_type = DocumentType.find_by(code: ENV['DOC_TYPE_CC'])
     # Formatear el username
     profile = Profile.create(user_id: @user.id,
-      firt_name: params[:user][:username],
-      document_type_id: doct_type.id, 
-      document_id: @user.identification,
-      phone: @user.phone_number 
-    )
+                             firt_name: params[:user][:username],
+                             document_type_id: doct_type.id,
+                             document_id: @user.identification,
+                             phone: @user.phone_number)
     profile.save
   end
 
   def user_role
     role = Role.find_by(code: ENV['USER_C'])
     user_role = UserRole.create(user_id: @user.id,
-      role_id: params[:user][:role_id] || role.id,
-      admin_id: @user.id,
-      active: true
-    )
+                                role_id: params[:user][:role_id] || role.id,
+                                admin_id: @user.id,
+                                active: true)
     user_role.save
   end
 
@@ -572,7 +586,7 @@ class Api::V1::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation, :identification, :phone_number)
-    #params.require(:user).permit(:email, :password, :password_confirmation, :identification, :phone_number, :username, :avatar)
+    # params.require(:user).permit(:email, :password, :password_confirmation, :identification, :phone_number, :username, :avatar)
   end
 
   def user_update_params
