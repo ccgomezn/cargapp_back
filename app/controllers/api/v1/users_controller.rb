@@ -367,7 +367,7 @@ class Api::V1::UsersController < ApplicationController
     position = 0
     my_position = 0
     users_all.each do |user|
-      user_services = Service.where(active: true, statu_id: 2, user_id: user.user_id)
+      user_services = Service.where(active: true, statu_id: 11, user_id: user.user_id)
       total_km = 0.0
       user_services.each do |service|
         total_km += service.distance
