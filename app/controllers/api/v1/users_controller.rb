@@ -370,7 +370,7 @@ class Api::V1::UsersController < ApplicationController
       user_services = Service.where(active: true, statu_id: 11, user_id: user.user_id)
       total_km = 0.0
       user_services.each do |service|
-        total_km += service.distance
+        total_km += service.distance > 0 ? service.distance : 0.0
       end
 
       name = user.user.profile ? !user.user.profile.firt_name.eql?('') ?
@@ -384,7 +384,7 @@ class Api::V1::UsersController < ApplicationController
     me_user_services = Service.where(active: true, statu_id: 2, user_id: @user.id)
     me_total_km = 0.0
     me_user_services.each do |service|
-      me_total_km += service.distance
+      me_total_km +=  service.distance > 0 ? service.distance : 0.0
     end
 
     me = { my_points: points, position: my_position, kilometres: me_total_km,
