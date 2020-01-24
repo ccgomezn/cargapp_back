@@ -370,7 +370,7 @@ class Api::V1::UsersController < ApplicationController
       user_services = Service.where(active: true, statu_id: 11, user_id: user.user_id)
       total_km = 0.0
       user_services.each do |service|
-        total_km += service.distance.positive? ? service.distance : 0.0
+        total_km += service.distance || 0.0
       end
 
       name = user.user.profile ? !user.user.profile.firt_name.eql?('') ?
@@ -381,10 +381,10 @@ class Api::V1::UsersController < ApplicationController
       my_position = position if user.user.email.eql?(@user.email)
     end
 
-    me_user_services = Service.where(active: true, statu_id: 2, user_id: @user.id)
+    me_user_services = Service.where(active: true, statu_id: 11, user_id: @user.id)
     me_total_km = 0.0
     me_user_services.each do |service|
-      me_total_km +=  service.distance.positive? ? service.distance : 0.0
+      me_total_km += service.distance || 0.0
     end
 
     me = { my_points: points, position: my_position, kilometres: me_total_km,
@@ -401,21 +401,21 @@ class Api::V1::UsersController < ApplicationController
     points = 0
     score = 0.0
     services.each do |service|
-      kilometres +=  service.distance.positive? ? service.distance : 0.0
+      kilometres +=  service.distance || 0.0
       if service.rate_service
-        score += service.rate_service.driver_point.positive? ? service.rate_service.driver_point : 0.0
+        score += service.rate_service.driver_point || 0.0
       end
     end
 
     challengers.each do |challenger|
-      points +=  challenger.point.positive? ? challenger.point : 0.0
+      points +=  challenger.point || 0.0
     end
     reponde = {
       total_services: services ? services.count : 0,
       kilometres: kilometres,
       challenges: challengers ? challengers.count : 0,
       point: points,
-      score: score
+      score: score.to_f / services ? services.count.to_f : 0.0
     }
 
     render json: reponde
