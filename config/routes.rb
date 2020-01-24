@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1, defaults: { format: :json } do
       get 'users/top' => 'users#top'
+      get 'users/statistics' => 'users#statistics'
       get 'users/truora_users' => 'users#truora_users'
       get 'users/truora_user/:id' => 'users#truora_user'
       post 'users/truora_check_user' => 'users#truora_check_user'      

@@ -64,10 +64,6 @@ class Api::V1::RateServicesController < ApplicationController
     response :not_found
   end
 
-
-
-
-
   # GET /rate_services
   # GET /rate_services.json
   def index

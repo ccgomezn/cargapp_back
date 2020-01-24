@@ -12,7 +12,7 @@ class Service < ApplicationRecord
   has_one :room, dependent: :destroy #P
   has_many :service_users, dependent: :destroy #P
   has_many :service_documents, dependent: :destroy #P
-  has_many :rate_services, dependent: :destroy #P
+  has_one :rate_service, dependent: :destroy #P
 
   before_create :default_values
   before_save :default_values

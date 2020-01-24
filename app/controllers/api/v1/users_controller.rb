@@ -394,6 +394,31 @@ class Api::V1::UsersController < ApplicationController
     render json: @obj
   end
 
+  def statistics
+    services = Service.where(user_driver_id: @user.id, active: true, statu_id: 2) # 11
+    challengers = UserChallenge.where(user_id: @user.id, active: true)
+    kilometres = 0
+    points = 0
+    score = 0.0
+    services.each do |service|
+      kilometres +=  service.distance.positive? ? service.distance : 0.0
+      score += service.rate_service.driver_point.positive? ? service.rate_service.driver_point : 0.0
+    end
+
+    challengers.each do |challenger|
+      points +=  challenger.point.positive? ? challenger.point : 0.0
+    end
+    reponde = {
+      total_services: services ? services.count : 0,
+      kilometres: kilometres,
+      challenges: challengers ? challengers.count : 0,
+      point: points,
+      score: score
+    }
+
+    render json: reponde
+  end
+
   def show
     @user_id = User.find_by(id: set_show_user)
     render json: @user_id, status: :ok
