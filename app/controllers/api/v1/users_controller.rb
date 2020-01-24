@@ -402,7 +402,9 @@ class Api::V1::UsersController < ApplicationController
     score = 0.0
     services.each do |service|
       kilometres +=  service.distance.positive? ? service.distance : 0.0
-      score += service.rate_service.driver_point.positive? ? service.rate_service.driver_point : 0.0
+      if service.rate_service
+        score += service.rate_service.driver_point.positive? ? service.rate_service.driver_point : 0.0
+      end
     end
 
     challengers.each do |challenger|
