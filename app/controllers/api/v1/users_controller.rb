@@ -395,7 +395,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def statistics
-    services = Service.where(user_driver_id: @user.id, active: true, statu_id: 2) # 11
+    services = Service.where(user_driver_id: @user.id, active: true, statu_id: 11)
     challengers = UserChallenge.where(user_id: @user.id, active: true)
     kilometres = 0
     points = 0
