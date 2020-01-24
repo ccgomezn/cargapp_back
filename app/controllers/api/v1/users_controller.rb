@@ -415,7 +415,7 @@ class Api::V1::UsersController < ApplicationController
       kilometres: kilometres,
       challenges: challengers ? challengers.count : 0,
       point: points,
-      score: score.to_f / services ? services.count.to_f : 0.0
+      score: score
     }
 
     render json: reponde
