@@ -81,6 +81,7 @@ class Api::V1::ProfilesController < ApplicationController
         birth_date: profile.birth_date,
         document_id: profile.document_id,
         document_type_id: profile.document_type_id,
+        load_type: profile.load_type,
         user_id: profile.user_id,
         created_at: profile.created_at,
         updated_at: profile.updated_at
@@ -106,6 +107,7 @@ class Api::V1::ProfilesController < ApplicationController
           birth_date: profile.birth_date,
           document_id: profile.document_id,
           document_type_id: profile.document_type_id,
+          load_type: profile.load_type,
           user_id: profile.user_id,
           created_at: profile.created_at,
           updated_at: profile.updated_at
@@ -129,6 +131,7 @@ class Api::V1::ProfilesController < ApplicationController
         birth_date: @profile.birth_date,
         document_id: @profile.document_id,
         document_type_id: @profile.document_type_id,
+        load_type: @profile.load_type,
         user_id: @profile.user_id,
         created_at: @profile.created_at,
         updated_at: @profile.updated_at
@@ -160,6 +163,7 @@ class Api::V1::ProfilesController < ApplicationController
       birth_date: @profile.birth_date,
       document_id: @profile.document_id,
       document_type_id: @profile.document_type_id,
+      load_type: @profile.load_type,
       user_id: @profile.user_id,
       created_at: @profile.created_at,
       updated_at: @profile.updated_at
@@ -179,6 +183,7 @@ class Api::V1::ProfilesController < ApplicationController
       birth_date: @profile.birth_date,
       document_id: @profile.document_id,
       document_type_id: @profile.document_type_id,
+      load_type: @profile.load_type,
       user_id: @profile.user_id,
       created_at: @profile.created_at,
       updated_at: @profile.updated_at
@@ -201,6 +206,7 @@ class Api::V1::ProfilesController < ApplicationController
         birth_date: @profile.birth_date,
         document_id: @profile.document_id,
         document_type_id: @profile.document_type_id,
+        load_type: @profile.load_type,
         user_id: @profile.user_id,
         created_at: @profile.created_at,
         updated_at: @profile.updated_at
@@ -225,6 +231,7 @@ class Api::V1::ProfilesController < ApplicationController
         birth_date: @profile.birth_date,
         document_id: @profile.document_id,
         document_type_id: @profile.document_type_id,
+        load_type: @profile.load_type,
         user_id: @profile.user_id,
         created_at: @profile.created_at,
         updated_at: @profile.updated_at
@@ -306,6 +313,6 @@ class Api::V1::ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:firt_name, :last_name, :avatar, :phone, :document_id, :document_type_id, :user_id, :birth_date)
+      params.require(:profile).permit(:firt_name, :last_name, :avatar, :phone, :document_id, :document_type_id, :user_id, :birth_date, :load_type)
     end
 end

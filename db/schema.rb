@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_19_020246) do
+ActiveRecord::Schema.define(version: 2020_01_30_061130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -461,6 +461,7 @@ ActiveRecord::Schema.define(version: 2020_01_19_020246) do
     t.date "birth_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "load_type"
     t.index ["document_type_id"], name: "index_profiles_on_document_type_id"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
@@ -604,6 +605,11 @@ ActiveRecord::Schema.define(version: 2020_01_19_020246) do
     t.datetime "updated_at", precision: 6, null: false
     t.decimal "distance"
     t.decimal "duration"
+    t.string "load_weight"
+    t.string "load_volume"
+    t.string "packing"
+    t.string "contact_name"
+    t.string "contact_phone"
     t.index ["company_id"], name: "index_services_on_company_id"
     t.index ["destination_city_id"], name: "index_services_on_destination_city_id"
     t.index ["origin_city_id"], name: "index_services_on_origin_city_id"
