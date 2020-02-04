@@ -91,6 +91,7 @@ Rails.application.routes.draw do
       resources :states
       get 'cities/active' => 'cities#active'
       resources :cities
+      get 'document_types/by_category/:category' => 'document_types#by_category'
       get 'document_types/active' => 'document_types#active'
       resources :document_types
       get 'vehicle_types/active' => 'vehicle_types#active'

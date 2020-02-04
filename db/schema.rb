@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_30_061130) do
+ActiveRecord::Schema.define(version: 2020_02_04_204146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -245,6 +245,7 @@ ActiveRecord::Schema.define(version: 2020_01_30_061130) do
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "category"
   end
 
   create_table "documents", force: :cascade do |t|
@@ -536,13 +537,15 @@ ActiveRecord::Schema.define(version: 2020_01_30_061130) do
 
   create_table "service_documents", force: :cascade do |t|
     t.string "name"
-    t.string "document_type"
     t.string "document"
     t.bigint "service_id", null: false
     t.bigint "user_id", null: false
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "document_types"
+    t.bigint "document_type_id"
+    t.index ["document_type_id"], name: "index_service_documents_on_document_type_id"
     t.index ["service_id"], name: "index_service_documents_on_service_id"
     t.index ["user_id"], name: "index_service_documents_on_user_id"
   end
@@ -608,7 +611,6 @@ ActiveRecord::Schema.define(version: 2020_01_30_061130) do
     t.string "load_weight"
     t.string "load_volume"
     t.string "packing"
-    t.string "contact_name"
     t.string "contact_phone"
     t.index ["company_id"], name: "index_services_on_company_id"
     t.index ["destination_city_id"], name: "index_services_on_destination_city_id"
@@ -846,6 +848,7 @@ ActiveRecord::Schema.define(version: 2020_01_30_061130) do
   add_foreign_key "room_users", "users"
   add_foreign_key "rooms", "services"
   add_foreign_key "rooms", "users"
+  add_foreign_key "service_documents", "document_types"
   add_foreign_key "service_documents", "services"
   add_foreign_key "service_documents", "users"
   add_foreign_key "service_locations", "cities"

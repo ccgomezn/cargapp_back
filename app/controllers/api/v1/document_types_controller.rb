@@ -64,6 +64,12 @@ class Api::V1::DocumentTypesController < ApplicationController
     render json: @document_types
   end
 
+  def by_category
+    @document_types = DocumentType.where(active: true, category:params[:category] )
+
+    render json: @document_types
+  end
+
   # GET /document_types/1
   # GET /document_types/1.json
   def show
@@ -165,6 +171,6 @@ class Api::V1::DocumentTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_type_params
-      params.require(:document_type).permit(:name, :code, :description, :active)
+      params.require(:document_type).permit(:name, :code, :description, :active, :category)
     end
 end

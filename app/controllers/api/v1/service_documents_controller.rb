@@ -78,7 +78,8 @@ class Api::V1::ServiceDocumentsController < ApplicationController
     @service_documents.each do |document|
       @obj = {
         id: document.id,
-        name: document.name,  
+        name: document.name,
+        document_type_id: document.document_type_id,
         document_type: document.document_type,
         document: document.document.attached? ? url_for(document.document) : nil,
         service_id: document.service_id,
@@ -100,6 +101,7 @@ class Api::V1::ServiceDocumentsController < ApplicationController
       @obj = {
         id: document.id,
         name: document.name,
+        document_type_id: document.document_type_id,
         document_type: document.document_type,
         document: document.document.attached? ? url_for(document.document) : nil,
         service_id: document.service_id,
@@ -121,6 +123,7 @@ class Api::V1::ServiceDocumentsController < ApplicationController
       @obj = {
         id: document.id,
         name: document.name,
+        document_type_id: document.document_type_id,
         document_type: document.document_type,
         document: document.document.attached? ? url_for(document.document) : nil,
         service_id: document.service_id,
@@ -140,6 +143,7 @@ class Api::V1::ServiceDocumentsController < ApplicationController
     @obj = {
       id: @service_document.id,
       name: @service_document.name,
+      document_type_id: @service_document.document_type_id,
       document_type: @service_document.document_type,
       document: @service_document.document.attached? ? url_for(@service_document.document) : nil,
       service_id: @service_document.service_id,
@@ -160,6 +164,7 @@ class Api::V1::ServiceDocumentsController < ApplicationController
       @obj = {
         id: document.id,
         name: document.name,
+        document_type_id: document.document_type_id,
         document_type: document.document_type,
         document: document.document.attached? ? url_for(document.document) : nil,
         service_id: document.service_id,
@@ -181,6 +186,7 @@ class Api::V1::ServiceDocumentsController < ApplicationController
       @obj = {
         id: @service_document.id,
         name: @service_document.name,
+        document_type_id: @service_document.document_type_id,
         document_type: @service_document.document_type,
         document: @service_document.document.attached? ? url_for(@service_document.document) : nil,
         service_id: @service_document.service_id,
@@ -202,6 +208,7 @@ class Api::V1::ServiceDocumentsController < ApplicationController
       @obj = {
         id: @service_document.id,
         name: @service_document.name,
+        document_type_id: @service_document.document_type_id,
         document_type: @service_document.document_type,
         document: @service_document.document.attached? ? url_for(@service_document.document) : nil,
         service_id: @service_document.service_id,
@@ -287,6 +294,6 @@ class Api::V1::ServiceDocumentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_document_params
-      params.require(:service_document).permit(:name, :document_type, :document, :service_id, :user_id, :active)
+      params.require(:service_document).permit(:name, :document_type_id, :document, :service_id, :user_id, :active)
     end
 end
