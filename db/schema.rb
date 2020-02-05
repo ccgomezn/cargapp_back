@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_04_204146) do
+ActiveRecord::Schema.define(version: 2020_02_05_173510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -611,7 +611,7 @@ ActiveRecord::Schema.define(version: 2020_02_04_204146) do
     t.string "load_weight"
     t.string "load_volume"
     t.string "packing"
-    t.string "contact_phone"
+    t.string "contact_name"
     t.index ["company_id"], name: "index_services_on_company_id"
     t.index ["destination_city_id"], name: "index_services_on_destination_city_id"
     t.index ["origin_city_id"], name: "index_services_on_origin_city_id"
