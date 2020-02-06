@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Document type:</strong>
+  <%= @vehicle_document.document_type_id %>
+</p>
+
+<p>
+  <strong>File:</strong>
+  <%= @vehicle_document.file %>
+</p>
+
+<p>
+  <strong>Statu:</strong>
+  <%= @vehicle_document.statu_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @vehicle_document.user_id %>
+</p>
+
+<p>
+  <strong>Vehicle:</strong>
+  <%= @vehicle_document.vehicle_id %>
+</p>
+
+<p>
+  <strong>Expire date:</strong>
+  <%= @vehicle_document.expire_date %>
+</p>
+
+<p>
+  <strong>Approved:</strong>
+  <%= @vehicle_document.approved %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @vehicle_document.active %>
+</p>
+
+<%= link_to 'Edit', edit_vehicle_document_path(@vehicle_document) %> |
+<%= link_to 'Back', vehicle_documents_path %>

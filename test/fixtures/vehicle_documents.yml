@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  document_type: one
+  file: MyString
+  statu: one
+  user: one
+  vehicle: one
+  expire_date: 2020-02-06
+  approved: false
+  active: false
+
+two:
+  document_type: two
+  file: MyString
+  statu: two
+  user: two
+  vehicle: two
+  expire_date: 2020-02-06
+  approved: false
+  active: false

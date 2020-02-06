@@ -1,0 +1,57 @@
+<%= form_with(model: vehicle_document, local: true) do |form| %>
+  <% if vehicle_document.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(vehicle_document.errors.count, "error") %> prohibited this vehicle_document from being saved:</h2>
+
+      <ul>
+        <% vehicle_document.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :document_type_id %>
+    <%= form.text_field :document_type_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :file %>
+    <%= form.file_field :file %>
+  </div>
+
+  <div class="field">
+    <%= form.label :statu_id %>
+    <%= form.text_field :statu_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :vehicle_id %>
+    <%= form.text_field :vehicle_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :expire_date %>
+    <%= form.date_select :expire_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :approved %>
+    <%= form.check_box :approved %>
+  </div>
+
+  <div class="field">
+    <%= form.label :active %>
+    <%= form.check_box :active %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
