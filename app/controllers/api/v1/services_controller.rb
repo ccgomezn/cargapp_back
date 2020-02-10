@@ -131,13 +131,19 @@ class Api::V1::ServicesController < ApplicationController
   end
 
   def find_by_service
-    @service = Service.find_by(active: true, user_id: @user.id, id: params[:id])
+    @service = Service.find_by(user_id: @user.id, id: params[:id])
+
 
     if @service
-      result = { service: @service, statu: @service.statu }
-      render json: result
+      if @service.active
+        result = { service: @service, statu: @service.statu, active: true }
+        render json: result
+      else
+        result = {  message: "Esta desactivada", service: @service, statu: @service.statu, active: false }
+        render json: result  
+      end
     else
-      result = {  message: "No esta vinculado", service: nil, statu: nil }
+      result = {  message: "No esta vinculado a este servicio", service: nil, statu: nil, active: false }
       render json: result
     end
 
