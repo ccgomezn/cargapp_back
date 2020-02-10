@@ -130,6 +130,19 @@ class Api::V1::ServicesController < ApplicationController
     render json: result
   end
 
+  def find_by_service
+    @service = Service.find_by(active: true, user_id: @user.id, id: params[:id])
+
+    if @service
+      result = { service: @service, statu: @service.statu }
+      render json: result
+    else
+      result = {  message: "No esta vinculado", service: nil, statu: nil }
+      render json: result
+    end
+
+  end
+
   def filter
     start_price = params[:start_price].to_i.eql?(0) ? 10000 : params[:start_price].to_i
     end_price = params[:end_price].to_i.eql?(0) ? 100000 : params[:end_price].to_i

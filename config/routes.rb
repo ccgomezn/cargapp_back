@@ -151,6 +151,7 @@ Rails.application.routes.draw do
       get 'user_payment_methods/me' => 'user_payment_methods#me'
       get 'user_payment_methods/active' => 'user_payment_methods#active'
       resources :user_payment_methods
+      get 'services/find_by_service/:id' => 'services#find_by_service'
       get 'services/destinations' => 'services#destinations'
       get 'services/filter/:start_price/:end_price/:vehicle_type/:created_at/:origin/:destination' => 'services#filter' #Last Service active
       get 'services/me' => 'services#me' #Last Service active
