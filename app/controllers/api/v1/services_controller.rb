@@ -131,6 +131,28 @@ class Api::V1::ServicesController < ApplicationController
     render json: result
   end
 
+  def find_by_service_user
+    @service = ServiceUser.find_by(service_id: params[:id], user_id: @user.id)
+
+    if @service
+      if @service.active
+        if @service.service.active
+          result = { user_service: @service, service: @service.service, statu: @service.service.statu, active: true }
+          render json: result
+        else
+          result = { message: 'El servicio esta desactivado', user_service: @service, service: @service.service, statu: @service.service.statu, active: false }
+          render json: result
+        end
+      else
+        result = { message: 'Esta desactivada', user_service: @service, service: @service.service, statu: @service.service.statu, active: false }
+        render json: result
+      end
+    else
+      result = { message: 'No esta vinculado a este servicio', service: nil, statu: nil, active: false }
+      render json: result
+    end
+  end
+
   def find_by_service
     @service = Service.find_by(user_driver_id: @user.id, id: params[:id])
 

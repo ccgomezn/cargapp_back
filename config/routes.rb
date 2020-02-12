@@ -1,4 +1,6 @@
-Rails.application.routes.draw do             
+# frozen_string_literal: true
+
+Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   use_doorkeeper
 
@@ -56,7 +58,7 @@ Rails.application.routes.draw do
       get 'users/statistics' => 'users#statistics'
       get 'users/truora_users' => 'users#truora_users'
       get 'users/truora_user/:id' => 'users#truora_user'
-      post 'users/truora_check_user' => 'users#truora_check_user'      
+      post 'users/truora_check_user' => 'users#truora_check_user'
       post 'users/email_verify' => 'users#email_verify'
       post 'users/phone_verify' => 'users#phone_verify'
       post 'users/validate_number' => 'users#validate_number'
@@ -65,10 +67,10 @@ Rails.application.routes.draw do
       get 'users/temporarily/:id' => 'users#destroy_temporarily'
       post 'users/login' => 'users#login'
       put 'users/update_password' => 'users#update_password'
-      post 'users/reset_password' => 'users#reset_password'      
-      post 'users/new_password' => 'users#new_password'      
-      get 'users/check' => 'users#check'      
-      resources :users #, only: [:create, :update, :show]
+      post 'users/reset_password' => 'users#reset_password'
+      post 'users/new_password' => 'users#new_password'
+      get 'users/check' => 'users#check'
+      resources :users # , only: [:create, :update, :show]
       # -------------------
       get 'roles/active' => 'roles#active'
       resources :roles
@@ -115,7 +117,7 @@ Rails.application.routes.draw do
       resources :tickets
       get 'documents/me' => 'documents#me'
       get 'documents/active' => 'documents#active'
-      post 'documents/find_user' => 'documents#find_user'      
+      post 'documents/find_user' => 'documents#find_user'
       resources :documents
       get 'vehicles/me' => 'vehicles#me'
       get 'vehicles/active' => 'vehicles#active'
@@ -152,14 +154,15 @@ Rails.application.routes.draw do
       get 'user_payment_methods/active' => 'user_payment_methods#active'
       resources :user_payment_methods
       get 'services/find_by_service/:id' => 'services#find_by_service'
+      get 'services/find_by_service_user/:id' => 'services#find_by_service_user'
       get 'services/destinations' => 'services#destinations'
-      get 'services/filter/:start_price/:end_price/:vehicle_type/:created_at/:origin/:destination' => 'services#filter' #Last Service active
-      get 'services/me' => 'services#me' #Last Service active
-      get 'services/find_driver/:id' => 'services#find_driver' #Last Service active
-      post 'services/find_driver' => 'services#find_driver' #Last Service active
-      get 'services/find_company/:id' => 'services#find_company' #Last Service active
-      get 'services/find_receiver/:id' => 'services#find_receiver' #Last Service active
-      get 'services/find_vehicle/:id' => 'services#find_vehicle' #Last Service active
+      get 'services/filter/:start_price/:end_price/:vehicle_type/:created_at/:origin/:destination' => 'services#filter' # Last Service active
+      get 'services/me' => 'services#me' # Last Service active
+      get 'services/find_driver/:id' => 'services#find_driver' # Last Service active
+      post 'services/find_driver' => 'services#find_driver' # Last Service active
+      get 'services/find_company/:id' => 'services#find_company' # Last Service active
+      get 'services/find_receiver/:id' => 'services#find_receiver' # Last Service active
+      get 'services/find_vehicle/:id' => 'services#find_vehicle' # Last Service active
       get 'services/history' => 'services#history'
       get 'services/active' => 'services#active'
       resources :services
@@ -168,11 +171,11 @@ Rails.application.routes.draw do
       get 'service_users/approved' => 'service_users#approved'
       get 'service_users/find_service/:id' => 'service_users#find_service'
       resources :service_users
-      get 'service_documents/me' => 'service_documents#me' #Last Service active
+      get 'service_documents/me' => 'service_documents#me' # Last Service active
       get 'service_documents/active' => 'service_documents#active'
       get 'service_documents/find_service/:id' => 'service_documents#find_service'
       resources :service_documents
-      get 'favorite_routes/me' => 'favorite_routes#me' #Last Service active
+      get 'favorite_routes/me' => 'favorite_routes#me' # Last Service active
       get 'favorite_routes/active' => 'favorite_routes#active'
       post 'favorite_routes/find_user' => 'favorite_routes#find_user'
       resources :favorite_routes
