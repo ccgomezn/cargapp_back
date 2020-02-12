@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 class Api::V1::ServicesController < ApplicationController
-  before_action :set_service, only: [:show, :edit, :update, :destroy]
+  before_action :set_service, only: %i[show edit update destroy]
   protect_from_forgery with: :null_session
   before_action :set_user
   before_action :doorkeeper_authorize!
-
 
   swagger_controller :service, 'Services Management'
 
@@ -49,7 +50,7 @@ class Api::V1::ServicesController < ApplicationController
 
   swagger_api :update do
     summary 'Updates an existing Service'
-    param :path, :id, :integer, :required, "Service Id"
+    param :path, :id, :integer, :required, 'Service Id'
     param :form, 'service[name]', :string, :optional, 'Name'
     param :form, 'service[origin]', :string, :optional, 'Origin'
     param :form, 'service[origin_city_id]', :integer, :optional, 'Id of origin city'
@@ -80,20 +81,20 @@ class Api::V1::ServicesController < ApplicationController
   end
 
   swagger_api :destroy do
-    summary "Deletes an existing Service"
-    param :path, :id, :integer, :optional, "Service Id"
+    summary 'Deletes an existing Service'
+    param :path, :id, :integer, :optional, 'Service Id'
     response :unauthorized
     response :not_found
   end
 
   swagger_api :me do
-    summary "Shows mine existing Service"
+    summary 'Shows mine existing Service'
     response :unauthorized
   end
 
   swagger_api :show do
-    summary "Shows a Service"
-    param :path, :id, :integer, :optional, "Service Id"
+    summary 'Shows a Service'
+    param :path, :id, :integer, :optional, 'Service Id'
     response :unauthorized
     response :not_found
   end
@@ -116,13 +117,13 @@ class Api::V1::ServicesController < ApplicationController
     @origins = []
     origins = @services.group(:origin).count
     origins.each do |origin|
-      @origins << { name: origin[0], count: origin[1]}
+      @origins << { name: origin[0], count: origin[1] }
     end
 
     @destinations = []
     destinations = @services.group(:destination).count
     destinations.each do |destination|
-      @destinations << { name: destination[0], count: destination[1]}
+      @destinations << { name: destination[0], count: destination[1] }
     end
 
     result = { origins: @origins, destinations: @destinations }
@@ -131,43 +132,39 @@ class Api::V1::ServicesController < ApplicationController
   end
 
   def find_by_service
-    @service = Service.find_by(user_id: @user.id, id: params[:id])
-
+    @service = Service.find_by(user_driver_id: @user.id, id: params[:id])
 
     if @service
       if @service.active
         result = { service: @service, statu: @service.statu, active: true }
         render json: result
       else
-        result = {  message: "Esta desactivada", service: @service, statu: @service.statu, active: false }
-        render json: result  
+        result = { message: 'Esta desactivada', service: @service, statu: @service.statu, active: false }
+        render json: result
       end
     else
-      result = {  message: "No esta vinculado a este servicio", service: nil, statu: nil, active: false }
+      result = { message: 'No esta vinculado a este servicio', service: nil, statu: nil, active: false }
       render json: result
     end
-
   end
 
   def filter
-    start_price = params[:start_price].to_i.eql?(0) ? 10000 : params[:start_price].to_i
-    end_price = params[:end_price].to_i.eql?(0) ? 100000 : params[:end_price].to_i
-    origin = params[:origin] 
+    start_price = params[:start_price].to_i.eql?(0) ? 10_000 : params[:start_price].to_i
+    end_price = params[:end_price].to_i.eql?(0) ? 100_000 : params[:end_price].to_i
+    origin = params[:origin]
     destination = params[:destination]
     created_at = params[:created_at].eql?('null') ? DateTime.now.to_date - 1.month : params[:created_at]
     vehicle_type = params[:vehicle_type]
 
     @services = Service.where('active = ? AND price >= ? AND price <= ?', true, start_price, end_price)
-      .where('created_at >= ?', created_at)
-    if !vehicle_type.eql?('null')
+                       .where('created_at >= ?', created_at)
+    unless vehicle_type.eql?('null')
       @services = @services.where('vehicle_type_id = ?', vehicle_type)
     end
 
-    if !origin.eql?('null')
-      @services = @services.where('origin = ?', origin)
-    end
+    @services = @services.where('origin = ?', origin) unless origin.eql?('null')
 
-    if !destination.eql?('null')
+    unless destination.eql?('null')
       @services = @services.where('destination = ?', destination)
     end
 
@@ -176,7 +173,12 @@ class Api::V1::ServicesController < ApplicationController
 
   def me
     @services = @user.services
-    render json: @services
+    if @services
+      render json: @services
+    else
+      @services = Service.where(user_driver_id: @user.id, active: true)
+      render json: @services
+    end
   end
 
   def find_driver
@@ -230,11 +232,11 @@ class Api::V1::ServicesController < ApplicationController
   # PATCH/PUT /services/1
   # PATCH/PUT /services/1.json
   def update
-      if @service.update(service_params)
-        render json: @service, status: :ok, location: @service
-      else
-        render json: @service.errors, status: :unprocessable_entity
-      end
+    if @service.update(service_params)
+      render json: @service, status: :ok, location: @service
+    else
+      render json: @service.errors, status: :unprocessable_entity
+    end
   end
 
   # DELETE /services/1
@@ -244,41 +246,19 @@ class Api::V1::ServicesController < ApplicationController
   end
 
   private
-    def set_user
-      @user = User.find(doorkeeper_token.resource_owner_id) if doorkeeper_token
-      permissions()
-    end
 
-    def permissions
-      if @user
-        has_permission = false
-        @user.roles.where(active: true).each do |role|
-          next if role.permissions.where(active: true).empty?
-          role.permissions.where(active: true).each do |permission|
-            if (permission.cargapp_model.value.eql?(controller_name) && permission.active) && permission.action.eql?('all')
-              has_permission = true
-            elsif (permission.cargapp_model.value.eql?(controller_name) && permission.active) && permission.allow
-              has_permission = true
-            elsif (permission.cargapp_model.value.eql?(controller_name) && permission.active) && permission.action.eql?(action_name)
-              has_permission = true
-            end
-          end
-        end
+  def set_user
+    @user = User.find(doorkeeper_token.resource_owner_id) if doorkeeper_token
+    permissions
+  end
 
-        if if_super()
-          has_permission = true
-        end
+  def permissions
+    if @user
+      has_permission = false
+      @user.roles.where(active: true).each do |role|
+        next if role.permissions.where(active: true).empty?
 
-        if has_permission
-          true
-        else
-          response = { response: "Does not have permissions" }
-          render json: response, status: :unprocessable_entity
-        end
-      else
-        role = Role.find_by(name: ENV['GUEST_N'], active: true)
-        has_permission = false
-        role.permissions.each do |permission|
+        role.permissions.where(active: true).each do |permission|
           if (permission.cargapp_model.value.eql?(controller_name) && permission.active) && permission.action.eql?('all')
             has_permission = true
           elsif (permission.cargapp_model.value.eql?(controller_name) && permission.active) && permission.allow
@@ -287,27 +267,49 @@ class Api::V1::ServicesController < ApplicationController
             has_permission = true
           end
         end
+      end
 
-        if has_permission
-          true
-        else
-          response = { response: "Does not have permissions" }
-          render json: response, status: :unprocessable_entity
+      has_permission = true if if_super
+
+      if has_permission
+        true
+      else
+        response = { response: 'Does not have permissions' }
+        render json: response, status: :unprocessable_entity
+      end
+    else
+      role = Role.find_by(name: ENV['GUEST_N'], active: true)
+      has_permission = false
+      role.permissions.each do |permission|
+        if (permission.cargapp_model.value.eql?(controller_name) && permission.active) && permission.action.eql?('all')
+          has_permission = true
+        elsif (permission.cargapp_model.value.eql?(controller_name) && permission.active) && permission.allow
+          has_permission = true
+        elsif (permission.cargapp_model.value.eql?(controller_name) && permission.active) && permission.action.eql?(action_name)
+          has_permission = true
         end
       end
-    end
 
-    def if_super
-      @if_super = (User.is_super?(@user) if @user) || false
+      if has_permission
+        true
+      else
+        response = { response: 'Does not have permissions' }
+        render json: response, status: :unprocessable_entity
+      end
     end
+  end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_service
-      @service = Service.find(params[:id])
-    end
+  def if_super
+    @if_super = (User.is_super?(@user) if @user) || false
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def service_params
-      params.require(:service).permit(:name, :origin, :origin_city_id, :origin_address, :origin_longitude, :origin_latitude, :destination, :destination_city_id, :destination_address, :destination_latitude, :destination_longitude, :price, :description, :note, :user_id, :company_id, :user_driver_id, :user_receiver_id, :vehicle_type_id, :vehicle_id, :statu_id, :expiration_date, :contact, :active, :distance, :duration, :load_weight, :load_volume, :packing, :contact_name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_service
+    @service = Service.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def service_params
+    params.require(:service).permit(:name, :origin, :origin_city_id, :origin_address, :origin_longitude, :origin_latitude, :destination, :destination_city_id, :destination_address, :destination_latitude, :destination_longitude, :price, :description, :note, :user_id, :company_id, :user_driver_id, :user_receiver_id, :vehicle_type_id, :vehicle_id, :statu_id, :expiration_date, :contact, :active, :distance, :duration, :load_weight, :load_volume, :packing, :contact_name)
+  end
 end
