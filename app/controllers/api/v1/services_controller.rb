@@ -256,7 +256,7 @@ class Api::V1::ServicesController < ApplicationController
     arrayServices = []
     @services.each do |service|
       dis = distance([params[:long].to_d, params[:lat].to_d], [service.origin_longitude.to_d, service.origin_latitude.to_d])
-      arrayServices << service if dis < 900
+      arrayServices << service if dis < 100
     end
 
     render json: arrayServices || @services
