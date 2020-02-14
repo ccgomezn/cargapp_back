@@ -153,6 +153,8 @@ Rails.application.routes.draw do
       get 'user_payment_methods/me' => 'user_payment_methods#me'
       get 'user_payment_methods/active' => 'user_payment_methods#active'
       resources :user_payment_methods
+      post 'services/dear_me' => 'services#dear_me'
+      get 'services/dear_me/:lat/:long' => 'services#dear_me'
       get 'services/find_by_service/:id' => 'services#find_by_service'
       get 'services/find_by_service_user/:id' => 'services#find_by_service_user'
       get 'services/destinations' => 'services#destinations'

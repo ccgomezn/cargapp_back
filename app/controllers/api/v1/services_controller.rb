@@ -193,6 +193,75 @@ class Api::V1::ServicesController < ApplicationController
     render json: @services
   end
 
+  def dear_me
+    results = Geocoder.search([params[:lat], params[:long]])
+    # Agrupo los nombres
+    cities = []
+    cityObj = results[0].data['address']
+    cities << cityObj['town'] || ''
+    cities << cityObj['county'] || ''
+    cities << cityObj['city'] || ''
+    # Identifico el pais
+    country = cityObj['country'] || ''
+
+    arrayCities = []
+    cities.each do |city|
+      next unless city
+
+      arrayCities << city.upcase
+      arrayCities << city.downcase
+      arrayCities << city
+    end
+
+    @country = Country.find_by(name: country.capitalize, active: true)
+    @states = State.where(country_id: @country.id, active: true)
+
+    arrayStates = []
+    @states.each do |state|
+      next unless state
+
+      arrayStates << state['id']
+    end
+
+    @cities = City.where(active: true, name: arrayCities)
+                  .order('updated_at DESC')
+
+    cities = []
+    @cities.each do |city|
+      next unless city
+
+      cities << city['id']
+    end
+
+    @services = Service.where(active: true, origin_city_id: cities).limit(30)
+
+    # Start Si no encuentra nada en ciudad entonces se va por los estados
+    unless @services.count > 0
+      puts '--------------'
+      @cities = City.where(active: true, state_id: arrayStates)
+                    .order('updated_at DESC')
+
+      cities = []
+      @cities.each do |city|
+        next unless city
+
+        cities << city['id']
+      end
+
+      @services = Service.where(active: true, origin_city_id: cities).limit(30)
+    end
+    # End Si no encuentra nada en ciudad entonces se va por los estados
+
+    # Calculo si esta cerca de mi radio
+    arrayServices = []
+    @services.each do |service|
+      dis = distance([params[:long].to_d, params[:lat].to_d], [service.origin_longitude.to_d, service.origin_latitude.to_d])
+      arrayServices << offer if dis < 900
+    end
+
+    render json: arrayServices || @services
+  end
+
   def me
     @services = @user.services
     if @services
@@ -333,5 +402,18 @@ class Api::V1::ServicesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def service_params
     params.require(:service).permit(:name, :origin, :origin_city_id, :origin_address, :origin_longitude, :origin_latitude, :destination, :destination_city_id, :destination_address, :destination_latitude, :destination_longitude, :price, :description, :note, :user_id, :company_id, :user_driver_id, :user_receiver_id, :vehicle_type_id, :vehicle_id, :statu_id, :expiration_date, :contact, :active, :distance, :duration, :load_weight, :load_volume, :packing, :contact_name)
+  end
+
+  # Calculate distance in to destinations
+  def distance(loc1, loc2)
+    rad_per_deg = Math::PI / 180 # PI / 180
+    rkm = 6371 # Earth radius in kilometers
+    dlat_rad = (loc2[0] - loc1[0]) * rad_per_deg # Delta, converted to rad
+    dlon_rad = (loc2[1] - loc1[1]) * rad_per_deg
+    lat1_rad, lon1_rad = loc1.map { |i| i * rad_per_deg }
+    lat2_rad, lon2_rad = loc2.map { |i| i * rad_per_deg }
+    a = Math.sin(dlat_rad / 2)**2 + Math.cos(lat1_rad) * Math.cos(lat2_rad) * Math.sin(dlon_rad / 2)**2
+    c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+    rkm * c # Delta in kilometers
   end
 end
