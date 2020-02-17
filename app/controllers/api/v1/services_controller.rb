@@ -282,7 +282,7 @@ class Api::V1::ServicesController < ApplicationController
         name: service_document.name,
         document_type_id: service_document.document_type_id,
         document_type: service_document.document_type,
-        document: service_document.document.attached? ? url_for(@service.service_document.document) : nil,
+        document: service_document.document.attached? ? url_for(service_document.document) : nil,
         service_id: service_document.service_id,
         user_id: service_document.user_id,
         active: service_document.active,
