@@ -272,6 +272,40 @@ class Api::V1::ServicesController < ApplicationController
     end
   end
 
+  def summary
+    @service = Service.find_by(id: params[:id])
+
+    documents = []
+    @service.service_documents.each do |_service_document|
+      document = {
+        id: @service.service_document.id,
+        name: @service.service_document.name,
+        document_type_id: @service.service_document.document_type_id,
+        document_type: @service.service_document.document_type,
+        document: @service.service_document.document.attached? ? url_for(@service.service_document.document) : nil,
+        service_id: @service.service_document.service_id,
+        user_id: @service.service_document.user_id,
+        active: @service.service_document.active,
+        created_at: @service.service_document.created_at,
+        updated_at: @service.service_document.updated_at
+      }
+      documents << document
+    end
+
+    response = {
+      service: @service,
+      origin: @service.origin_city,
+      destination: @service.destination_city,
+      vehicle: @service.vehicle,
+      generator: { last_name: @service.user.profile.last_name,
+                   firt_name: @service.user.profile.firt_name,
+                   email: @service.user.email,
+                   phone_number: @service.user.phone_number },
+      document_services: documents
+    }
+    render json: response
+  end
+
   def find_driver
     user = User.find(params[:id])
     @services = Service.where(user_driver_id: user.id)
