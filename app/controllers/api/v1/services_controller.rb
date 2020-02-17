@@ -276,18 +276,18 @@ class Api::V1::ServicesController < ApplicationController
     @service = Service.find_by(id: params[:id])
 
     documents = []
-    @service.service_documents.each do |_service_document|
+    @service.service_documents.each do |service_document|
       document = {
-        id: @service.service_document.id,
-        name: @service.service_document.name,
-        document_type_id: @service.service_document.document_type_id,
-        document_type: @service.service_document.document_type,
-        document: @service.service_document.document.attached? ? url_for(@service.service_document.document) : nil,
-        service_id: @service.service_document.service_id,
-        user_id: @service.service_document.user_id,
-        active: @service.service_document.active,
-        created_at: @service.service_document.created_at,
-        updated_at: @service.service_document.updated_at
+        id: service_document.id,
+        name: service_document.name,
+        document_type_id: service_document.document_type_id,
+        document_type: service_document.document_type,
+        document: service_document.document.attached? ? url_for(@service.service_document.document) : nil,
+        service_id: service_document.service_id,
+        user_id: service_document.user_id,
+        active: service_document.active,
+        created_at: service_document.created_at,
+        updated_at: service_document.updated_at
       }
       documents << document
     end
