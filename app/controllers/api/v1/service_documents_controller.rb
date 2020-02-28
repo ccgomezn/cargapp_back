@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 class Api::V1::ServiceDocumentsController < ApplicationController
-  before_action :set_service_document, only: [:show, :edit, :update, :destroy]
+  before_action :set_service_document, only: %i[show edit update destroy]
   protect_from_forgery with: :null_session
   before_action :doorkeeper_authorize!
   before_action :set_user
-
 
   swagger_controller :serviceDocument, 'Service Documents Management'
 
@@ -31,7 +32,7 @@ class Api::V1::ServiceDocumentsController < ApplicationController
 
   swagger_api :update do
     summary 'Updates an existing Service Document'
-    param :path, :id, :integer, :required, "Service Document Id"
+    param :path, :id, :integer, :required, 'Service Document Id'
     param :form, 'service_document[name]', :string, :optional, 'Name'
     param :form, 'service_document[document_type]', :string, :optional, 'Document Type'
     param :form, 'service_document[document]', :file, :optional, 'Document'
@@ -44,27 +45,27 @@ class Api::V1::ServiceDocumentsController < ApplicationController
   end
 
   swagger_api :destroy do
-    summary "Deletes an existing Service Document"
-    param :path, :id, :integer, :optional, "Service Document Id"
+    summary 'Deletes an existing Service Document'
+    param :path, :id, :integer, :optional, 'Service Document Id'
     response :unauthorized
     response :not_found
   end
 
   swagger_api :show do
-    summary "Shows Service Document"
-    param :path, :id, :integer, :optional, "Service Document Id"
+    summary 'Shows Service Document'
+    param :path, :id, :integer, :optional, 'Service Document Id'
     response :unauthorized
     response :not_found
   end
 
   swagger_api :me do
-    summary "Shows mine Service Document"
+    summary 'Shows mine Service Document'
     response :unauthorized
   end
 
   swagger_api :find_service do
-    summary "Shows Service Documents of an specific service"
-    param :path, :id, :integer, :optional, "Service Id"
+    summary 'Shows Service Documents of an specific service'
+    param :path, :id, :integer, :optional, 'Service Id'
     response :unauthorized
     response :not_found
   end
@@ -84,7 +85,7 @@ class Api::V1::ServiceDocumentsController < ApplicationController
         document: document.document.attached? ? url_for(document.document) : nil,
         service_id: document.service_id,
         user_id: document.user_id,
-        active: document.active,        
+        active: document.active,
         created_at: document.created_at,
         updated_at: document.updated_at
       }
@@ -106,7 +107,7 @@ class Api::V1::ServiceDocumentsController < ApplicationController
         document: document.document.attached? ? url_for(document.document) : nil,
         service_id: document.service_id,
         user_id: document.user_id,
-        active: document.active,        
+        active: document.active,
         created_at: document.created_at,
         updated_at: document.updated_at
       }
@@ -128,7 +129,7 @@ class Api::V1::ServiceDocumentsController < ApplicationController
         document: document.document.attached? ? url_for(document.document) : nil,
         service_id: document.service_id,
         user_id: document.user_id,
-        active: document.active,        
+        active: document.active,
         created_at: document.created_at,
         updated_at: document.updated_at
       }
@@ -148,7 +149,7 @@ class Api::V1::ServiceDocumentsController < ApplicationController
       document: @service_document.document.attached? ? url_for(@service_document.document) : nil,
       service_id: @service_document.service_id,
       user_id: @service_document.user_id,
-      active: @service_document.active,        
+      active: @service_document.active,
       created_at: @service_document.created_at,
       updated_at: @service_document.updated_at
     }
@@ -158,6 +159,42 @@ class Api::V1::ServiceDocumentsController < ApplicationController
   def find_service
     service_id = params[:id]
     @service_documents = ServiceDocument.where(service_id: service_id, active: true)
+
+    @result = []
+    @service_documents.each do |document|
+      @obj = {
+        id: document.id,
+        name: document.name,
+        document_type_id: document.document_type_id,
+        document_type: document.document_type,
+        document: document.document.attached? ? url_for(document.document) : nil,
+        service_id: document.service_id,
+        user_id: document.user_id,
+        active: document.active,
+        created_at: document.created_at,
+        updated_at: document.updated_at
+      }
+      @result << @obj
+    end
+    render json: @result
+  end
+
+  def find_service_category
+    category = params[:category]
+    service_id = params[:id]
+
+    category_ids = DocumentType.where(category: category)
+
+    arrayTypes = []
+    category_ids.each do |type|
+      next unless type
+
+      arrayTypes << type['id']
+    end
+
+    puts arrayTypes
+
+    @service_documents = ServiceDocument.where(service_id: service_id, active: true, document_type_id: arrayTypes)
 
     @result = []
     @service_documents.each do |document|
@@ -191,7 +228,7 @@ class Api::V1::ServiceDocumentsController < ApplicationController
         document: @service_document.document.attached? ? url_for(@service_document.document) : nil,
         service_id: @service_document.service_id,
         user_id: @service_document.user_id,
-        active: @service_document.active,        
+        active: @service_document.active,
         created_at: @service_document.created_at,
         updated_at: @service_document.updated_at
       }
@@ -213,7 +250,7 @@ class Api::V1::ServiceDocumentsController < ApplicationController
         document: @service_document.document.attached? ? url_for(@service_document.document) : nil,
         service_id: @service_document.service_id,
         user_id: @service_document.user_id,
-        active: @service_document.active,        
+        active: @service_document.active,
         created_at: @service_document.created_at,
         updated_at: @service_document.updated_at
       }
@@ -230,41 +267,19 @@ class Api::V1::ServiceDocumentsController < ApplicationController
   end
 
   private
-    def set_user
-      @user = User.find(doorkeeper_token.resource_owner_id) if doorkeeper_token
-      permissions()
-    end
 
-    def permissions
-      if @user
-        has_permission = false
-        @user.roles.where(active: true).each do |role|
-          next if role.permissions.where(active: true).empty?
-          role.permissions.where(active: true).each do |permission|
-            if (permission.cargapp_model.value.eql?(controller_name) && permission.active) && permission.action.eql?('all')
-              has_permission = true
-            elsif (permission.cargapp_model.value.eql?(controller_name) && permission.active) && permission.allow
-              has_permission = true
-            elsif (permission.cargapp_model.value.eql?(controller_name) && permission.active) && permission.action.eql?(action_name)
-              has_permission = true
-            end
-          end
-        end
+  def set_user
+    @user = User.find(doorkeeper_token.resource_owner_id) if doorkeeper_token
+    permissions
+  end
 
-        if if_super()
-          has_permission = true
-        end
+  def permissions
+    if @user
+      has_permission = false
+      @user.roles.where(active: true).each do |role|
+        next if role.permissions.where(active: true).empty?
 
-        if has_permission
-          true
-        else
-          response = { response: "Does not have permissions" }
-          render json: response, status: :unprocessable_entity
-        end
-      else
-        role = Role.find_by(name: ENV['GUEST_N'], active: true)
-        has_permission = false
-        role.permissions.each do |permission|
+        role.permissions.where(active: true).each do |permission|
           if (permission.cargapp_model.value.eql?(controller_name) && permission.active) && permission.action.eql?('all')
             has_permission = true
           elsif (permission.cargapp_model.value.eql?(controller_name) && permission.active) && permission.allow
@@ -273,27 +288,49 @@ class Api::V1::ServiceDocumentsController < ApplicationController
             has_permission = true
           end
         end
+      end
 
-        if has_permission
-          true
-        else
-          response = { response: "Does not have permissions" }
-          render json: response, status: :unprocessable_entity
+      has_permission = true if if_super
+
+      if has_permission
+        true
+      else
+        response = { response: 'Does not have permissions' }
+        render json: response, status: :unprocessable_entity
+      end
+    else
+      role = Role.find_by(name: ENV['GUEST_N'], active: true)
+      has_permission = false
+      role.permissions.each do |permission|
+        if (permission.cargapp_model.value.eql?(controller_name) && permission.active) && permission.action.eql?('all')
+          has_permission = true
+        elsif (permission.cargapp_model.value.eql?(controller_name) && permission.active) && permission.allow
+          has_permission = true
+        elsif (permission.cargapp_model.value.eql?(controller_name) && permission.active) && permission.action.eql?(action_name)
+          has_permission = true
         end
       end
-    end
 
-    def if_super
-      @if_super = (User.is_super?(@user) if @user) || false
+      if has_permission
+        true
+      else
+        response = { response: 'Does not have permissions' }
+        render json: response, status: :unprocessable_entity
+      end
     end
+  end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_service_document
-      @service_document = ServiceDocument.find(params[:id])
-    end
+  def if_super
+    @if_super = (User.is_super?(@user) if @user) || false
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def service_document_params
-      params.require(:service_document).permit(:name, :document_type_id, :document, :service_id, :user_id, :active)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_service_document
+    @service_document = ServiceDocument.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def service_document_params
+    params.require(:service_document).permit(:name, :document_type_id, :document, :service_id, :user_id, :active)
+  end
 end

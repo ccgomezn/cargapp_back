@@ -176,6 +176,7 @@ Rails.application.routes.draw do
       resources :service_users
       get 'service_documents/me' => 'service_documents#me' # Last Service active
       get 'service_documents/active' => 'service_documents#active'
+      get 'service_documents/find_service/:id/:category' => 'service_documents#find_service_category'
       get 'service_documents/find_service/:id' => 'service_documents#find_service'
       resources :service_documents
       get 'favorite_routes/me' => 'favorite_routes#me' # Last Service active
