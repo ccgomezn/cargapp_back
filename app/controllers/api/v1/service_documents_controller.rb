@@ -192,8 +192,6 @@ class Api::V1::ServiceDocumentsController < ApplicationController
       arrayTypes << type['id']
     end
 
-    puts arrayTypes
-
     @service_documents = ServiceDocument.where(service_id: service_id, active: true, document_type_id: arrayTypes)
 
     @result = []

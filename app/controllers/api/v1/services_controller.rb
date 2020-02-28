@@ -148,7 +148,7 @@ class Api::V1::ServicesController < ApplicationController
         render json: result
       end
     else
-      result = { message: 'No esta vinculado a este servicio', service: nil, statu: nil, active: false }
+      result = { message: 'No esta vinculado a este servicio', service: { id: params[:id] }, statu: nil, active: false }
       render json: result
     end
   end
