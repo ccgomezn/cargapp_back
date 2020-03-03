@@ -229,6 +229,7 @@ Rails.application.routes.draw do
       get 'messages/active' => 'messages#active'
       get 'messages/room/:id' => 'messages#room'
       resources :messages
+      get 'vehicle_documents/me/:vehicle_id' => 'vehicle_documents#me'
       get 'vehicle_documents/active' => 'vehicle_documents#active'
       get 'vehicle_documents/find_by_vehicle/:id' => 'vehicle_documents#find_by_vehicle'
       resources :vehicle_documents
