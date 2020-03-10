@@ -336,7 +336,7 @@ class Api::V1::UsersController < ApplicationController
         roles << obj
       end
 
-      @services = Service.where(user_id: @user.id, status_id: ENV['STATUS_END_ID'], active: true)
+      @services = Service.where(user_id: @user.id, statu_id: ENV['STATUS_END_ID'], active: true)
 
       # PAra tomar tiempos y distancias toca agregar variable<
       top = @user.services.where(statu_id: 2)
@@ -398,16 +398,14 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def statistics
-    services = Service.where(user_driver_id: @user.id, active: true, statu_id: 11)
+    services = Service.where(user_driver_id: @user.id, active: true, statu_id: ENV['STATUS_END_ID'])
     challengers = UserChallenge.where(user_id: @user.id, active: true)
     kilometres = 0
     points = 0
     score = 0.0
     services.each do |service|
       kilometres +=  service.distance || 0.0
-      if service.rate_service
-        score += service.rate_service.driver_point || 0.0
-      end
+      score += service.rate_service.driver_point || 0.0 if service.rate_service
     end
 
     challengers.each do |challenger|
