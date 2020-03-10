@@ -336,10 +336,13 @@ class Api::V1::UsersController < ApplicationController
         roles << obj
       end
 
+      @services = Service.where(user_id: @user.id, status_id: ENV['STATUS_END_ID'], active: true)
+
       # PAra tomar tiempos y distancias toca agregar variable<
       top = @user.services.where(statu_id: 2)
       @obj = {
         user: @user,
+        finished_services: @services.count,
         top: top,
         roles: roles
         # profile: @user.profile

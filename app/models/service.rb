@@ -20,7 +20,11 @@ class Service < ApplicationRecord
     self.origin = self.origin.capitalize
     self.destination = self.destination.capitalize
     self.name = %'#{self.origin}-#{self.destination}'
-    #distance
-    #duration
+
+    if self.statu_id == ENV['STATUS_END_ID']
+      #distance = 
+      #duration = 
+      puts '-----------'
+    end
   end
 end
