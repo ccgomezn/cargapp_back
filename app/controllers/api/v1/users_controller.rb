@@ -252,15 +252,15 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    error_tw ||= false
+    $error_tw ||= false
 
-    if @user.save && !error_tw
+    if @user.save && !$error_tw
       user_role
       profile
       # password definido por el atribut
       render json: @user, status: :created
     else
-      if error_tw
+      if $error_tw
         data = { message: 'error twillio' }
         render json: data, status: :created
       else
@@ -268,7 +268,7 @@ class Api::V1::UsersController < ApplicationController
         render json: @user.errors, status: :unprocessable_entity
       end
     end
-    error_tw = false
+    $error_tw = false
   end
 
   def login
