@@ -5,48 +5,48 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+- Ruby version
 
-* System dependencies
+- System dependencies
 
-* Configuration
+- Configuration
 
-* Database creation
+- Database creation
 
-* Database initialization
+- Database initialization
 
-* How to run the test suite
+- How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+- Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+- Deployment instructions
 
-* ...
+- ...
 
 ### The code Verify (standardize)
 
 Code style checker
 
-* run command for verify code
-`rubocop`
+- run command for verify code
+  `rubocop`
 
-* run command to correct code
-`rubocop -a`
+- run command to correct code
+  `rubocop -a`
 
+##### Temporary in controller models api
 
-##### Temporary in controller models api 
-```protect_from_forgery with: :null_session```
-
+`protect_from_forgery with: :null_session`
 
 # Data Base Models
 
 ## Role
-* name
-* code
-* description
-* active
 
-```rails g scaffold Role name code:string:index description:text active:boolean```
+- name
+- code
+- description
+- active
+
+`rails g scaffold Role name code:string:index description:text active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/roles 'Listar'
 2. GET http://api.cargapp.co/api/v1/roles/active 'Ver activos'
@@ -59,42 +59,41 @@ Code style checker
 {
     "role": {
         "name": "user",
-        "code": "USER", 
+        "code": "USER",
         "description": "Role para todos los uaurios en general",
         "active": true
     }
 }
 ```
 
-
 ## User
-* email
-* password
-* phone_number
-* mobile_verify
-* verification_code
-* identifiation
-* code
-* uuid
-* provider
-* username
-* referal_code
-* user_referal_code
-* pin
-* online
-* active
 
+- email
+- password
+- phone_number
+- mobile_verify
+- verification_code
+- identifiation
+- code
+- uuid
+- provider
+- username
+- referal_code
+- user_referal_code
+- pin
+- online
+- active
 
-```rails g migration AddPhoneToUser phone_number mobile_verify:boolean mobile_code identifiation uuid provider referal_code user_referal_code pin online:boolean active:boolean```
-
+`rails g migration AddPhoneToUser phone_number mobile_verify:boolean mobile_code identifiation uuid provider referal_code user_referal_code pin online:boolean active:boolean`
 
 ## UserRole
-* role_id
-* user_id
-* admin_id
-* active:boolean
 
-```rails g scaffold UserRole role:references user:references admin:references active:boolean```
+- role_id
+- user_id
+- admin_id
+- active:boolean
+
+`rails g scaffold UserRole role:references user:references admin:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/user_roles 'Listar'
 2. GET http://api.cargapp.co/api/v1/user_roles/active 'Ver activos'
@@ -115,12 +114,13 @@ Code style checker
 ```
 
 ## CargappModel
-* name
-* code
-* description
-* active
 
-```rails g scaffold CargappModel name code description:text active:boolean```
+- name
+- code
+- description
+- active
+
+`rails g scaffold CargappModel name code description:text active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/cargapp_models 'Listar'
 2. GET http://api.cargapp.co/api/v1/cargapp_models/active 'Ver activos'
@@ -141,17 +141,17 @@ Code style checker
 }
 ```
 
-
 ## Parameter
-* name
-* code
-* description
-* user_id
-* value
-* model_id
-* active
 
-```rails g scaffold Parameter name code description:text user:references value cargapp_model:references active:boolean```
+- name
+- code
+- description
+- user_id
+- value
+- model_id
+- active
+
+`rails g scaffold Parameter name code description:text user:references value cargapp_model:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/parameters 'Listar'
 2. GET http://api.cargapp.co/api/v1/parameters/active 'Ver activos'
@@ -174,17 +174,17 @@ Code style checker
 }
 ```
 
+## Permission
 
-## Permission 
-* role_id
-* model_id
-* action
-* method
-* user_id
-* allow
-* active
+- role_id
+- model_id
+- action
+- method
+- user_id
+- allow
+- active
 
-```rails g scaffold Permission role:references cargapp_model:references action method allow:boolean user:references active:boolean```
+`rails g scaffold Permission role:references cargapp_model:references action method allow:boolean user:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/permissions 'Listar'
 2. GET http://api.cargapp.co/api/v1/permissions/active 'Ver activos'
@@ -207,16 +207,16 @@ Code style checker
 }
 ```
 
+## Statu
 
-## Statu 
-* name
-* code
-* description
-* user_id
-* cargapp_model_id
-* active
+- name
+- code
+- description
+- user_id
+- cargapp_model_id
+- active
 
-```rails g scaffold Statu name code description:text user:references cargapp_model:references active:boolean```
+`rails g scaffold Statu name code description:text user:references cargapp_model:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/status 'Listar'
 2. GET http://api.cargapp.co/api/v1/status/active 'Ver activos'
@@ -238,24 +238,23 @@ Code style checker
 }
 ```
 
+## Country
 
-## Country 
-* name
-* code
-* description
-* cioc
-* currency_code
-* currency_name
-* currency_symbol
-* language_iso639
-* language_name 
-* language_native_name
-* image
-* date_utc
-* active
+- name
+- code
+- description
+- cioc
+- currency_code
+- currency_name
+- currency_symbol
+- language_iso639
+- language_name
+- language_native_name
+- image
+- date_utc
+- active
 
-
-```rails g scaffold Country name code description:text cioc currency_code currency_name currency_symbol language_iso639 language_name language_native_name image date_utc active:boolean```
+`rails g scaffold Country name code description:text cioc currency_code currency_name currency_symbol language_iso639 language_name language_native_name image date_utc active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/countries 'Listar'
 2. GET http://api.cargapp.co/api/v1/countries/active 'Ver activos'
@@ -278,15 +277,15 @@ Code style checker
 }
 ```
 
-## State 
-* name
-* code
-* description
-* country_id
-* active
+## State
 
+- name
+- code
+- description
+- country_id
+- active
 
-```rails g scaffold State name code description:text country:references active:boolean```
+`rails g scaffold State name code description:text country:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/states 'Listar'
 2. GET http://api.cargapp.co/api/v1/states/active 'Ver activos'
@@ -299,7 +298,7 @@ Code style checker
 {
     "state": {
         "name": "creado",
-        "code": "creted",        
+        "code": "creted",
         "description": "estado creado para el usro de los estados del modelo servicios o ofertas",
         "country_id": 1,
         "active": true
@@ -307,16 +306,15 @@ Code style checker
 }
 ```
 
+## City
 
-## City 
-* name
-* code
-* description
-* state_id
-* active
+- name
+- code
+- description
+- state_id
+- active
 
-
-```rails g scaffold City name code description:text state:references active:boolean```
+`rails g scaffold City name code description:text state:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/cities 'Listar'
 2. GET http://api.cargapp.co/api/v1/cities/active 'Ver activos'
@@ -329,7 +327,7 @@ Code style checker
 {
     "city": {
         "name": "creado",
-        "code": "creted",        
+        "code": "creted",
         "description": "estado creado para el usro de los estados del modelo servicios o ofertas",
         "state_id": 1,
         "active": true
@@ -337,14 +335,14 @@ Code style checker
 }
 ```
 
-## DocumentType 
-* name
-* code
-* description
-* active
+## DocumentType
 
+- name
+- code
+- description
+- active
 
-```rails g scaffold DocumentType name code description:text active:boolean```
+`rails g scaffold DocumentType name code description:text active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/document_types 'Listar'
 2. GET http://api.cargapp.co/api/v1/document_types/active 'Ver activos'
@@ -357,22 +355,22 @@ Code style checker
 {
     "document_type": {
         "name": "creado",
-        "code": "creted",        
+        "code": "creted",
         "description": "estado creado para el usro de los estados del modelo servicios o ofertas",
         "active": true
     }
 }
 ```
 
-## VehicleType 
-* name
-* code
-* icon
-* description
-* active
+## VehicleType
 
+- name
+- code
+- icon
+- description
+- active
 
-```rails g scaffold VehicleType name code icon description:text active:boolean```
+`rails g scaffold VehicleType name code icon description:text active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/vehicle_types 'Listar'
 2. GET http://api.cargapp.co/api/v1/vehicle_types/active 'Ver activos'
@@ -385,7 +383,7 @@ Code style checker
 {
     "vehicle_type": {
         "name": "creado",
-        "code": "creted",        
+        "code": "creted",
         "description": "estado creado para el usro de los estados del modelo servicios o ofertas",
         "icon": "image.png",
         "active": true
@@ -393,15 +391,15 @@ Code style checker
 }
 ```
 
-## LoadType 
-* name
-* code
-* icon
-* description
-* active
+## LoadType
 
+- name
+- code
+- icon
+- description
+- active
 
-```rails g scaffold LoadType name code icon description:text active:boolean```
+`rails g scaffold LoadType name code icon description:text active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/load_types 'Listar'
 2. GET http://api.cargapp.co/api/v1/load_types/active 'Ver activos'
@@ -414,7 +412,7 @@ Code style checker
 {
     "load_type": {
         "name": "creado",
-        "code": "creted",        
+        "code": "creted",
         "description": "estado creado para el usro de los estados del modelo servicios o ofertas",
         "icon": "image.png",
         "active": true
@@ -423,28 +421,28 @@ Code style checker
 ```
 
 ##Integration
-* name
-* description
-* provider
-* code
-* url
-* url_provider
-* url_production
-* url_develop
-* email
-* username
-* password
-* phone
-* pin
-* token
-* app_id
-* client_id
-* api_key
-* user:references
-* active 
 
+- name
+- description
+- provider
+- code
+- url
+- url_provider
+- url_production
+- url_develop
+- email
+- username
+- password
+- phone
+- pin
+- token
+- app_id
+- client_id
+- api_key
+- user:references
+- active
 
-```rails g scaffold CargappIntegration name description:text provider code url url_provider url_production url_develop email username password phone pin token app_id client_id api_key user:references active:boolean```
+`rails g scaffold CargappIntegration name description:text provider code url url_provider url_production url_develop email username password phone pin token app_id client_id api_key user:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/cargapp_integrations 'Listar'
 2. GET http://api.cargapp.co/api/v1/cargapp_integrations/active 'Ver activos'
@@ -480,22 +478,21 @@ Code style checker
 }
 ```
 
+## Company
 
-## Company 
-* name
-* description
-* company_type
-* load_type_id
-* sector
-* legal_representative
-* address
-* phone
-* user_id
-* constitution_date
-* active
+- name
+- description
+- company_type
+- load_type_id
+- sector
+- legal_representative
+- address
+- phone
+- user_id
+- constitution_date
+- active
 
-
-```rails g scaffold Company name description:text company_type load_type:references sector legal_representative address phone user:references constitution_date:date active:boolean```
+`rails g scaffold Company name description:text company_type load_type:references sector legal_representative address phone user:references constitution_date:date active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/companies 'Listar'
 2. GET http://api.cargapp.co/api/v1/companies/active 'Ver activos'
@@ -509,7 +506,7 @@ Code style checker
 {
     "load_type": {
         "name": "creado",
-        "code": "creted",        
+        "code": "creted",
         "description": "estado creado para el usro de los estados del modelo servicios o ofertas",
         "icon": "image.png",
         "active": true
@@ -517,17 +514,17 @@ Code style checker
 }
 ```
 
-## Ticket 
-* title
-* body
-* image
-* media
-* status_id
-* user_id
-* active
+## Ticket
 
+- title
+- body
+- image
+- media
+- status_id
+- user_id
+- active
 
-```rails g scaffold Ticket title body:text image media statu:references user:references active:boolean```
+`rails g scaffold Ticket title body:text image media statu:references user:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/tickets 'Listar'
 2. GET http://api.cargapp.co/api/v1/tickets/active 'Ver activos'
@@ -551,19 +548,18 @@ Code style checker
 }
 ```
 
+## Document
 
-## Document 
-* document_id
-* document_type_id
-* file
-* status_id
-* user_id
-* expire_date
-* approved
-* active
+- document_id
+- document_type_id
+- file
+- status_id
+- user_id
+- expire_date
+- approved
+- active
 
-
-```rails g scaffold Document document_id document_type:references file statu:references user:references expire_date:date approved:boolean active:boolean```
+`rails g scaffold Document document_id document_type:references file statu:references user:references expire_date:date approved:boolean active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/documents 'Listar'
 2. GET http://api.cargapp.co/api/v1/documents/active 'Ver activos'
@@ -588,19 +584,18 @@ Code style checker
 }
 ```
 
+## Profile
 
-## Profile 
-* firt_name
-* last_name
-* avatar
-* phone
-* document_id
-* document_type_id
-* birth_date
-* user_id
+- firt_name
+- last_name
+- avatar
+- phone
+- document_id
+- document_type_id
+- birth_date
+- user_id
 
-
-```rails g scaffold Profile firt_name last_name avatar phone document_id document_type:references user:references birth_date:date```
+`rails g scaffold Profile firt_name last_name avatar phone document_id document_type:references user:references birth_date:date`
 
 1. GET http://api.cargapp.co/api/v1/profiles 'Listar'
 2. GET http://api.cargapp.co/api/v1/profiles/active 'Ver activos'
@@ -625,23 +620,22 @@ Code style checker
 }
 ```
 
+## Vehicle
 
-## Vehicle 
-* brand
-* model
-* model_year
-* color
-* plate 
-* chassis
-* owner_vehicle
-* vehicle_type_id
-* owner_document_type_id
-* owner_document_id
-* user_id
-* active
+- brand
+- model
+- model_year
+- color
+- plate
+- chassis
+- owner_vehicle
+- vehicle_type_id
+- owner_document_type_id
+- owner_document_id
+- user_id
+- active
 
-
-```rails g scaffold Vehicle brand model model_year:integer color plate chassis owner_vehicle vehicle_type:references owner_document_type:references owner_document_id user:references active:boolean```
+`rails g scaffold Vehicle brand model model_year:integer color plate chassis owner_vehicle vehicle_type:references owner_document_type:references owner_document_id user:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/vehicles 'Listar'
 2. GET http://api.cargapp.co/api/v1/vehicles/active 'Ver activos'
@@ -663,24 +657,23 @@ Code style checker
         "owner_vehicle": "segundo españa bastidas",
         "owner_document_id": "10922222",
         "vehicle_type_id": 1,
-        "owner_document_type_id": 1, 
+        "owner_document_type_id": 1,
         "user_id": 1,
         "active": true
     }
 }
 ```
 
+## Challenge
 
-## Challenge 
-* name
-* body
-* image
-* point 
-* user_id
-* active
+- name
+- body
+- image
+- point
+- user_id
+- active
 
-
-```rails g scaffold Challenge name body:text image point:integer user:references active:boolean```
+`rails g scaffold Challenge name body:text image point:integer user:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/challenges 'Listar'
 2. GET http://api.cargapp.co/api/v1/challenges/active 'Ver activos'
@@ -703,16 +696,15 @@ Code style checker
 }
 ```
 
-
 ## UserChallenge
-* position
-* point 
-* challenge_id
-* user_id
-* active
 
+- position
+- point
+- challenge_id
+- user_id
+- active
 
-```rails g scaffold UserChallenge position:integer point:integer challenge:references user:references active:boolean```
+`rails g scaffold UserChallenge position:integer point:integer challenge:references user:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/user_challenges 'Listar'
 2. GET http://api.cargapp.co/api/v1/user_challenges/active 'Ver activos'
@@ -734,20 +726,19 @@ Code style checker
 }
 ```
 
-
 ## Coupon
-* name
-* code
-* description
-* cargapp_model_id
-* is_porcentage
-* value
-* quantity
-* user_id
-* active
 
+- name
+- code
+- description
+- cargapp_model_id
+- is_porcentage
+- value
+- quantity
+- user_id
+- active
 
-```rails g scaffold Coupon name code description is_porcentage:boolean value:integer quantity:integer cargapp_model:references user:references active:boolean```
+`rails g scaffold Coupon name code description is_porcentage:boolean value:integer quantity:integer cargapp_model:references user:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/coupons 'Listar'
 2. GET http://api.cargapp.co/api/v1/coupons/active 'Ver activos'
@@ -761,11 +752,11 @@ Code style checker
 {
     "coupon": {
         "name": "Todos 10",
-        "code": "TODO10", 
+        "code": "TODO10",
         "description": "10% de decuento para todos",
         "is_porcentage": true,
         "value": 10,
-        "quantity": 100,    
+        "quantity": 100,
         "user_id": 1,
         "cargapp_model_id": 1,
         "active": true
@@ -774,16 +765,16 @@ Code style checker
 ```
 
 ## UserCoupon
-* user_id
-* coupon_id
-* cargapp_model_id
-* applied_item_id
-* offert_id
-* discount
-* active
 
+- user_id
+- coupon_id
+- cargapp_model_id
+- applied_item_id
+- offert_id
+- discount
+- active
 
-```rails g scaffold UserCoupon discount cargapp_model:references applied_item_id:integer coupon:references user:references active:boolean```
+`rails g scaffold UserCoupon discount cargapp_model:references applied_item_id:integer coupon:references user:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/user_coupons 'Listar'
 2. GET http://api.cargapp.co/api/v1/user_coupons/active 'Ver activos'
@@ -806,21 +797,20 @@ Code style checker
 }
 ```
 
-
 ## Prize
-* name
-* code
-* point
-* description
-* body
-* image
-* media
-* expire_date
-* user_id
-* active
 
+- name
+- code
+- point
+- description
+- body
+- image
+- media
+- expire_date
+- user_id
+- active
 
-```rails g scaffold Prize name code point:integer description:text body:text image media expire_date:datetime user:references active:boolean```
+`rails g scaffold Prize name code point:integer description:text body:text image media expire_date:datetime user:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/prizes 'Listar'
 2. GET http://api.cargapp.co/api/v1/prizes/active 'Ver activos'
@@ -847,16 +837,15 @@ Code style checker
 }
 ```
 
-
 ## UserPrize
-* point
-* expire_date
-* prize_id
-* user_id
-* active
 
+- point
+- expire_date
+- prize_id
+- user_id
+- active
 
-```rails g scaffold UserPrize point prize:references expire_date:datetime user:references active:boolean```
+`rails g scaffold UserPrize point prize:references expire_date:datetime user:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/user_prizes 'Listar'
 2. GET http://api.cargapp.co/api/v1/user_prizes/active 'Ver activos'
@@ -878,16 +867,15 @@ Code style checker
 }
 ```
 
+## ReasonType
 
-## ReasonType 
-* name
-* code
-* icon
-* description
-* active
+- name
+- code
+- icon
+- description
+- active
 
-
-```rails g scaffold ReasonType name code icon description:text active:boolean```
+`rails g scaffold ReasonType name code icon description:text active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/reason_types 'Listar'
 2. GET http://api.cargapp.co/api/v1/reason_types/active 'Ver activos'
@@ -900,7 +888,7 @@ Code style checker
 {
     "reason_type": {
         "name": "creado",
-        "code": "creted",        
+        "code": "creted",
         "description": "estado creado para el usro de los estados del modelo servicios o ofertas",
         "icon": "image.png",
         "active": true
@@ -908,18 +896,17 @@ Code style checker
 }
 ```
 
-
 ## Blocking (After)
-* description
-* reason_type_id
-* statu_id
-* user_id
-* driver_id
-* expire_date
-* active
 
+- description
+- reason_type_id
+- statu_id
+- user_id
+- driver_id
+- expire_date
+- active
 
-```rails g scaffold Blocking description:text reason:references statu:references expire_date:datetime user:references driver:references active:boolean```
+`rails g scaffold Blocking description:text reason:references statu:references expire_date:datetime user:references driver:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/user_coupons 'Listar'
 2. GET http://api.cargapp.co/api/v1/user_coupons/active 'Ver activos'
@@ -942,14 +929,14 @@ Code style checker
 ```
 
 ## Activity (After)
-* model
-* action
-* item
-* message
-* user_id
 
+- model
+- action
+- item
+- message
+- user_id
 
-```rails g scaffold Activity model action item message user:references ```
+`rails g scaffold Activity model action item message user:references`
 
 1. GET http://api.cargapp.co/api/v1/activities 'Listar'
 2. GET http://api.cargapp.co/api/v1/activities/active 'Ver activos'
@@ -971,20 +958,20 @@ Code style checker
 }
 ```
 
-
 ## PaymentMethod
-* name
-* uuid
-* description
-* email
-* app_id
-* secret_id
-* token
-* password
-* user_id
-* active
 
-```rails g scaffold PaymentMethod name uuid description:text email aap_id secret_id token password user:references active:boolean```
+- name
+- uuid
+- description
+- email
+- app_id
+- secret_id
+- token
+- password
+- user_id
+- active
+
+`rails g scaffold PaymentMethod name uuid description:text email aap_id secret_id token password user:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/payment_methods 'Listar'
 2. GET http://api.cargapp.co/api/v1/payment_methods/active 'Ver activos'
@@ -1011,20 +998,20 @@ Code style checker
 }
 ```
 
-
 ## UserPaymentMethod
-* email
-* uuid
-* token
-* card_number
-* expiration
-* cvv
-* observation
-* user_id
-* payment_method_id
-* active
 
-```rails g scaffold UserPaymentMethod email uuid token card_number expiration:date cvv observation:text user:references payment_method:references active:boolean```
+- email
+- uuid
+- token
+- card_number
+- expiration
+- cvv
+- observation
+- user_id
+- payment_method_id
+- active
+
+`rails g scaffold UserPaymentMethod email uuid token card_number expiration:date cvv observation:text user:references payment_method:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/user_payment_methods 'Listar'
 2. GET http://api.cargapp.co/api/v1/user_payment_methods/active 'Ver activos'
@@ -1051,24 +1038,23 @@ Code style checker
 }
 ```
 
-
-
 ## Report
-* name
-* origin
-* destination
-* cause
-* sense
-* novelty
-* geolocation
-* image
-* start_date
-* end_date
-* report_type
-* user_id
-* active
 
-```rails g scaffold Report name origin destination cause sense novelty geolocation image start_date:date end_date:date report_type user:references active:boolean```
+- name
+- origin
+- destination
+- cause
+- sense
+- novelty
+- geolocation
+- image
+- start_date
+- end_date
+- report_type
+- user_id
+- active
+
+`rails g scaffold Report name origin destination cause sense novelty geolocation image start_date:date end_date:date report_type user:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/report_types 'Listar'
 2. GET http://api.cargapp.co/api/v1/report_types/active 'Ver activos'
@@ -1081,7 +1067,7 @@ Code style checker
 {
     "report_type": {
         "name": "creado",
-        "code": "creted",        
+        "code": "creted",
         "description": "estado creado para el usro de los estados del modelo servicios o ofertas",
         "icon": "image.png",
         "active": true
@@ -1089,34 +1075,34 @@ Code style checker
 }
 ```
 
-
 ## Service
-* name
-* origin
-* origin_city_id
-* origin_address
-* origin_longitude
-* origin_latitude
-* destination
-* destination_city_id
-* destination_address
-* destination_latitude
-* destination_longitude
-* price
-* description
-* note
-* user_id
-* company_id
-* user_driver_id
-* user_receiver_id
-* vehicle_type_id
-* vehicle_id
-* statu_id
-* expiration_date
-* contact
-* active
 
-```rails g scaffold Service name origin origin_city:references origin_address origin_longitude origin_latitude destination destination_city:references destination_address destination_latitude destination_longitude price:integer description:text note:text user:references company:references user_driver:references user_receiver:references vehicle_type:references vehicle:references statu:references expiration_date:date contact active:boolean```
+- name
+- origin
+- origin_city_id
+- origin_address
+- origin_longitude
+- origin_latitude
+- destination
+- destination_city_id
+- destination_address
+- destination_latitude
+- destination_longitude
+- price
+- description
+- note
+- user_id
+- company_id
+- user_driver_id
+- user_receiver_id
+- vehicle_type_id
+- vehicle_id
+- statu_id
+- expiration_date
+- contact
+- active
+
+`rails g scaffold Service name origin origin_city:references origin_address origin_longitude origin_latitude destination destination_city:references destination_address destination_latitude destination_longitude price:integer description:text note:text user:references company:references user_driver:references user_receiver:references vehicle_type:references vehicle:references statu:references expiration_date:date contact active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/services 'Listar'
 2. GET http://api.cargapp.co/api/v1/services/active 'Ver activos'
@@ -1135,17 +1121,17 @@ Code style checker
 }
 ```
 
-
 ## ServiceDocument
-* name
-* document_type
-* document_type_id
-* document
-* service_id
-* user_id
-* active
 
-```rails g scaffold ServiceDocument name document_type document service:references user:references active:boolean```
+- name
+- document_type
+- document_type_id
+- document
+- service_id
+- user_id
+- active
+
+`rails g scaffold ServiceDocument name document_type document service:references user:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/services_documents 'Listar'
 2. GET http://api.cargapp.co/api/v1/services_documents/active 'Ver activos'
@@ -1167,14 +1153,14 @@ Code style checker
 }
 ```
 
-
 ## FavoriteRoute
-* origin_city_id
-* destination_city_id
-* user_id
-* active
 
-```rails g scaffold FavoriteRoute origin_city:references destination_city:references active:boolean```
+- origin_city_id
+- destination_city_id
+- user_id
+- active
+
+`rails g scaffold FavoriteRoute origin_city:references destination_city:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/favorite_routes 'Listar'
 2. GET http://api.cargapp.co/api/v1/favorite_routes/active 'Ver activos'
@@ -1195,23 +1181,23 @@ Code style checker
 }
 ```
 
-
 ## CargappAd
-* id
-* name
-* price
-* description
-* body
-* image
-* url
-* media
-* have_discoun
-* is_percentage
-* discoun
-* user_id
-* active
 
-```rails g scaffold CargappAd name price:integer description:text body:text image url media have_discoun:boolean is_percentage:boolean discoun:integer user:references active:boolean```
+- id
+- name
+- price
+- description
+- body
+- image
+- url
+- media
+- have_discoun
+- is_percentage
+- discoun
+- user_id
+- active
+
+`rails g scaffold CargappAd name price:integer description:text body:text image url media have_discoun:boolean is_percentage:boolean discoun:integer user:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/cargapp_ads 'Listar'
 2. GET http://api.cargapp.co/api/v1/cargapp_ads/active 'Ver activos'
@@ -1220,7 +1206,6 @@ Code style checker
 5. PUT http://api.cargapp.co/api/v1/cargapp_ads/:id 'Actualiza'
 6. DELETE http://api.cargapp.co/api/v1/cargapp_ads/:id 'Elimina'
 7. GET http://api.cargapp.co/api/v1/cargapp_ads/me 'Ver las del usuario'
-
 
 ```
 {
@@ -1234,16 +1219,16 @@ Code style checker
 }
 ```
 
-
 ## UserLocation
-* id
-* longitude
-* latitude
-* city_id
-* user_id
-* active
 
-```rails g scaffold UserLocation longitude latitude city:references user:references active:boolean```
+- id
+- longitude
+- latitude
+- city_id
+- user_id
+- active
+
+`rails g scaffold UserLocation longitude latitude city:references user:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/user_locations 'Listar'
 2. GET http://api.cargapp.co/api/v1/user_locations/active 'Ver activos'
@@ -1252,7 +1237,6 @@ Code style checker
 5. PUT http://api.cargapp.co/api/v1/user_locations/:id 'Actualiza'
 6. DELETE http://api.cargapp.co/api/v1/user_locations/:id 'Elimina'
 7. GET http://api.cargapp.co/api/v1/user_locations/me 'Ver las del usuario'
-
 
 ```
 {
@@ -1266,17 +1250,17 @@ Code style checker
 }
 ```
 
-
 ## ServiceLocation
-* id
-* longitude
-* latitude
-* city_id
-* user_id
-* service_id
-* active
 
-```rails g scaffold ServiceLocation longitude latitude city:references user:references service:references active:boolean```
+- id
+- longitude
+- latitude
+- city_id
+- user_id
+- service_id
+- active
+
+`rails g scaffold ServiceLocation longitude latitude city:references user:references service:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/service_locations 'Listar'
 2. GET http://api.cargapp.co/api/v1/service_locations/active 'Ver activos'
@@ -1285,7 +1269,6 @@ Code style checker
 5. PUT http://api.cargapp.co/api/v1/service_locations/:id 'Actualiza'
 6. DELETE http://api.cargapp.co/api/v1/service_locations/:id 'Elimina'
 7. GET http://api.cargapp.co/api/v1/service_locations/me 'Ver las del usuario'
-
 
 ```
 {
@@ -1300,17 +1283,17 @@ Code style checker
 }
 ```
 
-
 ## BankAccount
-* id
-* account_number
-* account_type
-* bank
-* user_id
-* statu_id
-* active
 
-```rails g scaffold BankAccount account_number:integer account_type bank user:references statu:references active:boolean```
+- id
+- account_number
+- account_type
+- bank
+- user_id
+- statu_id
+- active
+
+`rails g scaffold BankAccount account_number:integer account_type bank user:references statu:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/bank_accounts 'Listar'
 2. GET http://api.cargapp.co/api/v1/bank_accounts/active 'Ver activos'
@@ -1319,7 +1302,6 @@ Code style checker
 5. PUT http://api.cargapp.co/api/v1/bank_accounts/:id 'Actualiza'
 6. DELETE http://api.cargapp.co/api/v1/bank_accounts/:id 'Elimina'
 7. GET http://api.cargapp.co/api/v1/bank_accounts/me 'Ver las del usuario'
-
 
 ```
 {
@@ -1334,18 +1316,18 @@ Code style checker
 }
 ```
 
-
 ## RateService
-* id
-* service_point
-* driver_point
-* point
-* service_id
-* user_id
-* driver_id
-* active
 
-```rails g scaffold RateService service_point:integer driver_point:integer point:integer service:references user:references driver:references active:boolean```
+- id
+- service_point
+- driver_point
+- point
+- service_id
+- user_id
+- driver_id
+- active
+
+`rails g scaffold RateService service_point:integer driver_point:integer point:integer service:references user:references driver:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/rate_services 'Listar'
 2. GET http://api.cargapp.co/api/v1/rate_services/active 'Ver activos'
@@ -1354,7 +1336,6 @@ Code style checker
 5. PUT http://api.cargapp.co/api/v1/rate_services/:id 'Actualiza'
 6. DELETE http://api.cargapp.co/api/v1/rate_services/:id 'Elimina'
 7. GET http://api.cargapp.co/api/v1/rate_services/me 'Ver las del usuario'
-
 
 ```
 {
@@ -1370,24 +1351,24 @@ Code style checker
 }
 ```
 
-
 ## CargappPayment
-* id
-* uuid
-* amount
-* transaction_code
-* observation
-* payment_method_id
-* statu_id 
-* generator_id
-* receiver_id
-* user_id
-* bank_account_id
-* service_id
-* company_id
-* active
 
-```rails g scaffold CargappPayment uuid amount:integer transaction_code observation:text payment_method:references statu:references generator:references receiver:references bank_account:references service:references company:references user:references active:boolean```
+- id
+- uuid
+- amount
+- transaction_code
+- observation
+- payment_method_id
+- statu_id
+- generator_id
+- receiver_id
+- user_id
+- bank_account_id
+- service_id
+- company_id
+- active
+
+`rails g scaffold CargappPayment uuid amount:integer transaction_code observation:text payment_method:references statu:references generator:references receiver:references bank_account:references service:references company:references user:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/cargapp_payments 'Listar'
 2. GET http://api.cargapp.co/api/v1/cargapp_payments/active 'Ver activos'
@@ -1396,7 +1377,6 @@ Code style checker
 5. PUT http://api.cargapp.co/api/v1/cargapp_payments/:id 'Actualiza'
 6. DELETE http://api.cargapp.co/api/v1/cargapp_payments/:id 'Elimina'
 7. GET http://api.cargapp.co/api/v1/cargapp_payments/me 'Ver las del usuario'
-
 
 ```
 {
@@ -1418,27 +1398,27 @@ Code style checker
 }
 ```
 
-
 ## Payment
-* id
-* uuid
-* total
-* sub_total
-* taxes
-* transaction_code
-* observation
-* coupon_id
-* coupon_code
-* coupon_amount
-* user_payment_method_id
-* payment_method_id
-* statu_id
-* user_id
-* is_service
-* service_id
-* active
 
-```rails g scaffold Payment uuid total:integer sub_total:integer taxes:integer  transaction_code observation:text coupon:references coupon_code coupon_amount:integer user_payment_method:references payment_method:references statu:references service:references is_service:boolean user:references active:boolean```
+- id
+- uuid
+- total
+- sub_total
+- taxes
+- transaction_code
+- observation
+- coupon_id
+- coupon_code
+- coupon_amount
+- user_payment_method_id
+- payment_method_id
+- statu_id
+- user_id
+- is_service
+- service_id
+- active
+
+`rails g scaffold Payment uuid total:integer sub_total:integer taxes:integer transaction_code observation:text coupon:references coupon_code coupon_amount:integer user_payment_method:references payment_method:references statu:references service:references is_service:boolean user:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/cargapp_payments 'Listar'
 2. GET http://api.cargapp.co/api/v1/cargapp_payments/active 'Ver activos'
@@ -1447,7 +1427,6 @@ Code style checker
 5. PUT http://api.cargapp.co/api/v1/cargapp_payments/:id 'Actualiza'
 6. DELETE http://api.cargapp.co/api/v1/cargapp_payments/:id 'Elimina'
 7. GET http://api.cargapp.co/api/v1/cargapp_payments/me 'Ver las del usuario'
-
 
 ```
 {
@@ -1473,12 +1452,13 @@ Code style checker
 ```
 
 ## CompanyUser
-* id
-* user_id
-* company_id
-* active
 
-```rails g scaffold CompanyUser company:references user:references active:boolean```
+- id
+- user_id
+- company_id
+- active
+
+`rails g scaffold CompanyUser company:references user:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/company_users 'Listar'
 2. GET http://api.cargapp.co/api/v1/company_users/active 'Ver activos'
@@ -1487,7 +1467,6 @@ Code style checker
 5. PUT http://api.cargapp.co/api/v1/company_users/:id 'Actualiza'
 6. DELETE http://api.cargapp.co/api/v1/company_users/:id 'Elimina'
 7. GET http://api.cargapp.co/api/v1/company_users/me 'Ver las del usuario'
-
 
 ```
 {
@@ -1500,15 +1479,16 @@ Code style checker
 ```
 
 ## ServiceUser
-* id
-* service_id
-* user_id
-* position
-* approved
-* expiration_date
-* active
 
-```rails g scaffold ServiceUser service:references user:references position:integer approved:boolean expiration_date:date active:boolean```
+- id
+- service_id
+- user_id
+- position
+- approved
+- expiration_date
+- active
+
+`rails g scaffold ServiceUser service:references user:references position:integer approved:boolean expiration_date:date active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/company_users 'Listar'
 2. GET http://api.cargapp.co/api/v1/company_users/active 'Ver activos'
@@ -1517,7 +1497,6 @@ Code style checker
 5. PUT http://api.cargapp.co/api/v1/company_users/:id 'Actualiza'
 6. DELETE http://api.cargapp.co/api/v1/company_users/:id 'Elimina'
 7. GET http://api.cargapp.co/api/v1/company_users/me 'Ver las del usuario'
-
 
 ```
 {
@@ -1542,7 +1521,7 @@ Code style checker
 }
 ```
 
-```rails g scaffold Room name note service:references user:references active:boolean```
+`rails g scaffold Room name note service:references user:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/rooms 'Listar'
 2. GET http://api.cargapp.co/api/v1/rooms/active 'Ver activos'
@@ -1551,7 +1530,6 @@ Code style checker
 5. PUT http://api.cargapp.co/api/v1/rooms/:id 'Actualiza'
 6. DELETE http://api.cargapp.co/api/v1/rooms/:id 'Elimina'
 7. GET http://api.cargapp.co/api/v1/rooms/me 'Ver las del usuario'
-
 
 ```
 {
@@ -1565,8 +1543,7 @@ Code style checker
 }
 ```
 
-
-```rails g scaffold RoomUser service:references room:references user:references active:boolean```
+`rails g scaffold RoomUser service:references room:references user:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/room_users 'Listar'
 2. GET http://api.cargapp.co/api/v1/room_users/active 'Ver activos'
@@ -1575,7 +1552,6 @@ Code style checker
 5. PUT http://api.cargapp.co/api/v1/room_users/:id 'Actualiza'
 6. DELETE http://api.cargapp.co/api/v1/room_users/:id 'Elimina'
 7. GET http://api.cargapp.co/api/v1/room_users/me 'Ver las del usuario'
-
 
 ```
 {
@@ -1588,8 +1564,8 @@ Code style checker
 }
 ```
 
-
 Messages
+
 - room
 - message_type
 - uuid
@@ -1598,7 +1574,7 @@ Messages
 - user
 - active
 
-```rails g scaffold Message room:references message_type uuid message file user:references active:boolean```
+`rails g scaffold Message room:references message_type uuid message file user:references active:boolean`
 
 1. GET http://api.cargapp.co/api/v1/messages 'Listar'
 2. GET http://api.cargapp.co/api/v1/messages/active 'Ver activos'
@@ -1607,7 +1583,6 @@ Messages
 5. PUT http://api.cargapp.co/api/v1/messages/:id 'Actualiza'
 6. DELETE http://api.cargapp.co/api/v1/messages/:id 'Elimina'
 7. GET http://api.cargapp.co/api/v1/messages/me 'Ver las del usuario'
-
 
 ```
 {
@@ -1623,20 +1598,32 @@ Messages
 }
 ```
 
-
 # Login Local for console
+
 irb -r oauth2
 app = "ZRylaRGgSD19_gOQVoumEmLueIWlcaBLkw2EkcIKG7Y123456"
-secret = "UaF6H-ETL8XlY04V5_U3eUSyehHVHiopXU__bcAcIXI123456"
+secret = "UaF6H-ETL8XlY04V5_U3eUSyehHVHiopXU\_\_bcAcIXI123456"
 client = OAuth2::Client.new(app, secret, site: 'http://localhost:3000')
 token = client.password.get_token('user@cargapp.co', '123456')
 puts token.token
 
-
 # Login Local for console
+
 irb -r oauth2
 app = "ZRylaRGgSD19_gOQVoumEmLueIWlcaBLkw2EkcIKG7Y"
-secret = "UaF6H-ETL8XlY04V5_U3eUSyehHVHiopXU__bcAcIXI"
+secret = "UaF6H-ETL8XlY04V5_U3eUSyehHVHiopXU\_\_bcAcIXI"
 client = OAuth2::Client.new(app, secret, site: 'http://localhost:3000')
-token = client.password.get_token('segundo.espana1@gmail.com', 'lol52800')
+token = client.password.get_token('user@gmail.com', '123456')
 puts token.token
+
+# users = UserChallenge.order(:point)
+
+# users = User.joins(:user_challenges).where(user_challenges: { user_id: 1 })
+
+# users = UserChallenge.where(created_at: (Time.now - 30.day)..Time.now)
+
+# users = UserChallenge.where(active: true).or(UserChallenge.where(user_id: [1]))
+
+# users = UserChallenge.select(:user_id).distinct
+
+# users = UserChallenge.select("user_id as user_id, sum(point) as total_points").group("user_id")
