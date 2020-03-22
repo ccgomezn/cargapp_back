@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable
-  
+
   has_many :user_roles, dependent: :destroy
   has_many :roles, through: :user_roles, dependent: :destroy
   has_many :cargapp_integrations, dependent: :destroy
@@ -35,17 +37,19 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :service_users, dependent: :destroy
   has_many :coupons, dependent: :destroy
-  #has_many :payment_methods, dependent: :destroy  
+  has_many :vehicle_bank_accounts, dependent: :destroy
+
+  # has_many :payment_methods, dependent: :destroy
 
   has_many :access_grants,
-         class_name: 'Doorkeeper::AccessGrant',
-         foreign_key: :resource_owner_id,
-         dependent: :delete_all # or :destroy if you need callbacks
+           class_name: 'Doorkeeper::AccessGrant',
+           foreign_key: :resource_owner_id,
+           dependent: :delete_all # or :destroy if you need callbacks
 
   has_many :access_tokens,
-         class_name: 'Doorkeeper::AccessToken',
-         foreign_key: :resource_owner_id,
-         dependent: :delete_all # or :destroy if you need callbacks
+           class_name: 'Doorkeeper::AccessToken',
+           foreign_key: :resource_owner_id,
+           dependent: :delete_all # or :destroy if you need callbacks
 
   def is_super?
     state = false
@@ -58,8 +62,8 @@ class User < ApplicationRecord
   # Create codes of user
   before_create :build_user
   def build_user
-    number_randon = [(0..9)].map { |i| i.to_a }.flatten
-    code = [('A'..'Z'), (0..9)].map { |i| i.to_a }.flatten
+    number_randon = [(0..9)].map(&:to_a).flatten
+    code = [('A'..'Z'), (0..9)].map(&:to_a).flatten
     referal_code = (0...8).map { code[rand(code.length)] }.join
     pin = (0...4).map { number_randon[rand(number_randon.length)] }.join
     mobile_code = (0...4).map { number_randon[rand(number_randon.length)] }.join
@@ -79,20 +83,18 @@ class User < ApplicationRecord
 
   after_create :build_profile
   def build_profile
-    begin
-      @client = Twilio::REST::Client.new ENV['TWILLIO_ACCOUNT_SID'], ENV['TWILLIO_AUT_TOKEN']
-      @client.api.account.messages.create(from: ENV['TWILLIO_FROM'], to: "+#{self.phone_number}", body: "Hola tu codigo de verificacion Cargapp es: #{mobile_code}")
-    rescue Twilio::REST::RestError => e
-      twillio_error(true)
-    end
+    @client = Twilio::REST::Client.new ENV['TWILLIO_ACCOUNT_SID'], ENV['TWILLIO_AUT_TOKEN']
+    @client.api.account.messages.create(from: ENV['TWILLIO_FROM'], to: "+#{phone_number}", body: "Hola tu codigo de verificacion Cargapp es: #{mobile_code}")
+  rescue Twilio::REST::RestError => e
+    twillio_error(true)
   end
 
   def send_reset_password_instructions
     # Email
     # token = set_reset_password_token
-    
+
     # Phone
-    number_randon = [(0..9)].map { |i| i.to_a }.flatten
+    number_randon = [(0..9)].map(&:to_a).flatten
     token = (0...6).map { number_randon[rand(number_randon.length)] }.join
 
     send_reset_password_instructions_notification(token)
@@ -107,6 +109,7 @@ class User < ApplicationRecord
       has_permission = false
       @user.roles.where(active: true).each do |role|
         next if role.permissions.where(active: true).empty?
+
         role.permissions.where(active: true).each do |permission|
           if (permission.cargapp_model.value.eql?(controller_name) && permission.active) && permission.action.eql?('all')
             has_permission = true
@@ -120,15 +123,13 @@ class User < ApplicationRecord
 
       @if_super = (User.is_super?(@user) if @user) || false
 
-      if @if_super
-        has_permission = true
-      end
+      has_permission = true if @if_super
 
       if has_permission
         true
       else
-        response = { response: "Does not have permissions" }
-        #render json: response, status: :unprocessable_entity
+        response = { response: 'Does not have permissions' }
+        # render json: response, status: :unprocessable_entity
         # render_bind type: { json: 'ss'}
       end
     else
@@ -147,7 +148,7 @@ class User < ApplicationRecord
       if has_permission
         true
       else
-        response = { response: "Does not have permissions" }
+        response = { response: 'Does not have permissions' }
         render json: response, status: :unprocessable_entity
       end
     end
@@ -161,11 +162,9 @@ class User < ApplicationRecord
     state = false
     puts user.to_json
     user.roles.where(active: true).each do |role|
-      if role.name.eql?(ENV['SUPER_N'] || ENV['SUPER_C'])
-        if user.user_roles.find_by(role_id: role.id, active: true)
-          state = true
-        end
-      end
+      next unless role.name.eql?(ENV['SUPER_N'] || ENV['SUPER_C'])
+
+      state = true if user.user_roles.find_by(role_id: role.id, active: true)
     end
     state
   end

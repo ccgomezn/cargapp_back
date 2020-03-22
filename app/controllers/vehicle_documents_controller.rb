@@ -1,5 +1,6 @@
 class VehicleDocumentsController < ApplicationController
   before_action :set_vehicle_document, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /vehicle_documents
   # GET /vehicle_documents.json

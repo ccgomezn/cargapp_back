@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Vehicle Bank Accounts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Account number</th>
+      <th>Account type</th>
+      <th>Bank</th>
+      <th>User</th>
+      <th>Vehicle</th>
+      <th>Statu</th>
+      <th>Certificate</th>
+      <th>Active</th>
+      <th>Approved</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @vehicle_bank_accounts.each do |vehicle_bank_account| %>
+      <tr>
+        <td><%= vehicle_bank_account.account_number %></td>
+        <td><%= vehicle_bank_account.account_type %></td>
+        <td><%= vehicle_bank_account.bank %></td>
+        <td><%= vehicle_bank_account.user_id %></td>
+        <td><%= vehicle_bank_account.vehicle_id %></td>
+        <td><%= vehicle_bank_account.statu_id %></td>
+        <td><%= vehicle_bank_account.certificate %></td>
+        <td><%= vehicle_bank_account.active %></td>
+        <td><%= vehicle_bank_account.approved %></td>
+        <td><%= link_to 'Show', vehicle_bank_account %></td>
+        <td><%= link_to 'Edit', edit_vehicle_bank_account_path(vehicle_bank_account) %></td>
+        <td><%= link_to 'Destroy', vehicle_bank_account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Vehicle Bank Account', new_vehicle_bank_account_path %>

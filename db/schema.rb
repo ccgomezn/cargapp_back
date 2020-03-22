@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_22_174916) do
+ActiveRecord::Schema.define(version: 2020_03_22_181010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -773,6 +773,23 @@ ActiveRecord::Schema.define(version: 2020_03_22_174916) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "vehicle_bank_accounts", force: :cascade do |t|
+    t.string "account_number"
+    t.string "account_type"
+    t.string "bank"
+    t.bigint "user_id", null: false
+    t.bigint "vehicle_id", null: false
+    t.bigint "statu_id", null: false
+    t.string "certificate"
+    t.boolean "active"
+    t.boolean "approved"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["statu_id"], name: "index_vehicle_bank_accounts_on_statu_id"
+    t.index ["user_id"], name: "index_vehicle_bank_accounts_on_user_id"
+    t.index ["vehicle_id"], name: "index_vehicle_bank_accounts_on_vehicle_id"
+  end
+
   create_table "vehicle_documents", force: :cascade do |t|
     t.bigint "document_type_id", null: false
     t.string "file"
@@ -903,6 +920,9 @@ ActiveRecord::Schema.define(version: 2020_03_22_174916) do
   add_foreign_key "user_prizes", "users"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
+  add_foreign_key "vehicle_bank_accounts", "status", column: "statu_id"
+  add_foreign_key "vehicle_bank_accounts", "users"
+  add_foreign_key "vehicle_bank_accounts", "vehicles"
   add_foreign_key "vehicle_documents", "document_types"
   add_foreign_key "vehicle_documents", "status", column: "statu_id"
   add_foreign_key "vehicle_documents", "users"

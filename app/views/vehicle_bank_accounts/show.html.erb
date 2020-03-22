@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Account number:</strong>
+  <%= @vehicle_bank_account.account_number %>
+</p>
+
+<p>
+  <strong>Account type:</strong>
+  <%= @vehicle_bank_account.account_type %>
+</p>
+
+<p>
+  <strong>Bank:</strong>
+  <%= @vehicle_bank_account.bank %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @vehicle_bank_account.user_id %>
+</p>
+
+<p>
+  <strong>Vehicle:</strong>
+  <%= @vehicle_bank_account.vehicle_id %>
+</p>
+
+<p>
+  <strong>Statu:</strong>
+  <%= @vehicle_bank_account.statu_id %>
+</p>
+
+<p>
+  <strong>Certificate:</strong>
+  <%= @vehicle_bank_account.certificate %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @vehicle_bank_account.active %>
+</p>
+
+<p>
+  <strong>Approved:</strong>
+  <%= @vehicle_bank_account.approved %>
+</p>
+
+<%= link_to 'Edit', edit_vehicle_bank_account_path(@vehicle_bank_account) %> |
+<%= link_to 'Back', vehicle_bank_accounts_path %>

@@ -1,0 +1,62 @@
+<%= form_with(model: vehicle_bank_account, local: true) do |form| %>
+  <% if vehicle_bank_account.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(vehicle_bank_account.errors.count, "error") %> prohibited this vehicle_bank_account from being saved:</h2>
+
+      <ul>
+        <% vehicle_bank_account.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :account_number %>
+    <%= form.text_field :account_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :account_type %>
+    <%= form.text_field :account_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bank %>
+    <%= form.text_field :bank %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :vehicle_id %>
+    <%= form.text_field :vehicle_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :statu_id %>
+    <%= form.text_field :statu_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :certificate %>
+    <%= form.text_field :certificate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :active %>
+    <%= form.check_box :active %>
+  </div>
+
+  <div class="field">
+    <%= form.label :approved %>
+    <%= form.check_box :approved %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

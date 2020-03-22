@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   resources :room_users
   resources :messages
   resources :vehicle_documents
+  resources :vehicle_bank_accounts
 
   namespace :api, defaults: { format: :json } do
     namespace :v1, defaults: { format: :json } do
@@ -233,6 +234,10 @@ Rails.application.routes.draw do
       get 'vehicle_documents/active' => 'vehicle_documents#active'
       get 'vehicle_documents/find_by_vehicle/:id' => 'vehicle_documents#find_by_vehicle'
       resources :vehicle_documents
+      get 'vehicle_bank_accounts/active' => 'vehicle_bank_accounts#active'
+      get 'vehicle_bank_accounts/me' => 'vehicle_bank_accounts#me'
+      get 'vehicle_bank_accounts/vehicle/:id' => 'vehicle_bank_accounts#vehicle'
+      resources :vehicle_bank_accounts
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
