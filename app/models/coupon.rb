@@ -13,5 +13,6 @@ class Coupon < ApplicationRecord
   before_create :default_values
   def default_values
     self.name = name.capitalize
+    self.active ||= false
   end
 end
