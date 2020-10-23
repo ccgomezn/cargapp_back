@@ -146,7 +146,7 @@ class Api::V1::StatusController < ApplicationController
           render json: response, status: :unprocessable_entity
         end
       else
-        role = Role.find_by(name: ENV['GUEST_N'], active: true)
+        role = Role.find_by(name: 'USER', active: true)
         has_permission = false
         role.permissions.each do |permission|
           if (permission.cargapp_model.value.eql?(controller_name) && permission.active) && permission.action.eql?('all')
